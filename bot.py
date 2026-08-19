@@ -81,6 +81,13 @@ BOT_TOKEN = "8882361592:AAFjdQEZvp2znuWDvV9eYSWD35AqwWNTl8k"
 # Key để cấp quyền Admin (user nhập /addadmin rồi gửi key này)
 KEY_ADMIN_SV = "AdminSv"
 
+# Mã kích hoạt quyền Admin: nhập /start/start/admin 34567
+ADMIN_ACTIVATE_CODE = "34567"
+
+# Kênh bắt buộc đăng ký trước khi dùng bot (THAY LINK KÊNH CỦA BẠN TẠI ĐÂY)
+CHANNEL_NAME = "TKA Mod Aov"
+CHANNEL_URL  = "https://t.me/TKAModAov"
+
 # Giới hạn
 MAX_SKIN_PER_MOD     = 10   # 1 lần mod tối đa 10 skin
 MAX_MOD_PER_DAY      = 5    # user thường: 5 lần/ngày
@@ -152,10 +159,19 @@ def get_admins():
     return admins
 
 def is_admin(user_id):
+    """Admin (kể cả ADMIN_ID gốc) chỉ có hiệu lực sau khi kích hoạt bằng
+    /start/start/admin 34567 (hoặc key AdminSv qua /addadmin)."""
     try:
-        return int(user_id) in get_admins()
+        uid = str(int(user_id))
     except Exception:
         return False
+    rec = load_json(ADMIN_FILE).get(uid)
+    return bool(rec and rec.get("activated"))
+
+def is_registered(user_id):
+    """User đã xác nhận đăng ký kênh TKA Mod Aov chưa."""
+    rec = load_json(FILE_USERS).get(str(user_id))
+    return bool(rec and rec.get("registered_channel"))
 
 def is_vip(user_id):
     info = load_json(KEYVIP_FILE).get(str(user_id))
@@ -315,6 +331,7 @@ ADMIN_MENU_COMMANDS = USER_MENU_COMMANDS + [
     ("unblock", "Bỏ chặn người dùng"),
     ("sendfiles", "Gửi dữ liệu cho admin"),
     ("all", "Gửi thông báo tất cả"),
+    ("danhsachlenh", "Xem danh sách lệnh (admin)"),
 ]
 
 async def configure_bot_menu(app):
@@ -405,12 +422,28 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     users = load_json(FILE_USERS)
-    users[user_id] = {
+    old_rec = users.get(user_id, {})
+    old_rec.update({
         "first_name": user.first_name,
         "last_name":  user.last_name or "",
         "username":   user.username,
-    }
+    })
+    users[user_id] = old_rec
     save_json(FILE_USERS, users)
+
+    # Chưa đăng ký kênh -> bắt đăng ký trước khi vào bot (ADMIN miễn)
+    if not is_admin(user_id) and not is_registered(user_id):
+        reg_kb = [
+            [InlineKeyboardButton(f"📢 Đăng Ký Kênh {CHANNEL_NAME}", url=CHANNEL_URL)],
+            [InlineKeyboardButton("✅ Tôi Đã Đăng Ký - Vào Bot", callback_data="reg_done")],
+        ]
+        await update.message.reply_text(
+            f"📢 Vui Lòng Đăng Ký Kênh {CHANNEL_NAME} Để Kích Hoạt Bot.\n\n"
+            "👉 Bấm nút Đăng Ký Kênh bên dưới, sau đó bấm ✅ Tôi Đã Đăng Ký\n"
+            "(hoặc gõ lại /start) để vào bot.",
+            reply_markup=InlineKeyboardMarkup(reg_kb),
+        )
+        return
 
     keyboard = [[InlineKeyboardButton("📢 Tham Gia Group", url="https://zalo.me/g/cdsnmnsjjxzozn6p5p2y")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -542,6 +575,12 @@ async def choosehero(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             "⚠️ Bạn chưa có Username Telegram nên không thể sử dụng bot.\n"
             "Hãy đặt Username."
+        )
+        return
+    if not is_admin(user_id) and not is_registered(user_id):
+        await update.message.reply_text(
+            f"⚠️ Vui Lòng Đăng Ký Kênh {CHANNEL_NAME} Để Kích Hoạt Bot.\n"
+            "Gõ /start để xem hướng dẫn đăng ký."
         )
         return
 
@@ -789,6 +828,12 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not user.username:
         await update.message.reply_text("⚠️ Bạn chưa có Username Telegram.")
         return
+    if not is_admin(user_id) and not is_registered(user_id):
+        await update.message.reply_text(
+            f"⚠️ Vui Lòng Đăng Ký Kênh {CHANNEL_NAME} Để Kích Hoạt Bot.\n"
+            "Gõ /start để xem hướng dẫn đăng ký."
+        )
+        return
 
     admin_flag, vip_flag = is_admin(user_id), is_vip(user_id)
     ids = [str(x) for x in context.user_data.get("idmodskin", [])]
@@ -807,15 +852,22 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     all_skins_str, all_tuongs_str = ", ".join(skins), ", ".join(tuongs)
     msg = await update.message.reply_text(f"⏳ Chuẩn Bị Tạo Mod...\n{all_tuongs_str}\n{all_skins_str}")
-    await msg.edit_text("⏳ Đang mod trực tiếp bằng engine đã gắn trong bot, vui lòng đợi...")
     output_root = os.path.join(BASE_DIR, "FILES_MOD")
     os.makedirs(output_root, exist_ok=True)
     before = set(os.listdir(output_root))
+    stop_progress = asyncio.Event()
+    progress_task = asyncio.create_task(
+        _run_progress_bar(msg, all_tuongs_str, all_skins_str, stop_progress)
+    )
     try:
         new_folder = await asyncio.to_thread(_inline_skin_mod, ids)
     except Exception as exc:
+        stop_progress.set()
+        progress_task.cancel()
         await msg.edit_text(f"❌ Tạo mod thất bại: {exc}")
         return
+    stop_progress.set()
+    progress_task.cancel()
     if not new_folder or not os.path.isdir(new_folder):
         await msg.edit_text("❌ Tạo mod thất bại: không tìm thấy output.")
         return
@@ -1274,6 +1326,93 @@ async def deladmin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Không Tìm Thấy Admin Này.")
 
 # ==============================================================
+#        PROGRESS BAR /RUN + KÍCH HOẠT ADMIN + /danhsachlenh
+# ==============================================================
+async def _run_progress_bar(msg, tuongs, skins, stop_event):
+    """Cập nhật thanh tiến trình (0% -> 95%) trong khi engine mod chạy."""
+    total = 20
+    pct = 0
+    while not stop_event.is_set() and pct <= 95:
+        filled = int(total * pct / 100)
+        bar = "▓" * filled + "░" * (total - filled)
+        try:
+            await msg.edit_text(
+                f"⏳ Đang Tạo Mod, Vui Lòng Đợi...\n"
+                f"[{bar}] {pct}%\n"
+                f"{tuongs}\n{skins}"
+            )
+        except Exception:
+            pass
+        pct += 5
+        try:
+            await asyncio.wait_for(stop_event.wait(), timeout=2.0)
+        except asyncio.TimeoutError:
+            pass
+
+async def admin_activate_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Kích hoạt quyền ADMIN bằng: /start/start/admin 34567"""
+    user    = update.effective_user
+    user_id = str(user.id)
+    text    = (update.message.text or "").strip()
+    parts   = text.split()
+    if len(parts) < 2 or parts[1] != ADMIN_ACTIVATE_CODE:
+        await update.message.reply_text("❌ Sai Mã Kích Hoạt Admin.")
+        return
+    if is_admin(user_id):
+        await update.message.reply_text("👑 Bạn Đã Kích Hoạt Quyền ADMIN Rồi.")
+        return
+    data = load_json(ADMIN_FILE)
+    data[user_id] = {
+        "first_name": user.first_name,
+        "last_name":  user.last_name or "",
+        "username":   user.username or "",
+        "activated":  True,
+        "added":      datetime.now().isoformat(),
+    }
+    save_json(ADMIN_FILE, data)
+    await update.message.reply_text("✅ Kích Hoạt Quyền ADMIN Thành Công 👑")
+
+async def danhsachlenh_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Chỉ ADMIN: xem toàn bộ danh sách lệnh của bot."""
+    if not is_admin(update.effective_user.id):
+        await update.message.reply_text("🚫 Lệnh Này Chỉ Dành Cho ADMIN.")
+        return
+    lines = ["📜 DANH SÁCH LỆNH CỦA BOT (ADMIN):", ""]
+    for cmd, desc in ADMIN_MENU_COMMANDS:
+        lines.append(f"/{cmd} - {desc}")
+    await update.message.reply_text("\n".join(lines))
+
+async def reg_channel_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """User bấm nút 'Tôi Đã Đăng Ký' -> đánh dấu đã đăng ký kênh."""
+    query = update.callback_query
+    await query.answer()
+    user    = query.from_user
+    user_id = str(user.id)
+    if is_registered(user_id):
+        try:
+            await query.edit_message_text("✅ Bạn Đã Kích Hoạt Bot Rồi. Gõ /start Để Vào Bot.")
+        except Exception:
+            pass
+        return
+    users = load_json(FILE_USERS)
+    rec = users.get(user_id, {})
+    rec.update({
+        "first_name": user.first_name,
+        "last_name":  user.last_name or "",
+        "username":   user.username or "",
+        "registered_channel": True,
+    })
+    users[user_id] = rec
+    save_json(FILE_USERS, users)
+    try:
+        await query.edit_message_text(
+            f"✅ Đã Xác Nhận Đăng Ký Kênh {CHANNEL_NAME}!\n"
+            "👉 Gõ /start lần nữa để vào bot."
+        )
+    except Exception:
+        pass
+
+# ==============================================================
 #            HANDLE TEXT (Key VIP / Key Admin / chat_all)
 # ==============================================================
 async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1290,6 +1429,7 @@ async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "first_name": user.first_name,
                 "last_name":  user.last_name or "",
                 "username":   user.username or "",
+                "activated":  True,
                 "added":      datetime.now().isoformat(),
             }
             save_json(ADMIN_FILE, data)
@@ -2553,9 +2693,14 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("sangdamefx", sangdamefx))
     app.add_handler(CommandHandler("fixreset",    fixreset))
     app.add_handler(CommandHandler("resources",   resources))
+    app.add_handler(CommandHandler("danhsachlenh", danhsachlenh_cmd))
+
+    # ----- Kích hoạt admin: /start/start/admin 34567 -----
+    app.add_handler(MessageHandler(filters.Regex(r"^/start/start/admin(\s|$)"), admin_activate_cmd))
 
     # ----- Callback handlers -----
     app.add_handler(CallbackQueryHandler(button_mod_callback, pattern="^btnmod_"))
+    app.add_handler(CallbackQueryHandler(reg_channel_callback, pattern="^reg_done$"))
     app.add_handler(CallbackQueryHandler(button))
 
     # ----- Text handler -----

@@ -86,7 +86,7 @@ ADMIN_ACTIVATE_CODE = "34567"
 
 # Kênh bắt buộc đăng ký trước khi dùng bot (THAY LINK KÊNH CỦA BẠN TẠI ĐÂY)
 CHANNEL_NAME = "TKA Mod Aov"
-CHANNEL_URL  = "https://t.me/TKAModAov"
+CHANNEL_URL  = "https://youtube.com/@tkamodaov?si=cWQxuFFlPuC9S07-"
 
 # Giới hạn
 MAX_SKIN_PER_MOD     = 10   # 1 lần mod tối đa 10 skin

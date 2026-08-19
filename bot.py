@@ -71,7 +71,7 @@ LINK4M_API      = "69a9052af795ac11c3712f51"
 LINK4M_API_URL  = "https://link4m.co/api-shorten/v2"
 
 TRAFFICHD_API   = "thd_ty1g3hs7gpudw9azi6d62s1hczul8bf1"
-TRAFFICHD_API_URL = "https://trafficHD.co/api"
+TRAFFICHD_API_URL = "https://traffichd.fun/api"
 
 GOFILE_ACC_ID    = "bad3e48e-b80e-4603-8005-d2b3e12ca18f"
 GOFILE_ACC_TOKEN = "na48eHcQTSFrT7KLMDVPGiHDrfavAKGP"
@@ -119,6 +119,107 @@ BUTTON_TICKET_FILE = "Data/Json/button_ticket.json"
 VIP_BTN_MONTH_FILE = "Data/Json/vip_btn_month.json"
 SKIN_TXT           = "Data/Json/skin.txt"     # dùng cho /choosehero
 NUTBAM_JSON        = "Data/Json/nutbam.json"  # danh sách button có thể mod
+
+# ==============================================================
+#     DANH SÁCH BUTTON CÓ THỂ MOD (ID -> Tên hiển thị)
+#  Danh sách chuẩn 88 mục theo engine ButtonNotify.
+#  Lần đầu chạy /buttonmod bot tự ghi vào Data/Json/nutbam.json.
+#  Muốn làm mới danh sách: xoá Data/Json/nutbam.json rồi chạy lại.
+#  LƯU Ý: ID 13015 đang bị trùng trong engine (Airi / Tulen Gojo);
+#  engine khớp theo ID nên 13015 sẽ ra Tulen Satoru Gojo (mục sau).
+#  -> Nên sửa lại ID của Airi trong Skin/skin.txt cho khác biệt.
+# ==============================================================
+DEFAULT_NUTBAM = {
+    "13015": "Airi - Thứ nguyên Vệ thần",
+    "11812": "Alice - Eternal Sailor Chibi Moon",
+    "5373B": "Allain - Lân sư Vũ thần",
+    "33612": "Aoi - Mikasa Ackerman",
+    "15612": "Arthur - Pomponpurin's Oath",
+    "54237": "Aya - Công chúa Cầu Vồng",
+    "54239": "Aya - Cinnamoroll's Dream",
+    "54835": "Bijan - Lữ Hành Thời Không",
+    "54837": "Bijan - Hẹn Ước Tình Yêu",
+    "53931": "Billow - Thiên Tướng - Độ Ách",
+    "53932": "Billow - T-Rex Bất Bại",
+    "53933": "Billow - Okarun",
+    "53732": "Byron - Yuji Itadori",
+    "53832": "Bolt Baron - Thiên Phú - Tư Mệnh",
+    "11614": "Butterfly - Kim Ngư thần nữ",
+    "11616": "Butterfly - Nữ thần Khởi nguyên",
+    "11620": "Butterfly - Bình Minh Tân Thế",
+    "52414": "Capheny - Càn Nguyên Hiền Chủ",
+    "52415": "Capheny - Bugcat Assemble",
+    "1713B": "Cresht - Eren Jaeger",
+    "15932": "Dolia - Nhật Kỷ Tình Yêu",
+    "15935": "Dolia - Mã Khởi Thiên Ca",
+    "13936": "Eland'orr - Tuxedo Mask",
+    "13938": "Eland'orr - Nông Giới Thần chủ",
+    "13614": "Elsu - Xạ Thần Mộng Giới",
+    "13538": "Enzo - Kurapika",
+    "52113": "Florentino - Kỷ Nguyên Hổ Phách",
+    "13B12": "Gildur - Jiji",
+    "17517": "Grakk - Thiên ẩn thực",
+    "13210": "Hayate - Tu Di thánh đế",
+    "13213": "Hayate - Siêu đạo chích Kid",
+    "13215": "Hayate - Thứ nguyên vệ thần",
+    "53836": "Iggy - Rimuru Tempest",
+    "13613": "Ilumia - Lưỡng Nghi Long Hậu",
+    "15336": "Kaine - Thợ săn chính nghĩa",
+    "1361B": "Krixi - Kimono",
+    "13620": "Krixi - Phù thủy thời không",
+    "14111": "Lauriel - Thứ nguyên vệ thần",
+    "14120": "Lauriel - Nữ Thần Cứu Thế",
+    "51015": "Liliana - Ma Pháp Tối Thượng",
+    "12312": "Maloch - Đầu Sĩ Đoạt Thế",
+    "12137": "Marja - Hắc Phượng Hoàng",
+    "13116": "Murad - Tuyệt thế thần binh",
+    "13118": "Murad - Thiên Luân Kiếm Thánh",
+    "13119": "Murad - Thần Pháo Hoa",
+    "15039": "Nakroth - Thứ nguyên vệ thần",
+    "15012": "Nakroth - Killua",
+    "15013": "Nakroth - Quỷ thương Liệp đế",
+    "15014": "Nakroth - Producer Tia chớp",
+    "15015": "Nakroth - Bạch Diện chiến thương",
+    "15016": "Nakroth - Levi",
+    "14214": "Natalya - Kuromi's Heart",
+    "14215": "Natalya - Phù Thủy Bóng Đêm",
+    "15710": "Ngộ Không - Tàn niên Vô thần",
+    "53612": "Omen - Liệt Hỏa Thiên Cang",
+    "13736": "Paine - Megumi Fushiguro",
+    "13737": "Paine - Cứu Sơn Tương Liễu",
+    "52839": "Qi - Milin Neva",
+    "5281D": "Qi - Annie Leonhart",
+    "15711": "Raz - Gon",
+    "13139": "Rouie - Linh Sứ Thời không",
+    "13111": "Rouie - Hẹn Ước Tình Yêu",
+    "17438": "Stuart - Siêu trùm phản diện",
+    "53138": "Tel'Annas - Thứ nguyên vệ thần",
+    "53119": "Tel'Annas - Lân Quang Thánh Điệu",
+    "53120": "Tel'Annas - Kỷ Nguyên Hổ Phách",
+    "12910": "Triệu Vân - Thần tài",
+    "12913": "Triệu Vân - Chiến Thần Vô Song",
+    # "13015": "Tulen - Satoru Gojo",   # trùng ID với Airi -> dict giữ mục cuối
+    "13015": "Tulen - Satoru Gojo",
+    "13016": "Tulen - Thiên Cơ Bách Trạch",
+    "13314": "Valhein - Thứ nguyên vệ thần",
+    "13316": "Valhein - Vũ Hành Vạn Lý",
+    "13914": "Veera - Phù thủy Hội hoa",
+    "13915": "Veera - Thất Sát - Thượng Sinh",
+    "13916": "Veera - My Melody's Love",
+    "13917": "Veera - Momo",
+    "52D11": "Veres - Lưu Ly Long Mẫu",
+    "11137": "Violet - Thứ nguyên vệ thần",
+    "11115": "Violet - Thần Long tỷ tỷ",
+    "1112D": "Violet - Nobara Kugisaki",
+    "5293B": "Volkath - Ma Ảnh Thần Đao",
+    "15412": "Yena - Huyền Cửu Thiên",
+    "15413": "Yena - Trấn Yêu Thần Lộc",
+    "11215": "Yorn - Conan Edogawa",
+    "54537": "Yue - Hồn Độn Thần Ma",
+    "13714": "Zephys - Kỷ Nguyên Hổ Phách",
+    "15212": "Điêu Thuyền - Eternal Sailor Moon",
+    "15217": "Điêu Thuyền - Nhật Nguyệt Thánh Linh",
+}
 
 ADMIN_ID  = [6997739191]
 SKINS     = {}
@@ -959,26 +1060,65 @@ async def create_link4m(long_url):
         return None
 
 async def create_trafficHD(long_url):
+    """Rút gọn link qua traffichd.fun
+
+    Hỗ trợ cả 2 phương thức theo tài liệu của web:
+      - GET  {TRAFFICHD_API_URL}?apitoken=<key>&url=<link>
+      - POST {TRAFFICHD_API_URL}  (JSON: {"apitoken","url","alias"})
+    """
     try:
         encoded = urllib.parse.quote_plus(long_url)
-        candidates = [
+        get_candidates = [
+            f"{TRAFFICHD_API_URL}?apitoken={TRAFFICHD_API}&url={encoded}",
             f"{TRAFFICHD_API_URL}?api={TRAFFICHD_API}&url={encoded}",
-            f"https://trafficHD.co/api?api={TRAFFICHD_API}&url={encoded}",
         ]
+        payload = {"apitoken": TRAFFICHD_API, "url": long_url}
+
+        def _pick_short(data):
+            if not isinstance(data, dict):
+                return None
+            for k in ("shortenedUrl", "shortUrl", "shorturl", "short",
+                      "shortened_url", "short_link", "result", "url_short"):
+                v = data.get(k)
+                if isinstance(v, str) and v.startswith("http"):
+                    return v
+            if str(data.get("status", "")).lower() in ("success", "ok", "true", "1"):
+                v = data.get("data")
+                if isinstance(v, str) and v.startswith("http"):
+                    return v
+            return None
+
         async with aiohttp.ClientSession() as session:
-            for api_url in candidates:
+            # --- Phương thức 1: GET query params ---
+            for api_url in get_candidates:
                 try:
                     async with session.get(api_url, timeout=30) as resp:
-                        if resp.status != 200: continue
+                        if resp.status != 200:
+                            continue
                         try:
                             data = await resp.json(content_type=None)
                         except Exception:
                             continue
-                        if str(data.get("status", "")).lower() == "success":
-                            return (data.get("shortenedUrl") or data.get("shortUrl")
-                                    or data.get("short"))
+                        short = _pick_short(data)
+                        if short:
+                            return short
                 except Exception:
                     continue
+            # --- Phương thức 2: POST JSON body ---
+            try:
+                headers = {"Content-Type": "application/json"}
+                async with session.post(TRAFFICHD_API_URL, json=payload,
+                                        headers=headers, timeout=30) as resp:
+                    if resp.status == 200:
+                        try:
+                            data = await resp.json(content_type=None)
+                        except Exception:
+                            data = None
+                        short = _pick_short(data)
+                        if short:
+                            return short
+            except Exception:
+                pass
         return None
     except Exception:
         return None
@@ -1091,6 +1231,10 @@ async def buttonmod_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # Menu button: lấy từ nutbam.json trước, nếu không có thì lấy từ Skin/skin.txt
     nutbam = load_json(NUTBAM_JSON)
+    if not nutbam and DEFAULT_NUTBAM:
+        # Lần đầu: ghi danh sách chuẩn vào nutbam.json để lần sau dùng luôn
+        nutbam = dict(DEFAULT_NUTBAM)
+        save_json(NUTBAM_JSON, nutbam)
     if not nutbam:
         # fallback: dùng skin.txt của ButtonNotify để lấy danh sách
         skin_txt = os.path.join(BASE_DIR, "Skin", "skin.txt")
@@ -1111,9 +1255,9 @@ async def buttonmod_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Chưa có Button nào trong danh sách.")
         return
 
-    # Chỉ hiển thị 40 button đầu để nhẹ; user có nhiều thì tự chọn qua trang
+    # Hiển thị toàn bộ danh sách button (Telegram cho phép tới 100 nút inline)
     keyboard = []
-    for sid, name in list(nutbam.items())[:40]:
+    for sid, name in list(nutbam.items()):
         keyboard.append([InlineKeyboardButton(name[:60], callback_data=f"btnmod_{sid}")])
     keyboard.append([InlineKeyboardButton("❌ HUỶ", callback_data="btnmod_cancel")])
 

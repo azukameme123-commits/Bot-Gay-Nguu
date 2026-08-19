@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.066" loop="false">
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="9e4c24a7-b9dc-476c-9fcf-6f64a5fd98d8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="33dea4a4-9a97-40c1-9a86-58c1e15ca2c3">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="584177" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="1" EnumValue="小于" refParamName="" useRefParam="false" />
+        <int name="buffLayers" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="4a6becdc-01ee-4665-bfad-8e88428d4712" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="9e4c24a7-b9dc-476c-9fcf-6f64a5fd98d8" status="true" />
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="4977e37b-411a-42b8-ac99-61438e38e735">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="584199" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="5" EnumValue="大于等于" refParamName="" useRefParam="false" />
+        <int name="buffLayers" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick0" eventType="SimpleSpawnBuffTick" guid="6c8c4aa7-6b08-44b7-a584-d1c086ed8ca3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="9e4c24a7-b9dc-476c-9fcf-6f64a5fd98d8" status="true" />
+      <Condition id="1" guid="4a6becdc-01ee-4665-bfad-8e88428d4712" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="84e4c03b-8111-45d9-8ab8-bae1d638159f">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="584108" />
+          <int value="584123" />
+          <int value="584177" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="bfc7ccfd-b7f5-45f0-a25b-21d921f0e704" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="9e4c24a7-b9dc-476c-9fcf-6f64a5fd98d8" status="true" />
+      <Condition id="1" guid="4a6becdc-01ee-4665-bfad-8e88428d4712" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="4c5738ca-bf29-4c7b-8157-505e581e239e">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="BuffLayer" value="2" refParamName="" useRefParam="false" />
+        <bool name="removeBuffByLayer" value="true" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="584199" />
+        </Array>
+      </Event>
+    </Track>
+  </Action>
+</Project>

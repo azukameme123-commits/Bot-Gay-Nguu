@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="monster" id="2" isTemp="false" />
+    <TemplateObject objectName="526pet" id="3" isTemp="false" />
+    <TemplateObject objectName="hero" id="4" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3000.000" loop="false">
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="fbf8c42a-c239-43fb-89c7-16b03df300d5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="a0beeca7-8d0c-4bdf-8659-123558c5525f">
+        <String name="actorName" value="526pet" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" objectName="monster" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="refParamName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckConditionDuration0" eventType="CheckConditionDuration" guid="0cacb1c5-7429-47bc-8021-7defd211c83b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckConditionDuration" time="0.000" length="3000.000" isDuration="true" guid="7815b031-f88b-48c5-a127-b6218e1b821c">
+        <TemplateObject name="targetId" objectName="monster" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bActorDead" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBulletTick0" eventType="RemoveBulletTick" guid="210e38af-f3e8-4f0b-873c-b80dfc4d86f3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="0cacb1c5-7429-47bc-8021-7defd211c83b" status="true" />
+      <Event eventName="RemoveBulletTick" time="0.000" isDuration="false" guid="e11fbe62-c31f-467c-a553-077e9abac4b0">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="5262424" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckDistanceDuration0" eventType="CheckDistanceDuration" guid="49ff822f-e9ce-49d4-b02f-06ccadd330d3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckDistanceDuration" time="0.000" length="3000.000" isDuration="true" guid="ff1ac3eb-58ef-4d4f-8b30-d94f699d0ace">
+        <TemplateObject name="srcId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="monster" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="distance" value="20000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="MoveActorDuration8" eventType="MoveActorDuration" guid="a4ff7b77-a061-471c-b03a-6f8c830ffe31" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="49ff822f-e9ce-49d4-b02f-06ccadd330d3" status="true" />
+      <Event eventName="MoveActorDuration" time="0.000" length="0.050" isDuration="true" guid="f5bd6ef4-6fc3-4b72-95ed-5693bfb64b78">
+        <TemplateObject name="actorId" objectName="monster" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="moveSpeed" value="50000" refParamName="" useRefParam="false" />
+        <bool name="enableRotate" value="true" refParamName="" useRefParam="false" />
+        <bool name="teleport" value="true" refParamName="" useRefParam="false" />
+        <bool name="IgnoreCollision" value="true" refParamName="" useRefParam="false" />
+        <Enum name="checkType" value="2" EnumValue="结束_包含以上两种情况" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetObjBehaviourModeTick0" eventType="SetObjBehaviourModeTick" guid="cc0ab71f-6398-427d-931c-d1ffbd5d2ab4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="49ff822f-e9ce-49d4-b02f-06ccadd330d3" status="true" />
+      <Event eventName="SetObjBehaviourModeTick" time="0.000" isDuration="false" guid="ccf5f1d8-710f-47cb-b19d-f417dfad1724">
+        <TemplateObject name="targetId" objectName="monster" id="2" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick0" eventType="SpawnBulletTick" guid="aa0b233c-726f-4ec3-b494-6d1cb934ef28" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="49ff822f-e9ce-49d4-b02f-06ccadd330d3" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="22a83054-138d-4f99-a294-05ff3cf8d08c">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/526_Summoner/skill/P0B5" refParamName="" useRefParam="false" />
+        <bool name="bImmeExcute" value="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="5262525" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBulletTick2" eventType="RemoveBulletTick" guid="d0917dcb-b72e-467b-979c-88b0b19071ec" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="49ff822f-e9ce-49d4-b02f-06ccadd330d3" status="true" />
+      <Event eventName="RemoveBulletTick" time="0.000" isDuration="false" guid="1f6f3090-3365-4295-a12d-31ffd4842793">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="5262424" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

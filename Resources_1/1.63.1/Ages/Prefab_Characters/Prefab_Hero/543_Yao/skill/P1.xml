@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.200" loop="false">
+    <Track trackName="攻击导致血量低于40%" eventType="CheckHPConditionTick" guid="6e16136a-b66b-43ef-9486-12751b92c636" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckHPConditionTick" time="0.000" isDuration="false" guid="27e8ed5e-6236-47e5-a4b9-5cd42da8287b">
+        <TemplateObject name="srcId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="value" value="40" refParamName="" useRefParam="false" />
+        <Enum name="checkType" value="1" refParamName="" useRefParam="false" />
+        <Enum name="checkValueType" value="1" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="cd可用" eventType="CheckSkillCombineConditionTick" guid="c6145932-35f9-4e0d-bc73-92586e3d2fe1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="69258be6-cd02-4973-b2bc-e59646557220">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="543910" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="不处于附身状态" eventType="CheckSkillCombineConditionTick" guid="8b2bb9e3-e43a-45ee-8331-fcd4ad036aa5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="94c4a4d4-8b02-4cbb-a0fa-1ee7cc764649">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="543500" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="1aeeeced-fc67-4a00-b04f-7a6d5ae8d007" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="6e16136a-b66b-43ef-9486-12751b92c636" status="true" />
+      <Condition id="2" guid="8b2bb9e3-e43a-45ee-8331-fcd4ad036aa5" status="true" />
+      <Condition id="1" guid="c6145932-35f9-4e0d-bc73-92586e3d2fe1" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="3d2c94b7-46f8-4642-9dc4-f25a1d578246">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_2" value="543902" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

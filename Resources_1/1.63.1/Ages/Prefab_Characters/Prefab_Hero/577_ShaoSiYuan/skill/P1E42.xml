@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="pas-target" id="3" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <int name="pas-layer" value="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.100" loop="false">
+    <Track trackName="傀儡时不生效" eventType="FilterTargetType" guid="c27a2049-5d35-4bec-b39d-b45078239d72" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="fa02f367-5f9a-43d5-9648-edd0409f422e">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="傀儡时不生效" eventType="StopTrack" guid="00052baa-a3e5-425b-a64d-25d3d41aaf42" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="c27a2049-5d35-4bec-b39d-b45078239d72" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="8ec2f49d-ec8e-400a-ad5a-63349efc46c6">
+        <TrackObject name="trackId" id="2" guid="b7957aad-a5d8-4b0c-ba49-ed5ee4aeec16" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="b7957aad-a5d8-4b0c-ba49-ed5ee4aeec16" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="bd1aeed2-1b46-448b-9d69-f2ec65817ec4" />
+    </Track>
+    <Track trackName="NewGetIntVariableTick0" eventType="NewGetIntVariableTick" guid="7694842c-0b8f-4c88-9f76-6ba7561c4566" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetIntVariableTick" time="0.000" isDuration="false" guid="14a6c883-509a-4237-8c84-175624a4bdf8">
+        <String name="refVariableName" value="pas-layer" refParamName="" useRefParam="false" />
+        <String name="variableName" value="pas-layer" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="2a7b6043-a256-4186-b301-86bf3cdce7e1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="4c41cb07-d76a-4cbf-a2c1-aabac611ab0a">
+        <String name="variableName" value="pas-target" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="目标是自身" eventType="FilterTargetType" guid="a0ad871d-4998-483d-9250-4d230a73bf3b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="9e896f75-5a64-441a-a21b-717898bae8ab">
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <bool name="bOnlySelf" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="全停保险" eventType="StopTracks" guid="cab2f2b4-1944-4894-b31a-5e2d7c70c64e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="5" guid="a0ad871d-4998-483d-9250-4d230a73bf3b" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="73cbd6f0-71bd-4af0-b265-8508ee80bd14">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="14" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" />
+          <TrackObject id="18" guid="41693e02-9f5f-4be8-831e-32b22f812508" />
+          <TrackObject id="19" guid="c443b7b2-95e8-4bf1-bbb8-07139ddcaeb3" />
+          <TrackObject id="21" guid="798cfb71-da59-40e0-b7c7-72b2333f7955" />
+          <TrackObject id="22" guid="fa0cd8d0-bbe7-49ac-ab11-dc1a0a6206b3" />
+          <TrackObject id="15" guid="c100e9c4-82ff-47d9-b29f-433b9d2a6fcc" />
+          <TrackObject id="16" guid="ba9f5f8c-4582-46f0-b7f4-23635c756648" />
+          <TrackObject id="17" guid="95113dcc-0a69-4e85-9fbb-068960c67acc" />
+          <TrackObject id="23" guid="cb5c3560-fd1a-448a-951f-542447477c90" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="直接给自身加钱" eventType="SimpleSpawnBuffTick" guid="2852b4b2-1277-4111-8bbf-b73788072946" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Condition id="5" guid="a0ad871d-4998-483d-9250-4d230a73bf3b" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="897b2855-09f5-4c93-9caf-2feb7335e0bf">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577925" />
+          <int value="577940" />
+        </Array>
+        <int name="buffLayer" value="0" refParamName="pas-layer" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="204ae36f-5c73-4a8a-a550-57230d40c51c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="5" guid="a0ad871d-4998-483d-9250-4d230a73bf3b" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="bd8d2f95-62dc-4384-9a5b-3817cfc58677" />
+    </Track>
+    <Track trackName="不在二段" eventType="FilterTargetType" guid="dc735732-1d2f-4bdc-9de1-3dc6aaad2195" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="93a15dc7-a0c6-4b66-924d-6d73ed9d34bf">
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="577129" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="188befe8-7672-48a7-bed8-76bd29eae7f2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="9" guid="dc735732-1d2f-4bdc-9de1-3dc6aaad2195" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="d4e26f9a-e575-43b4-9c8e-ffbd359d066d">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="15" guid="c100e9c4-82ff-47d9-b29f-433b9d2a6fcc" />
+          <TrackObject id="16" guid="ba9f5f8c-4582-46f0-b7f4-23635c756648" />
+          <TrackObject id="17" guid="95113dcc-0a69-4e85-9fbb-068960c67acc" />
+          <TrackObject id="21" guid="798cfb71-da59-40e0-b7c7-72b2333f7955" />
+          <TrackObject id="22" guid="fa0cd8d0-bbe7-49ac-ab11-dc1a0a6206b3" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="目标非英雄" eventType="FilterTargetType" guid="b0a2051a-9461-4c6b-ab7c-0b51b8c432ed" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="ead60766-54ea-4c9d-abf3-a8db345bab4b">
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterHero" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="全停保险" eventType="StopTracks" guid="d01a4e92-b94e-4a60-8710-999070a97873" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="11" guid="b0a2051a-9461-4c6b-ab7c-0b51b8c432ed" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="5fdc0fe6-a089-4aa6-9cd7-8ff32a44682c">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="14" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" />
+          <TrackObject id="18" guid="41693e02-9f5f-4be8-831e-32b22f812508" />
+          <TrackObject id="19" guid="c443b7b2-95e8-4bf1-bbb8-07139ddcaeb3" />
+          <TrackObject id="21" guid="798cfb71-da59-40e0-b7c7-72b2333f7955" />
+          <TrackObject id="22" guid="fa0cd8d0-bbe7-49ac-ab11-dc1a0a6206b3" />
+          <TrackObject id="15" guid="c100e9c4-82ff-47d9-b29f-433b9d2a6fcc" />
+          <TrackObject id="16" guid="ba9f5f8c-4582-46f0-b7f4-23635c756648" />
+          <TrackObject id="17" guid="95113dcc-0a69-4e85-9fbb-068960c67acc" />
+          <TrackObject id="23" guid="cb5c3560-fd1a-448a-951f-542447477c90" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="e4a667da-f518-4391-9b13-6314ad369317" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="11" guid="b0a2051a-9461-4c6b-ab7c-0b51b8c432ed" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="79d9c64b-c544-43b1-ae74-db4a979844ff" />
+    </Track>
+    <Track trackName="目标是敌方" eventType="FilterTargetType" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="63c231c0-c139-43f8-8f3f-182cf70c9ce8">
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterCampWithTarget" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="filterObjID" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterSameCampWithTarget" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="给敌方扣钱不返" eventType="SimpleSpawnBuffTick" guid="c100e9c4-82ff-47d9-b29f-433b9d2a6fcc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="8c40b6e1-5038-4f5c-9cc2-65f6379951a2">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577922" />
+        </Array>
+        <int name="buffLayer" value="0" refParamName="pas-layer" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="直接给自身加钱" eventType="SimpleSpawnBuffTick" guid="ba9f5f8c-4582-46f0-b7f4-23635c756648" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="37754c23-10d7-4ab2-bd52-ba44d5cd6831">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577925" />
+          <int value="577940" />
+        </Array>
+        <int name="buffLayer" value="0" refParamName="pas-layer" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="停掉给敌方记层" eventType="StopTracks" guid="95113dcc-0a69-4e85-9fbb-068960c67acc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="7ce000fd-43ca-4841-a980-1a437007ef33">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="18" guid="41693e02-9f5f-4be8-831e-32b22f812508" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="对敌方扣钱+记层" eventType="SimpleSpawnBuffTick" guid="41693e02-9f5f-4be8-831e-32b22f812508" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Condition id="14" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="46441ce1-cf46-4862-8c5d-022738c1eb9c">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577924" />
+        </Array>
+        <int name="buffLayer" value="0" refParamName="pas-layer" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="敌方时关掉友方所有判断" eventType="StopTracks" guid="c443b7b2-95e8-4bf1-bbb8-07139ddcaeb3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="e2cacc93-30a7-4f61-8008-0fcc24c0ee6c">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="21" guid="798cfb71-da59-40e0-b7c7-72b2333f7955" />
+          <TrackObject id="22" guid="fa0cd8d0-bbe7-49ac-ab11-dc1a0a6206b3" />
+          <TrackObject id="23" guid="cb5c3560-fd1a-448a-951f-542447477c90" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="以下为友方" eventType="FilterTargetDistance" guid="2a909345-2e6a-4bd8-a29e-c01bdaabb849" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetDistance" time="0.000" isDuration="false" guid="b86f7d5e-3cd1-49fa-8a67-e1e64750bb75">
+        <TemplateObject name="sourceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <int name="distance" value="2500" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="2" EnumValue="小于等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="停掉给友方记层" eventType="StopTracks" guid="798cfb71-da59-40e0-b7c7-72b2333f7955" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="a16365d5-143f-4c01-ad82-bc2e860e1f66">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="23" guid="cb5c3560-fd1a-448a-951f-542447477c90" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="直接给自身加钱" eventType="SimpleSpawnBuffTick" guid="fa0cd8d0-bbe7-49ac-ab11-dc1a0a6206b3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="abd987fb-3e6e-4383-95bf-e15ebe1c4bb8">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577925" />
+          <int value="577940" />
+        </Array>
+        <int name="buffLayer" value="0" refParamName="pas-layer" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="对友方记层" eventType="SimpleSpawnBuffTick" guid="cb5c3560-fd1a-448a-951f-542447477c90" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="68a121db-3048-4d3e-bf89-4cb11c2cfe19">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="pas-target" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577921" />
+        </Array>
+        <int name="buffLayer" value="0" refParamName="pas-layer" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="2eab588e-dcfd-480a-80f8-52f0834ef79f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Condition id="20" guid="2a909345-2e6a-4bd8-a29e-c01bdaabb849" status="true" />
+      <Condition id="14" guid="5695d54b-c46a-47a6-97d1-2e9aff2d4d01" status="true" />
+      <Condition id="-1" guid="" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="576622a0-59f3-4210-b37f-05aeb752a6c7" />
+    </Track>
+  </Action>
+</Project>

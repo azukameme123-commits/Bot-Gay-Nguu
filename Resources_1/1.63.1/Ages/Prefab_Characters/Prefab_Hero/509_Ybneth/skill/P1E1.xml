@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="攻击者" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="BulletDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="CrossPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="UseDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3.000" loop="false">
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="8696aeb2-5f6d-488a-a047-109f82ffecf7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="5bd8336d-11a7-4c61-b179-a8641995a1e0">
+        <Enum name="SkillFuncType" value="29" EnumValue="触发技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查自身被动层数=5?" eventType="CheckSkillCombineConditionTick" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="8696aeb2-5f6d-488a-a047-109f82ffecf7" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="d63f3c13-4645-4cb1-88ae-cceae1608459">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="509901" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="1技能立刻冷却" eventType="HitTriggerTick" guid="ccd1da74-4389-4da9-bc08-4dc03bbfa187" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="21feb374-dd3d-4896-80b5-486937c2f4d7">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="hitTargetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_2" value="509106" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ChangeSkillTriggerTick0" eventType="ChangeSkillTriggerTick" guid="4a83e977-a2a6-4d36-97c5-d5e4aa46ef52" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="ChangeSkillTriggerTick" time="0.000" isDuration="false" guid="05df1993-ce9c-4233-99ad-26ac0ddcbf7a">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="1" EnumValue="技能1" refParamName="" useRefParam="false" />
+        <int name="effectTime" value="8000" refParamName="" useRefParam="false" />
+        <int name="recoverSkillID" value="50910" refParamName="" useRefParam="false" />
+        <int name="changeSkillID" value="50911" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick1" eventType="SimpleSpawnBuffTick" guid="b9e0a640-b5f9-4de6-a15b-2eced659569b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="5e2e91b5-4208-4829-ae5f-c989a9b4380f">
+        <TemplateObject name="originatorId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="509903" />
+        </Array>
+        <int name="buffLayer" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="64c6ab38-c62c-47db-a6a0-049176b70061" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="a889107b-3251-42f1-967c-88e5a792e0a4">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="509901" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="99b02908-1ad5-415b-ac74-3fb6d07ee2b6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="9cb3ab35-6148-47bc-b28c-5b383345bf97">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="3c3e2faf-a908-41d3-84d2-bc9a9b381dd4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="672f1140-3458-44df-b681-7eee7bf05d92">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="a9e97bd7-2d56-4800-84e5-b6f6e58b88f1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="757aa822-027a-47f2-b2fa-88af65000487">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="8ae2a3cb-58a6-47c3-9de7-a8b16dc234b7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="692e7494-5856-4949-a466-25b0ccabdc40">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="f8730207-4e42-4692-bc21-e7a82a7527e8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="065e8ffc-b20d-49bc-b9c9-2bf699987a80" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="1fc49061-7783-452f-b535-4b4ad691e51c">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查自身被动层数=4?" eventType="CheckSkillCombineConditionTick" guid="50295860-0538-4553-ab07-a500d5729c4b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="8696aeb2-5f6d-488a-a047-109f82ffecf7" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="e39d4838-acfe-4ca2-923b-8bd24643662e">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="509901" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="64176ffc-003f-4717-b0ff-122a7565c689" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="11" guid="50295860-0538-4553-ab07-a500d5729c4b" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="e22489f6-e58c-478c-8f20-2c699949db11">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="8d6b6b07-6fc7-490d-bd9b-a553e6e1ba8b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="11" guid="50295860-0538-4553-ab07-a500d5729c4b" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="6efe86d9-3492-4ab6-9b52-bb26e5d2cea8">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="929d5dee-1363-4fa2-aa23-42e74bef0d4d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="11" guid="50295860-0538-4553-ab07-a500d5729c4b" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="8cb27cf9-583a-4fee-ba3d-e6f38b723180">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="8e90f909-3357-4118-9c01-e85989089efc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="11" guid="50295860-0538-4553-ab07-a500d5729c4b" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="6abed698-bddc-4efa-a376-3f3bee7cb7d1">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查自身被动层数=3?" eventType="CheckSkillCombineConditionTick" guid="65294ab5-7885-48fe-8a72-b40a49749414" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="8696aeb2-5f6d-488a-a047-109f82ffecf7" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="8da78990-1cb4-42b1-a08c-7189b32c04a2">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="509901" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="ce46fae6-e05e-42c8-89c5-8592df543ca2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="16" guid="65294ab5-7885-48fe-8a72-b40a49749414" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="f68871f9-f274-43bb-a577-b758702d6015">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="9f1a359d-22f6-4472-a2e0-dd983673c035" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="16" guid="65294ab5-7885-48fe-8a72-b40a49749414" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="e505400b-1de3-4c35-abb9-87b6b2b28247">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="421b6326-075f-4407-987d-1d6c0104cf0b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="16" guid="65294ab5-7885-48fe-8a72-b40a49749414" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="570ea352-033f-4ef0-9b98-024a3200e6e3">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查自身被动层数=2?" eventType="CheckSkillCombineConditionTick" guid="ef21e821-7664-4b58-b8ff-04770e8c36e1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="8696aeb2-5f6d-488a-a047-109f82ffecf7" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="8839f477-9a8c-46b2-89e1-9fccc1fd2296">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="509901" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="d2c14bea-391d-486e-b20d-40059d8c3377" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="20" guid="ef21e821-7664-4b58-b8ff-04770e8c36e1" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="4abc9f4e-2be4-48a3-878e-e964ede0a1c2">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="2bd14dd2-29b0-472e-b2d7-a3eeaf07a205" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="20" guid="ef21e821-7664-4b58-b8ff-04770e8c36e1" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="927dbc70-9520-45fe-83a4-ea0c85a9ccf3">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查自身被动层数=1?" eventType="CheckSkillCombineConditionTick" guid="314c7fa3-d93c-457d-b912-19e7b07f1908" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="8696aeb2-5f6d-488a-a047-109f82ffecf7" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="e2717514-c19e-409b-b9cf-eb9fad97fcf3">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="509901" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="b97a8092-bc60-44c7-82f4-bcd65d14cd49" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="23" guid="314c7fa3-d93c-457d-b912-19e7b07f1908" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="4e21182d-2e3c-4962-81e1-2fd387c264f5">
+        <Enum name="SkillFuncType" value="28" EnumValue="增加技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="fa0c5a95-1dff-432b-8a1f-4bbfc3b8df3b" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="true">
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="ea87c793-158b-4dfc-9d56-871c56b5d5d9">
+        <Enum name="SkillFuncType" value="29" EnumValue="触发技能印记" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

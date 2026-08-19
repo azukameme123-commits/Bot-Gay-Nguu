@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="host" isTemp="true" />
+    <TemplateObject id="3" objectName="monster" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="2.000" loop="false">
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="6cbd32dd-3458-4d88-a0c6-7ec0a204f3f8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="6217a0c2-85d7-40f8-b9ee-18c6eab6f9ae">
+        <String name="actorName" value="526pet" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" id="3" objectName="monster" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="refParamName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBulletTick0" eventType="RemoveBulletTick" guid="e568bee8-7ee2-4bc8-84ca-b0f6bb70b333" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="RemoveBulletTick" time="0.000" isDuration="false" guid="78e50b78-b3da-40ce-8b9c-73a62b25ebd8">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="5261111" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckConditionDuration0" eventType="CheckConditionDuration" guid="0a1b4030-21ca-4568-a1ef-038a77a1bb3b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckConditionDuration" time="0.000" length="2.000" isDuration="true" guid="5a499b9a-ab63-4bc7-a863-e52a1bf2b1dc">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bActorAlive" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckConditionDuration0" eventType="CheckConditionDuration" guid="baabeaf8-c8e3-4379-b203-4910aeeec11f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="0a1b4030-21ca-4568-a1ef-038a77a1bb3b" status="true" />
+      <Event eventName="CheckConditionDuration" time="0.000" length="0.150" isDuration="true" guid="428a36b0-49e4-4e13-b314-3bd06b3ef308">
+        <TemplateObject name="targetId" id="3" objectName="monster" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bActorAlive" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick1" eventType="SpawnBulletTick" guid="ca9161f1-0f9f-4fce-889c-e851e5652451" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="baabeaf8-c8e3-4379-b203-4910aeeec11f" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="0327c08b-56f2-4d9b-8c85-053e7ec85bd0">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/526_Summoner/skill/CheckHeroDead" refParamName="" useRefParam="false" />
+        <bool name="bAgeEternal" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="5261111" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick0" eventType="SpawnBulletTick" guid="83490051-a0ea-4761-91f2-6e01fed7b4d6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="0a1b4030-21ca-4568-a1ef-038a77a1bb3b" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.100" isDuration="false" guid="b7648017-a991-4608-906d-7a1e48601658">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="referenceObjectId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/526_Summoner/skill/P0B1" refParamName="" useRefParam="false" />
+        <bool name="bImmeExcute" value="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="526111" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick1" eventType="SpawnBulletTick" guid="35774406-6f2b-4563-904f-d436e1075492" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="0a1b4030-21ca-4568-a1ef-038a77a1bb3b" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.100" isDuration="false" guid="133f8662-34ff-403b-9a5b-56c18c688558">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/526_Summoner/skill/CheckHeroDead" refParamName="" useRefParam="false" />
+        <bool name="bImmeExcute" value="false" refParamName="" useRefParam="false" />
+        <bool name="bAgeEternal" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="5261111" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="target1" id="3" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.600" loop="false">
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="63909a93-bf55-4e5d-9cd4-6e73d29394ef" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="c8bcdf45-e949-4b92-9cc3-69b9cba00a12">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="target1" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target1" id="3" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="c1bd6807-d94e-400a-a2e3-6cfe74a8e290" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="0.400" isDuration="true" guid="84b986e5-333a-4784-8aea-b7c3df86db8e">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target1" id="3" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="-500" z="0" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="一层特效" eventType="TriggerParticle" guid="f0379b3f-eb1d-4739-ac97-0f0cecc9ccfe" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="TriggerParticle" time="0.000" length="0.300" isDuration="true" guid="6486bae2-72f2-420d-b8f4-f9e249113491">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="一层子弹飞" eventType="MoveBulletDuration" guid="2f627e20-0c6f-433f-86b9-505ff17a8c36" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="MoveBulletDuration" time="0.000" length="0.300" isDuration="true" guid="66be201b-06c9-42be-aa8a-1c5309d4d508">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bIgnoreCharCollisionSize" value="true" refParamName="" useRefParam="false" />
+        <Enum name="hitPoint" value="2" EnumValue="任意位置" refParamName="" useRefParam="false" />
+        <bool name="bAdjustSpeed" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="自身加一层" eventType="SimpleSpawnBuffTick" guid="b9b87b7c-4c55-4651-8dbe-c347985286b3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="2f627e20-0c6f-433f-86b9-505ff17a8c36" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="ed3ee3cb-969a-45f7-9eb2-8850ae1f0217">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="502261" />
+        </Array>
+        <int name="buffLayer" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="加速" eventType="SimpleSpawnBuffTick" guid="051e5b4c-65d8-4aed-9922-b93e149ddd14" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="2f627e20-0c6f-433f-86b9-505ff17a8c36" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="e275b0f0-60c6-4244-b8fd-886f42d10fed">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="502253" />
+        </Array>
+        <int name="buffLayer" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CameraShakeDuration0" eventType="CameraShakeDuration" guid="5a4da3a0-0ecb-4803-83ef-873cf98b0462" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="2f627e20-0c6f-433f-86b9-505ff17a8c36" status="true" />
+      <Event eventName="CameraShakeDuration" time="0.000" length="0.100" isDuration="true" guid="7b09733e-3034-4b4b-8de0-1744746cb57b">
+        <bool name="useMainCamera" value="true" refParamName="" useRefParam="false" />
+        <bool name="filter_self" value="true" refParamName="" useRefParam="false" />
+        <Vector3 name="shakeRange" x="0.100" y="0.100" z="0.100" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="1795941f-070b-472f-a31a-22ef472ac431" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="4" guid="b9b87b7c-4c55-4651-8dbe-c347985286b3" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="ea17c52a-2495-4df9-9946-70d2da4f469b" />
+    </Track>
+  </Action>
+</Project>

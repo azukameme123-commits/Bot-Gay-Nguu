@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="s2tar" id="3" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.066" loop="false">
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="09dba6a7-5032-4b8c-9704-a53c16d5ec51" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="9">
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="3526f965-6757-47dd-ba14-b25d30ad9d3c">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="109301" refParamName="" useRefParam="false" />
+        <bool name="bImmeStop" value="true" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="10915" />
+    </Track>
+    <Track trackName="SetBehaviourModeTick4" eventType="SetBehaviourModeTick" guid="1487a02a-b704-44fb-adbc-37f0210bec01" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SetBehaviourModeTick" time="0.000" isDuration="false" guid="4965847c-f714-417e-8311-6a65db55b6b2">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="stopMove" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="04b55d78-3046-4d52-aff8-1c448d0b4be0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="140a9ead-8a38-45ce-ae7b-13f456a5d043">
+        <String name="actorName" value="s2tar" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" objectName="s2tar" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="refParamName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckDistanceDuration1" eventType="CheckDistanceDuration" guid="aeb96713-3ee6-42ba-b9ad-07d1a2a500f4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckDistanceDuration" time="0.000" length="0.066" isDuration="true" guid="3593240f-8d4a-4b79-ba7d-4e769bd0a817">
+        <TemplateObject name="srcId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="s2tar" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="checkType" value="1" EnumValue="小于" refParamName="" useRefParam="false" />
+        <int name="distance" value="7900" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="有s2目标" eventType="SpawnBulletTick" guid="4f1b82b2-996d-48c8-b9ba-855c05b6c031" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="aeb96713-3ee6-42ba-b9ad-07d1a2a500f4" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="ed4a354c-a4ee-4e4e-a4d5-288015974221">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/109_daji/skill/u1b0" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="无s2目标" eventType="SpawnBulletTick" guid="68356cfa-4317-4422-8067-4539898f5933" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="4f1b82b2-996d-48c8-b9ba-855c05b6c031" status="false" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="4044cb1f-6394-43f7-9611-b0af6133534d">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/109_daji/skill/u2b0" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillCDTriggerTick1" eventType="SkillCDTriggerTick" guid="2d60b29b-6064-4885-ad8d-412b9ae3e23c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SkillCDTriggerTick" time="0.000" isDuration="false" guid="2e191356-f3a3-4820-8b50-2bafa222afe7">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

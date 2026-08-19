@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="Sunce_get" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="2.000" loop="false">
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="e1f7223f-a1a2-4039-b937-070b4a6e048d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="644c5b5a-e5af-4b96-beb8-e9118a015048">
+        <String name="actorName" value="SunCe" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" id="3" objectName="Sunce_get" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="refParamName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="326e035c-0d03-4af4-8ca9-2e55aefc933a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="a4cc6cbc-8128-4be8-a413-ae565729ce0b">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterMonter" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterBoss" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterOrgan" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterChest" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterEye" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterPet" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterMajorMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterMinorMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterSoldier" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterOtherMonster" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ShowCallBossBtnDuration0" eventType="ShowCallBossBtnDuration" guid="846f09e8-2bef-43bb-a6e0-3da5d4e9b1c9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="326e035c-0d03-4af4-8ca9-2e55aefc933a" status="true" />
+      <Event eventName="ShowCallBossBtnDuration" time="0.000" length="2.000" isDuration="true" guid="12e0ea35-80cc-4290-b6ab-3aed6632f244">
+        <TemplateObject name="callBossActorId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="CallBossAgeName" value="" refParamName="" useRefParam="false" />
+        <bool name="bIsCallAgeWhenTrackNormalEnd" value="false" refParamName="" useRefParam="false" />
+        <String name="ImagePath" value="UGUI/Sprite/Dynamic/Skill/54831.prefab" refParamName="" useRefParam="false" />
+        <int name="Priorty" value="20" refParamName="" useRefParam="false" />
+        <String name="NameKey" value="Hero_548_SunCe_ShowCallBossBtn_key" refParamName="" useRefParam="false" />
+        <String name="NameKeyUp" value="" refParamName="" useRefParam="false" />
+        <String name="NameKeyMid" value="" refParamName="" useRefParam="false" />
+        <String name="NameKeyDown" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SaveActorDuration0" eventType="SaveActorDuration" guid="61e4060f-10c6-47a5-8aa3-10d507de744a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="846f09e8-2bef-43bb-a6e0-3da5d4e9b1c9" status="true" />
+      <Event eventName="SaveActorDuration" time="0.000" length="0.100" isDuration="true" guid="6a8c26f8-e690-414b-97c3-380c9f5a05b3">
+        <String name="actorName" value="passenger" refParamName="" useRefParam="false" />
+        <TemplateObject name="SetActorId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick0" eventType="SpawnBulletTick" guid="29bd9b1f-8728-4e95-ae18-5b1afdc7a8c8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="846f09e8-2bef-43bb-a6e0-3da5d4e9b1c9" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="012153cf-65fb-4e23-9923-bdc5f0d1e537">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/548_SunCe/skill/U1E23" refParamName="" useRefParam="false" />
+        <String name="SpecialActionName" value="Prefab_Characters/Prefab_Hero/548_SunCe/skill/U1E23" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ShowExtraBtnParticleDuration0" eventType="ShowExtraBtnParticleDuration" guid="e5c17e24-14b7-4a2b-9ebf-4de28c4669ad" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="326e035c-0d03-4af4-8ca9-2e55aefc933a" status="true" />
+      <Event eventName="ShowExtraBtnParticleDuration" time="0.000" length="1.000" isDuration="true" guid="183f41a2-fb71-4b25-8ffa-1ea70bd03538">
+        <TemplateObject name="opActorId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourcePath" value="prefab_skill_effects/hero_skill_effects/525_Driver/Driver_Skill02_Breakaway" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckDistanceDuration0" eventType="CheckDistanceDuration" guid="fec60728-f903-4a3d-9950-1f59e07896d8" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckDistanceDuration" time="0.000" length="2.000" isDuration="true" guid="cbf1d53c-1e60-47c7-9290-3b026243d37b">
+        <TemplateObject name="srcId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="3" objectName="Sunce_get" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="distance" value="4000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="c189561e-839a-41ac-b95a-5f3a1247d633" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="fec60728-f903-4a3d-9950-1f59e07896d8" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="d2155b90-2992-453f-9149-0c5ffc1806b3" />
+    </Track>
+  </Action>
+</Project>

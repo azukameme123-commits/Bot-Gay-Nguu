@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="bullet" id="1" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList />
+  <Action tag="" length="1.000" loop="false">
+    <Track trackName="FilterTargetState1" eventType="FilterTargetState" guid="b340b7dd-886a-4dd7-92b2-56780a1cdd57" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetState" time="0.000" isDuration="false" guid="1a78c788-c1d0-4f67-bbed-32b15023c9d2">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="checkDeadState" value="true" refParamName="" useRefParam="false" />
+        <bool name="checkImmeRevive" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="313f39ab-4be3-4681-be21-457eb83bb7d3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b340b7dd-886a-4dd7-92b2-56780a1cdd57" status="false" />
+      <Event eventName="SpawnObjectDuration" time="0.000" length="0.200" isDuration="true" guid="0bceafd6-ebb1-4832-8a75-ca7cb8a0baa9">
+        <TemplateObject name="targetId" objectName="bullet" id="1" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="parentId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick0" eventType="SetCollisionTick" guid="3244f42f-0d0f-476c-9dc1-b926002b5a2c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b340b7dd-886a-4dd7-92b2-56780a1cdd57" status="false" />
+      <Event eventName="SetCollisionTick" time="0.000" isDuration="false" guid="7b144d57-3c73-434d-a6da-61ecbf49cb6a">
+        <TemplateObject name="targetId" objectName="bullet" id="1" isTemp="true" refParamName="" useRefParam="false" />
+        <int name="Radius" value="100000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerDuration0" eventType="HitTriggerDuration" guid="867119da-5cc3-4caf-b83a-f3083240937c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b340b7dd-886a-4dd7-92b2-56780a1cdd57" status="false" />
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.200" isDuration="true" guid="b9637c22-fdce-45a1-bd53-5c9815941707">
+        <TemplateObject name="triggerId" objectName="bullet" id="1" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="triggerInterval" value="500" refParamName="" useRefParam="false" />
+        <bool name="bFilterEnemy" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterFriend" value="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterHero" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFileterOrgan" value="true" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="159283" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayHeroSoundTick1" eventType="PlayHeroSoundTick" guid="ac5e1f57-5b9e-43df-96f1-3c8fb80df205" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b340b7dd-886a-4dd7-92b2-56780a1cdd57" status="false" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="edfa90aa-a606-4fae-bf6b-e7a256c55bc7">
+        <TemplateObject name="targetId" objectName="bullet" id="1" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_Dolia_Skill_B_Loop_Stop" refParamName="" useRefParam="false" />
+        <bool name="canNotBeCulled" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayAnimationTick0" eventType="PlayAnimationTick" guid="786f1ad6-fd57-4adc-b724-9b335c23e7ad" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" lod="0" nameSpace="">
+      <Event eventName="PlayAnimationTick" time="0.000" isDuration="false" guid="03221fdd-3a84-4a1a-989f-14aed3f83823">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Dead" refParamName="" useRefParam="false" />
+        <float name="crossFadeTime" value="0.100" refParamName="" useRefParam="false" />
+        <int name="layer" value="5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayHeroSoundTick57" eventType="PlayHeroSoundTick" guid="bd3cfdc5-f60e-4db1-993a-2584fc981c21" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="fdefe486-6a34-4722-b1e9-9b62f00c91ea">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_Dolia_VOX_Dead" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

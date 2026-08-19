@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="b1" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3.000" loop="false">
+    <Track trackName="CheckConditionDuration0" eventType="CheckConditionDuration" guid="611df4a7-7cc7-408c-849b-160253093e9f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckConditionDuration" time="0.000" length="3.000" isDuration="true" guid="3122f55a-29c4-45d0-bb0b-77bf5f3a51e3">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bActorDead" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CallMonsterTick0" eventType="CallMonsterTick" guid="731b2077-2f96-44e1-84c6-ebaf279256f3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="611df4a7-7cc7-408c-849b-160253093e9f" status="true" />
+      <Event eventName="CallMonsterTick" time="0.000" isDuration="false" guid="db60dff9-828e-493f-adfe-2b29cdca3ef0">
+        <TemplateObject name="TargetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="MonserId" id="3" objectName="b1" isTemp="true" refParamName="" useRefParam="false" />
+        <int name="ConfigID" value="9" refParamName="" useRefParam="false" />
+        <bool name="Invincible" value="true" refParamName="" useRefParam="false" />
+        <int name="LifeTime" value="2000" refParamName="" useRefParam="false" />
+        <bool name="bExecuteEvenInDeath" value="true" refParamName="" useRefParam="false" />
+        <bool name="bSuicideWhenHostDead" value="false" refParamName="" useRefParam="false" />
+        <bool name="bIgnoreLevel" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseCallerSightRadius" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="b1" id="2" isTemp="true" />
+    <TemplateObject objectName="攻击者" id="3" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3.500" loop="false" isConditionRuntime="true">
+    <Track trackName="移除下落镜头" eventType="RemoveBulletTick" guid="39c9c536-55e9-4b32-8026-2a74b6b9a5ae" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="RemoveBulletTick" time="0.000" isDuration="false" guid="a379601a-ae6a-4f98-8f3e-dee4b125179a">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="58478" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="79c01680-d1a2-4cdc-a012-641aec64237c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="e6b6af4a-ca06-404e-b87c-167b68274928">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="584108" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="5" EnumValue="大于等于" refParamName="" useRefParam="false" />
+        <int name="buffLayers" value="5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="不进冷却" eventType="StopTrack" guid="c28d613e-fe10-4521-ba68-7463b84f49c5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="79c01680-d1a2-4cdc-a012-641aec64237c" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="dc1d30bd-c298-46f1-b362-0e9321e5bfcb">
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="63d9e6b5-455d-417c-83c5-2497c16397a4">
+        <TrackObject name="trackId" id="12" guid="7400b3ba-a6d2-4939-bbbb-92ac56aba5bb" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="减5格能量" eventType="RemoveBuffTick" guid="14cba736-68a7-40eb-8754-1acf0d9f24a5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="79c01680-d1a2-4cdc-a012-641aec64237c" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="cb166a6b-77ad-4149-a0db-f69c65a7448b">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="BuffLayer" value="5" refParamName="" useRefParam="false" />
+        <bool name="removeBuffByLayer" value="true" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="584108" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="检测不在空中" eventType="FilterTargetType" guid="332a4376-0252-4485-9910-2b4fbbe25f50" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="51585b65-0381-4a92-a172-0e09dee86beb">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="584810" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="1级" eventType="CheckSkillLevelConditionTick" guid="ad1e05de-0783-4b38-b93a-61aaa0b95111" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillLevelConditionTick" time="0.000" isDuration="false" guid="24f33d43-55e3-4391-bae3-c7c6cd4d2976">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" EnumValue="技能3" refParamName="" useRefParam="false" />
+        <int name="skillLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="2级" eventType="CheckSkillLevelConditionTick" guid="cc786514-f1fd-45de-a2a5-9fe600e0c5e5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillLevelConditionTick" time="0.000" isDuration="false" guid="4756e74e-db29-439b-a790-337c7004bf6e">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" EnumValue="技能3" refParamName="" useRefParam="false" />
+        <int name="skillLevel" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="3级" eventType="CheckSkillLevelConditionTick" guid="ade54ba6-35c4-4c0e-8d46-c57c19ba174e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillLevelConditionTick" time="0.000" isDuration="false" guid="2f334bd6-62a7-4c87-b8d1-b1d9cb6b837e">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" EnumValue="技能3" refParamName="" useRefParam="false" />
+        <int name="skillLevel" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="状态1" eventType="SpawnBulletTick" guid="d59f0fe0-b786-45f9-bc19-c2d20e5387d7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="4" guid="332a4376-0252-4485-9910-2b4fbbe25f50" status="true" />
+      <Condition id="5" guid="ad1e05de-0783-4b38-b93a-61aaa0b95111" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="2541c28f-76a1-4be6-a7a8-6afcbbdaa650">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/584_Ciyuansheshou/skill/S2B3.xml" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="584666" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+        <bool name="bRemoveWhenRepressed" value="true" refParamName="" useRefParam="false" />
+        <int name="controlRemoveParam" value="12" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="状态1" eventType="SpawnBulletTick" guid="434d40df-9f68-4c4a-83d0-05eaf6727f5d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="4" guid="332a4376-0252-4485-9910-2b4fbbe25f50" status="true" />
+      <Condition id="6" guid="cc786514-f1fd-45de-a2a5-9fe600e0c5e5" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="78ccd5a0-bf0a-4c4a-adbf-782b14a14b06">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/584_Ciyuansheshou/skill/S2B31.xml" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="584666" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+        <bool name="bRemoveWhenRepressed" value="true" refParamName="" useRefParam="false" />
+        <int name="controlRemoveParam" value="12" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="状态1" eventType="SpawnBulletTick" guid="3b8784ce-3a40-45a7-94ea-7dfd71f35bc5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="4" guid="332a4376-0252-4485-9910-2b4fbbe25f50" status="true" />
+      <Condition id="7" guid="ade54ba6-35c4-4c0e-8d46-c57c19ba174e" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="f773cb36-7c83-43db-8cf2-2d965e0f66b4">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/584_Ciyuansheshou/skill/S2B32.xml" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="584666" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+        <bool name="bRemoveWhenRepressed" value="true" refParamName="" useRefParam="false" />
+        <int name="controlRemoveParam" value="12" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="发射" eventType="SpawnBulletTick" guid="0c4314cd-5134-4f08-b849-eb8039660b8e" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="3cb780ee-b301-4230-9aa4-84f00c2b2f28">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/584_Ciyuansheshou/skill/S2B1.xml" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="58477" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+        <bool name="bAttackSpdAffectPlaySpeed" value="true" refParamName="" useRefParam="false" />
+        <int name="playSpeedScaleRatio" value="5000" refParamName="" useRefParam="false" />
+        <bool name="bRemoveWhenRepressed" value="true" refParamName="" useRefParam="false" />
+        <int name="controlRemoveParam" value="12" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillCDTriggerTick0" eventType="SkillCDTriggerTick" guid="7400b3ba-a6d2-4939-bbbb-92ac56aba5bb" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SkillCDTriggerTick" time="0.000" isDuration="false" guid="5561d940-bbc9-45c3-a4e4-2c2b71e163e8">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick0" eventType="SpawnBulletTick" guid="9d2e3bde-ebbd-451c-9aa5-08198cd1cf31" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="04470f68-89b6-4217-9c54-a43d0c6d70de">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/584_Ciyuansheshou/skill/P0B0.xml" refParamName="" useRefParam="false" />
+        <String name="SpecialActionName" value="Prefab_Characters/Prefab_Hero/584_Ciyuansheshou/skill/P0B0.xml" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="58485" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+        <int name="playSpeedScaleRatio" value="10000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCurrentSkillInterruptibility1" eventType="SetCurrentSkillInterruptibility" guid="7c2648df-5cd4-45c4-9f59-740cf0c4c917" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SetCurrentSkillInterruptibility" time="0.264" length="3.036" isDuration="true" guid="d10cea8c-101f-4f50-bd6c-2d5793551e26">
+        <TemplateObject name="attackerId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="BySkill1" value="true" refParamName="" useRefParam="false" />
+        <bool name="BySkill2" value="true" refParamName="" useRefParam="false" />
+        <bool name="BySkill3" value="true" refParamName="" useRefParam="false" />
+        <bool name="ByMove" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCurrentSkillInterruptibility0" eventType="SetCurrentSkillInterruptibility" guid="94d94cfd-27c9-4d43-86df-18a47b636752" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SetCurrentSkillInterruptibility" time="2.000" length="1.500" isDuration="true" guid="4c442229-73ce-4db8-9f41-9a0d6ff10cb7">
+        <TemplateObject name="attackerId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="BySkill0" value="true" refParamName="" useRefParam="false" />
+        <bool name="BySkill1" value="true" refParamName="" useRefParam="false" />
+        <bool name="BySkill2" value="true" refParamName="" useRefParam="false" />
+        <bool name="BySkill3" value="true" refParamName="" useRefParam="false" />
+        <bool name="ByMove" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

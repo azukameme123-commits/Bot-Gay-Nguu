@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="攻击者" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="bullet2" isTemp="false" />
+    <TemplateObject id="4" objectName="bullet3" isTemp="false" />
+    <TemplateObject id="5" objectName="bullet4" isTemp="false" />
+    <TemplateObject id="6" objectName="bullet5" isTemp="false" />
+    <TemplateObject id="7" objectName="self" isTemp="false" />
+    <TemplateObject id="8" objectName="ghost" isTemp="true" />
+    <TemplateObject id="9" objectName="brother" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <String name="BulletPrefab" value="" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="5.000" loop="false">
+    <Track trackName="检查自己是否变身" eventType="FilterTargetType" guid="17aebba4-f91e-409c-a0e7-89a4856fc7f3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="b8587ef2-6a55-46eb-ae07-2b5a96befa24">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="598700" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身前" eventType="TriggerParticle" guid="f50c6f06-b492-4e13-b107-440561959287" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="0" guid="17aebba4-f91e-409c-a0e7-89a4856fc7f3" status="false" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="d804b044-9151-487e-a6dc-53f87c1586ec">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_spell01A" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopFollowParent0" eventType="StopFollowParent" guid="914e21f6-6c86-4475-8625-e182067afe1b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="StopFollowParent" time="0.150" isDuration="false" guid="20e3ac97-d468-4a26-a6a1-df84b448f910">
+        <TrackObject name="trackId" id="1" guid="f50c6f06-b492-4e13-b107-440561959287" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后" eventType="TriggerParticle" guid="075add78-ee8b-49ab-8f7f-c5617ee59bf2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="0" guid="17aebba4-f91e-409c-a0e7-89a4856fc7f3" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="6d774222-0ee2-49c4-afbc-65b9f3594c99">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_spell01A_01" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopFollowParent0" eventType="StopFollowParent" guid="6f31c6f2-b2df-4c22-aaff-62d4a8727b48" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="StopFollowParent" time="0.150" isDuration="false" guid="3f880d6d-a2fa-413e-a6e9-4d5424ec8dc4">
+        <TrackObject name="trackId" id="3" guid="075add78-ee8b-49ab-8f7f-c5617ee59bf2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

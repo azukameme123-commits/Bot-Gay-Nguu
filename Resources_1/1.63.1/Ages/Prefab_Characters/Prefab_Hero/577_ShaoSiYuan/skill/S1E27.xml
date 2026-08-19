@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet1" id="3" isTemp="true" />
+    <TemplateObject objectName="zhiren1" id="4" isTemp="true" />
+    <TemplateObject objectName="bullet2" id="5" isTemp="true" />
+    <TemplateObject objectName="bullet3" id="6" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="7.500" loop="false">
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="5bf81326-28ec-466a-8a60-ef829ea11892" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="9578fbd0-3bda-4b70-b47a-9aa50814026e">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="577128" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick0" eventType="SimpleSpawnBuffTick" guid="936ec8be-8347-470b-a572-3f015e20e45c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="5bf81326-28ec-466a-8a60-ef829ea11892" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="2a930c5a-9c83-46ec-bc1c-0bbb04fffd75">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577226" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="4932a6c1-b4fa-4022-9fe3-da30b77afec3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="5bf81326-28ec-466a-8a60-ef829ea11892" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="3aacbf07-59ef-4bf1-afe3-61e609933744">
+        <TrackObject name="trackId" id="4" guid="c55c0273-9d54-4554-93a3-a3644327d1ce" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="d0f5d06b-1965-4af1-9b5e-eb8b04e4ab2d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="5bf81326-28ec-466a-8a60-ef829ea11892" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.500" isDuration="false" guid="5e740202-1101-4809-8052-e5961fce706c">
+        <Enum name="SkillFuncType" value="70" EnumValue="移除技能效果" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="c55c0273-9d54-4554-93a3-a3644327d1ce" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="76100c0b-4475-472c-a0fa-dbc9857ca452">
+        <Enum name="SkillFuncType" value="70" EnumValue="移除技能效果" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="7f7f1874-98a2-4641-a5eb-4ce1cf56e761" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="TriggerParticle" time="0.000" length="0.990" isDuration="true" guid="78df6720-3529-49b9-a16d-6897e0205030">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/577_ShaoSiYuan/ShaoSiYuan_buff_yj_red_01_start" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-3.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+        <int name="iDelayDisappearTime" value="66" refParamName="" useRefParam="false" />
+        <bool name="bindOnHUD" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="AdjustParticleTransformTick0" eventType="AdjustParticleTransformTick" guid="470267d4-22db-47ea-87fc-fb3b415df8d2" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="AdjustParticleTransformTick" time="0.000" isDuration="false" guid="89823b0a-38c3-49c8-ad55-07312406b419">
+        <TemplateObject name="objectId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="refActorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFitHeight" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="9986e866-d218-487b-a52f-b12aac696e2f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="TriggerParticle" time="0.990" length="6.510" isDuration="true" guid="5572ebb1-e9ad-4178-9706-e3f0141942de">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/577_ShaoSiYuan/ShaoSiYuan_buff_yj_red_01_loop" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-3.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+        <bool name="bindOnHUD" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="AdjustParticleTransformTick0" eventType="AdjustParticleTransformTick" guid="92061ae8-20f4-4c28-b7b7-4c37e7f9bb50" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="AdjustParticleTransformTick" time="0.990" isDuration="false" guid="1d81ee86-6227-407d-8d20-4ca04857fee9">
+        <TemplateObject name="objectId" objectName="bullet2" id="5" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="refActorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFitHeight" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="0e04579f-42df-488f-8b3d-ee228b79d715" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="true" execOnActionCompleted="true">
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="c6e92b84-f0b7-43e1-bdbd-c07ea78b530d">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/577_ShaoSiYuan/ShaoSiYuan_buff_yj_red_01_end" refParamName="" useRefParam="false" />
+        <float name="lifeTime" value="1.300" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-3.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="bindOnHUD" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="AdjustParticleTransformTick0" eventType="AdjustParticleTransformTick" guid="0509e2c3-dca1-4fa1-b852-293ef3b41af9" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="true" execOnActionCompleted="true">
+      <Event eventName="AdjustParticleTransformTick" time="0.000" isDuration="false" guid="d6014e61-a050-409b-b387-b1f009866840">
+        <TemplateObject name="objectId" objectName="bullet3" id="6" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="refActorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFitHeight" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

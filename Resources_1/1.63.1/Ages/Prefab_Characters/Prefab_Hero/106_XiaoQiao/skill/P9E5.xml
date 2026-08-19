@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="5.000" loop="false">
+    <Track trackName="检测出泉水" eventType="CheckSkillCombineConditionDuration" guid="aa73c598-47e5-404e-b6d5-92ecc486259e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionDuration" time="0.000" length="5.000" isDuration="true" guid="90ccc5ca-bb60-435b-adfe-e36f7701dafd">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="90005" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检测出泉水（2min）" eventType="CheckSkillCombineConditionDuration" guid="d2876616-a846-4050-8d36-e2d088e72a44" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionDuration" time="0.000" length="5.000" isDuration="true" guid="6ed03d67-e149-4efa-af47-16d017206ee2">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="900059" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检测家园卫士buff" eventType="CombinationConditionDuration" guid="5d6b2c71-5923-4d85-94e3-9dea77d54a25" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CombinationConditionDuration" time="0.000" length="5.000" isDuration="true" guid="c3b0cacc-4e17-46b6-a60e-bb26f89a55de">
+        <Array name="CondiTrackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="0" guid="aa73c598-47e5-404e-b6d5-92ecc486259e" />
+          <TrackObject id="1" guid="d2876616-a846-4050-8d36-e2d088e72a44" />
+        </Array>
+        <Array name="CheckCondiTrackStatus" refParamName="" useRefParam="false" type="bool">
+          <bool value="true" />
+          <bool value="true" />
+        </Array>
+        <Array name="IsOrConditions" refParamName="" useRefParam="false" type="bool">
+          <bool value="true" />
+          <bool value="true" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="出城回城出城检测" eventType="HitTriggerTick" guid="dc0bc9fa-db1e-4cc1-a688-dc5fcdfc8d02" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="5d6b2c71-5923-4d85-94e3-9dea77d54a25" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="396df1a4-0cc9-446d-809a-071e2a56544f">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="hitTargetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="106992" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="1d1c5953-ebc5-4979-a8cd-d17fbdd5f382" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="5d6b2c71-5923-4d85-94e3-9dea77d54a25" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="1a929474-e7ac-4885-9f17-d16e090e40f8">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="106994" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

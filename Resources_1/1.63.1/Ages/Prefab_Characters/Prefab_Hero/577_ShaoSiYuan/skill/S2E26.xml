@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="zhiren1" id="3" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="1.000" loop="false">
+    <Track trackName="FilterTargetDuration0" eventType="FilterTargetDuration" guid="b0d975e6-8a19-4e77-82e9-534b006d12a7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetDuration" time="0.000" length="1.000" isDuration="true" guid="8c985f70-5d1a-45b7-8827-efa4981c7ad6">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="577198" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="fa1a340b-e0ca-49da-8f70-60fb63c5c4b5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b0d975e6-8a19-4e77-82e9-534b006d12a7" status="true" />
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="d519b712-9f5d-424f-8a85-9821424b09c9">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="yuanzai_B" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckTargetIsNullTick0" eventType="CheckTargetIsNullTick" guid="d802bbda-c0f8-4ca0-9dca-1f265278366c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b0d975e6-8a19-4e77-82e9-534b006d12a7" status="true" />
+      <Event eventName="CheckTargetIsNullTick" time="0.000" isDuration="false" guid="98f95887-a249-439a-ba4b-57afdbdf35f7">
+        <TemplateObject name="actorId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="75c6292d-0414-403d-8b18-e61f9d197140" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="d802bbda-c0f8-4ca0-9dca-1f265278366c" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="2ad012bf-bb28-4c07-919b-d4599ba79676">
+        <TrackObject name="trackId" id="7" guid="2502193c-505d-4ddc-b428-2badfe6d851e" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="7335a384-a24b-4023-b483-4ac99a3ab53a" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b0d975e6-8a19-4e77-82e9-534b006d12a7" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="dc466ca3-f57d-4eff-ab45-a7da2bed34ed">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="33426e14-73a3-4ae9-b32c-cd945f9d96f3" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="d802bbda-c0f8-4ca0-9dca-1f265278366c" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="ae59bb99-53d1-42b2-8d15-4fa2513b64cd">
+        <TrackObject name="trackId" id="6" guid="fd9309c9-3f23-4959-a5bc-ce0d55ce3c67" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick0" eventType="SimpleSpawnBuffTick" guid="fd9309c9-3f23-4959-a5bc-ce0d55ce3c67" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b0d975e6-8a19-4e77-82e9-534b006d12a7" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="cd718c62-c5ff-42b2-8e8b-a8bc193a207c">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577944" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="DestroyActorTick0" eventType="DestroyActorTick" guid="2502193c-505d-4ddc-b428-2badfe6d851e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="b0d975e6-8a19-4e77-82e9-534b006d12a7" status="true" />
+      <Event eventName="DestroyActorTick" time="0.000" isDuration="false" guid="a7823db4-0d86-4713-ada1-d74aa2744fd6">
+        <TemplateObject name="TargetId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList />
+  <Action tag="" length="1.000" loop="false">
+    <Track trackName="检查目标debuff层数" eventType="CheckSkillCombineConditionTick" guid="fb4c662e-b835-4bd4-bea8-c7fb825da2cc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="5c09ec6a-cb62-4f0b-aa6f-36df45066936">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="512110" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="acf08d48-3ebf-44ec-bab8-7e58a2c3016b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="e4ce95d3-903c-4adb-aef1-8639b69e1a7e">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterMonter" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterBoss" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterOrgan" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterChest" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterEye" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="造成减速" eventType="HitTriggerTick" guid="4447c294-cb77-4e8e-a46b-53ca45a5993f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="acf08d48-3ebf-44ec-bab8-7e58a2c3016b" status="true" />
+      <Condition id="0" guid="fb4c662e-b835-4bd4-bea8-c7fb825da2cc" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="e6542ac0-33fd-4bff-9662-4328599bf205">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="hitTargetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="512111" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

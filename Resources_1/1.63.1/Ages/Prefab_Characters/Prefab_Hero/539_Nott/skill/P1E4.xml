@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="bullet2" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.400" loop="false">
+    <Track trackName="CheckEnergyConditionDuration0" eventType="CheckEnergyConditionDuration" guid="571d06dc-6a82-4dff-993e-8c6b94503f51" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckEnergyConditionDuration" time="0.000" length="0.400" isDuration="true" guid="1e9a8eee-8f13-45ed-a98a-c85eccd341a3">
+        <TemplateObject name="srcId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="energySlot" value="1" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="value" value="100" refParamName="" useRefParam="false" />
+        <Enum name="checkType" value="1" refParamName="" useRefParam="false" />
+        <Enum name="checkValueType" value="1" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="扣能量" eventType="SpawnBulletTick" guid="75258d7b-bdc7-47c0-a95f-61516c7f62b6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="571d06dc-6a82-4dff-993e-8c6b94503f51" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="8abfd4fb-3fa9-450c-a69d-3c5ecb156e35">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/539_Nott/skill/p1b1" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+        <bool name="bAgeEternal" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="539002" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckSkillCombineConditionTick0" eventType="CheckSkillCombineConditionTick" guid="e1b283c6-d512-46ef-8599-54ba85f1dd57" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="571d06dc-6a82-4dff-993e-8c6b94503f51" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="74d625f6-dc63-4208-b6d5-2023569c2b7f">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="539905" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="a3090c44-add4-4f47-a418-15b9482ee1e2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="e1b283c6-d512-46ef-8599-54ba85f1dd57" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="f2a6028b-149a-447b-a3f7-1519cc6c2fdf">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="539905" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="攻击者" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="2.000" loop="false">
+    <Track trackName="LimitMovementAreaDuration0" eventType="LimitMovementAreaDuration" guid="d7b43858-a1fc-4f2f-b793-ab4a73bca5e4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="LimitMovementAreaDuration" time="0.000" length="2.000" isDuration="true" guid="d08337ff-b4b2-4cf0-9223-9cfb2ad95c1a">
+        <TemplateObject name="sourceId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="areaRadius" value="4000" refParamName="" useRefParam="false" />
+        <Enum name="limiteType" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckSkillCombineConditionDuration1" eventType="CheckSkillCombineConditionDuration" guid="0c7be75a-49da-41b2-8a2e-738971d1233f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionDuration" time="0.000" length="2.000" isDuration="true" guid="e8a9fa56-29fc-4df6-ab3e-1ffa0176c119">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="5193992" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="24f3820b-9870-41b4-8d96-07d11cf8ecd8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="0c7be75a-49da-41b2-8a2e-738971d1233f" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="686743d9-1fde-4416-b04d-be95e7095ea5">
+        <TrackObject name="trackId" id="0" guid="d7b43858-a1fc-4f2f-b793-ab4a73bca5e4" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="240af3fa-409c-4588-9e6c-071325f55d15" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="0c7be75a-49da-41b2-8a2e-738971d1233f" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="5bc53bc2-ec50-464a-b396-5bb78121a42d" />
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet1" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet2" id="3" isTemp="true" />
+    <TemplateObject objectName="bullet5" id="4" isTemp="true" />
+    <TemplateObject objectName="bullet6" id="5" isTemp="true" />
+    <TemplateObject objectName="bullet7" id="6" isTemp="true" />
+    <TemplateObject objectName="bullet8" id="7" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="6.000" loop="false">
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="a2b4ee22-9189-40cc-9ce4-dce4236482d2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="a0cb15e1-c2a6-4e72-8acf-f2c7a67c5abb">
+        <String name="actorName" value="A" refParamName="" useRefParam="false" />
+        <TemplateObject name="getFromTargetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" objectName="bullet2" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="2626486a-ab8c-42a1-9c31-af0832bb20f3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="d06e7e53-63dd-447a-a50b-1eecf3e03240">
+        <String name="actorName" value="C" refParamName="" useRefParam="false" />
+        <TemplateObject name="getFromTargetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" objectName="bullet6" id="5" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckDistanceDuration0" eventType="CheckDistanceDuration" guid="1a1ec348-883c-4098-bc09-db13869dc188" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckDistanceDuration" time="0.000" length="6.000" isDuration="true" guid="9220140d-aeb8-4beb-9e37-bcb74ae29566">
+        <TemplateObject name="srcId" objectName="bullet2" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="bullet6" id="5" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="checkType" value="1" EnumValue="小于" refParamName="" useRefParam="false" />
+        <int name="distance" value="12000" refParamName="" useRefParam="false" />
+        <bool name="bIngoreY" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="WZRemoveBuffTick0" eventType="WZRemoveBuffTick" guid="f4913f35-cc34-4339-a98f-acc568347517" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="1a1ec348-883c-4098-bc09-db13869dc188" status="true" />
+      <Event eventName="WZRemoveBuffTick" time="0.000" isDuration="false" guid="af992081-6fa8-4e34-8752-6a15984aae9e">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="buffInstigatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="509324" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick1" eventType="SpawnBulletTick" guid="67c7cd83-eaf0-42a5-8d2f-a532076c440b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="1a1ec348-883c-4098-bc09-db13869dc188" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="0e520d6f-c645-4e3f-b4b1-3a735d35c1c1">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/509_Ybneth/skill/U1B91" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="50991" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

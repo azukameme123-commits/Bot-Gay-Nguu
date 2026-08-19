@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.100" loop="false">
+    <Track trackName="未解封" eventType="CheckSkillCombineConditionTick" guid="2f890a8b-3b28-44c5-9e1d-b852739ca654" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="5199971d-fd45-4d64-a13c-d4031ba69e2c">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="542908" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="有被该区域印记伤害到" eventType="CheckSkillCombineConditionTick" guid="db4d30f6-508c-4e1f-b60f-6be4934dd262" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="2f890a8b-3b28-44c5-9e1d-b852739ca654" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="737fe4e2-0f63-4e1c-9471-10032b33016e">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="542906" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="没有同时触发别的印记" eventType="CheckSkillCombineConditionTick" guid="a8aba825-64f8-4f60-a8ec-10de158e2f20" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="db4d30f6-508c-4e1f-b60f-6be4934dd262" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="99b5e068-c5d4-4ead-907d-b06af1c34ecc">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="542905" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="82d14191-889d-4d2f-836b-4d0b559bafbd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="a8aba825-64f8-4f60-a8ec-10de158e2f20" status="true" />
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="b6ab36f1-c7c8-4e12-b805-a0077ae9a010">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterMinorMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterSoldier" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterSameCamp" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="2d80b1c5-28d1-46dd-8e12-0b36dbd8a93c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="82d14191-889d-4d2f-836b-4d0b559bafbd" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="db589bff-2c66-4993-a661-6809c0a8dc8e">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="542905" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="542900" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBulletTick0" eventType="RemoveBulletTick" guid="3f424ed4-404a-4edc-8c63-e0939cc4f7e7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="82d14191-889d-4d2f-836b-4d0b559bafbd" status="true" />
+      <Event eventName="RemoveBulletTick" time="0.000" isDuration="false" guid="4bf057ba-2e58-48ff-b084-e5841514ae15">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="5420001" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="a4df91e9-1c51-412e-a4cb-aa4e21fb87db" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="82d14191-889d-4d2f-836b-4d0b559bafbd" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="bef75e4b-b930-46b2-b18c-84d6a79238dd">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="5429011" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_2" value="542909" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_3" value="542907" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="s1self" isTemp="false" />
+    <TemplateObject id="3" objectName="bullet" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="30.000" loop="false">
+    <Track trackName="空buff判断S1二段释放与否" eventType="CheckSkillCombineConditionDuration" guid="9c9385df-01e8-420e-b338-1e26a2453a4b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionDuration" time="0.000" length="30.000" isDuration="true" guid="84c5898c-0d8c-4e3e-b14f-f8e79d7bb35d">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="531140" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="5" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="停止S1原地时的特效" eventType="StopTrack" guid="36a0e912-f887-4868-84aa-2b4450ae1859" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="9c9385df-01e8-420e-b338-1e26a2453a4b" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="64104015-f28c-49ca-98ab-3cde8a7af8bd">
+        <TrackObject name="trackId" id="3" guid="38b24252-c3ab-4f20-9af6-d54b1a57aaf3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="97184185-d6ac-4ed8-9928-38da8e58e5f4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="30.000" isDuration="true" guid="8c9f195f-5bef-4b95-a513-57a5fe12bc6a">
+        <TemplateObject name="targetId" id="3" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="prefabName" value="prefab_characters/commonempty" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+        <TemplateObject name="materialParentActorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="visionActorId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="recordTargeID" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="38b24252-c3ab-4f20-9af6-d54b1a57aaf3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="TriggerParticle" time="0.000" length="30.000" isDuration="true" guid="6a03977b-beb4-47d0-b985-bec70cea9c96">
+        <TemplateObject name="targetId" id="3" objectName="bullet" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/531_keera/keera_spell_01c" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bHideWhenDead" value="false" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="保存s1self（幻象）" eventType="SaveActorDuration" guid="65bb3cc4-fb5a-471c-9a3e-de612736c251" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SaveActorDuration" time="0.000" length="30.000" isDuration="true" guid="9fd6719a-242a-4769-9b1c-f7d792ae83cc">
+        <String name="actorName" value="s1self" refParamName="" useRefParam="false" />
+        <TemplateObject name="SetActorId" id="3" objectName="bullet" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="strValue" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick0" eventType="SpawnBulletTick" guid="5653d036-5cdc-4ed3-b2a0-3b53c928665a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnBulletTick" time="3.400" isDuration="false" guid="575216c5-464d-4bd3-854c-ca8b1084c797">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/531_keera/skill/s11b1" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+        <bool name="bAgeEternal" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="777" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="停止S1原地时的特效" eventType="StopTrack" guid="fae3b801-14db-42d8-bdb5-0e79a9e19807" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="5" guid="5653d036-5cdc-4ed3-b2a0-3b53c928665a" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="927da4c4-27ac-4566-9bcb-24f0c7d0728a">
+        <TrackObject name="trackId" id="3" guid="38b24252-c3ab-4f20-9af6-d54b1a57aaf3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

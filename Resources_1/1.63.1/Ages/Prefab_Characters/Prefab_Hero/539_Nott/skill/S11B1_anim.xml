@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="bullet1" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.900" loop="false">
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="74b7a537-2cef-488b-a901-9f91f100b8b2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="c7b1d6ca-d593-4525-a176-14d9756bb16e">
+        <String name="actorName" value="Ball" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" id="2" objectName="bullet" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="refParamName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="在左边" eventType="IsLeftSide" guid="c4155091-4944-435f-aa49-98952febb1b4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="IsLeftSide" time="0.000" isDuration="false" guid="b76b0863-ca36-4a72-b5d4-bc6dc0a9e470">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="startId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ForbidAbilityDuration0" eventType="ForbidAbilityDuration" guid="94cf395c-f928-4612-aa3a-3f44944de5f9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="ForbidAbilityDuration" time="0.000" length="0.400" isDuration="true" guid="59b9e774-a035-4c6b-a86c-f1a5c9bc2cc4">
+        <TemplateObject name="attackerId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="forbidSkillAbort" value="false" refParamName="" useRefParam="false" />
+        <bool name="forbidMoveRotate" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="往右移特效" eventType="TriggerParticle" guid="74c938d7-c6c3-4a17-953c-a3d9c97c6416" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="c4155091-4944-435f-aa49-98952febb1b4" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.900" isDuration="true" guid="fe68ce3e-8b14-4f9b-b692-32fb778caf18">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/539_Nott/Nott_spell01_attack03" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="enableMaxFollowTime" value="true" refParamName="" useRefParam="false" />
+        <float name="maxFollowTime" value="0.400" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="在左边，往右移动" eventType="PlayAnimDuration" guid="470fb67f-69d5-48e6-b5aa-a9f639b218d7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="c4155091-4944-435f-aa49-98952febb1b4" status="true" />
+      <Event eventName="PlayAnimDuration" time="0.000" length="0.900" isDuration="true" guid="5d53dd2c-cb03-4fc8-a8d4-85c56ed703dd">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Spell1_1_Right" refParamName="" useRefParam="false" />
+        <float name="crossFadeTime" value="0.100" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeed" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="往右移特效" eventType="TriggerParticle" guid="03a32036-e12f-4ba6-9868-cda9d3439ea2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="c4155091-4944-435f-aa49-98952febb1b4" status="false" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.900" isDuration="true" guid="ef116a64-6595-4621-bc31-a1711c98e0b0">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/539_Nott/Nott_spell01_attack02" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="enableMaxFollowTime" value="true" refParamName="" useRefParam="false" />
+        <float name="maxFollowTime" value="0.400" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="在右边，往左移" eventType="PlayAnimDuration" guid="0b2d3aa0-5139-4de5-9e69-b36681ed0ba7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="c4155091-4944-435f-aa49-98952febb1b4" status="false" />
+      <Event eventName="PlayAnimDuration" time="0.000" length="0.900" isDuration="true" guid="797ccf5d-3fd9-49d7-9211-99f7bde877c0">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Spell1_1_Left" refParamName="" useRefParam="false" />
+        <float name="crossFadeTime" value="0.100" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeed" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="斥力状态下的弹出子弹" eventType="SpawnBulletTick" guid="979af41d-a84d-4942-ab2d-a306ccecd1af" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="bd1347d9-af55-499e-b055-5facb962f67c">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/539_Nott/skill/s11b1" refParamName="" useRefParam="false" />
+        <bool name="bDeadRemove" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="539103" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

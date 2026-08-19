@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="monster" isTemp="true" />
+    <TemplateObject id="4" objectName="hero" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <int name="123" value="0" refParamName="" useRefParam="false" />
+    <int name="789" value="0" refParamName="" useRefParam="false" />
+    <int name="level" value="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.100" loop="false">
+    <Track trackName="GetActorTick1" eventType="GetActorTick" guid="2133c59d-cea0-4d58-b005-54a77ec2871d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" comment="传递天籁">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="c0d95537-3cc1-4c5f-b128-d3feaf89247b">
+        <String name="actorName" value="TianLaiTarget" refParamName="" useRefParam="false" />
+        <TemplateObject name="getFromTargetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" id="3" objectName="monster" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="refParamName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="GetSkillLevelTick0" eventType="GetSkillLevelTick" guid="6ca1e793-306a-47dc-8aa1-eb9fd000f904" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="GetSkillLevelTick" time="0.008" isDuration="false" guid="d32b8db8-7524-4e72-972e-365e05d1347c">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillID" value="15930" refParamName="" useRefParam="false" />
+        <String name="resultValueName" value="level" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckIntegerTick0" eventType="CheckIntegerTick" guid="76ec5b74-cfe1-4be7-a0ae-102493b73941" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="03f17d60-d92e-4502-8d86-be2a115430a4">
+        <int name="compareParam" value="0" refParamName="level" useRefParam="true" />
+        <Enum name="checkOPType" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="0d2629de-6915-4017-a596-e1e9be15cd6c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="76ec5b74-cfe1-4be7-a0ae-102493b73941" status="false" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="1a95a818-5b2e-4098-a907-ab78af849059" />
+    </Track>
+    <Track trackName="CheckSkillCDTick0" eventType="CheckSkillCDTick" guid="3cfdf350-280a-4bf9-8394-7b4324d3023c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCDTick" time="0.000" isDuration="false" guid="2844a33b-6c2e-4e33-976d-08fc845c7f36">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bCheckSlot" value="true" refParamName="" useRefParam="false" />
+        <Enum name="checkSlot" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="d864e1a4-3a77-4b1c-b1f3-a6152d38b949" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="3cfdf350-280a-4bf9-8394-7b4324d3023c" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="fb697c0b-6eea-4b38-8337-eb97f20aa0e8">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="159973" refParamName="" useRefParam="false" />
+        <bool name="bImmeStop" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="1a299165-3602-4e7b-91d3-d845cc1a9670" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="3cfdf350-280a-4bf9-8394-7b4324d3023c" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="98cf5fe8-9082-4c97-b60f-feece34c9022" />
+    </Track>
+    <Track trackName="检测天籁在旁边" eventType="CheckSkillCombineConditionTick" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" comment="天籁在旁边">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="27235ef6-a0d2-4f0b-bc7a-8ed84e25e439">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="159711" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="5" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检测天籁技能" eventType="GetSkillSlotCDTick" guid="4bbdca10-eb0f-4af4-b5b7-a8d782e4ed3c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" comment="天籁进cd">
+      <Event eventName="GetSkillSlotCDTick" time="0.000" isDuration="false" guid="37e00431-1f63-454f-a4ec-8eb6d4c054a3">
+        <TemplateObject name="actorId" id="3" objectName="monster" isTemp="true" refParamName="" useRefParam="false" />
+        <bool name="isMaxSkillCD" value="true" refParamName="" useRefParam="false" />
+        <bool name="specialCheck" value="true" refParamName="" useRefParam="false" />
+        <bool name="checkSkillBean" value="true" refParamName="" useRefParam="false" />
+        <bool name="outputSlot" value="true" refParamName="" useRefParam="false" />
+        <String name="outputSlotName" value="123" refParamName="" useRefParam="false" />
+        <bool name="outputCD" value="true" refParamName="" useRefParam="false" />
+        <String name="outputCDName" value="456" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ShowMaxSkillCDOnHUDDuration0" eventType="ShowMaxSkillCDOnHUDDuration" guid="ed7b5070-f67e-414a-b099-900906382f4a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" status="true" />
+      <Condition id="8" guid="4bbdca10-eb0f-4af4-b5b7-a8d782e4ed3c" status="true" />
+      <Condition id="2" guid="76ec5b74-cfe1-4be7-a0ae-102493b73941" status="true" />
+      <Condition id="4" guid="3cfdf350-280a-4bf9-8394-7b4324d3023c" status="true" />
+      <Event eventName="ShowMaxSkillCDOnHUDDuration" time="0.000" length="0.100" isDuration="true" guid="c173ddb4-f2aa-4178-a337-38fae1e7b3dd">
+        <TemplateObject name="srcId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="3" objectName="monster" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" refParamName="123" useRefParam="true" />
+        <int name="minCD" value="500000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="78e9ab38-e3a7-4505-8226-92a5f4a5e0ba" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" status="true" />
+      <Condition id="8" guid="4bbdca10-eb0f-4af4-b5b7-a8d782e4ed3c" status="false" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="3aa72fc4-f77e-4639-a2d2-ba6a37da94fe">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="9" guid="ed7b5070-f67e-414a-b099-900906382f4a" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="51b9303f-0138-45d1-98e2-0ad78f86e45a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" status="false" />
+      <Condition id="8" guid="4bbdca10-eb0f-4af4-b5b7-a8d782e4ed3c" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="b06e7940-67d7-4ef5-bed5-229dc037a728">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="9" guid="ed7b5070-f67e-414a-b099-900906382f4a" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="f48ffff5-c4fd-4d3e-ae2b-d49b4e70e3be" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" status="false" />
+      <Condition id="8" guid="4bbdca10-eb0f-4af4-b5b7-a8d782e4ed3c" status="false" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="20698d41-94d2-4ca6-93b9-7d3d68796a79">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="9" guid="ed7b5070-f67e-414a-b099-900906382f4a" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="a3afbdad-b4ab-4a24-b128-8591dc16df71" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" status="true" />
+      <Condition id="8" guid="4bbdca10-eb0f-4af4-b5b7-a8d782e4ed3c" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="3524528d-56fe-46ec-b397-a1e4e45198de">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="15" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" />
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="-1" guid="" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="19319eac-f5b4-4885-84eb-7a10257cdd2c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="1be5c58e-fa9c-4d5a-adf0-ea8e98c74efa">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="15" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" />
+          <TrackObject id="18" guid="fdaf1ba3-0abf-4292-9823-35127a21ee4e" />
+          <TrackObject id="25" guid="eba7eb88-f8a3-4c09-8e93-c9fe8e2ae688" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="周围有队友" eventType="SearchActorTick" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" comment="队友在旁边">
+      <Condition id="7" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" status="false" />
+      <Event eventName="SearchActorTick" time="0.000" isDuration="false" guid="043ab886-5bdf-44f1-b396-6eabad28bac0">
+        <TemplateObject name="actorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="filterCamp" value="true" refParamName="" useRefParam="false" />
+        <bool name="filterAttackRange" value="true" refParamName="" useRefParam="false" />
+        <int name="attackRange" value="12000" refParamName="" useRefParam="false" />
+        <bool name="specialCheck" value="true" refParamName="" useRefParam="false" />
+        <bool name="checkSkillBean" value="true" refParamName="" useRefParam="false" />
+        <bool name="filterSelf" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="周围有队友" eventType="SearchActorTick" guid="bd764374-c7e6-4b60-a21c-d0dabc61382d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" comment="队友在旁边">
+      <Condition id="15" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" status="true" />
+      <Event eventName="SearchActorTick" time="0.000" isDuration="false" guid="2f8c79f7-b975-43be-838b-6717f30a8599">
+        <TemplateObject name="actorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="filterCamp" value="true" refParamName="" useRefParam="false" />
+        <bool name="filterAttackRange" value="true" refParamName="" useRefParam="false" />
+        <int name="attackRange" value="12000" refParamName="" useRefParam="false" />
+        <bool name="filterSkillMaxCD" value="true" refParamName="" useRefParam="false" />
+        <bool name="specialCheck" value="true" refParamName="" useRefParam="false" />
+        <bool name="checkSkillBean" value="true" refParamName="" useRefParam="false" />
+        <bool name="filterSelf" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="saveTargetId" id="4" objectName="hero" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检测队友技能" eventType="GetSkillSlotCDTick" guid="65ed8cb8-734b-4248-be32-7b8961e6aad2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" comment="天籁进cd">
+      <Condition id="16" guid="bd764374-c7e6-4b60-a21c-d0dabc61382d" status="true" />
+      <Event eventName="GetSkillSlotCDTick" time="0.000" isDuration="false" guid="7e5a148c-e5e7-4eee-8108-8b952a3adfdd">
+        <TemplateObject name="actorId" id="4" objectName="hero" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="isMaxSkillCD" value="true" refParamName="" useRefParam="false" />
+        <bool name="specialCheck" value="true" refParamName="" useRefParam="false" />
+        <bool name="checkSkillBean" value="true" refParamName="" useRefParam="false" />
+        <bool name="outputSlot" value="true" refParamName="" useRefParam="false" />
+        <String name="outputSlotName" value="123" refParamName="" useRefParam="false" />
+        <bool name="outputCD" value="true" refParamName="" useRefParam="false" />
+        <String name="outputCDName" value="456" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ShowMaxSkillCDOnHUDDuration0" eventType="ShowMaxSkillCDOnHUDDuration" guid="fdaf1ba3-0abf-4292-9823-35127a21ee4e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="17" guid="65ed8cb8-734b-4248-be32-7b8961e6aad2" status="true" />
+      <Condition id="2" guid="76ec5b74-cfe1-4be7-a0ae-102493b73941" status="true" />
+      <Condition id="4" guid="3cfdf350-280a-4bf9-8394-7b4324d3023c" status="true" />
+      <Event eventName="ShowMaxSkillCDOnHUDDuration" time="0.000" length="0.100" isDuration="true" guid="cf9d7fa0-5ec7-4390-916f-1ac79d153780">
+        <TemplateObject name="srcId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="4" objectName="hero" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" refParamName="123" useRefParam="true" />
+        <int name="minCD" value="500000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="9f5d7e8a-f20d-4122-b287-a1ec547dc826" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="15" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" status="true" />
+      <Condition id="17" guid="65ed8cb8-734b-4248-be32-7b8961e6aad2" status="false" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="6a9ec99d-d5b4-4e99-adcc-3ad43e0d0ef6">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="18" guid="fdaf1ba3-0abf-4292-9823-35127a21ee4e" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="1c994127-d829-4f42-bd4c-aed0687f74d8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="15" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" status="false" />
+      <Condition id="17" guid="65ed8cb8-734b-4248-be32-7b8961e6aad2" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="a865093b-0e73-4a19-8d18-2284fba3bf09">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="18" guid="fdaf1ba3-0abf-4292-9823-35127a21ee4e" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="e59f2399-1ada-4b70-9a4a-d2ff5b65d287" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="15" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" status="false" />
+      <Condition id="17" guid="65ed8cb8-734b-4248-be32-7b8961e6aad2" status="false" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="8baaa42e-b66a-448e-a868-07155ceda4b1">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="18" guid="fdaf1ba3-0abf-4292-9823-35127a21ee4e" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="dd38d6ed-3abd-4fe8-b4d9-8f3f660742d6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="15" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="37e61200-052d-44d4-b136-8c0f207bae8c">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="24" guid="d22c1b3f-a21c-4801-9732-5d52101a140d" />
+          <TrackObject id="25" guid="eba7eb88-f8a3-4c09-8e93-c9fe8e2ae688" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="周围没人" eventType="SearchActorTick" guid="007bbdca-8296-4189-aa17-f91cd18466fe" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" comment="周围没人">
+      <Condition id="15" guid="3fb9d8a4-8e5a-4c3a-aa45-9bbc69acff71" status="false" />
+      <Condition id="7" guid="2d7fca7e-9406-4867-934c-1b8d93d495c4" status="false" />
+      <Event eventName="SearchActorTick" time="0.000" isDuration="false" guid="e2dcb3fa-0815-4742-9dc3-76090a9c5d99">
+        <TemplateObject name="actorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="filterCamp" value="true" refParamName="" useRefParam="false" />
+        <bool name="filterAttackRange" value="true" refParamName="" useRefParam="false" />
+        <int name="attackRange" value="12000" refParamName="" useRefParam="false" />
+        <bool name="filterSkillMaxCD" value="true" refParamName="" useRefParam="false" />
+        <bool name="specialCheck" value="true" refParamName="" useRefParam="false" />
+        <bool name="checkSkillBean" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="saveTargetId" id="4" objectName="hero" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检测自己技能" eventType="GetSkillSlotCDTick" guid="d22c1b3f-a21c-4801-9732-5d52101a140d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" comment="天籁进cd">
+      <Condition id="23" guid="007bbdca-8296-4189-aa17-f91cd18466fe" status="true" />
+      <Event eventName="GetSkillSlotCDTick" time="0.000" isDuration="false" guid="6e081c2e-d82f-432a-be86-129285adb23f">
+        <TemplateObject name="actorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="isMaxSkillCD" value="true" refParamName="" useRefParam="false" />
+        <bool name="specialCheck" value="true" refParamName="" useRefParam="false" />
+        <bool name="checkSkillBean" value="true" refParamName="" useRefParam="false" />
+        <bool name="outputSlot" value="true" refParamName="" useRefParam="false" />
+        <String name="outputSlotName" value="123" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ShowMaxSkillCDOnHUDDuration0" eventType="ShowMaxSkillCDOnHUDDuration" guid="eba7eb88-f8a3-4c09-8e93-c9fe8e2ae688" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="24" guid="d22c1b3f-a21c-4801-9732-5d52101a140d" status="true" />
+      <Condition id="4" guid="3cfdf350-280a-4bf9-8394-7b4324d3023c" status="true" />
+      <Condition id="2" guid="76ec5b74-cfe1-4be7-a0ae-102493b73941" status="true" />
+      <Event eventName="ShowMaxSkillCDOnHUDDuration" time="0.000" length="0.100" isDuration="true" guid="2c918294-f23e-48f1-8748-f08db4140132">
+        <TemplateObject name="srcId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" refParamName="123" useRefParam="true" />
+        <int name="minCD" value="500000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="46079f7f-fecc-4e4a-89de-66e59a0cfdd6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="24" guid="d22c1b3f-a21c-4801-9732-5d52101a140d" status="false" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="6f1a79d8-32a2-438c-83db-f7fc05f53c8b">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="25" guid="eba7eb88-f8a3-4c09-8e93-c9fe8e2ae688" />
+        </Array>
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.200" loop="false">
+    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="a66c0c5d-659b-4258-b6f7-6630f5046041" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="e2766ca8-0396-4fac-b567-fbc2b52b20e9">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bForceShowParticle" value="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell03_hurt01" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bOnlyFollowPos" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayHeroSoundTick10" eventType="PlayHeroSoundTick" guid="82f6605c-bc04-4c21-9f43-199c433ae2b4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="405d7dc4-b0f6-4b5e-b0e0-78649bca534b">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="sourceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_502_Astrid_Skill_C_Hit" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckSkillIDTick1" eventType="CheckSkillIDTick" guid="ea6abe51-ab8e-4789-a74e-1a2a6f99617e" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillIDTick" time="0.000" isDuration="false" guid="83088631-3274-40d2-95f4-1e9d18df4f81">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillID" value="50230" refParamName="" useRefParam="false" />
+        <bool name="needCheckLevel" value="true" refParamName="" useRefParam="false" />
+        <int name="skillLevel" value="3" refParamName="" useRefParam="false" />
+        <bool name="bCheckSlot" value="true" refParamName="" useRefParam="false" />
+        <Enum name="checkSlot" value="3" EnumValue="技能3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckHPConditionTick0" eventType="CheckHPConditionTick" guid="5f68bbb7-2ad5-49fc-89a9-df6cd04c5a92" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="ea6abe51-ab8e-4789-a74e-1a2a6f99617e" status="false" />
+      <Event eventName="CheckHPConditionTick" time="0.000" isDuration="false" guid="72420562-a849-4d4a-85e4-588370b75c56">
+        <TemplateObject name="srcId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bCompareWithObject" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="value" value="60" refParamName="" useRefParam="false" />
+        <Enum name="checkType" value="1" EnumValue="当前血量" refParamName="" useRefParam="false" />
+        <Enum name="checkValueType" value="1" EnumValue="百分比" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="2" EnumValue="小等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="bc1c2b34-488c-4205-acc5-df1109197baf" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="5f68bbb7-2ad5-49fc-89a9-df6cd04c5a92" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="baf97efb-4c76-4bc9-abbf-7a62d67dad38">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="502390" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckHPConditionTick0" eventType="CheckHPConditionTick" guid="4b1a5eaa-5d6a-4044-a8a6-2868b98e7194" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="ea6abe51-ab8e-4789-a74e-1a2a6f99617e" status="false" />
+      <Event eventName="CheckHPConditionTick" time="0.000" isDuration="false" guid="33a95ea7-3b49-4a9e-9410-ce305bf8114c">
+        <TemplateObject name="srcId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bCompareWithObject" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="value" value="60" refParamName="" useRefParam="false" />
+        <Enum name="checkType" value="1" EnumValue="当前血量" refParamName="" useRefParam="false" />
+        <Enum name="checkValueType" value="1" EnumValue="百分比" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="7acc871a-abbc-4b27-b91e-746c362d6051" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="5" guid="4b1a5eaa-5d6a-4044-a8a6-2868b98e7194" status="true" />
+      <Event eventName="HitTriggerTick" time="0.005" isDuration="false" guid="c517b3da-efa9-4565-8802-c49607880e1d">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="502320" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="8d09eb2f-50ed-4358-a741-27ca7e1a94dd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="763796ce-bfe3-4dc9-a7a9-8f113b0e2899">
+        <Enum name="SkillFuncType" value="2" EnumValue="真实伤害" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="眩晕" eventType="HitTriggerTick" guid="6ba4ac4e-8f16-4845-be76-6a9b0262cce6" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="d1d57396-dfc0-499a-b2f0-57083b1ed530">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="502390" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="真实伤害" eventType="HitTriggerTick" guid="01ee9415-e3ac-4f6f-b716-b973705d8917" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="b66d527d-2a55-4ad0-97b4-e30783c46579">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="502320" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="4cb627c7-0204-4ae3-a6ff-6c74f12a68b5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="5567d071-912e-4e1b-b9dd-bd9da847b8ac">
+        <Enum name="SkillFuncType" value="10" EnumValue="吸血" refParamName="" useRefParam="false" />
+        <int name="OverrideParam1" value="2000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

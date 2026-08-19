@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.500" loop="false">
+    <Track trackName="SkillFuncPerioidc0" eventType="SkillFuncPerioidc" guid="ffddd42c-4fe6-49d9-ac7a-b5a6a04a84fa" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SkillFuncPerioidc" time="0.000" length="0.500" isDuration="true" guid="c21bab91-5271-4b04-a6c4-9097ec638624">
+        <Enum name="SkillFuncType" value="95" refParamName="" useRefParam="false" />
+        <int name="PeriodicInterval" value="66" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="能量满100" eventType="CheckEnergyConditionDuration" guid="9cd0025e-0fe0-4993-ae31-0b652b7270cc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckEnergyConditionDuration" time="0.000" length="0.500" isDuration="true" guid="358efc35-81b6-46d8-90be-636d87903a46">
+        <TemplateObject name="srcId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="energySlot" value="1" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="value" value="100" refParamName="" useRefParam="false" />
+        <Enum name="checkType" value="1" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="渐变" eventType="ChangeEnergySpriteStyleTick" guid="74671b53-2e4b-480b-8b94-ead91fbaa6c4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="9cd0025e-0fe0-4993-ae31-0b652b7270cc" status="true" />
+      <Event eventName="ChangeEnergySpriteStyleTick" time="0.000" isDuration="false" guid="1953bad4-45ac-448d-a6e8-26008752ce8e">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="enableControlSprite" value="true" refParamName="" useRefParam="false" />
+        <String name="energySpriteName" value="Battle_purWhiteHp" refParamName="" useRefParam="false" />
+        <bool name="enableControlRGB" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="energySpriteColorRGB" x="88" y="185" z="63" refParamName="" useRefParam="false" />
+        <int name="energySlot" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

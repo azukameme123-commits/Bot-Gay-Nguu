@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="normal_object_0" id="3" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.400" loop="false">
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="c6fa0f02-9291-424f-a96a-5e4c1f79cc60" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="0.400" isDuration="true" guid="db0b960f-7e63-49f2-8f9d-f73f0213fd0c">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="1500" z="1500" refParamName="" useRefParam="false" />
+        <bool name="modifyScaling" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick0" eventType="SetCollisionTick" guid="e097dd1b-6170-4f6e-b665-828fcd4f7381" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SetCollisionTick" time="0.000" isDuration="false" guid="36f3df4c-d802-464f-8a35-c2be068fc5bb">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="2200" y="10000" z="4000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="MoveBulletDuration2" eventType="MoveBulletDuration" guid="92f28f9d-a7dd-470c-a114-cb2364dd4de2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="MoveBulletDuration" time="0.000" length="0.400" isDuration="true" guid="4959b10a-fbfd-41f9-b233-57aae3e43561">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="MoveType" value="2" EnumValue="指定朝向" refParamName="" useRefParam="false" />
+        <int name="distance" value="5500" refParamName="" useRefParam="false" />
+        <int name="velocity" value="25000" refParamName="" useRefParam="false" />
+        <bool name="bIsUseReferenceDirActorFrom" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="referenceDirActorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="8b0ebe47-959e-41e7-a1eb-3443bb8ade01" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="11">
+      <Event eventName="TriggerParticle" time="0.000" length="0.400" isDuration="true" guid="0373436b-25b6-4ba8-a028-b31bfeac1a69">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/563_HaiNuo/HaiNuo_attack01_fly01B" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="56301" />
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="862192de-979c-4d39-97e8-972f343003f3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="11">
+      <Condition id="2" guid="92f28f9d-a7dd-470c-a114-cb2364dd4de2" status="true" />
+      <Event eventName="StopTracks" time="0.100" isDuration="false" guid="99247143-04d1-4b0e-a649-9426b81e2163">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="0" guid="c6fa0f02-9291-424f-a96a-5e4c1f79cc60" />
+          <TrackObject id="2" guid="92f28f9d-a7dd-470c-a114-cb2364dd4de2" />
+          <TrackObject id="3" guid="8b0ebe47-959e-41e7-a1eb-3443bb8ade01" />
+        </Array>
+      </Event>
+      <SkinOrAvatarList id="56301" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="c3aaef14-beb9-4d31-984c-851acc8ba301" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Event eventName="TriggerParticle" time="0.000" length="0.400" isDuration="true" guid="2316fdbc-7668-4f1e-a81a-081d78dbc3df">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/563_HaiNuo/HaiNuo_attack01_fly01B" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="56301" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="663f4fa0-0a0f-4833-9a04-c6d4905a9a5b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Event eventName="TriggerParticle" time="0.000" length="0.400" isDuration="true" guid="06e42656-49b9-4d50-8e4e-a680b176b1b5">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/563_HaiNuo/HaiNuo_attack01_fly01B_2" refParamName="" useRefParam="false" />
+        <int name="iDelayDisappearTime" value="500" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="56301" />
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="20472910-b1c5-4753-b4fe-3c8ac066d072" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="2" guid="92f28f9d-a7dd-470c-a114-cb2364dd4de2" status="true" />
+      <Event eventName="StopTracks" time="0.100" isDuration="false" guid="bf2b89b7-8c97-4114-b66e-843c8648cf0a">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="0" guid="c6fa0f02-9291-424f-a96a-5e4c1f79cc60" />
+          <TrackObject id="2" guid="92f28f9d-a7dd-470c-a114-cb2364dd4de2" />
+          <TrackObject id="5" guid="c3aaef14-beb9-4d31-984c-851acc8ba301" />
+          <TrackObject id="6" guid="663f4fa0-0a0f-4833-9a04-c6d4905a9a5b" />
+        </Array>
+      </Event>
+      <SkinOrAvatarList id="56301" />
+    </Track>
+    <Track trackName="PlaySoundTick0" eventType="PlaySoundTick" guid="e8a48903-42a0-4352-82de-484adee3e962" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlaySoundTick" time="0.000" isDuration="false" guid="2d2a253f-50ce-4bd9-bec3-1a87faa727d2">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_item_electric_knife_attack" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="GetLinkedActorConditionTick0" eventType="GetLinkedActorConditionTick" guid="30fe79b8-f2be-408a-8fbc-884ec2ada176" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="92f28f9d-a7dd-470c-a114-cb2364dd4de2" status="true" />
+      <Event eventName="GetLinkedActorConditionTick" time="0.000" isDuration="false" guid="06b109b3-20d3-41db-8e38-938a94104157">
+        <TemplateObject name="tempId" objectName="normal_object_0" id="3" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="srcId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bIsGetSpecialHurtTarget" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick0" eventType="SpawnBulletTick" guid="0ba0c139-4aca-46b3-b289-af1906e12d9b" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="9" guid="30fe79b8-f2be-408a-8fbc-884ec2ada176" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="2114eb46-8150-4230-8092-04158e7c162e">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="SpecialActionName" value="Prefab_Characters/Prefab_Hero/563_HaiNuo/skill/A1E10" refParamName="" useRefParam="false" />
+        <bool name="bDestroyedBySpecialBullet" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticleTick2" eventType="TriggerParticleTick" guid="9707c0c5-1561-4a23-9cdc-7d96f62cb982" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="92f28f9d-a7dd-470c-a114-cb2364dd4de2" status="true" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="b9a2baab-bf7f-41f0-ad08-ea185477af90">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/563_HaiNuo/HaiNuo_spell01_hurt01" refParamName="" useRefParam="false" />
+        <float name="lifeTime" value="4.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

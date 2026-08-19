@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="bullet1" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <String name="BulletPrefab" value="" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3.000" loop="false">
+    <Track trackName="抽样数据" eventType="CreateRandomNumTick" guid="62e2d650-1086-46d1-9294-8908957d3119" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CreateRandomNumTick" time="0.000" isDuration="false" guid="ad64c409-8575-4894-a159-b8879d54f9f3">
+        <int name="randomRangeBegin" value="1" refParamName="" useRefParam="false" />
+        <int name="randomRangeEnd" value="5" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="13609" refParamName="" useRefParam="false" />
+        <bool name="withoutReplacement" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType33" eventType="FilterTargetType" guid="4c623b22-0ac4-4b03-970e-5cd18b2d016f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="90ab727e-dc04-4fc8-af07-5b1ff4ef85a0">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterDiffCamp" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType34" eventType="FilterTargetType" guid="ccb31c5b-2215-4421-9101-5fa8897398c1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="9be0239e-2436-411b-ae5a-f104804f6cc4">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterSameCamp" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="f3537a64-a6cf-4de9-9dc7-7fba56330fef" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="3.000" isDuration="true" guid="0a667c06-cfdb-4e07-b28b-58e6bcb61fc2">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="targetPosition" x="0" y="0" z="0" refParamName="_TargetPos" useRefParam="true" />
+        <String name="prefabName" value="prefab_characters/commonempty" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+        <TemplateObject name="materialParentActorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="modifyScaling" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="visionActorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bLayOnNavMesh" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="recordTargeID" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick4" eventType="SetCollisionTick" guid="fe6e0aa9-97ce-4023-a634-63cafaa23513" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SetCollisionTick" time="0.000" isDuration="false" guid="d01fe038-5780-4536-b8c1-5d25853d5152">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="type" value="1" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+        <int name="Radius" value="2500" refParamName="" useRefParam="false" />
+        <int name="Rotation" value="160" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerDuration0" eventType="HitTriggerDuration" guid="cac68460-5552-4a82-8f0e-883f702a971d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="HitTriggerDuration" time="1.067" length="0.500" isDuration="true" guid="a0308cfa-5858-4d6e-950c-97e583afde7f">
+        <TemplateObject name="triggerId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="triggerInterval" value="1000" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="1000" refParamName="" useRefParam="false" />
+        <bool name="bFileterOrgan" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="bulletID" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="32" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="136300" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="136390" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_3" value="136380" refParamName="" useRefParam="false" />
+        <String name="BulletActionName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="特效一" eventType="CheckRandomRangeTick" guid="21962e03-83f2-402d-8a83-06189e1e41dc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="62e2d650-1086-46d1-9294-8908957d3119" status="true" />
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="6516b50b-4f4c-4053-b215-32b98161f24a">
+        <int name="checkRangeBegin" value="1" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="1" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="13609" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle5" eventType="TriggerParticle" guid="22032e0b-ee2a-419b-86fb-f5801c685582" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="4c623b22-0ac4-4b03-970e-5cd18b2d016f" status="true" />
+      <Condition id="6" guid="21962e03-83f2-402d-8a83-06189e1e41dc" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="db37bcfc-2cf0-4378-814d-3b82b9a0598f">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/wuzetian_attack_spell03" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle5" eventType="TriggerParticle" guid="3b743bca-e626-4a42-a719-b1ff1a91161c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="21962e03-83f2-402d-8a83-06189e1e41dc" status="true" />
+      <Condition id="2" guid="ccb31c5b-2215-4421-9101-5fa8897398c1" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="bff917c1-41af-4f58-829a-f218e25d9417">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/wuzetian_attack_spell03_e" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="特效二" eventType="CheckRandomRangeTick" guid="7fd875b7-33ca-4d68-a267-9afc7badd013" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="62e2d650-1086-46d1-9294-8908957d3119" status="true" />
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="f5f56d45-7493-42f2-9292-a1db071706f6">
+        <int name="checkRangeBegin" value="2" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="2" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="13609" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="13609特效二" eventType="TriggerParticle" guid="289c7c50-d437-4e8f-ad36-318a9077112e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="4c623b22-0ac4-4b03-970e-5cd18b2d016f" status="true" />
+      <Condition id="9" guid="7fd875b7-33ca-4d68-a267-9afc7badd013" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="b21c6877-f294-4267-b38c-9fa281da6ec4">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/WuZeTian_attack_spell03_1" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="13609特效二" eventType="TriggerParticle" guid="84be2f74-521d-4914-a06b-31847f04aa5d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="ccb31c5b-2215-4421-9101-5fa8897398c1" status="true" />
+      <Condition id="9" guid="7fd875b7-33ca-4d68-a267-9afc7badd013" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="d68a550e-9396-45f5-9815-33e88476c014">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/WuZeTian_attack_spell03_1_E" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="特效3" eventType="CheckRandomRangeTick" guid="6ed7e8ec-6691-497f-97c0-e7cba2012848" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="62e2d650-1086-46d1-9294-8908957d3119" status="true" />
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="dba2e2aa-b29f-4eee-98ae-2c5140a92e65">
+        <int name="checkRangeBegin" value="3" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="3" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="13609" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="13609特效二" eventType="TriggerParticle" guid="837a91a9-2118-4072-baa1-ff89f029e29a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="4c623b22-0ac4-4b03-970e-5cd18b2d016f" status="true" />
+      <Condition id="12" guid="6ed7e8ec-6691-497f-97c0-e7cba2012848" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="e07ec413-681c-4e74-bdd8-10715a299bc6">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/WuZeTian_attack_spell03_2" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="13609特效二" eventType="TriggerParticle" guid="7278b8ec-e7d0-4dbf-9e64-eb37b1b8f78a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="ccb31c5b-2215-4421-9101-5fa8897398c1" status="true" />
+      <Condition id="12" guid="6ed7e8ec-6691-497f-97c0-e7cba2012848" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="d80722d7-3270-449f-b345-93d5ac10be56">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/WuZeTian_attack_spell03_2_E" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="特效4" eventType="CheckRandomRangeTick" guid="b81651d2-68b8-45a1-b524-bfa7223f7b2b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="62e2d650-1086-46d1-9294-8908957d3119" status="true" />
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="38425f65-3ce7-416d-8ec7-a7ed31b3c530">
+        <int name="checkRangeBegin" value="4" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="4" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="13609" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="13609特效二" eventType="TriggerParticle" guid="e8b85f3d-17c7-4e28-88e7-a2174b40b3f4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="4c623b22-0ac4-4b03-970e-5cd18b2d016f" status="true" />
+      <Condition id="15" guid="b81651d2-68b8-45a1-b524-bfa7223f7b2b" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="1d03bffc-c57c-4c29-8ed7-18b137a19bc0">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/WuZeTian_attack_spell03_3" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="13609特效二" eventType="TriggerParticle" guid="489ec447-9a76-4106-bae5-bf76f6d4464c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="ccb31c5b-2215-4421-9101-5fa8897398c1" status="true" />
+      <Condition id="15" guid="b81651d2-68b8-45a1-b524-bfa7223f7b2b" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="8d1e056d-acf4-4464-8f34-87ccc688df13">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/WuZeTian_attack_spell03_3_E" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="特效5" eventType="CheckRandomRangeTick" guid="e024d000-0bfb-4ffa-8f78-975be1a6a7e4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="62e2d650-1086-46d1-9294-8908957d3119" status="true" />
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="ea907b08-d2c4-4f83-b6eb-906cf03ae6fe">
+        <int name="checkRangeBegin" value="5" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="5" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="13609" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="13609特效二" eventType="TriggerParticle" guid="079991e2-02f0-49e2-8612-2c05fa2bac87" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="4c623b22-0ac4-4b03-970e-5cd18b2d016f" status="true" />
+      <Condition id="18" guid="e024d000-0bfb-4ffa-8f78-975be1a6a7e4" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="442cd927-b58e-4458-b94b-38130316468b">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/WuZeTian_attack_spell03_4" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="13609特效二" eventType="TriggerParticle" guid="c1b092d0-7c1d-404b-8e67-42ba224bf8eb" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="ccb31c5b-2215-4421-9101-5fa8897398c1" status="true" />
+      <Condition id="18" guid="e024d000-0bfb-4ffa-8f78-975be1a6a7e4" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="a7ffdfbc-2898-462d-b0d1-0610c1ea340c">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/136_wuzetian/WuZeTian_attack_spell03_4_E" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CameraShakeDuration0" eventType="CameraShakeDuration" guid="54df05e1-ea75-41eb-80f2-06167fc27ac1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CameraShakeDuration" time="1.067" length="0.500" isDuration="true" guid="cc690905-dc31-46fd-a630-011c67d1fe32">
+        <bool name="useMainCamera" value="true" refParamName="" useRefParam="false" />
+        <bool name="filter_self" value="true" refParamName="" useRefParam="false" />
+        <bool name="canBeCover" value="false" refParamName="" useRefParam="false" />
+        <Vector3 name="shakeRange" x="0.300" y="0.400" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="bUseCustomCurveMode" value="true" refParamName="" useRefParam="false" />
+        <String name="curvesPath" value="Prefab_Skill_Assets/CameraShakeCurves/nor04" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayHeroSoundTick0" eventType="PlayHeroSoundTick" guid="8d8b4b1b-64cf-42c7-80cf-42632bd304fd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="22a3c626-adfe-4f7b-8994-9d464d52861c">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="sourceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_Wuzetian_Skill_C_beforHit" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

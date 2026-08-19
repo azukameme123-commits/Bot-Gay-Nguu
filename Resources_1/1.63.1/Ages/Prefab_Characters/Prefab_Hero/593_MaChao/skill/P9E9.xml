@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <int name="cengshu" value="0" refParamName="" useRefParam="false" />
+    <int name="jiou" value="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="4.100" loop="false">
+    <Track trackName="获取层数" eventType="GetBuffOverLayTick" guid="cc4a56f5-4f2e-45e0-923e-fa4157aca13c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="GetBuffOverLayTick" time="0.000" isDuration="false" guid="d1183fb2-b20b-4ebf-9339-5c758dfee8ee">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="originId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="593999" refParamName="" useRefParam="false" />
+        <String name="outBuffIdOverLay" value="cengshu" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="层数取余" eventType="NewVariableIntCalTick" guid="18103cdb-00b5-41e5-a2ab-7a855c315880" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="cc4a56f5-4f2e-45e0-923e-fa4157aca13c" status="true" />
+      <Event eventName="NewVariableIntCalTick" time="0.000" isDuration="false" guid="1b2d061b-a5a8-4b3a-b58a-76e5a4303e6a">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="LeftActionVariableName" value="cengshu" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="cengshu" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="4" EnumValue="取余" refParamName="" useRefParam="false" />
+        <int name="RightValue" value="2" refParamName="" useRefParam="false" />
+        <Enum name="OutOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="OutActionVariableName" value="jiou" refParamName="" useRefParam="false" />
+        <String name="OutActionRefVariableName" value="jiou" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="取余后是否大于0" eventType="NewVariableIntCompareTick" guid="8ff78756-d784-421f-aa09-1074de91e1dc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="18103cdb-00b5-41e5-a2ab-7a855c315880" status="true" />
+      <Event eventName="NewVariableIntCompareTick" time="0.000" isDuration="false" guid="9b6e523d-b91c-4985-9520-afab10b7323a">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="LeftActionVariableName" value="jiou" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="jiou" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="2" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick2" eventType="SimpleSpawnBuffTick" guid="1435a1d8-a584-4481-bd16-4fc07271ab0b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="8ff78756-d784-421f-aa09-1074de91e1dc" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="95cff67f-c583-4150-99a5-649443a65902">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="593998" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick2" eventType="SimpleSpawnBuffTick" guid="ddb85b87-607e-442c-847a-3c4c04d91d7c" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="8ff78756-d784-421f-aa09-1074de91e1dc" status="false" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="cffc4c67-f061-4f21-8f6d-11511d4046eb">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="593997" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="检查buff或印记层数" eventType="CheckSkillCombineConditionTick" guid="3bde7c09-9c09-481c-bf80-d7ce6569d434" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="8ff78756-d784-421f-aa09-1074de91e1dc" status="false" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="445b7c5e-9742-4798-b812-f3f8cbce9e42">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="593998" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+        <TemplateObject name="skillCombineSrcId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick2" eventType="SimpleSpawnBuffTick" guid="f0e7563a-d0ba-42a5-abb0-51ee1f20c647" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="5" guid="3bde7c09-9c09-481c-bf80-d7ce6569d434" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="ca8e05bd-c9cd-4b9f-ae15-b371feb65a6c">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="593997" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick2" eventType="SimpleSpawnBuffTick" guid="1dff61df-749e-494f-89b2-444d659ae4af" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="5" guid="3bde7c09-9c09-481c-bf80-d7ce6569d434" status="false" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="4438c07b-25fa-4252-822f-ea9ffca03370">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="593998" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="检查buff或印记层数" eventType="CheckSkillCombineConditionDuration" guid="b1f721a9-01e8-41bd-a593-d7b284f221f5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillCombineConditionDuration" time="0.000" length="4.100" isDuration="true" guid="143d1ff8-a872-4645-b511-01d10dcc29df">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="593" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="攻击者" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="2.400" loop="false">
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="5d0b0b0c-463c-4af6-94a8-8c1ca102fabd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" lod="0">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="0.500" isDuration="true" guid="256212fc-9aac-4a62-8be7-942d5808b7ae">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="prefabName" value="prefab_characters/commonempty" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="1200" z="500" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+        <bool name="modifyScaling" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick0" eventType="SetCollisionTick" guid="3597a591-40df-46b8-873e-e41327b72e66" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" lod="0">
+      <Event eventName="SetCollisionTick" time="0.000" isDuration="false" guid="57f7c5e0-06a9-43d4-90e5-f4a01a2526d1">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="type" value="1" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="7a5aff76-ea2c-4c96-b476-7020d8d17ddd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" lod="0">
+      <Event eventName="TriggerParticle" time="0.000" length="0.500" isDuration="true" guid="9b098181-7803-498b-a819-99add71c0798">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/156_zhangliang/zhangliang_attack_01" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="MoveBulletDuration0" eventType="MoveBulletDuration" guid="61e04311-bf2d-4f84-a553-a605bc4cb84e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" lod="0">
+      <Event eventName="MoveBulletDuration" time="0.000" length="0.500" isDuration="true" guid="acab235c-2000-4645-8c31-be5a3789a827">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="MoveType" value="2" refParamName="" useRefParam="false" />
+        <Vector3i name="offsetDir" x="0" y="0" z="0" refParamName="_TargetDir" useRefParam="true" />
+        <int name="distance" value="5000" refParamName="" useRefParam="false" />
+        <int name="velocity" value="18000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerDuration0" eventType="HitTriggerDuration" guid="1e0b1d40-f329-4718-b4d0-d5c0caaaa1e4" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" lod="0">
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.500" isDuration="true" guid="3c1b8136-1e5d-43da-afc0-4701b6b450bc">
+        <TemplateObject name="triggerId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="1" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="156010" refParamName="" useRefParam="false" />
+        <String name="BulletActionName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="7c485748-e7be-499d-96a2-37d50e1b3eac" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" lod="0">
+      <Condition id="4" guid="1e0b1d40-f329-4718-b4d0-d5c0caaaa1e4" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="a0b28239-f836-4bdc-b03a-72716e6b1942">
+        <TrackObject name="trackId" id="0" guid="5d0b0b0c-463c-4af6-94a8-8c1ca102fabd" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack1" eventType="StopTrack" guid="d6b43077-17fb-4825-b523-d9cb4ac3c739" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" lod="0">
+      <Condition id="4" guid="1e0b1d40-f329-4718-b4d0-d5c0caaaa1e4" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="5a66aafa-1339-4596-88be-615b40ac3eea">
+        <TrackObject name="trackId" id="2" guid="7a5aff76-ea2c-4c96-b476-7020d8d17ddd" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack2" eventType="StopTrack" guid="eeaabb7a-df7a-4935-83be-f1365c356bc6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" lod="0">
+      <Condition id="4" guid="1e0b1d40-f329-4718-b4d0-d5c0caaaa1e4" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="54e25d4f-e6b9-4c58-b174-82db89321031">
+        <TrackObject name="trackId" id="3" guid="61e04311-bf2d-4f84-a553-a605bc4cb84e" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

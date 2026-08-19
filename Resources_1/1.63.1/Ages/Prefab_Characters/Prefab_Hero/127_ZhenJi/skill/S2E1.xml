@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="攻击者" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="self" id="2" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3.000" loop="false">
+    <Track trackName="TriggerParticleTick3" eventType="TriggerParticleTick" guid="16e072f9-91e0-4dec-9d74-29de830b42fa" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="f5a24d8b-3cf3-4d40-aa88-414302af7607">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/127_zhenji/zhenji_hurt_spell01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToAnimation" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="bfb17786-2133-4c3a-9b28-5939792ce49c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="7835e340-38ad-4354-89aa-133ae03bc66d">
+        <Enum name="SkillFuncType" value="1" EnumValue="法术伤害" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayHeroSoundTick62" eventType="PlayHeroSoundTick" guid="8450f743-4393-4c3a-8a2b-ce31f805901f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="b6834d18-8151-4a02-8a79-a7d7cbd4374b">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="sourceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="ZhenJi_Skill_B_Hit" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="判定二技能挂载位置" eventType="HitTriggerTick" guid="6bd619a0-df9c-4eef-9d67-d22f59493b52" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="20433083-4e44-41a0-98eb-d8c401786357">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="127202" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="127203" refParamName="" useRefParam="false" />
+        <bool name="bAttackCloseCollisionCheck" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="防止结束执行被打断子弹" eventType="StopTrack" guid="f7e87acf-bcef-469b-8311-17b5436d6b80" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="StopTrack" time="2.990" isDuration="false" guid="9f447bdd-620a-41c0-95c3-4db1f073ebb7">
+        <TrackObject name="trackId" id="5" guid="e8b53cc6-fef2-4053-886d-dc1b42a5c636" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="中途净化子弹" eventType="SpawnBulletTick" guid="e8b53cc6-fef2-4053-886d-dc1b42a5c636" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="true">
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="02d1a346-21d0-40a4-94ee-13c0ca2d5050">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/127_ZhenJi/skill/S12E1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

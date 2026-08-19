@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="daiqiu" id="3" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.100" loop="false">
+    <Track trackName="提取上一个挂载目标" eventType="NewGetActorRootTick" guid="4f1f0b17-064d-4b50-a9d4-3163dd5f7630" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="97c194a5-ade9-4477-bc0d-b8c6db70b903">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="bounce" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="daiqiu" id="3" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="删除上一个目标携带buff" eventType="RemoveBuffTick" guid="efac0953-d3d7-4fc6-8c56-664400906f3d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="4c91a9f1-b491-4ff8-9ad3-f65fa229528c">
+        <TemplateObject name="targetId" objectName="daiqiu" id="3" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="当前目标加buff" eventType="HitTriggerTick" guid="12a7c204-80a2-4ff3-b682-8b5e517b76a7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="21dc496d-d24f-4735-8e59-f226d71a7108">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="127203" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="存储当前挂载目标" eventType="NewSaveActorRootTick" guid="2a60a42b-8a32-4e05-8be4-63e2d4094ab1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewSaveActorRootTick" time="0.000" isDuration="false" guid="6bca7eb3-4036-42db-af4a-b744d69b2eb6">
+        <Enum name="dataDest" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="bounce" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

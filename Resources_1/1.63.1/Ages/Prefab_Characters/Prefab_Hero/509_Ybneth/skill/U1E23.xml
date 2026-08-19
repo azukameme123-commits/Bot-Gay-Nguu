@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet6" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet12" id="3" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList />
+  <Action tag="" length="6.000" loop="false">
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="7cea6dc7-cd97-4fc4-8602-2eb1dbe485c7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="fc8b392c-efa5-4911-bad8-2d209432c484">
+        <String name="actorName" value="E" refParamName="" useRefParam="false" />
+        <TemplateObject name="getFromTargetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" objectName="bullet12" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="我方特效" eventType="FilterTargetType" guid="c70bca7f-070f-4422-8171-a325554c7346" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="856f4cb4-285a-446c-8f1b-8e55906962d8">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterDiffCamp" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="敌方特效" eventType="FilterTargetType" guid="1c53fea7-56d5-4b7a-b963-0bb100b92f97" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="e36ef5f4-9037-4ed5-9e40-3aeae75c9b80">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterSameCamp" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="第四个子弹" eventType="SpawnBulletDuration" guid="5648daad-aa78-44c6-a43b-542c951092c9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnBulletDuration" time="0.000" length="6.000" isDuration="true" guid="50f9def0-c349-417f-be0f-8d21157f9656">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetPosActorId" objectName="bullet12" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/509_Ybneth/skill/U1B3" refParamName="" useRefParam="false" />
+        <int name="spawnFreq" value="250" refParamName="" useRefParam="false" />
+        <bool name="bAgeImmeExcute" value="true" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="50939" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="第四个子弹指示器特效" eventType="TriggerParticle" guid="9c63cc77-a539-4e6b-aff6-502b6f21fb86" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="c70bca7f-070f-4422-8171-a325554c7346" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="6.000" isDuration="true" guid="1f82feef-e6f1-48a8-8857-6d798b4f702b">
+        <TemplateObject name="targetId" objectName="bullet12" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet12" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/509_Ybneth/Ybneth_spell032_target01" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="1.530" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="1" y="1" z="1" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="敌方第四个子弹指示器特效" eventType="TriggerParticle" guid="81c97bd2-f862-449b-ac01-8acac5a1814f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="1c53fea7-56d5-4b7a-b963-0bb100b92f97" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="6.000" isDuration="true" guid="7971c733-3747-44ce-8e08-2bffad721b89">
+        <TemplateObject name="targetId" objectName="bullet12" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet12" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/509_Ybneth/Ybneth_spell032_target01_E" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="1.530" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="1" y="1" z="1" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayHeroSoundTick0" eventType="PlayHeroSoundTick" guid="67ccbffe-1d36-4d15-97fe-8194cb6e8628" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="9158d40f-a38b-4bb7-a633-11298cf6cb3e">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="sourceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_509_Ybneth_Circle" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet2" id="3" isTemp="true" />
+    <TemplateObject objectName="bullet1" id="4" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" />
+  </RefParamList>
+  <Action tag="" length="1.100" loop="false" isConditionRuntime="true">
+    <Track trackName="SetAnimationParamsTick0" eventType="SetAnimationParamsTick" guid="e3f762a4-0d76-48ad-aa95-11ed3677e666" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SetAnimationParamsTick" time="0.000" isDuration="false" guid="40148baf-1a0b-45fa-ba98-3f77570b79b0">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <String name="animatorName" value="Weapon" />
+        <Array name="boolNames" type="String">
+          <String value="Atk" />
+        </Array>
+        <Array name="boolValues" type="bool">
+          <bool value="true" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="硬控" eventType="FilterTargetStateDuration" guid="f4144e6a-d721-4514-b7e7-3639c51dac4b" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetStateDuration" time="0.000" length="1.000" isDuration="true" guid="50887074-b2f2-4933-aa78-0f772c173a1f">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <bool name="checkControlState" value="true" />
+        <bool name="bUnderHardControl" value="true" />
+      </Event>
+    </Track>
+    <Track trackName="压制" eventType="FilterTargetStateDuration" guid="290367cb-7bfa-4ae8-96bb-183578fe2ea7" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetStateDuration" time="0.000" length="1.000" isDuration="true" guid="c630955b-b28f-4b8c-8215-66a84defbbed">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <bool name="checkBeRepressed" value="true" />
+      </Event>
+    </Track>
+    <Track trackName="死亡" eventType="FilterTargetStateDuration" guid="17a0e587-a5b0-4594-9403-1ea93c540d0a" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetStateDuration" time="0.000" length="1.000" isDuration="true" guid="e4949612-74db-412b-9e61-d470fd80436c">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <bool name="checkDeadState" value="true" />
+      </Event>
+    </Track>
+    <Track trackName="SetAnimationParamsTick0" eventType="SetAnimationParamsTick" guid="39f9ceb7-a475-4442-bf60-caeaeab13c93" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" OrConditions="true">
+      <Condition id="1" guid="f4144e6a-d721-4514-b7e7-3639c51dac4b" status="true" />
+      <Condition id="2" guid="290367cb-7bfa-4ae8-96bb-183578fe2ea7" status="true" />
+      <Condition id="3" guid="17a0e587-a5b0-4594-9403-1ea93c540d0a" status="true" />
+      <Event eventName="SetAnimationParamsTick" time="0.000" isDuration="false" guid="4e0c882e-b0c0-4601-aa1d-70b7fa1913ec">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <String name="animatorName" value="Weapon" />
+        <Array name="boolNames" type="String">
+          <String value="Atk" />
+        </Array>
+        <Array name="boolValues" type="bool">
+          <bool value="false" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="90a93279-328e-461f-a069-2a18e63ca9a5" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" OrConditions="true">
+      <Condition id="1" guid="f4144e6a-d721-4514-b7e7-3639c51dac4b" status="true" />
+      <Condition id="2" guid="290367cb-7bfa-4ae8-96bb-183578fe2ea7" status="true" />
+      <Condition id="3" guid="17a0e587-a5b0-4594-9403-1ea93c540d0a" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="8fb398bb-1b2d-4db5-b34f-a6df566030fc">
+        <TrackObject name="trackId" id="6" guid="504424bb-ac99-4508-8a49-115b92aab881" value="" />
+        <bool name="alsoStopNotStartedTrack" value="true" />
+      </Event>
+    </Track>
+    <Track trackName="SetAnimationParamsTick0" eventType="SetAnimationParamsTick" guid="504424bb-ac99-4508-8a49-115b92aab881" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SetAnimationParamsTick" time="0.996" isDuration="false" guid="62e1fd20-9867-4184-aaf7-7c9586152a30">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <String name="animatorName" value="Weapon" />
+        <Array name="boolNames" type="String">
+          <String value="Atk" />
+        </Array>
+        <Array name="boolValues" type="bool">
+          <bool value="false" />
+        </Array>
+      </Event>
+    </Track>
+  </Action>
+</Project>

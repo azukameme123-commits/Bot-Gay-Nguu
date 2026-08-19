@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet1" id="3" isTemp="true" />
+    <TemplateObject objectName="bullet2" id="4" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <String name="BulletPrefab" value="" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3.000" loop="false">
+    <Track trackName="特效盒子" eventType="SpawnObjectDuration" guid="e61977e5-b6f4-4765-9742-c5a8a720dff1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="1.500" isDuration="true" guid="3bb3ebe1-12ff-4c7c-8eda-332e6b27df01">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="-500" z="0" refParamName="" useRefParam="false" />
+        <bool name="bUseRecordPos" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="基础特效" eventType="TriggerParticle" guid="6d2bfcb1-2e77-416c-8828-0435df1fb7d9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Event eventName="TriggerParticle" time="0.000" length="1.500" isDuration="true" guid="5a18a7a3-4986-4d4a-b472-2600c7e1d1eb">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/170_LiuBei/laixiao_attack_02_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-1.000" z="0.000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="攻击盒子（贴地）" eventType="SpawnObjectDuration" guid="ebe208a5-88c8-400a-a5d1-408ee1261f6c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="0.350" isDuration="true" guid="fe98551e-af10-49be-b7f7-252c72fd5fd2">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <bool name="bUseRecordPos" value="true" refParamName="" useRefParam="false" />
+        <bool name="bLayOnNavMesh" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick1" eventType="SetCollisionTick" guid="e457a8a0-d9b1-4555-abf2-bd0e333866bb" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Event eventName="SetCollisionTick" time="0.000" isDuration="false" guid="9dee9cad-0389-4336-9377-ebdfebe9ea32">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="type" value="1" EnumValue="SPHERE" refParamName="" useRefParam="false" />
+        <int name="Radius" value="1500" refParamName="" useRefParam="false" />
+        <int name="Height" value="0" refParamName="" useRefParam="false" />
+        <int name="ExternalRadius" value="2000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="对英雄" eventType="HitTriggerDuration" guid="573cbe11-e079-4056-af80-4deecf368d33" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.350" isDuration="true" guid="bde671a7-d1c1-48af-a631-e08bf657a3be">
+        <TemplateObject name="triggerId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="0" refParamName="" useRefParam="false" />
+        <bool name="bFilterFloating" value="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="32" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="170000" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="170001" refParamName="" useRefParam="false" />
+        <bool name="bApplyIntersects2D" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="子弹爆炸" eventType="PlayHeroSoundTick" guid="3552990e-5181-4012-bdf3-a8b0d1fcd709" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="a0d89950-6e62-43c6-b8a5-aad4f6c721bc">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_Moen_Attack_Explosion" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

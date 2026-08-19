@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet2" id="3" isTemp="true" />
+    <TemplateObject objectName="bullet1" id="4" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" />
+  </RefParamList>
+  <Action tag="" length="1.000" loop="false" isConditionRuntime="true">
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="075c8c04-c2d7-4d15-a569-18fe977b01ba" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="0.500" isDuration="true" guid="97c92678-b1b8-40cc-8b37-86f0aa9bcd1c">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" value="" />
+        <TemplateObject name="objectSpaceId" objectName="self" id="0" isTemp="false" value="" />
+        <Vector3i name="translation" x="150" y="1400" z="0" value="" />
+        <bool name="modifyScaling" value="true" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle6" eventType="TriggerParticle" guid="dd7fbb50-09a8-4ec4-bf5e-b2597b0a28ed" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="TriggerParticle" time="0.000" length="0.500" isDuration="true" guid="d7f856b7-de63-42a7-bf8c-341eec04d60c">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" value="" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon10/A/0000/Battle/FX/Ciyuansheshou_fly_01" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="1.500" value="" />
+        <bool name="applyActionSpeedToParticle" value="false" />
+      </Event>
+    </Track>
+    <Track trackName="MoveBulletDuration0" eventType="MoveBulletDuration" guid="1fecb3fc-9603-40cc-b2ce-d0dc3dc66914" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="MoveBulletDuration" time="0.000" length="0.462" isDuration="true" guid="b2025c85-4b4c-480a-8ab1-cb44915fdf0d">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" value="" />
+        <Vector3i name="offsetDir" x="0" y="0" z="0" refParamName="_TargetDir" useRefParam="true" value="" />
+        <Enum name="MoveType" value="2" EnumValue="指定朝向" />
+        <int name="distance" value="8000" />
+        <bool name="bAtkRangeExtAddValue" value="true" />
+        <int name="velocity" value="17316" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="99e1120c-2ae2-4819-8200-d395b76a94cd" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="1fecb3fc-9603-40cc-b2ce-d0dc3dc66914" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="e707dbe3-92bf-468e-af53-228fc5344c6a" />
+    </Track>
+  </Action>
+</Project>

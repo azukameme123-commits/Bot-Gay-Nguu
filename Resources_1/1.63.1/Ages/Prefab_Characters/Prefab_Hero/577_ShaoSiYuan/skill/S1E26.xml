@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="zhiren1" id="3" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="1.000" loop="false">
+    <Track trackName="FilterTargetDuration0" eventType="FilterTargetDuration" guid="a3a549d5-d71b-4a4a-86f3-a5ae4d972bc9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetDuration" time="0.000" length="1.000" isDuration="true" guid="f7385651-c3ee-402a-92e8-8847f2dc2225">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="577196" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="e3911e16-72cd-40d5-8f26-b2d63921e9b4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="a3a549d5-d71b-4a4a-86f3-a5ae4d972bc9" status="true" />
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="8cb0c397-b6f3-4b7f-93d9-9dd234a05fc2">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="yuanzai" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckTargetIsNullTick0" eventType="CheckTargetIsNullTick" guid="af5ec027-987a-44ab-bdfa-1962a1673658" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="a3a549d5-d71b-4a4a-86f3-a5ae4d972bc9" status="true" />
+      <Event eventName="CheckTargetIsNullTick" time="0.000" isDuration="false" guid="2bbee446-73d0-4602-9143-dd5e724f6c16">
+        <TemplateObject name="actorId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="2f42bc25-fa44-4b43-89cf-fc95a3ef41f0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="af5ec027-987a-44ab-bdfa-1962a1673658" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="db4eb69b-2ca3-4dc0-af1f-82a58f3a825f">
+        <TrackObject name="trackId" id="4" guid="9844eca0-9df2-4c79-a4b3-1bb46cf817d9" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="DestroyActorTick0" eventType="DestroyActorTick" guid="9844eca0-9df2-4c79-a4b3-1bb46cf817d9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="a3a549d5-d71b-4a4a-86f3-a5ae4d972bc9" status="true" />
+      <Event eventName="DestroyActorTick" time="0.000" isDuration="false" guid="9c04fcf2-0735-4e76-a959-e0d89d28493f">
+        <TemplateObject name="TargetId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

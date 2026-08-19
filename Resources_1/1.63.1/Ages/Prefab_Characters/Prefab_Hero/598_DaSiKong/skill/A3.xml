@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="攻击者" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="self" id="3" isTemp="false" />
+    <TemplateObject objectName="bullet1" id="4" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList />
+  <Action tag="" length="1.800" loop="false">
+    <Track trackName="RemoveBulletTick0" eventType="RemoveBulletTick" guid="5c26f3b6-9f87-45f3-93f1-fba085612531" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="RemoveBulletTick" time="0.000" isDuration="false" guid="6015dd9a-5129-4231-b7e5-4fa2c598c2de">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="598001" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查自己是否变身" eventType="FilterTargetType" guid="4ac08740-e287-4367-9c42-634abc701106" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="3156fa9a-cddf-4359-8000-5fe639e0e4f0">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="598700" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="远程条件，小于3500" eventType="FilterTargetDistance" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="FilterTargetDistance" time="0.000" isDuration="false" guid="ae22ece9-0118-4bb9-aba8-dc311293ddec">
+        <TemplateObject name="sourceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="disCheckType" value="1" EnumValue="距离检测" refParamName="" useRefParam="false" />
+        <int name="distance" value="3000" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="2" EnumValue="小于等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBehaviourModeTick0" eventType="SetBehaviourModeTick" guid="4fccd1c2-8cc4-48c2-ab17-c22c37787408" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="SetBehaviourModeTick" time="0.000" isDuration="false" guid="683c0068-0135-4baf-9409-f8fddd154f2e">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetAttackDirDuration0" eventType="SetAttackDirDuration" guid="faca7298-1fb9-4546-b537-831261396714" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="SetAttackDirDuration" time="0.000" length="0.050" isDuration="true" guid="debf991d-e32b-4ef2-93f8-ac415869c18c">
+        <TemplateObject name="attackerId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ForbidAbilityDuration0" eventType="ForbidAbilityDuration" guid="b09a4632-8403-4dfe-a525-fa96fe0b2866" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="ForbidAbilityDuration" time="0.000" length="0.350" isDuration="true" guid="f533bdb6-0722-4aa3-be75-446749c5f77c">
+        <TemplateObject name="attackerId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="forbidMove" value="true" refParamName="" useRefParam="false" />
+        <bool name="abortFilterSkill1" value="true" refParamName="" useRefParam="false" />
+        <bool name="abortFilterSkill2" value="true" refParamName="" useRefParam="false" />
+        <bool name="abortFilterSkill3" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillInputCacheDuration5" eventType="SkillInputCacheDuration" guid="a2af6d47-e81a-4c52-aa05-8900e28d59f8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="SkillInputCacheDuration" time="0.000" length="0.350" isDuration="true" guid="f5c53a99-9d79-469e-81a0-77790ebe8255">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="cacheSkill" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillInputCacheDuration6" eventType="SkillInputCacheDuration" guid="30a0d629-eda4-4483-a221-b7fa70247a2f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="SkillInputCacheDuration" time="0.250" length="0.100" isDuration="true" guid="5a778993-de55-48b5-b0bd-f33b65ab51f4">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="cacheMove" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillUseCacheTick1" eventType="SkillUseCacheTick" guid="b8adc553-3860-429b-896f-ce1abe648aed" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="SkillUseCacheTick" time="0.350" isDuration="false" guid="f9fd46c9-0fe2-4e22-adab-0f75540b7f33">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普通近战普攻动画" eventType="PlayAnimDuration" guid="c655af2a-54b7-42d7-9b83-ff93c2c411c9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="PlayAnimDuration" time="0.000" length="1.200" isDuration="true" guid="0e7a9752-de99-4fbf-9fd0-533cebf481fb">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Atk3" refParamName="" useRefParam="false" />
+        <int name="layer" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="人" eventType="TriggerParticleTick" guid="3cc949d4-1475-48bc-b0cd-5f0f1a8e9707" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="false" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="12e3f49b-324c-490f-93da-684e74b73eea">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack03A" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身近战" eventType="TriggerParticleTick" guid="cbf588a9-733b-44dd-b442-fbf9428af0c9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="true" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="fe9bba93-a328-4acf-861b-fdc275c01d37">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack04C" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="1.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普通近战普攻子弹" eventType="SpawnBulletTick" guid="2562801c-7231-4b19-9366-dc356d097189" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.200" isDuration="false" guid="97f68723-9f0b-437a-b1b8-e3d79f83720f">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/598_DaSiKong/skill/A1B99.xml" refParamName="" useRefParam="false" />
+        <String name="SpecialActionName" value="Prefab_Characters/Prefab_Hero/598_DaSiKong/skill/A1B99.xml" refParamName="" useRefParam="false" />
+        <bool name="bDestroyedBySpecialBullet" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普通近战攻击" eventType="SpawnObjectDuration" guid="5725dcb2-f95a-434d-9dc7-9981d872e2ee" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="SpawnObjectDuration" time="0.196" length="0.500" isDuration="true" guid="7220f3cb-3f53-460f-a1e9-37e19d80a731">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="0" z="1500" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普通近战攻击" eventType="SetCollisionTick" guid="613899d0-0553-471f-83fe-4f42886cea52" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="SetCollisionTick" time="0.200" isDuration="false" guid="ddc18b61-a660-439f-aa17-c8dd5418bb42">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="3000" y="10000" z="4000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="MoveBulletDuration0" eventType="MoveBulletDuration" guid="e7541d03-69b6-4996-9551-f4ab6706f4c4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="MoveBulletDuration" time="0.200" length="0.100" isDuration="true" guid="266b4bea-1023-4dcf-9688-4d4d54008d23">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="MoveType" value="2" EnumValue="指定朝向" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="distance" value="-1" refParamName="" useRefParam="false" />
+        <int name="velocity" value="-10" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普通近战攻击加能量" eventType="HitTriggerDuration" guid="6b77f4eb-7d2e-48de-a427-fef23f185da4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="HitTriggerDuration" time="0.200" length="0.300" isDuration="true" guid="ba0e0c13-e2d4-431f-8061-bae330a6e494">
+        <TemplateObject name="triggerId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="triggerInterval" value="1000" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="1000" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="1" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="598912" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普通近战攻击" eventType="HitTriggerDuration" guid="cf565b71-fe5a-43cb-acbe-2fdaa87d6e88" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="HitTriggerDuration" time="0.200" length="0.300" isDuration="true" guid="05682fca-3974-4703-a0ae-1065f043c559">
+        <TemplateObject name="triggerId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="triggerInterval" value="1000" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="1000" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="32" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="598001" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="停掉变为远程" eventType="StopTrack" guid="daed840e-12d3-4f2f-8663-8d2f4fe54939" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="StopTrack" time="0.500" isDuration="false" guid="40fc1886-f600-469a-89b8-116f0be983d8">
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普通远程普攻动画" eventType="PlayAnimDuration" guid="93f74482-340d-46db-a24f-31c2997079af" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Event eventName="PlayAnimDuration" time="0.000" length="1.200" isDuration="true" guid="3a95a9ee-a94f-48d2-bbe7-b86b39b6dc94">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Atk7" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="53702" eventType="FilterTargetType" guid="4930cd9e-5d23-4968-b332-2eeaf4cb4743" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="3c5a3c0c-9c76-4ac3-9d4a-7f32062687c0">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="53702" eventType="TriggerParticleTick" guid="29050f27-d310-4e54-818b-c5ccac8ccc32" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="true" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Condition id="20" guid="4930cd9e-5d23-4968-b332-2eeaf4cb4743" status="true" />
+      <Event eventName="TriggerParticleTick" time="0.254" isDuration="false" guid="009212db-7ef1-4ebd-8964-b7c6d620db6a">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack01C_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-0.100" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普通远程普攻子弹" eventType="SpawnBulletTick" guid="af3a2f4d-b84e-404d-8201-309bf39072f6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Event eventName="SpawnBulletTick" time="0.250" isDuration="false" guid="376e2b5c-43c8-4957-8ebf-18c6a970009a">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/598_DaSiKong/skill/A1B12.xml" refParamName="" useRefParam="false" />
+        <String name="SpecialActionName" value="Prefab_Characters/Prefab_Hero/598_DaSiKong/skill/A1B2.xml" refParamName="" useRefParam="false" />
+        <bool name="bDestroyedBySpecialBullet" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ChangeSkillTriggerTick0" eventType="ChangeSkillTriggerTick" guid="07e7f7a6-5333-4af5-be0b-c1212f1dd80a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="ChangeSkillTriggerTick" time="0.000" isDuration="false" guid="fcdf0d55-6e5f-41f2-bbac-0c49fd867bfc">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="effectTime" value="5000" refParamName="" useRefParam="false" />
+        <int name="recoverSkillID" value="59800" refParamName="" useRefParam="false" />
+        <bool name="bOvertimeCD" value="false" refParamName="" useRefParam="false" />
+        <int name="changeSkillID" value="59800" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查buff" eventType="FilterTargetType" guid="f449145c-6548-497d-9189-1b4881e3e9a1" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="4d01b0b7-878e-40f7-b9d9-720711e89c49">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="598205" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick0" eventType="SimpleSpawnBuffTick" guid="111bec49-1247-4fe0-aaeb-c1b6ecb1c1c4" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="24" guid="f449145c-6548-497d-9189-1b4881e3e9a1" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="633f4bbc-0b6c-4723-8546-079bd4d02404">
+        <TemplateObject name="originatorId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="598105" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="检查buff" eventType="FilterTargetType" guid="66eb801c-7bc6-45e3-afcc-766bc5bc6b18" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="24" guid="f449145c-6548-497d-9189-1b4881e3e9a1" status="true" />
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="fae2eef5-26ba-4154-adf4-df0c17260d9a">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="598205" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普攻cd" eventType="SkillCDTriggerTick" guid="21f7a6a6-5e1c-4f8b-aec3-e7c0af763cab" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Event eventName="SkillCDTriggerTick" time="0.000" isDuration="false" guid="8f42bf85-6a98-4511-9622-30e4feac646a">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="50" eventType="SkillCDTriggerTick" guid="781ef078-c81f-4228-8f7f-a6947ae1840c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="SkillCDTriggerTick" time="0.000" isDuration="false" guid="3894f349-14c5-408f-beb3-541d1a6c0987">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="triggerRatio" value="8000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身换普工" eventType="ChangeSkillTriggerTick" guid="2169b293-4269-413b-87d9-f920ad350acf" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="true" />
+      <Event eventName="ChangeSkillTriggerTick" time="0.000" isDuration="false" guid="7de59540-c6b9-4fe4-a092-0e4d9a301e03">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="effectTime" value="5000" refParamName="" useRefParam="false" />
+        <int name="recoverSkillID" value="59800" refParamName="" useRefParam="false" />
+        <int name="changeSkillID" value="59801" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后的普攻表现" eventType="SpawnBulletTick" guid="d776ce65-5ec2-43ff-8359-11c4e7ae8e99" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="c26d8bf8-509d-43c0-907d-03da87458b2a">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/598_DaSiKong/skill/A3B0" refParamName="" useRefParam="false" />
+        <String name="SpecialActionName" value="Prefab_Characters/Prefab_Hero/598_DaSiKong/skill/A3B0" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="598001" refParamName="" useRefParam="false" />
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false" />
+        <bool name="bDestroyedBySpecialBullet" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="OldSaveActorRootTick0" eventType="OldSaveActorRootTick" guid="39a08efa-6f56-4ac8-a36e-068e77bb066a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="OldSaveActorRootTick" time="0.000" isDuration="false" guid="7bf57153-0b04-48b5-8e87-f329b71d4058">
+        <Enum name="dataDest" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="atkTarget" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="近战攻击添加跑步变量" eventType="SimpleSpawnBuffTick" guid="34b623f9-840c-4891-8bb2-b3a7f3be5456" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="a6242c90-c357-4d00-89be-860d8a0ec3c7">
+        <TemplateObject name="originatorId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="598903" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="377cf04a-fd8a-458f-bb59-79fc92a171ec" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="ac88e2be-13a0-417f-aa11-b577aeebf2b0">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="598903" refParamName="" useRefParam="false" />
+        <int name="BuffLayer" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="近战普攻特音效" eventType="PlayHeroSoundTick" guid="bd6f056d-1ffe-47e7-bbfb-8ee6f8f856a4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="false" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="b1635a99-2c95-4742-89fd-3b1335bbf704">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_J_Attack" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="远程普攻音效" eventType="PlayHeroSoundTick" guid="319211d6-948b-4297-8250-c7b98f59a997" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="false" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="103a16e4-d951-4773-a860-65246b87a105">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_Attack" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后近战普攻特音效" eventType="PlayHeroSoundTick" guid="d8a4ab0a-d6b4-418f-b2d0-60711f01a6b6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="true" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="91c45a47-ef86-4e4c-ac48-e306313bca87">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_J_Attack_S" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后远程普攻音效" eventType="PlayHeroSoundTick" guid="de8f0ed2-9d76-402b-95fe-d229290f3288" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="true" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="2ee8bc0c-cfa6-49b3-b1fb-a646710d8443">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_Attack_S" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="近战普攻VO" eventType="PlayHeroSoundTick" guid="267520de-5eaa-43b3-8afd-fcc778e32e11" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="false" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="b8d2229b-bd7e-4857-8161-c9dfba293e9f">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_VO_AngerN" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="远程普攻VO" eventType="PlayHeroSoundTick" guid="4a3141f3-c09a-40eb-864c-14042fdba2bf" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="false" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="10eef900-0467-434b-9af2-81d0f286f7c5">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_VO_AngerF" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后近战普攻VO" eventType="PlayHeroSoundTick" guid="96e678bc-285f-4cf8-ba82-a8ddaeab2452" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="true" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="true" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="11a79b99-8d1f-446b-bc38-24bf6d0b0635">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhenBS_VO_AngerN" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后远程普攻VO" eventType="PlayHeroSoundTick" guid="f0dc165a-8138-435a-8fef-aa0b6d6c5dd7" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="true" />
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="6a1b993a-e301-4591-ad72-54598c1fb3d1">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhenBS_VO_AngerF" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="普攻VO" eventType="PlayHeroSoundTick" guid="362fb9a6-8576-4179-b43c-d8cefc36674b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="d1bf98a9-6370-4107-832f-6e93d1145926">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_VO_Short" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="年限攻击特效" eventType="TriggerParticleTick" guid="068bf8b2-a471-4e17-86a4-dc0890a16e58" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="2" guid="f8259650-918e-4f74-a44f-ad69f60dfcd5" status="false" />
+      <Condition id="1" guid="4ac08740-e287-4367-9c42-634abc701106" status="false" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="6ef06490-fc34-4b60-bce5-c0ff37a716a5">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/59802/DaSiKong_attack01B_spell03" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="ChangeCommonAttackPatternTick0" eventType="ChangeCommonAttackPatternTick" guid="8ffe2ed6-85b5-4b56-a913-e4aac7366d63" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="ChangeCommonAttackPatternTick" time="0.066" isDuration="false" guid="64a9c796-4ad2-477d-9f96-09a88d9ed92e">
+        <TemplateObject name="targetId" objectName="self" id="3" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bSpecialCommonAttackPattern" value="true" refParamName="" useRefParam="false" />
+        <bool name="bDisableSpecialCommonAttack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

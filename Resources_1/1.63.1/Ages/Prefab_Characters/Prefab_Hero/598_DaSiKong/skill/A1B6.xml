@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="攻击者" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet1" id="3" isTemp="true" />
+    <TemplateObject objectName="bullet2" id="4" isTemp="true" />
+    <TemplateObject objectName="bullet3" id="5" isTemp="true" />
+    <TemplateObject objectName="bullet4" id="6" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <String name="BulletPrefab" value="" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="2.000" loop="false">
+    <Track trackName="OldSaveActorRootTick0" eventType="OldSaveActorRootTick" guid="49f192c3-2a1a-4265-9543-9a90fc6aca41" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="OldSaveActorRootTick" time="0.000" isDuration="false" guid="c39e1e65-5969-4ec7-8bab-39365c59423d">
+        <Enum name="dataDest" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="atkTarget" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="子弹中" eventType="SpawnObjectDuration" guid="94bc37a9-ae48-4598-a1f1-f979f9176e2a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="2.000" isDuration="true" guid="66015017-efc5-493b-9d77-650ed471402e">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="0" z="2000" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="_TargetDir" useRefParam="true" />
+        <bool name="modifyScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToAnimation" value="false" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <Event eventName="SpawnObjectDuration" time="0.000" length="2.000" isDuration="true" guid="e2a7f469-2e95-4b90-9e36-eea982180436">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="0" z="2000" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="_TargetDir" useRefParam="true" />
+        <bool name="modifyScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToAnimation" value="false" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick6" eventType="SetCollisionTick" guid="05f23d9b-08ad-4f5d-aade-bf05fdaba753" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="SetCollisionTick" time="0.000" isDuration="false" guid="272c108f-10f7-4165-8459-b334e9656fbc">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="3500" y="10000" z="3500" refParamName="" useRefParam="false" />
+        <int name="Radius" value="1750" refParamName="" useRefParam="false" />
+        <int name="ExternalRadius" value="2250" refParamName="" useRefParam="false" />
+      </Event>
+      <Event eventName="SetCollisionTick" time="0.100" isDuration="false" guid="f1d7ee47-1207-4136-8c53-939301fd0ea3">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="4250" y="10000" z="3500" refParamName="" useRefParam="false" />
+        <int name="Radius" value="2500" refParamName="" useRefParam="false" />
+        <int name="ExternalRadius" value="2250" refParamName="" useRefParam="false" />
+      </Event>
+      <Event eventName="SetCollisionTick" time="0.200" isDuration="false" guid="46bed9f0-6961-4a2a-bf4c-d65f473b1e12">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="5000" y="10000" z="3500" refParamName="" useRefParam="false" />
+        <int name="Radius" value="3250" refParamName="" useRefParam="false" />
+        <int name="ExternalRadius" value="2250" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="原地特效参考" eventType="SpawnObjectDuration" guid="d5e8aef4-f6ba-4ea3-b674-6772851e8251" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="2.000" isDuration="true" guid="6bb9b8f7-e91c-4d86-8904-0dd3ca29b3a5">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="0" z="2000" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="_TargetDir" useRefParam="true" />
+        <bool name="modifyScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToAnimation" value="false" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="其他目标" eventType="HitTriggerDuration" guid="92de32e4-6a23-467e-be21-eee439e84824" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.500" isDuration="true" guid="060493a9-4bd3-40ba-81cd-fa09672bdad3">
+        <TemplateObject name="triggerId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="specifiedActorId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="1000" refParamName="" useRefParam="false" />
+        <Enum name="FilterHpOperatorType" value="5" EnumValue="大于等于" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="32" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="598005" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="598009" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="回血" eventType="HitTriggerDuration" guid="41ca6e62-db00-4f31-9ac4-ade74cb31e09" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.500" isDuration="true" guid="b6454151-a6f3-40f2-9e79-129dd87c7b3b">
+        <TemplateObject name="triggerId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="specifiedActorId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="1000" refParamName="" useRefParam="false" />
+        <Enum name="FilterHpOperatorType" value="5" EnumValue="大于等于" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="1" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="598900" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="只有选择的英雄单位触发法球" eventType="HitTriggerDuration" guid="1762fa45-a853-4ba1-a4eb-17c078575295" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.500" isDuration="true" guid="f6db51e4-8960-4d77-9e94-beec3861a506">
+        <TemplateObject name="triggerId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="specifiedActorId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="1000" refParamName="" useRefParam="false" />
+        <Enum name="FilterHpOperatorType" value="5" EnumValue="大于等于" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="32" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="598037" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="MoveBulletDuration0" eventType="MoveBulletDuration" guid="06e560df-456b-44c8-93d2-dc85f3922a19" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="MoveBulletDuration" time="0.000" length="0.200" isDuration="true" guid="eb0d8d60-ca5c-449e-b67f-19c953a14f48">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="MoveType" value="2" EnumValue="指定朝向" refParamName="" useRefParam="false" />
+        <int name="distance" value="6000" refParamName="" useRefParam="false" />
+        <int name="velocity" value="30000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CameraShakeDuration0" eventType="CameraShakeDuration" guid="efb09580-8087-416a-9c50-e8475905989e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="CameraShakeDuration" time="0.000" length="0.150" isDuration="true" guid="6ec3a7f6-e699-4bf6-a977-9b9b6bef0c69">
+        <bool name="useMainCamera" value="true" refParamName="" useRefParam="false" />
+        <bool name="filter_self" value="true" refParamName="" useRefParam="false" />
+        <Vector3 name="shakeRange" x="0.050" y="0.050" z="0.050" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CameraShakeDuration0" eventType="CameraShakeDuration" guid="d82684b4-1d83-4493-ba10-db1c37978237" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="CameraShakeDuration" time="0.150" length="0.150" isDuration="true" guid="fc750e17-6405-44e8-88ad-f05c5e67616c">
+        <bool name="useMainCamera" value="true" refParamName="" useRefParam="false" />
+        <bool name="filter_self" value="true" refParamName="" useRefParam="false" />
+        <Vector3 name="shakeRange" x="0.050" y="0.050" z="0.050" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CameraShakeDuration0" eventType="CameraShakeDuration" guid="74c4c12a-bf6c-4881-99f2-9decae771d0d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="CameraShakeDuration" time="0.300" length="0.150" isDuration="true" guid="9e7a694e-cb16-4f33-b15f-ccff925001e6">
+        <bool name="useMainCamera" value="true" refParamName="" useRefParam="false" />
+        <bool name="filter_self" value="true" refParamName="" useRefParam="false" />
+        <Vector3 name="shakeRange" x="0.050" y="0.050" z="0.050" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身远程能量值" eventType="SimpleSpawnBuffTick" guid="801b4b62-1999-4609-bbca-ca7d1c7cd195" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="bed77258-32c6-4ab8-ae59-f4dbc12c9fad">
+        <TemplateObject name="originatorId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="598912" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="CreateRandomNumTick0" eventType="CreateRandomNumTick" guid="df08f69b-9c90-4f44-a5fd-b8286b4e211c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CreateRandomNumTick" time="0.000" isDuration="false" guid="b45aba1a-01a2-48f5-9f5a-6e0bb69a1c4a">
+        <int name="randomRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random1" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick0" eventType="CheckRandomRangeTick" guid="ee2987a6-ea43-4fd5-9b9e-47e9b326ba3d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="b6e72367-9364-4d80-be87-185576a64900">
+        <int name="checkRangeEnd" value="100" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random1" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick1" eventType="CheckRandomRangeTick" guid="d88f1154-6031-435f-abf3-4af11412d98d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="04dfceba-0832-4095-8ba6-8ec01373dc74">
+        <int name="checkRangeBegin" value="100" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="200" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random1" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick2" eventType="CheckRandomRangeTick" guid="5fe3a369-47de-4bf3-8fb9-393d8e2bbe1c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="5184ddd5-294c-4e7d-82ab-f1fdfff462b1">
+        <int name="checkRangeBegin" value="200" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random1" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹1-1" eventType="TriggerParticle" guid="deca7561-772c-4523-9c45-4daed4f0542b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="13" guid="ee2987a6-ea43-4fd5-9b9e-47e9b326ba3d" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="274704d6-8acf-4915-baba-e636b4386ca8">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.100" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹1-2" eventType="TriggerParticle" guid="1d94cd20-e031-4779-84cf-3ce74f24448d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="14" guid="d88f1154-6031-435f-abf3-4af11412d98d" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="dc2e97d6-965f-4efc-9354-d2647e01109a">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01a" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.100" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹1-3" eventType="TriggerParticle" guid="206ef7ad-af1a-4a13-9c98-0f5a4d246927" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="15" guid="5fe3a369-47de-4bf3-8fb9-393d8e2bbe1c" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="8a67c870-40dc-42b1-8e50-727d383b7dcb">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01b" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.100" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CreateRandomNumTick0" eventType="CreateRandomNumTick" guid="04996e3e-d1e5-4532-8f02-7a9af9741452" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CreateRandomNumTick" time="0.000" isDuration="false" guid="25e15c5f-eb2d-4ac3-8aaa-a4fd83f14c32">
+        <int name="randomRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random2" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick0" eventType="CheckRandomRangeTick" guid="6c5aaf9c-e48e-493b-bf1c-12c67ae652d0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="2cd54a59-220a-463f-a60f-7e24a8224b12">
+        <int name="checkRangeEnd" value="100" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random2" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick1" eventType="CheckRandomRangeTick" guid="804a541e-c18f-486b-913d-4e36098c5cf5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="393b81fd-ae47-4241-81df-d0609213612f">
+        <int name="checkRangeBegin" value="100" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="200" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random2" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick2" eventType="CheckRandomRangeTick" guid="5d06de76-b898-47ad-bf8b-ceb0f1a268c9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="d1d460d0-cb38-4f37-ae0f-cb6b8b4205d3">
+        <int name="checkRangeBegin" value="200" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random2" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹2-1" eventType="TriggerParticle" guid="5c0763db-c7a1-4c57-ae0e-610593470108" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="20" guid="6c5aaf9c-e48e-493b-bf1c-12c67ae652d0" status="true" />
+      <Event eventName="TriggerParticle" time="0.125" length="1.000" isDuration="true" guid="b1b88a26-4324-40ea-9f9b-cd67bb620125">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-1.000" y="0.100" z="3.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹2-2" eventType="TriggerParticle" guid="4530ee38-8652-43de-b7ab-f822729f8b9a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="21" guid="804a541e-c18f-486b-913d-4e36098c5cf5" status="true" />
+      <Event eventName="TriggerParticle" time="0.125" length="1.000" isDuration="true" guid="a74044e6-3184-45ca-b4fc-51dc436ec30c">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01a" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-1.000" y="0.100" z="3.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹2-3" eventType="TriggerParticle" guid="ade9a171-5faf-42e4-99d1-b968520b2d4b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="22" guid="5d06de76-b898-47ad-bf8b-ceb0f1a268c9" status="true" />
+      <Event eventName="TriggerParticle" time="0.125" length="1.000" isDuration="true" guid="bc943097-5f5d-4f22-af88-90082ea46520">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01b" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-1.000" y="0.100" z="3.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CreateRandomNumTick0" eventType="CreateRandomNumTick" guid="6571cc78-8a39-4a17-b70c-04f598245054" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CreateRandomNumTick" time="0.000" isDuration="false" guid="5f1a90fd-53dc-45ed-a213-248b4d5aed37">
+        <int name="randomRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random3" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick0" eventType="CheckRandomRangeTick" guid="601705cd-5d42-4593-9506-45f46a4acb67" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="509d2df2-2bf9-407e-956f-cfb76ec571c8">
+        <int name="checkRangeEnd" value="100" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random3" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick1" eventType="CheckRandomRangeTick" guid="38a243d2-211d-426a-ae1b-db1d25e34a21" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="e70cce22-6f52-4448-af0a-3caccaab8663">
+        <int name="checkRangeBegin" value="100" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="200" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random3" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick2" eventType="CheckRandomRangeTick" guid="290df82f-4df3-4f57-9b0d-d9785997aa4d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="fc0a8409-2e68-4909-b68e-7fa42daf213b">
+        <int name="checkRangeBegin" value="200" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random3" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹3-1" eventType="TriggerParticle" guid="2ced4cec-a41c-4e81-989f-e6706b99420a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="27" guid="601705cd-5d42-4593-9506-45f46a4acb67" status="true" />
+      <Event eventName="TriggerParticle" time="0.125" length="1.000" isDuration="true" guid="750a76da-28fd-4ab3-8328-b9ed18b99695">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="1.000" y="0.100" z="3.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹3-2" eventType="TriggerParticle" guid="b471a38c-03ad-4723-8180-159d17168a19" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="28" guid="38a243d2-211d-426a-ae1b-db1d25e34a21" status="true" />
+      <Event eventName="TriggerParticle" time="0.125" length="1.000" isDuration="true" guid="75322dfc-c3ad-4367-83d5-d41056de3cac">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01a" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="1.000" y="0.100" z="3.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹3-3" eventType="TriggerParticle" guid="2ccb3660-6e09-466b-ba2d-94977e13f2f3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="29" guid="290df82f-4df3-4f57-9b0d-d9785997aa4d" status="true" />
+      <Event eventName="TriggerParticle" time="0.125" length="1.000" isDuration="true" guid="d7fbc194-b61e-4840-bdd4-34808d2976fe">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01b" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="1.000" y="0.100" z="3.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CreateRandomNumTick0" eventType="CreateRandomNumTick" guid="c569a38c-bcc4-4163-9b6f-5622abc00d50" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CreateRandomNumTick" time="0.000" isDuration="false" guid="8053fc0f-126e-42b5-80f2-c15d125fefac">
+        <int name="randomRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random4" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick0" eventType="CheckRandomRangeTick" guid="8861513b-bb58-4905-a780-9755793c753e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="f41d214e-0125-4fc2-94fb-6dd0156844d8">
+        <int name="checkRangeEnd" value="100" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random4" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick1" eventType="CheckRandomRangeTick" guid="35094278-62e3-4be5-a718-ab63a8123027" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="0effd42c-e395-4e22-9e71-5107e49a5d34">
+        <int name="checkRangeBegin" value="100" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="200" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random4" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick2" eventType="CheckRandomRangeTick" guid="9a9a5629-3075-47ce-8e42-14fcc85507c3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="66deb5f5-dd6c-4231-8083-80c1d04e2c32">
+        <int name="checkRangeBegin" value="200" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random4" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹4-1" eventType="TriggerParticle" guid="859d8589-c2f9-4cb4-9768-500ee6e3420a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="34" guid="8861513b-bb58-4905-a780-9755793c753e" status="true" />
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="a3a11786-cc6f-4b14-bc90-16caf699d2a1">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-2.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹4-2" eventType="TriggerParticle" guid="7791fb11-370a-47a2-902d-54c409697f5f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="35" guid="35094278-62e3-4be5-a718-ab63a8123027" status="true" />
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="bdf4cbbc-a5ae-4149-b127-5bed6d3a9dc5">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01a" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-2.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹4-3" eventType="TriggerParticle" guid="9a9244b2-8f5e-4619-b7f2-90fd71c50f49" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="36" guid="9a9a5629-3075-47ce-8e42-14fcc85507c3" status="true" />
+      <Event eventName="TriggerParticle" time="0.246" length="1.000" isDuration="true" guid="42df62d7-a372-4c4c-9aef-1dee0b6c2d03">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01b" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-2.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CreateRandomNumTick0" eventType="CreateRandomNumTick" guid="081a3592-480c-4358-89f3-af8de3f07ba4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CreateRandomNumTick" time="0.000" isDuration="false" guid="53f7d784-ea1c-4cec-b885-2e0d99fe2d0a">
+        <int name="randomRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random5" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick0" eventType="CheckRandomRangeTick" guid="58e4793a-e49f-4025-bdf5-e976a4195fc4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="69bb3091-7480-464b-83d2-7be1f3a02c63">
+        <int name="checkRangeEnd" value="100" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random5" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick1" eventType="CheckRandomRangeTick" guid="099ee0c6-78dc-4354-aeae-0e96a0ef290e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="8e4ebf0f-d9ab-419e-9874-fe5cdc27e5aa">
+        <int name="checkRangeBegin" value="100" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="200" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random5" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick2" eventType="CheckRandomRangeTick" guid="ddc92ff0-3eb6-44e4-bb17-f72ba0559c4c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="b22f3bfb-21cd-4e5e-adb5-8d3febd30c7a">
+        <int name="checkRangeBegin" value="200" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random5" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹5-1" eventType="TriggerParticle" guid="680fa02a-b04d-4785-9544-6046252f51e8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="41" guid="58e4793a-e49f-4025-bdf5-e976a4195fc4" status="true" />
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="1657c22e-d13c-4f45-8d1f-3e747892d933">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹5-1" eventType="TriggerParticle" guid="73fd436b-194e-4809-8a28-342e20133e46" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="42" guid="099ee0c6-78dc-4354-aeae-0e96a0ef290e" status="true" />
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="5f0efdb6-1ac9-4fd0-8c29-17f92fa5df55">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01a" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹5-1" eventType="TriggerParticle" guid="3a46cb68-b860-402a-8d1e-fc3be01dd99d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="43" guid="ddc92ff0-3eb6-44e4-bb17-f72ba0559c4c" status="true" />
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="3431dc0a-7254-49cb-abca-9da532b627b8">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01b" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CreateRandomNumTick0" eventType="CreateRandomNumTick" guid="08fa074c-63ef-4200-92f8-346092bbbe15" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CreateRandomNumTick" time="0.000" isDuration="false" guid="723c95e6-6af1-4207-bbaa-d39eeb9b617b">
+        <int name="randomRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random6" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick0" eventType="CheckRandomRangeTick" guid="803c5132-7d08-4db8-9832-f4d48c1a7332" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="cfe3d150-851d-4e1b-b12a-10072b789589">
+        <int name="checkRangeEnd" value="100" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random6" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick1" eventType="CheckRandomRangeTick" guid="f169456b-bd7d-41d4-be42-71688e116cdd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="38698752-4405-4f46-a159-500f8db02db7">
+        <int name="checkRangeBegin" value="100" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="200" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random6" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="CheckRandomRangeTick2" eventType="CheckRandomRangeTick" guid="c8e2a8c8-458c-4c0b-a3bc-65a215ca966f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11">
+      <Event eventName="CheckRandomRangeTick" time="0.000" isDuration="false" guid="302fa687-ff1a-4693-b319-4b24b05440ac">
+        <int name="checkRangeBegin" value="200" refParamName="" useRefParam="false" />
+        <int name="checkRangeEnd" value="300" refParamName="" useRefParam="false" />
+        <bool name="bUsePreCreateRandonNum" value="true" refParamName="" useRefParam="false" />
+        <String name="preCreateRandonNumName" value="random6" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹6-1" eventType="TriggerParticle" guid="6ba46d45-b6d0-446c-8505-bb32d26f0153" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="48" guid="803c5132-7d08-4db8-9832-f4d48c1a7332" status="true" />
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="c3099c16-c894-41df-b708-30ee23df63fe">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="2.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹6-2" eventType="TriggerParticle" guid="1145d380-4592-47e4-bae5-38ee332dbeed" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="49" guid="f169456b-bd7d-41d4-be42-71688e116cdd" status="true" />
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="5f8384c9-675d-4514-9f50-a236153f71e0">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01a" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="2.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹6-3" eventType="TriggerParticle" guid="7053cf35-9315-4cee-9099-90035bf2e6d3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="50" guid="c8e2a8c8-458c-4c0b-a3bc-65a215ca966f" status="true" />
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="102f064d-4fae-4701-8bed-5d188babb6ab">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_attack02A_01b" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="2.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹1-1" eventType="TriggerParticle" guid="c593543b-990d-4794-b966-8a39fe563064" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="9">
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="ba3ff843-2def-477e-be9a-5c41553ea9e2">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/59802/DaSiKong_attack02B_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.100" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹2-1" eventType="TriggerParticle" guid="e7d3c293-4fa9-4c27-be52-a7ad296817f5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="9">
+      <Event eventName="TriggerParticle" time="0.125" length="1.000" isDuration="true" guid="1a68f5d3-a6c7-4779-be8f-7bbc5e54cf6c">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/59802/DaSiKong_attack02B_03" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-1.000" y="0.100" z="3.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹3-1" eventType="TriggerParticle" guid="7262a4f8-8c99-4241-aede-923abbdcd14f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="9">
+      <Event eventName="TriggerParticle" time="0.125" length="1.000" isDuration="true" guid="568c9ef0-2e92-46b1-8ad8-d7aa2c49283f">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/59802/DaSiKong_attack02B_02" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="1.000" y="0.100" z="3.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹4-1" eventType="TriggerParticle" guid="e4057e06-8615-4aee-8cb0-e7aeac12ba1b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="9">
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="9fa0640f-389d-4116-9f39-ba364aa5377d">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/59802/DaSiKong_attack02B_06" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-2.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹5-1" eventType="TriggerParticle" guid="54824c29-d4e5-4d8d-9b47-fac3a682cc56" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="9">
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="86c2447f-f043-4fae-ae86-aa7e5889c7b4">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/59802/DaSiKong_attack02B_04" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+    <Track trackName="地面子弹6-1" eventType="TriggerParticle" guid="2370e0a0-b9bc-4707-8241-6df34697ed4f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" SkinAvatarFilterType="9">
+      <Event eventName="TriggerParticle" time="0.250" length="1.000" isDuration="true" guid="822319db-7928-424a-8152-c8cff02166f7">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/59802/DaSiKong_attack02B_05" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="2.000" y="0.100" z="6.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+  </Action>
+</Project>

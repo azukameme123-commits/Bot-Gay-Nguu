@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <int name="GS2" value="0" refParamName="" useRefParam="false" />
+    <int name="GS" value="0" refParamName="" useRefParam="false" />
+    <int name="GS21" value="0" refParamName="" useRefParam="false" />
+    <int name="GS22" value="0" refParamName="" useRefParam="false" />
+    <int name="GS3" value="0" refParamName="" useRefParam="false" />
+    <int name="GS4" value="0" refParamName="" useRefParam="false" />
+    <int name="GS23" value="0" refParamName="" useRefParam="false" />
+    <int name="GS5" value="0" refParamName="" useRefParam="false" />
+    <int name="temp" value="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3.000" loop="false" isConditionRuntime="true">
+    <Track trackName="当前攻速" eventType="NewGetActorPropertyTick" guid="b200e5e2-7b84-440a-889a-3dc037a83f2e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorPropertyTick" time="0.000" isDuration="false" guid="46cceebc-5644-4c32-8cb5-5f8bbbd99fa2">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="refVariableName" value="GS" refParamName="" useRefParam="false" />
+        <Enum name="propertyType" value="18" EnumValue="攻速加成" refParamName="" useRefParam="false" />
+        <bool name="chooseAllProtect" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewVariableIntCompareTick0" eventType="NewVariableIntCompareTick" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewVariableIntCompareTick" time="0.000" isDuration="false" guid="aba5b871-9ee1-4dd8-9a87-2ad7aa725194">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="GS" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="2" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CalculatorTick0" eventType="CalculatorTick" guid="5a031d0e-44ea-46a5-a310-8301c31d2da8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Event eventName="CalculatorTick" time="0.000" isDuration="false" guid="3cc4b40e-635b-407c-bf87-566ec04db951">
+        <int name="iLeftInt" value="0" refParamName="GS" useRefParam="true" />
+        <Enum name="OperatorType" value="3" EnumValue="除" refParamName="" useRefParam="false" />
+        <int name="iRightInt" value="2" refParamName="" useRefParam="false" />
+        <String name="OutParamName" value="temp" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CalculatorTick0" eventType="CalculatorTick" guid="dfd961c2-a1cd-4a02-a6ef-435df969516d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Event eventName="CalculatorTick" time="0.000" isDuration="false" guid="95c7082c-1723-4a91-8fbc-cb49272be169">
+        <int name="iLeftInt" value="0" refParamName="temp" useRefParam="true" />
+        <int name="iRightInt" value="10000" refParamName="" useRefParam="false" />
+        <String name="OutParamName" value="GS2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewVariableIntCalTick1" eventType="NewVariableIntCalTick" guid="269313aa-c037-480f-8218-7c1b830a6b7e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Event eventName="NewVariableIntCalTick" time="0.000" isDuration="false" guid="384b525c-bb69-4b81-aff7-60fb5645b07a">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="GS2" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="2" EnumValue="乘" refParamName="" useRefParam="false" />
+        <int name="RightValue" value="65" refParamName="" useRefParam="false" />
+        <Enum name="OutOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="OutActionVariableName" value="GS23" refParamName="" useRefParam="false" />
+        <String name="OutActionRefVariableName" value="GS23" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewVariableIntCalTick1" eventType="NewVariableIntCalTick" guid="8c5ff050-c4ba-419d-92b7-2dc50c53f419" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Event eventName="NewVariableIntCalTick" time="0.000" isDuration="false" guid="f9c67dc1-e49d-44ae-9ba9-1bb87ada18d6">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <int name="LeftValue" value="23" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="GS23" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="3" EnumValue="除" refParamName="" useRefParam="false" />
+        <int name="RightValue" value="100" refParamName="" useRefParam="false" />
+        <Enum name="OutOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="OutActionRefVariableName" value="GS5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewVariableIntCalTick1" eventType="NewVariableIntCalTick" guid="182b633c-423c-4481-9539-f1cc92c100e6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Event eventName="NewVariableIntCalTick" time="0.000" isDuration="false" guid="cab258a6-a49e-42bc-97e2-abb2c3e9c693">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="GS2" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="2" EnumValue="乘" refParamName="" useRefParam="false" />
+        <int name="RightValue" value="55" refParamName="" useRefParam="false" />
+        <Enum name="OutOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="OutActionRefVariableName" value="GS21" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewVariableIntCalTick1" eventType="NewVariableIntCalTick" guid="0b083fb0-31e9-4323-af0c-419053856b17" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Event eventName="NewVariableIntCalTick" time="0.000" isDuration="false" guid="7ef2a266-fb0a-4ff6-b3a9-f89fa3fb815b">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="GS21" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="3" EnumValue="除" refParamName="" useRefParam="false" />
+        <int name="RightValue" value="100" refParamName="" useRefParam="false" />
+        <Enum name="OutOperandType" value="1" EnumValue="Action变量" refParamName="" useRefParam="false" />
+        <String name="OutActionVariableName" value="GS3" refParamName="" useRefParam="false" />
+        <String name="OutActionRefVariableName" value="GS3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewVariableIntCalTick1" eventType="NewVariableIntCalTick" guid="e6ebff19-a88a-4b91-94fd-68d8574d4836" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Event eventName="NewVariableIntCalTick" time="0.000" isDuration="false" guid="c48b8b79-1a79-4ed1-acb6-8a87cf95f3e8">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="GS2" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="2" EnumValue="乘" refParamName="" useRefParam="false" />
+        <int name="RightValue" value="45" refParamName="" useRefParam="false" />
+        <Enum name="OutOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="OutActionRefVariableName" value="GS22" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="NewVariableIntCalTick1" eventType="NewVariableIntCalTick" guid="91351315-063d-465c-8949-d4ca72430973" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Event eventName="NewVariableIntCalTick" time="0.000" isDuration="false" guid="4c850474-8489-47a3-bea0-dc6b835914a9">
+        <Enum name="LeftOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="LeftActionRefVariableName" value="GS22" refParamName="" useRefParam="false" />
+        <Enum name="OperatorType" value="3" EnumValue="除" refParamName="" useRefParam="false" />
+        <int name="RightValue" value="100" refParamName="" useRefParam="false" />
+        <Enum name="OutOperandType" value="4" EnumValue="Action引用变量" refParamName="" useRefParam="false" />
+        <String name="OutActionRefVariableName" value="GS4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PrintTick0" eventType="PrintTick" guid="1084026e-a9f6-44a6-923f-1be4b243dc19" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PrintTick" time="0.000" isDuration="false" guid="062954a3-2526-4ebb-b8bc-670ef25c3998">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bParam" value="true" refParamName="" useRefParam="false" />
+        <Array name="variableNames" refParamName="" useRefParam="false" type="String">
+          <String value="GS4" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="9d16ca6d-33ab-42e3-b22e-729d10c7d30f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="d23f76ae-abe2-4ccc-8e91-928912c21525">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="TT" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="1级" eventType="CheckSkillLevelConditionTick" guid="13ee6f62-4320-4c05-bf7b-07868d083e73" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillLevelConditionTick" time="0.000" isDuration="false" guid="7b16ad41-397f-4d31-9a39-0c62bf3de9b1">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" EnumValue="技能3" refParamName="" useRefParam="false" />
+        <int name="skillLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="2级" eventType="CheckSkillLevelConditionTick" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillLevelConditionTick" time="0.000" isDuration="false" guid="43aed66e-1b9f-4fcc-8f4f-221c4f15370e">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" EnumValue="技能3" refParamName="" useRefParam="false" />
+        <int name="skillLevel" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="3级" eventType="CheckSkillLevelConditionTick" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillLevelConditionTick" time="0.000" isDuration="false" guid="e6ddde6a-f606-42e3-b493-8bcc69d1e2d7">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="slotType" value="3" EnumValue="技能3" refParamName="" useRefParam="false" />
+        <int name="skillLevel" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="9bdb1173-ef2a-44b1-88c1-1f1f815b4def">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterDiffCamp" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="db580de2-af7c-4c87-b8a1-a98e7198d96f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="12" guid="13ee6f62-4320-4c05-bf7b-07868d083e73" status="true" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.264" isDuration="true" guid="e927bf1a-dcf8-4af6-aa8d-8a20a84f2441">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="84167a6a-7911-47f1-a80d-f1e987c7e12c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="12" guid="13ee6f62-4320-4c05-bf7b-07868d083e73" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="8a250aad-907e-45c2-8327-d79640afbdc9">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="0" refParamName="GS5" useRefParam="true" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="5ae52e5b-a13c-4455-a110-e81ce4357b7b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="12" guid="13ee6f62-4320-4c05-bf7b-07868d083e73" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="false" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="d4681ed6-72dc-4383-b390-caf4f9e6fe22">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="6500" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="1411743d-c15b-4b72-94b8-f0286bd64eb2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="true" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.264" isDuration="true" guid="ea1ea8ff-2d4a-49eb-9678-f394f5e5e051">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="9641435f-47c7-4488-aabc-30bfe3d78886" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="1f4b9f9a-300c-468d-b449-f532d15c3b91">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="0" refParamName="GS3" useRefParam="true" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="b5c74d8e-f5a2-4652-9b4b-6449200bab1b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="false" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="36e88bf9-8e28-492d-bdf9-82e9f2365cb5">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="5500" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="a49d3e11-66ed-4af0-9758-30560680ecfc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="true" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.264" isDuration="true" guid="c8babddd-dfe1-4985-92e1-42161a3b715c">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="04e88a81-0b40-4c03-8c4d-056bc3d58d7f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="3bde67d2-d32a-45b0-bcd3-01a4a413627c">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="0" refParamName="GS4" useRefParam="true" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="352aa83f-9a3e-412c-bbdc-dd587cb17cd5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="false" />
+      <Condition id="15" guid="b18bd3ff-d57b-466c-82f4-4e99398df711" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="b530e56d-26e4-4f52-862c-a315f9ca0c60">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="4500" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType1" eventType="FilterTargetType" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="50b0daba-46fd-444e-b7be-e2c0b9a430d4">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterSameCamp" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="f5829471-4137-4b60-9cb0-0dbc66fd552f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="false" />
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="false" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.264" isDuration="true" guid="93a1fc81-ef1b-477d-aad4-791c84eca2c1">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="51649379-8b5b-4997-8f9d-01388f150d4f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="false" />
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="false" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="949a5e5e-cc6b-46e6-91ea-76d221d94a63">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="0" refParamName="GS5" useRefParam="true" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="4ca0a9c0-85e8-4cc5-9cab-b815504125ca" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="false" />
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="false" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="false" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="11b8ac22-aaab-40fd-98b8-62eaaeeca0a5">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="6500" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="84b19173-b823-444f-82fa-e4740bd22ed6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="true" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.264" isDuration="true" guid="f2adceec-f8a4-4c17-a5fa-c010600c6114">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="6c502bb8-17f5-4341-9a1d-5d85c38c5da5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="19fa16c5-9bdf-4b2d-942b-50317aa141ba">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="0" refParamName="GS3" useRefParam="true" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="e12f4a65-94a1-4b7c-b63e-48d7ecf6fef9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="8d601eab-1c22-48d3-9ab5-e131dc1cf02a" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="false" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="9c047e1e-0120-4c2c-8aab-764c534d1d41">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="5500" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="e296fcac-7001-4cb2-94e9-08d53110a99e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="true" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.264" isDuration="true" guid="fb853ba9-32dd-4881-af71-d3c243c19b0d">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="30c2afa4-3dfe-4cec-9b2c-0c9f527a1faf" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="true" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="3a06dbef-3d33-4439-8178-bb0909b002f7">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="0" refParamName="GS4" useRefParam="true" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="074405c2-7276-4f0d-a625-9ec930719ec5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="14" guid="d0fde454-dd6d-4e68-b33a-5637cfb3d226" status="true" />
+      <Condition id="1" guid="10ae5d09-1c5a-4489-9d61-6a9d10f02cd2" status="false" />
+      <Condition id="25" guid="04c319b6-eb22-49a5-ba52-ed84c01b558a" status="true" />
+      <Event eventName="TriggerParticle" time="0.264" length="2.736" isDuration="true" guid="a05a52ed-3f83-469b-947c-1f5508cd0912">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Dimension/Character/01_Male/P0000/10_Weapon/Weapon13/A/0000/Battle/FX/Ciyuansheshou_spell02_attack05_E" refParamName="" useRefParam="false" />
+        <int name="startTimeOffset" value="264" refParamName="" useRefParam="false" />
+        <int name="speedMultiplier" value="4500" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.300" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="受压制还原地面状态" eventType="FilterTargetStateDuration" guid="5c7a7541-6874-4677-8653-952447a1ba14" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetStateDuration" time="0.000" length="3.000" isDuration="true" guid="7881e8db-15eb-48f5-9022-291729e11c1d">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="checkBeRepressed" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUnderHardControl" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="死亡还原地面状态" eventType="FilterTargetStateDuration" guid="bc8cbfdb-2eca-41cf-920c-f74726b03e8f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetStateDuration" time="0.000" length="3.000" isDuration="true" guid="0c82ad57-8a81-48b5-90ac-fb48b39dfefe">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bUnderHardControl" value="true" refParamName="" useRefParam="false" />
+        <bool name="checkDeadState" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetDuration0" eventType="FilterTargetDuration" guid="0c996086-9b01-4bf2-af2a-3333c0d2b511" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetDuration" time="0.000" length="3.000" isDuration="true" guid="a63e1f14-346e-4684-a4a4-9e6c06ecb402">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="510994" refParamName="" useRefParam="false" />
+        <int name="buffLayers" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="83913b75-0596-4f86-b4e5-347c34f62d31" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="35" guid="5c7a7541-6874-4677-8653-952447a1ba14" status="true" />
+      <Condition id="36" guid="bc8cbfdb-2eca-41cf-920c-f74726b03e8f" status="true" />
+      <Condition id="37" guid="0c996086-9b01-4bf2-af2a-3333c0d2b511" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="676aee19-b87c-45ad-9b39-832a83caf54d" />
+    </Track>
+  </Action>
+</Project>

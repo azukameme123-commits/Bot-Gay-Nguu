@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="bullet2" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="2.000" loop="false">
+    <Track trackName="PlayAnimDuration0" eventType="PlayAnimDuration" guid="036b40ff-08d6-415a-9d97-97e0942d2aee" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="PlayAnimDuration" time="0.000" length="2.000" isDuration="true" guid="9b733282-6e87-4d84-a438-04a75df1c303">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Spell2" refParamName="" useRefParam="false" />
+        <float name="crossFadeTime" value="0.100" refParamName="" useRefParam="false" />
+        <bool name="bUseFadeOutTime" value="true" refParamName="" useRefParam="false" />
+        <float name="fadeOutTime" value="0.200" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick0" eventType="SpawnBulletTick" guid="7565ae49-b6dd-4a80-b161-88156a0f7472" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="b26683cc-ba57-46e5-af44-971b678356b9">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/191_daqiao/skill/s2b1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="check移动" eventType="CheckConditionDuration" guid="f3210c46-086b-4fdb-b16a-f2f3512b7441" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckConditionDuration" time="0.667" length="0.500" isDuration="true" guid="2271a765-6d5a-4eaf-b31f-7d67006f1c21">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="operatorMethod" value="0" refParamName="" useRefParam="false" />
+        <bool name="bActorMoving" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="658e92f5-779f-487d-842c-0e554ecfedea" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="f3210c46-086b-4fdb-b16a-f2f3512b7441" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="b8d734ef-1659-4709-96a6-52244081d3c3">
+        <TrackObject name="trackId" id="0" guid="036b40ff-08d6-415a-9d97-97e0942d2aee" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="Check死亡" eventType="CheckConditionDuration" guid="9d1ee8e9-e9ff-43dc-95f2-1e3dfad5deb4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckConditionDuration" time="0.000" length="2.000" isDuration="true" guid="f1a962b9-fe61-4852-a68c-81ff71415654">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bActorDead" value="true" refParamName="" useRefParam="false" />
+        <Enum name="operatorMethod" value="0" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="e49be76e-eaf5-40bd-9301-10eee7dd6143" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="9d1ee8e9-e9ff-43dc-95f2-1e3dfad5deb4" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="9392fbb2-52b3-4605-83fe-be04f430c7c4">
+        <TrackObject name="trackId" id="0" guid="036b40ff-08d6-415a-9d97-97e0942d2aee" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

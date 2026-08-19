@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.100" loop="false">
+    <Track trackName="过滤死亡单位" eventType="FilterTargetState" guid="ef8d2a90-fbe6-4aa1-9b23-c44814e36b07" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetState" time="0.000" isDuration="false" guid="cfffed08-e785-49f5-be66-a512ee0b84e9">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="checkDeadState" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="3b48399f-7d19-417e-b6a6-bf6f0a203696" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="ef8d2a90-fbe6-4aa1-9b23-c44814e36b07" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="5913f5f1-8e97-428b-becf-5ffb0cb1c31a">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="2" guid="37953c52-2718-47f7-a71b-c6e56244cb1f" />
+          <TrackObject id="3" guid="ec46a052-9b19-46e1-9fbd-b92247c09837" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="过滤未挂载二技能目标" eventType="FilterTargetType" guid="37953c52-2718-47f7-a71b-c6e56244cb1f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="3df0801b-b142-4d91-b3fa-bcd94e36819c">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="127203" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBulletTick0" eventType="RemoveBulletTick" guid="ec46a052-9b19-46e1-9fbd-b92247c09837" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="2" guid="37953c52-2718-47f7-a71b-c6e56244cb1f" status="true" />
+      <Event eventName="RemoveBulletTick" time="0.000" isDuration="false" guid="deefb0fb-3b18-4c95-bb88-8fb15af19be5">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="1272" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

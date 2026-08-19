@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet1" id="3" isTemp="true" />
+    <TemplateObject objectName="TT" id="4" isTemp="false" />
+    <TemplateObject objectName="bullet2" id="5" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <String name="BulletPrefab" value="" refParamName="" useRefParam="false" />
+    <int name="Light" value="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="SD" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <int name="juli" value="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.200" loop="false" isConditionRuntime="true">
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="a204e9a1-3cbe-459d-abad-6743ccbdc2b1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="48b19c36-32df-4cb5-a9b6-620a152be380">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="TT" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="一段子弹" eventType="FilterTargetType" guid="b6cd5d6a-825a-4060-84ba-f885c65609d0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="99f390bb-bcdf-452d-ad29-91733bab8358">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="584600" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="372ba09d-ffb1-426f-9d4f-9f057bb505ed" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="b6cd5d6a-825a-4060-84ba-f885c65609d0" status="true" />
+      <Event eventName="SpawnObjectDuration" time="0.000" length="0.100" isDuration="true" guid="27215637-b9f5-4613-aa07-2b25ae9fd039">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="0" z="-2500" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <bool name="bLayOnNavMesh" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick0" eventType="SetCollisionTick" guid="4098eae0-aeeb-468c-a7b2-8ed968daa350" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="b6cd5d6a-825a-4060-84ba-f885c65609d0" status="true" />
+      <Event eventName="SetCollisionTick" time="0.000" isDuration="false" guid="8e50526b-609e-4f43-a4d8-56f3c1fd882f">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="type" value="6" EnumValue="ARCTRAPEZOID" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <int name="Radius" value="3000" refParamName="" useRefParam="false" />
+        <int name="SectorRadius" value="10000" refParamName="" useRefParam="false" />
+        <int name="SectorInnerRadius" value="5000" refParamName="" useRefParam="false" />
+        <int name="Degree" value="36" refParamName="" useRefParam="false" />
+        <int name="ArcTrapezoidRadius" value="10000" refParamName="" useRefParam="false" />
+        <int name="ArcTrapezoidInnerRadius" value="5000" refParamName="" useRefParam="false" />
+        <int name="ArcTrapezoidDegree" value="36" refParamName="" useRefParam="false" />
+        <int name="ArcTrapezoidRotation" value="0" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检测有无目标" eventType="HitTriggerDuration" guid="131b24a5-0684-478c-b158-b95c0bbe8a58" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="b6cd5d6a-825a-4060-84ba-f885c65609d0" status="true" />
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.100" isDuration="true" guid="a5b197bb-d11e-421d-a5bd-201ffe6484a0">
+        <TemplateObject name="triggerId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="0" refParamName="" useRefParam="false" />
+        <bool name="bFileterOrgan" value="true" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="1" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <bool name="bTriggerBullet" value="true" refParamName="" useRefParam="false" />
+        <String name="BulletActionName" value="Prefab_Characters/Prefab_Hero/584_Ciyuansheshou/skill/S2B2.xml" refParamName="" useRefParam="false" />
+        <bool name="bAgeImmeExcute" value="true" refParamName="" useRefParam="false" />
+        <int name="spawnBulletTypeId" value="584404" refParamName="" useRefParam="false" />
+        <bool name="bReplaceBullet" value="false" refParamName="" useRefParam="false" />
+        <bool name="bDestroyedBySpecialBullet" value="true" refParamName="" useRefParam="false" />
+        <Enum name="referenceObjectProperty" value="0" EnumValue="位置和朝向" refParamName="" useRefParam="false" />
+        <Enum name="referenceObjectProperty2" value="0" EnumValue="位置和朝向" refParamName="" useRefParam="false" />
+        <bool name="bApplyIntersects2D" value="true" refParamName="" useRefParam="false" />
+        <bool name="bCheckSight" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="f9560ebe-c5b4-435d-83de-4e3a65f75e02" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="4" guid="131b24a5-0684-478c-b158-b95c0bbe8a58" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="22bdbe34-9ad8-4790-8e6f-95bae8330b6d">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="6" guid="71c4cf5a-a977-4f38-afad-631ffc437be4" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="范围内随机子弹" eventType="SpawnBulletTick" guid="71c4cf5a-a977-4f38-afad-631ffc437be4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="b6cd5d6a-825a-4060-84ba-f885c65609d0" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="ed132e33-7a0c-4636-a043-b356851f0606">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/584_Ciyuansheshou/skill/S2B20.xml" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="584404" refParamName="" useRefParam="false" />
+        <bool name="bDestroyedBySpecialBullet" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

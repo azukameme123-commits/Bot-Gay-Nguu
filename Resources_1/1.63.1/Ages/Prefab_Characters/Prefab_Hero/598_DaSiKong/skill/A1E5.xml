@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="攻击者" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet1" id="2" isTemp="true" />
+    <TemplateObject objectName="selfplayer" id="3" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="1.000" loop="false">
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="ba5bbfee-d2df-4b7a-9539-1842ff4abcf5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="63b6b7b9-f90f-4af4-8135-b13001110173">
+        <Enum name="SkillFuncType" value="1" EnumValue="法术伤害" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查自己是否变身" eventType="FilterTargetType" guid="18b16ed4-d147-4971-891f-f6cd56ff259e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="10141ac1-407c-42d3-91e3-dbc3bb151671">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="598700" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身前近战受击音效" eventType="PlayHeroSoundTick" guid="444de4c1-f18d-412e-ba12-9ba06b93a5fa" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="1" guid="18b16ed4-d147-4971-891f-f6cd56ff259e" status="false" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="133f1835-ab7d-416b-8b87-442bbb06b7fc">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_J_Skill_D_Hit" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后近战受击音效" eventType="PlayHeroSoundTick" guid="e0ed66fb-09c1-4a39-babc-b0e1fd040584" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="1" guid="18b16ed4-d147-4971-891f-f6cd56ff259e" status="true" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="7257b0fa-7430-46d7-95b5-0f97549d590a">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_J_Skill_D_Hit_S" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

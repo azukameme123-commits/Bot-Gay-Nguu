@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+    <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false"/>
+    <TemplateObject id="1" objectName="target" isTemp="false"/>
+    </TemplateObjectList>
+    <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false"/>
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false"/>
+    </RefParamList>
+    <Action tag="" length="0.100" loop="false">
+    <Track trackName="Check Buff 2 False" eventType="CheckSkillCombineConditionTick" guid="Check-Buff-2-False-MMN-AOV" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false">
+       <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false"/>
+        <int name="skillCombineId" value="130912" refParamName="" useRefParam="false"/>
+        <Enum name="checkOPType" value="1" refParamName="" useRefParam="false"/>
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false"/>
+        </Event>
+    </Track>
+    <Track trackName="Buff 2 Trigger" eventType="HitTriggerTick" guid="4cbe0c17-34e7-4f93-a2dd-7125490ccdda" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="Check-Buff-2-False-MMN-AOV" status="true"/>
+       <Event eventName="HitTriggerTick" time="0.000" isDuration="false">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false"/>
+        <int name="SelfSkillCombineID_3" value="130912" refParamName="" useRefParam="false"/>
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false"/>
+        <bool name="bIngnoreDeadState" value="true" refParamName="" useRefParam="false"/>
+        </Event>
+    </Track>
+    <Track trackName="StopTracks" eventType="StopTracks" guid="38239ecc-c096-4ed7-b84b-1473a2ee8bca" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+       <Condition id="0" guid="Check-Buff-2-False-MMN-AOV" status="true"/>
+       <Event eventName="StopTracks" time="0.000" isDuration="false">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+            <TrackObject id="4" guid="Check-Buff-2-True-MMN-AOV"/>
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false"/>
+        </Event>
+    </Track>
+    <Track trackName="Repeat" eventType="SpawnBulletTick" guid="f1c1b16d-4604-45bd-bf48-d349f75e48d7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+       <Condition id="0" guid="Check-Buff-2-False-MMN-AOV" status="true"/>
+       <Event eventName="SpawnBulletTick" time="0.100" isDuration="false">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false"/>
+        <String name="ActionName" value="prefab_characters/prefab_hero/167_wukong/skill/16707_back" refParamName="" useRefParam="false"/>
+        <String name="SpecialActionName" value="prefab_characters/prefab_hero/167_wukong/skill/16707_back" refParamName="" useRefParam="false"/>
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false"/>
+        </Event>
+    </Track>
+    <Track trackName="Check Buff 2 True" eventType="CheckSkillCombineConditionTick" guid="Check-Buff-2-True-MMN-AOV" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+       <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false"/>
+        <int name="skillCombineId" value="130912" refParamName="" useRefParam="false"/>
+        <Enum name="checkOPType" value="5" refParamName="" useRefParam="false"/>
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false"/>
+        </Event>
+    </Track>
+    <Track trackName="Remove Buff 2" eventType="RemoveBuffTick" guid="4206358d-b971-4030-99d1-8e13dd866c3f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+       <Condition id="4" guid="Check-Buff-2-True-MMN-AOV" status="true"/>
+       <Event eventName="RemoveBuffTick" time="0.000" isDuration="false">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false"/>
+        <int name="buffId" value="130912" refParamName="" useRefParam="false"/>
+        <int name="BuffLayer" value="1" refParamName="" useRefParam="false"/>
+        </Event>
+    </Track>
+    <Track trackName="Repeat" eventType="SpawnBulletTick" guid="a65615b9-d5b3-4e6a-8ed3-11f6cf3de6fe" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+       <Condition id="4" guid="Check-Buff-2-True-MMN-AOV" status="true"/>
+       <Event eventName="SpawnBulletTick" time="0.100" isDuration="false">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false"/>
+        <String name="ActionName" value="prefab_characters/prefab_hero/167_wukong/skill/16707_back" refParamName="" useRefParam="false"/>
+        <String name="SpecialActionName" value="prefab_characters/prefab_hero/167_wukong/skill/16707_back" refParamName="" useRefParam="false"/>
+        <int name="bulletUpperLimit" value="1" refParamName="" useRefParam="false"/>
+        </Event>
+    </Track>
+   </Action>
+</Project>

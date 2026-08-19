@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="5.200" loop="false">
+    <Track trackName="清空能量" eventType="SkillFuncInstant" guid="7786b38b-29e5-400d-95c3-9fa1917ea4fb" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SkillFuncInstant" time="5.000" isDuration="false" guid="aad92335-c033-4089-bc00-a92b3418f9b3">
+        <Enum name="SkillFuncType" value="95" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="自己死亡" eventType="CheckConditionDuration" guid="ff51c9fc-21ed-479c-afe1-c360e9261bed" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckConditionDuration" time="0.000" length="5.000" isDuration="true" guid="ed660f95-799d-48f3-a16f-e55760f42bd9">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bActorDead" value="true" refParamName="" useRefParam="false" />
+        <Enum name="operatorMethod" value="0" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="清空能量" eventType="HitTriggerTick" guid="b7d6c6f4-c048-48b8-b452-c94b4cba01b1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="ff51c9fc-21ed-479c-afe1-c360e9261bed" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="ebfce2d1-f7ad-4142-b6ff-e33c557278b3">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="522022" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="21c621c5-3cf4-4989-a370-8d36c10c43b7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="ff51c9fc-21ed-479c-afe1-c360e9261bed" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="54e5568b-9eab-4aca-af6b-2e109be3207b" />
+    </Track>
+  </Action>
+</Project>

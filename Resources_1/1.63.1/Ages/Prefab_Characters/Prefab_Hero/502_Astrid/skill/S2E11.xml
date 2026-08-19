@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_BulletDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="5.000" loop="false">
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="2585861b-41f0-4c20-86a8-72b1189555c9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="a04c798f-1d02-4314-9684-67d676961a84">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterHero" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterOrgan" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="非野怪减速" eventType="SkillFuncDuration" guid="81c020e6-6d2c-467a-b120-85352f6e62d8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="2585861b-41f0-4c20-86a8-72b1189555c9" status="false" />
+      <Event eventName="SkillFuncDuration" time="0.000" length="5.000" isDuration="true" guid="ff8d832c-db8e-43f6-8773-bd0b64be9410">
+        <Enum name="SkillFuncType" value="7" EnumValue="减少移动速度" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="野怪减速" eventType="SkillFuncDuration" guid="69965b4c-2300-49bd-a8e7-a1540fff68ec" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="2585861b-41f0-4c20-86a8-72b1189555c9" status="true" />
+      <Event eventName="SkillFuncDuration" time="0.000" length="5.000" isDuration="true" guid="dd1270e5-b64b-4f1f-ae3b-646fe78fe902">
+        <Enum name="SkillFuncType" value="7" EnumValue="减少移动速度" refParamName="" useRefParam="false" />
+        <bool name="bIsOverrideParamsFromXls" value="true" refParamName="" useRefParam="false" />
+        <int name="OverrideParam1" value="1" refParamName="" useRefParam="false" />
+        <int name="OverrideParam2" value="7500" refParamName="" useRefParam="false" />
+        <bool name="bImmediateExec" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet2" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="1.000" loop="false">
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="b3f14ebd-ca4b-4901-9998-0f96f2a6aaef" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="1.000" isDuration="true" guid="ba668758-547b-4452-bbe5-9193d6c60bed">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="prefabName" value="prefab_characters/commonempty" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+        <TemplateObject name="materialParentActorId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bSameVisibleAsAttacker" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="visionActorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bRefreshVision" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="recordTargeID" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="蓝" eventType="CheckCameraMirrorTick" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckCameraMirrorTick" time="0.000" isDuration="false" guid="eaa0c914-2563-4e0c-93aa-955c372fa7f9">
+        <bool name="inBlueCamp" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="大招期间" eventType="CheckSkillCombineConditionTick" guid="cf7eca62-8449-46c9-9ccb-40765abe8f55" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="76dc2b8e-f082-45ba-b67e-c6270a2d78da">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="544300" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="不是T2皮肤" eventType="CheckSkinIdTick" guid="9a53c37b-20f7-4ece-99d5-b3cb3e56f9f1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Event eventName="CheckSkinIdTick" time="0.000" isDuration="false" guid="ae755c84-bd1b-4db9-bacd-91a69b20a460">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skinId" value="54402" refParamName="" useRefParam="false" />
+        <bool name="bEqual" value="false" refParamName="" useRefParam="false" />
+        <bool name="bSkipLogicCheck" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="f530d664-123e-4d40-8839-1ea18e63abcc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Condition id="3" guid="9a53c37b-20f7-4ece-99d5-b3cb3e56f9f1" status="true" />
+      <Condition id="2" guid="cf7eca62-8449-46c9-9ccb-40765abe8f55" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.500" isDuration="true" guid="2378fc7f-c033-457f-8146-5ac6866a8411">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_1_S" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.650" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <bool name="bReverseXWhenCameraMirror" value="true" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="07409964-a955-4855-ac24-6b59fd65766d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Condition id="3" guid="9a53c37b-20f7-4ece-99d5-b3cb3e56f9f1" status="true" />
+      <Condition id="2" guid="cf7eca62-8449-46c9-9ccb-40765abe8f55" status="false" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.500" isDuration="true" guid="72970cd7-a63e-4684-8d1c-1e74564b6060">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_1" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.650" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <bool name="bReverseXWhenCameraMirror" value="true" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="T2皮肤" eventType="CheckSkinIdTick" guid="71c9e83d-446c-42d0-a7d5-fa4dc7896fea" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Event eventName="CheckSkinIdTick" time="0.000" isDuration="false" guid="65866157-fdd0-4235-b375-8ce5d50bbdd0">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skinId" value="54402" refParamName="" useRefParam="false" />
+        <bool name="bSkipLogicCheck" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="515804de-f9d3-4c86-a99c-a92d45242c9d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="71c9e83d-446c-42d0-a7d5-fa4dc7896fea" status="true" />
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Condition id="2" guid="cf7eca62-8449-46c9-9ccb-40765abe8f55" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="d29fe8fb-e48f-4621-947d-bf6643bcef45">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_1_S" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.650" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseClearTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <bool name="bReverseXWhenCameraMirror" value="true" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="1a3f92f9-300f-4ded-86ac-d85b9f0413e4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="71c9e83d-446c-42d0-a7d5-fa4dc7896fea" status="true" />
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Condition id="2" guid="cf7eca62-8449-46c9-9ccb-40765abe8f55" status="false" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="5f68e94c-ef00-42a3-bc4a-4914031f8130">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_1" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.650" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseClearTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <bool name="bReverseXWhenCameraMirror" value="true" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="76efe6f3-bc9c-4ef5-8a3c-7dd866cc6538" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="71c9e83d-446c-42d0-a7d5-fa4dc7896fea" status="true" />
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Event eventName="StopTracks" time="0.430" isDuration="false" guid="0bb68e8e-accc-4aa8-93a1-7dd85fed4076">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="7" guid="515804de-f9d3-4c86-a99c-a92d45242c9d" />
+          <TrackObject id="8" guid="1a3f92f9-300f-4ded-86ac-d85b9f0413e4" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="2d81eada-5ed6-4cae-be65-73621fac7303" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="71c9e83d-446c-42d0-a7d5-fa4dc7896fea" status="true" />
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Condition id="2" guid="cf7eca62-8449-46c9-9ccb-40765abe8f55" status="true" />
+      <Event eventName="TriggerParticle" time="0.133" length="0.733" isDuration="true" guid="7a5c5240-323e-44e3-ab93-3885c6df4a72">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_0_S" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bOnlyFollowPos" value="true" refParamName="" useRefParam="false" />
+        <bool name="b1stTickParentRot" value="true" refParamName="" useRefParam="false" />
+        <bool name="bTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseClearTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="23797856-cb52-4735-a063-178d4cf92882" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="71c9e83d-446c-42d0-a7d5-fa4dc7896fea" status="true" />
+      <Condition id="1" guid="729f6263-d877-460f-8c6e-4c31fed9d7d8" status="true" />
+      <Condition id="2" guid="cf7eca62-8449-46c9-9ccb-40765abe8f55" status="false" />
+      <Event eventName="TriggerParticle" time="0.266" length="0.733" isDuration="true" guid="b6d51011-2913-415c-a418-d9cda1f73d1f">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_0" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bOnlyFollowPos" value="true" refParamName="" useRefParam="false" />
+        <bool name="b1stTickParentRot" value="true" refParamName="" useRefParam="false" />
+        <bool name="bTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseClearTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="红" eventType="CheckCameraMirrorTick" guid="8a708306-b1d7-44cc-a659-26402d9fd938" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckCameraMirrorTick" time="0.000" isDuration="false" guid="68b8eba3-1cac-4f30-a46d-19ef62c2e4cc" />
+    </Track>
+    <Track trackName="大招期间" eventType="CheckSkillCombineConditionTick" guid="6e52b6dc-7854-43d5-8fee-3a5d8f00dd5f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="1c65f024-020a-4464-a6d4-fb07c3300e25">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="544300" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="不是T2皮肤" eventType="CheckSkinIdTick" guid="0a162572-758f-49f2-840e-2b77645f118b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Event eventName="CheckSkinIdTick" time="0.000" isDuration="false" guid="7f6072dc-9430-4135-9a49-339bc1859508">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skinId" value="54402" refParamName="" useRefParam="false" />
+        <bool name="bEqual" value="false" refParamName="" useRefParam="false" />
+        <bool name="bSkipLogicCheck" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="df660280-7882-4e14-a4ee-a8062e8c53bd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="14" guid="0a162572-758f-49f2-840e-2b77645f118b" status="true" />
+      <Condition id="13" guid="6e52b6dc-7854-43d5-8fee-3a5d8f00dd5f" status="true" />
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.500" isDuration="true" guid="7961155f-a684-4ef4-b5b4-d01b3090593e">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_1_S" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.500" z="0.750" refParamName="" useRefParam="false" />
+        <EulerAngle name="bindRotOffset" x="0.000" y="0.000" z="180.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <bool name="bReverseXWhenCameraMirror" value="true" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="fa7a5317-f668-436a-bbbb-c4d0296d9881" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="14" guid="0a162572-758f-49f2-840e-2b77645f118b" status="true" />
+      <Condition id="13" guid="6e52b6dc-7854-43d5-8fee-3a5d8f00dd5f" status="false" />
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.500" isDuration="true" guid="31da0411-6d77-4a95-8b09-561d9fe32aeb">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_1" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.500" z="0.750" refParamName="" useRefParam="false" />
+        <EulerAngle name="bindRotOffset" x="0.000" y="0.000" z="180.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <bool name="bReverseXWhenCameraMirror" value="true" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="T2皮肤" eventType="CheckSkinIdTick" guid="fddcda22-f9b4-40ae-9e80-09c4f1c9c6a7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Event eventName="CheckSkinIdTick" time="0.000" isDuration="false" guid="4a7a6294-4469-4a8e-8b9e-8e8f15e71751">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skinId" value="54402" refParamName="" useRefParam="false" />
+        <bool name="bSkipLogicCheck" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="0ab6de30-0f06-4e43-87e1-3cda87eccb38" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="13" guid="6e52b6dc-7854-43d5-8fee-3a5d8f00dd5f" status="true" />
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Condition id="17" guid="fddcda22-f9b4-40ae-9e80-09c4f1c9c6a7" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="814efee6-e4c9-4c21-823e-4f66fea181a7">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_1_S" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.500" z="0.750" refParamName="" useRefParam="false" />
+        <EulerAngle name="bindRotOffset" x="0.000" y="0.000" z="180.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseClearTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <bool name="bReverseXWhenCameraMirror" value="true" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="f8a0a458-67d3-4354-a234-fe40538a198b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="13" guid="6e52b6dc-7854-43d5-8fee-3a5d8f00dd5f" status="false" />
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Condition id="17" guid="fddcda22-f9b4-40ae-9e80-09c4f1c9c6a7" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="6c80e235-4225-48fe-ba11-d60b0b959faf">
+        <TemplateObject name="targetId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="2" objectName="bullet2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_1_L" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseClearTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <bool name="bReverseXWhenCameraMirror" value="true" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="727f90af-7f92-45f2-98fe-d80d8e314633" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Condition id="17" guid="fddcda22-f9b4-40ae-9e80-09c4f1c9c6a7" status="true" />
+      <Event eventName="StopTracks" time="0.430" isDuration="false" guid="54632b09-fa35-4b2a-929a-20cc27d3ea68">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="18" guid="0ab6de30-0f06-4e43-87e1-3cda87eccb38" />
+          <TrackObject id="19" guid="f8a0a458-67d3-4354-a234-fe40538a198b" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="18ef5ffd-095d-415e-9833-e0eda90f3ee9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="13" guid="6e52b6dc-7854-43d5-8fee-3a5d8f00dd5f" status="true" />
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Condition id="17" guid="fddcda22-f9b4-40ae-9e80-09c4f1c9c6a7" status="true" />
+      <Event eventName="TriggerParticle" time="0.133" length="0.733" isDuration="true" guid="e37f80cd-1ccb-4a1a-b8d6-1c39aefa0e64">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_0_S" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bOnlyFollowPos" value="true" refParamName="" useRefParam="false" />
+        <bool name="b1stTickParentRot" value="true" refParamName="" useRefParam="false" />
+        <bool name="bTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseClearTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="040f8c0e-bd01-45d0-bfcb-17d46bb95a18" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="13" guid="6e52b6dc-7854-43d5-8fee-3a5d8f00dd5f" status="false" />
+      <Condition id="12" guid="8a708306-b1d7-44cc-a659-26402d9fd938" status="true" />
+      <Condition id="17" guid="fddcda22-f9b4-40ae-9e80-09c4f1c9c6a7" status="true" />
+      <Event eventName="TriggerParticle" time="0.266" length="0.727" isDuration="true" guid="0a23d5e7-ddc5-448a-be59-8c13906852b2">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/544_Painter/Painter_spell02_0" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <bool name="bOnlyFollowPos" value="true" refParamName="" useRefParam="false" />
+        <bool name="b1stTickParentRot" value="true" refParamName="" useRefParam="false" />
+        <bool name="bTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <bool name="bUseClearTrailProtect" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

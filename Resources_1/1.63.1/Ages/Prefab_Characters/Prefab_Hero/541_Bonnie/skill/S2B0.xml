@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="攻击者" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <int name="angle" value="0" refParamName="" useRefParam="false" />
+    <int name="int_20" value="0" refParamName="" useRefParam="false" />
+    <int name="int_21" value="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="1.067" loop="false">
+    <Track trackName="GetRotationtick0" eventType="GetRotationtick" guid="16d0c9e8-c8db-49e7-bfb1-942b5b28c460" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="GetRotationtick" time="0.000" isDuration="false" guid="738b56bd-7e68-4e1f-8866-057413cbc3d2">
+        <TemplateObject name="sourceActorId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetActorId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="exportAngle" value="angle" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CalculatorTick0" eventType="CalculatorTick" guid="822ef6c5-65a8-40af-8064-afa1c19188ae" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CalculatorTick" time="0.000" isDuration="false" guid="213d92ef-823f-44b7-83e0-419e6776d5b8">
+        <int name="iLeftInt" value="0" refParamName="int_20" useRefParam="true" />
+        <int name="iRightInt" value="1" refParamName="" useRefParam="false" />
+        <String name="OutParamName" value="int_21" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillCDTriggerTick0" eventType="SkillCDTriggerTick" guid="0bc6d05d-0ee3-4ac6-b73d-49dd25ce4535" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SkillCDTriggerTick" time="0.000" isDuration="false" guid="e2edff56-86be-4b86-919a-eb8668349183">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckConditionDuration2" eventType="CheckConditionDuration" guid="4370cb79-b00f-4c0e-9e6b-708f7dadf31a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckConditionDuration" time="0.000" length="0.132" isDuration="true" guid="87c6fe78-55de-44b6-9e13-690969b164c5">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="operatorMethod" value="0" refParamName="" useRefParam="false" />
+        <bool name="bActorMoving" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="小于45" eventType="CheckIntegerTick" guid="05e2ba57-a061-4cc8-8268-c841754692aa" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="9106cf02-1513-4c4c-a167-b04667ed83a1">
+        <int name="compareParam" value="0" refParamName="angle" useRefParam="true" />
+        <Enum name="checkOPType" value="1" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="45" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="大等于315" eventType="CheckIntegerTick" guid="b2fe8c07-a149-45af-b430-0eb90cd8e6b9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="6294a59d-8719-46bf-976e-d7a512387740">
+        <int name="compareParam" value="0" refParamName="angle" useRefParam="true" />
+        <Enum name="checkOPType" value="5" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="315" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="前" eventType="SetAnimationParamsDuration" guid="3e5c80e6-4a85-4473-8ece-761b68a5e5f3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="4370cb79-b00f-4c0e-9e6b-708f7dadf31a" status="true" />
+      <Condition id="4" guid="05e2ba57-a061-4cc8-8268-c841754692aa" status="true" />
+      <Event eventName="SetAnimationParamsDuration" time="0.000" length="0.700" isDuration="true" guid="d5048ea9-3865-446f-af52-3998577dd738">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="intNames" refParamName="" useRefParam="false" type="String">
+          <String value="age_spellIndex" />
+        </Array>
+        <Array name="intValues" refParamName="" useRefParam="false" type="int">
+          <int value="21" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="前" eventType="SetAnimationParamsDuration" guid="1c124b08-aeda-401d-815f-5081f37eb0c9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="4370cb79-b00f-4c0e-9e6b-708f7dadf31a" status="true" />
+      <Condition id="5" guid="b2fe8c07-a149-45af-b430-0eb90cd8e6b9" status="true" />
+      <Event eventName="SetAnimationParamsDuration" time="0.000" length="0.700" isDuration="true" guid="2a5db355-b91a-4084-9454-703654dcbd85">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="intNames" refParamName="" useRefParam="false" type="String">
+          <String value="age_spellIndex" />
+        </Array>
+        <Array name="intValues" refParamName="" useRefParam="false" type="int">
+          <int value="21" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="小于225" eventType="CheckIntegerTick" guid="730d2e69-a797-440b-b073-4fef71f6b335" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="bbde2af5-1df8-4bbb-af8c-2bb9b1e38270">
+        <int name="compareParam" value="0" refParamName="angle" useRefParam="true" />
+        <Enum name="checkOPType" value="1" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="225" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="大等于135" eventType="CheckIntegerTick" guid="f123840a-25ed-4ed9-81a2-c32aa393a9d3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="dbd749a6-f54a-46ca-b66c-5208036a872c">
+        <int name="compareParam" value="0" refParamName="angle" useRefParam="true" />
+        <Enum name="checkOPType" value="5" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="135" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="后" eventType="SetAnimationParamsDuration" guid="c8c98e5a-c94b-40c6-8ee1-e7e95b1cbc0c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="4370cb79-b00f-4c0e-9e6b-708f7dadf31a" status="true" />
+      <Condition id="8" guid="730d2e69-a797-440b-b073-4fef71f6b335" status="true" />
+      <Condition id="9" guid="f123840a-25ed-4ed9-81a2-c32aa393a9d3" status="true" />
+      <Event eventName="SetAnimationParamsDuration" time="0.000" length="0.700" isDuration="true" guid="44a919ad-268f-4892-a881-9b1afb1c8eea">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="intNames" refParamName="" useRefParam="false" type="String">
+          <String value="age_spellIndex" />
+        </Array>
+        <Array name="intValues" refParamName="" useRefParam="false" type="int">
+          <int value="22" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="小于315" eventType="CheckIntegerTick" guid="89970718-690a-4d84-b1ab-2904d6b5b5ec" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="47f19192-5bc6-4a75-8681-19673522bbd5">
+        <int name="compareParam" value="0" refParamName="angle" useRefParam="true" />
+        <Enum name="checkOPType" value="1" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="315" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="大等于225" eventType="CheckIntegerTick" guid="086e81b2-d62f-414c-9333-b904eb0fa097" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="52181b51-71b9-4eca-b91c-79b13e7863f7">
+        <int name="compareParam" value="0" refParamName="angle" useRefParam="true" />
+        <Enum name="checkOPType" value="5" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="225" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="左" eventType="SetAnimationParamsDuration" guid="8e41267b-9176-450a-b633-14ac8ad8953d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="4370cb79-b00f-4c0e-9e6b-708f7dadf31a" status="true" />
+      <Condition id="11" guid="89970718-690a-4d84-b1ab-2904d6b5b5ec" status="true" />
+      <Condition id="12" guid="086e81b2-d62f-414c-9333-b904eb0fa097" status="true" />
+      <Event eventName="SetAnimationParamsDuration" time="0.000" length="0.700" isDuration="true" guid="f5a2ee8d-c69b-4b36-a69f-ff8d385924d8">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="intNames" refParamName="" useRefParam="false" type="String">
+          <String value="age_spellIndex" />
+        </Array>
+        <Array name="intValues" refParamName="" useRefParam="false" type="int">
+          <int value="41" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="大等于45" eventType="CheckIntegerTick" guid="16d1a418-41b4-4113-a917-59cb5738c5ac" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="711a6725-816e-4e12-9dc7-2eebbd0e5c3b">
+        <int name="compareParam" value="0" refParamName="angle" useRefParam="true" />
+        <Enum name="checkOPType" value="5" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="45" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="小于135" eventType="CheckIntegerTick" guid="c3cb8d21-3a6e-4700-89ee-9d2b87eb1115" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.000" isDuration="false" guid="02e0d878-9367-41a9-b095-007d93bedee0">
+        <int name="compareParam" value="0" refParamName="angle" useRefParam="true" />
+        <Enum name="checkOPType" value="1" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="135" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="右" eventType="SetAnimationParamsDuration" guid="6724636e-5902-4d2c-ac05-55276457b2f1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="4370cb79-b00f-4c0e-9e6b-708f7dadf31a" status="true" />
+      <Condition id="14" guid="16d1a418-41b4-4113-a917-59cb5738c5ac" status="true" />
+      <Condition id="15" guid="c3cb8d21-3a6e-4700-89ee-9d2b87eb1115" status="true" />
+      <Event eventName="SetAnimationParamsDuration" time="0.000" length="0.700" isDuration="true" guid="cb37be9b-1b56-47cc-b6ca-b84972b42d8c">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="intNames" refParamName="" useRefParam="false" type="String">
+          <String value="age_spellIndex" />
+        </Array>
+        <Array name="intValues" refParamName="" useRefParam="false" type="int">
+          <int value="42" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="站立攻击" eventType="SetAnimationParamsDuration" guid="7b6d2f63-281c-4fda-b7cc-eb60662b8252" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="4370cb79-b00f-4c0e-9e6b-708f7dadf31a" status="false" />
+      <Event eventName="SetAnimationParamsDuration" time="0.000" length="0.700" isDuration="true" guid="2f7e60be-7387-46d1-87c6-086f5498d281">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="intNames" refParamName="" useRefParam="false" type="String">
+          <String value="age_spellIndex" />
+        </Array>
+        <Array name="intValues" refParamName="" useRefParam="false" type="int">
+          <int value="2" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="SpawnBulletTick0" eventType="SpawnBulletTick" guid="9baf6bbb-630f-4325-808d-a9a6c250a2ee" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnBulletTick" time="0.250" isDuration="false" guid="8a0e9d5e-46f5-442c-bb3c-5d462deef0f0">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="prefab_characters/prefab_hero/541_Bonnie/skill/s2b1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CalculatorTick0" eventType="CalculatorTick" guid="ed2ffe69-40c8-4239-8950-29f3769ccf9a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="4370cb79-b00f-4c0e-9e6b-708f7dadf31a" status="true" />
+      <Event eventName="CalculatorTick" time="0.000" isDuration="false" guid="ac6d79f1-5a0b-4adb-8e54-40285f69bf33">
+        <int name="iLeftInt" value="0" refParamName="int_21" useRefParam="true" />
+        <Enum name="OperatorType" value="1" refParamName="" useRefParam="false" />
+        <int name="iRightInt" value="1" refParamName="" useRefParam="false" />
+        <String name="OutParamName" value="int_21" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckIntegerTick0" eventType="CheckIntegerTick" guid="88541dd6-af75-4379-b6b9-8b481288b0ad" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckIntegerTick" time="0.066" isDuration="false" guid="bf054ad2-1885-4bdd-86ee-090bd7ff0dbe">
+        <int name="compareParam" value="0" refParamName="int_21" useRefParam="true" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+        <int name="compareValue" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetAttackDirDuration0" eventType="SetAttackDirDuration" guid="e6c4b774-3917-4dcf-8bd3-f149df5babd7" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="20" guid="88541dd6-af75-4379-b6b9-8b481288b0ad" status="true" />
+      <Event eventName="SetAttackDirDuration" time="0.000" length="0.066" isDuration="true" guid="39d2f5ca-2998-4741-8904-d4c41f89161b">
+        <TemplateObject name="attackerId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="5dba232c-e575-4be9-a87b-99813d9b2461" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="TriggerParticleTick" time="0.132" isDuration="false" guid="5b918997-4fd0-4da4-bc2d-2b453722f008">
+        <TemplateObject name="targetId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/541_Bonnie/Bonnie_spell02_01" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

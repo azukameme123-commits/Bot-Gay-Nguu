@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="lastTarget" id="3" isTemp="false" />
+    <TemplateObject objectName="ultTarget" id="4" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="5.000" loop="false">
+    <Track trackName="SaveActorDuration0" eventType="SaveActorDuration" guid="9ae8f04f-f602-41a6-955b-26bd5e97c92b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SaveActorDuration" time="0.000" length="5.000" isDuration="true" guid="fbf643cb-1896-4b84-a18c-d97ced77b60e">
+        <String name="actorName" value="Skill7" refParamName="" useRefParam="false" />
+        <TemplateObject name="SetActorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bKeepUpdateValue" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="GetActorTick0" eventType="GetActorTick" guid="a063cd03-ea1a-4032-8778-d920cd889d21" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="GetActorTick" time="0.000" isDuration="false" guid="f6696cd6-36b2-408c-87ab-8489d541c722">
+        <String name="actorName" value="TianLaiTarget" refParamName="" useRefParam="false" />
+        <TemplateObject name="getFromTargetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="GetActorId" objectName="lastTarget" id="3" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="refParamName" value="TianLaiTarget" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="7792ca1a-48d9-4448-ae29-16bacf6ce340" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="a063cd03-ea1a-4032-8778-d920cd889d21" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="27aea911-7117-4c24-9d7e-b1844b02e53a">
+        <TemplateObject name="targetId" objectName="lastTarget" id="3" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="159710" refParamName="" useRefParam="false" />
+        <int name="BuffLayer" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="e2fc64f8-87fb-4772-9a40-8f1d5f9ce70b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="a063cd03-ea1a-4032-8778-d920cd889d21" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="7e83adc0-e3c7-4fe0-9f53-d6ae4bd23fd2">
+        <TemplateObject name="targetId" objectName="lastTarget" id="3" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="159712" refParamName="" useRefParam="false" />
+        <int name="BuffLayer" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckSkillCombineConditionTick0" eventType="CheckSkillCombineConditionTick" guid="483ccbf5-f8ec-4cd6-92aa-ae86b241674b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="ea70e825-ffae-4e65-ad08-23327e379d58">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="159801" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="5" EnumValue="大等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="2b8101ec-78c9-4194-b704-7ba938c87c7b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="4" guid="483ccbf5-f8ec-4cd6-92aa-ae86b241674b" status="false" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="2b5e3c3a-3e64-4efc-b824-c191a3093c5b">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="159721" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="08b087dc-23f8-427c-8b17-7856327bda69" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="4" guid="483ccbf5-f8ec-4cd6-92aa-ae86b241674b" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="ba88c59e-c177-4fb1-ae49-6e5423842999">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="159720" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckSkillCombineConditionTick0" eventType="CheckSkillCombineConditionTick" guid="f0ba9431-ee02-4fcd-bd8c-56d14b9d1bf4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.700" isDuration="false" guid="172a0b17-780b-4b4d-a96f-ccdcc8ac7f9f">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="159801" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="5" EnumValue="大等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="399d43df-d727-4f9d-a49d-0724c50b24f1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="7" guid="f0ba9431-ee02-4fcd-bd8c-56d14b9d1bf4" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="5d5f5d15-d8ca-435d-bb88-78a11d1ea86b">
+        <TrackObject name="trackId" id="9" guid="41043140-d131-4264-a28f-843e23161b90" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="41043140-d131-4264-a28f-843e23161b90" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnObjectDuration" time="0.700" length="4.300" isDuration="true" guid="2c7008b2-9712-43bd-b9d5-877997e5c23e">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="translation" x="0" y="1000" z="0" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="1000" z="0" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="3e92f318-88d0-4923-a6cd-0043363b99a1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="7" guid="f0ba9431-ee02-4fcd-bd8c-56d14b9d1bf4" status="true" />
+      <Event eventName="SpawnObjectDuration" time="0.000" length="5.000" isDuration="true" guid="69d950fb-a5af-4433-b2e8-3ee1b11cba5e">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="-500" z="0" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="e7d98d27-8809-4942-a420-fe13a1254899" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="7" guid="f0ba9431-ee02-4fcd-bd8c-56d14b9d1bf4" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="f5643c74-27a0-413f-92e6-c6f0dcc7e243">
+        <TrackObject name="trackId" id="14" guid="97a685ec-dcc0-4817-b2bd-652c54425218" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick0" eventType="SetCollisionTick" guid="5d7fa4b9-a192-4295-942d-3f4c59d24f31" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SetCollisionTick" time="0.700" isDuration="false" guid="6ef389d6-7a57-428b-8360-0f0365bae344">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="2000" y="10000" z="2000" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="MoveBulletDuration0" eventType="MoveBulletDuration" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="MoveBulletDuration" time="0.700" length="4.300" isDuration="true" guid="b93e7661-967b-4d41-b647-05501824323a">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="destId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="velocity" value="12500" refParamName="" useRefParam="false" />
+        <bool name="bLockY" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="97a685ec-dcc0-4817-b2bd-652c54425218" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="11">
+      <Event eventName="TriggerParticle" time="0.700" length="4.300" isDuration="true" guid="17b74c52-c1b0-422d-a0a8-3bd3702120fc">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="海诺心动" eventType="FilterTargetType" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="8e9fbb8e-a305-4c1e-a3b5-9182500a667b">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="563354" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="buffLayers" value="1" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="CheckSkillCombineConditionTick0" eventType="CheckSkillCombineConditionTick" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="702d2f01-a62f-460b-9908-fa24d6fbeec6">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="159801" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="5" EnumValue="大等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="03f337c3-b1b0-4c19-a6d9-1396c96d6c20" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="true" />
+      <Condition id="16" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.530" isDuration="true" guid="fd748a93-12a1-48ad-a2d0-47be4c0a9530">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_buff_03_hn" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-0.070" y="-0.900" z="-0.500" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="5cb83cda-8aa8-4929-8a3d-a74a7efa6ca2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="false" />
+      <Condition id="16" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.530" isDuration="true" guid="5cde423e-42f7-4990-88ee-a3daa0f2d3e8">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_buff_03" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="-0.070" y="-0.900" z="-0.500" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="2c930455-71ba-4a11-a02b-57e8544bed94" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="true" />
+      <Condition id="16" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" status="false" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.530" isDuration="true" guid="68e44288-4e0f-41e3-8ad9-727324649425">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_buff_03_hn" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="6cfade38-f513-4d7c-8f72-042fe86e6a5a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="false" />
+      <Condition id="16" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" status="false" />
+      <Event eventName="TriggerParticle" time="0.000" length="1.530" isDuration="true" guid="c2a3fe69-02ed-4e33-94fc-26ddecc2187c">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_buff_03" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="672ac0a4-c266-4959-8e94-af972bd7d002" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="false" />
+      <Event eventName="TriggerParticle" time="0.710" length="4.300" isDuration="true" guid="cf5f54bd-28ea-4105-a784-5e4e5af41f0c">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.500" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="701be627-389f-4b1f-9e0a-2f3fd17bbcb5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="false" />
+      <Event eventName="TriggerParticle" time="0.710" length="4.300" isDuration="true" guid="b014efb0-4589-49d2-93a1-020ba840fdac">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02_1" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.500" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="884272df-f966-4f34-8fec-9db73d23db32" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="true" />
+      <Event eventName="TriggerParticle" time="0.710" length="4.300" isDuration="true" guid="d84ced68-4427-4e36-a4bb-4efa9ed51cc3">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02_hn" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.500" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="PlayHeroSoundTick0" eventType="PlayHeroSoundTick" guid="d18b0bd8-1702-4f6f-b4bf-8b12d9c56ea6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="3d3d0ff0-57c9-4184-9b2b-db782d82b0c3">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_Dolia_Skill_Passive_Hit" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerDuration0" eventType="HitTriggerDuration" guid="7c70c85c-43dd-4d92-97c4-127dc1530dac" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.066" isDuration="true" guid="4e1cdfbc-570f-441c-a0ac-858cd88e25da">
+        <TemplateObject name="triggerId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterEnemy" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterFriend" value="false" refParamName="" useRefParam="false" />
+        <bool name="bFileterNoBattleMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFileterMonter" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFileterOrgan" value="true" refParamName="" useRefParam="false" />
+        <int name="MaxTriggerCount" value="1" refParamName="" useRefParam="false" />
+        <int name="MaxTargetBuffCount" value="1" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="159710" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick1" eventType="HitTriggerTick" guid="86a1577c-3bcd-43f8-a503-88b70ae7aa8e" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="8d34c2ff-0020-4b8b-8b80-88a99751dd6a">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="lastHit" value="true" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_2" value="159710" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerDuration0" eventType="HitTriggerDuration" guid="f91f64bf-a70b-4e23-a30f-5399552d00a0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.066" isDuration="true" guid="674d1343-5ab0-463e-804f-d04d2ac2605e">
+        <TemplateObject name="triggerId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterEnemy" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterFriend" value="false" refParamName="" useRefParam="false" />
+        <bool name="bFileterNoBattleMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFileterMonter" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFileterOrgan" value="true" refParamName="" useRefParam="false" />
+        <int name="MaxTriggerCount" value="1" refParamName="" useRefParam="false" />
+        <int name="MaxTargetBuffCount" value="1" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="159712" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick1" eventType="HitTriggerTick" guid="2dce3229-b51c-449e-bbf4-1c0f50c6d482" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="c6d61bc2-f642-4cc9-8af7-a9916bb796a8">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="lastHit" value="true" refParamName="" useRefParam="false" />
+        <int name="TargetSkillCombine_1" value="159712" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="0a714efe-ce6b-4896-aa92-690df560efd9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="11">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="92a06d4b-9498-4e4f-936e-549db993ee95">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_buff_03_hurt" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+      <SkinOrAvatarList id="15905" />
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="3b3e8190-2dbd-4ad6-a359-598c3064e701" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="true" />
+      <Event eventName="TriggerParticle" time="0.710" length="4.300" isDuration="true" guid="f74625ac-1e52-4251-9cef-28805756d700">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02_1_hn" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.500" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="2eefcb41-35c7-43cb-9032-ac45b6a16c90" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="false" />
+      <Condition id="16" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" status="true" />
+      <Event eventName="TriggerParticle" time="0.710" length="4.300" isDuration="true" guid="db92f3bb-5293-4185-a368-9198113b04ef">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.500" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="acb1f12a-1b1c-488c-abdc-9fd68e680572" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="false" />
+      <Condition id="16" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" status="true" />
+      <Event eventName="TriggerParticle" time="0.710" length="4.300" isDuration="true" guid="d0f3a520-0495-444f-8fbc-805504d248d7">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02_1" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.500" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="b5217cfd-2d7c-4ed1-8b5c-e38f64573c26" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="true" />
+      <Condition id="16" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" status="true" />
+      <Event eventName="TriggerParticle" time="0.710" length="4.300" isDuration="true" guid="ee63eb10-3751-4c96-99eb-6092f6663c4f">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02_hn" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.500" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="34ccc8e2-582f-4ea2-912c-2c9b35a79368" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="true" />
+      <Condition id="16" guid="86fd6b6e-bb4f-45c0-9fb7-b4edc915195f" status="true" />
+      <Event eventName="TriggerParticle" time="0.710" length="4.300" isDuration="true" guid="bd64107d-acfc-4912-8b64-c8b0f1d1c24c">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_fly_02_1_hn" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.000" z="0.500" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="83bf324a-83ff-4492-b439-61b6454b0a2e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="true" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="88bd1429-2cf8-4fa3-951f-8d3b64a938bd">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_buff_03_hurt_hn" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="a6de4151-0db9-4028-a043-3d5db249cf6c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Condition id="15" guid="eee0ccfa-5409-4fe4-974a-9bcb4659051a" status="false" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="3c37dd98-a56f-46e8-bc0e-791040ee65d4">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_buff_03_hurt" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="35ecc11a-c385-40e9-aa1a-e4f05c3b5ddc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="63c7eb83-ec8c-4905-9e02-42e3424151e9">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="21" guid="672ac0a4-c266-4959-8e94-af972bd7d002" />
+          <TrackObject id="23" guid="884272df-f966-4f34-8fec-9db73d23db32" />
+          <TrackObject id="31" guid="2eefcb41-35c7-43cb-9032-ac45b6a16c90" />
+          <TrackObject id="33" guid="b5217cfd-2d7c-4ed1-8b5c-e38f64573c26" />
+        </Array>
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="ed8e9f85-4da8-46a0-8f06-13bbdf7d92cd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="bfcbdbc5-0059-4bb0-a7b5-7858dbedbaba">
+        <TrackObject name="trackId" id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="b5f7bc0d-b8ec-4a0c-835b-d2a0def5ae46" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="54869dce-4de4-4d74-8d42-67f3e2528c11">
+        <TrackObject name="trackId" id="10" guid="3e92f318-88d0-4923-a6cd-0043363b99a1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="58389283-beaa-4657-8e32-9db71ed4cd08" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="11">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="72c7a1c0-505a-484b-9378-ef3ab1a028f0">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="14" guid="97a685ec-dcc0-4817-b2bd-652c54425218" />
+        </Array>
+      </Event>
+      <SkinOrAvatarList id="15903" />
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="2c2e3d81-e823-4ef9-b313-f700b89f57dd" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="5c368d53-6e68-48ab-8c00-2c888f22a949">
+        <TrackObject name="trackId" id="14" guid="97a685ec-dcc0-4817-b2bd-652c54425218" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetAttackDirDuration0" eventType="SetAttackDirDuration" guid="e42dde61-74dd-4f6d-b0a4-a1b6661a5c2f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SetAttackDirDuration" time="0.000" length="1.200" isDuration="true" guid="747e41a9-4159-4fb6-b491-1298baa98434">
+        <TemplateObject name="attackerId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bForceRotate" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayHeroSoundTick0" eventType="PlayHeroSoundTick" guid="960d8224-bf7f-445e-acbe-bd45ae9f52a8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="8c5fbc7a-c4b5-42aa-b31a-de04d2bbfee4">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_Dolia_VOX_Skill_D" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="b150efae-0a23-4a93-9bab-5e0ede2b75d6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="13" guid="d33153a2-95e1-4852-97b2-a45f23c622e9" status="true" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="d466793f-7346-43d2-aace-0ebc7259d8f9">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/159_Dolia/Dolia_spell03_buff_03_hurt" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.000" z="0.000" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="15905" />
+    </Track>
+  </Action>
+</Project>

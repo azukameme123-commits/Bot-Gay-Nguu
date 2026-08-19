@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="攻击者" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="BulletDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="CrossPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="UseDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="1.000" loop="false">
+    <Track trackName="GetSkillContextTick" eventType="GetSkillContextTick" guid="7ff34fee-7217-4c94-bb7a-39e8d27c5f06" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="GetSkillContextTick" time="0.000" isDuration="false" guid="9f83ae21-d97b-4c3d-9b76-8033c715a353">
+        <String name="UseVector" value="UseDir" refParamName="" useRefParam="false" />
+        <String name="BulletDir" value="BulletDir" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="计算交点" eventType="CalcVectorCrossTick" guid="3f7318b6-375a-4f7b-b10c-132e02f40a79" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CalcVectorCrossTick" time="0.000" isDuration="false" guid="762c70ee-1c11-4f49-a1bc-d2795c8e40ad">
+        <TemplateObject name="actor1" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="Direction1" x="0" y="0" z="0" refParamName="BulletDir" useRefParam="true" />
+        <TemplateObject name="actor2" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Vector3i name="Direction2" x="0" y="0" z="0" refParamName="UseDir" useRefParam="true" />
+        <String name="OutParamName" value="CrossPos" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="MoveActorDuration0" eventType="MoveActorDuration" guid="c6becde6-a66b-4d01-a346-50781e0b331e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="3f7318b6-375a-4f7b-b10c-132e02f40a79" status="true" />
+      <Event eventName="MoveActorDuration" time="0.000" length="0.500" isDuration="true" guid="8b66c445-cc27-45d0-84fe-528836fbd9a7">
+        <Enum name="moveType" value="1" EnumValue="指定位置" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="moveSpeed" value="17000" refParamName="" useRefParam="false" />
+        <Vector3i name="destPos" x="0" y="0" z="0" refParamName="CrossPos" useRefParam="true" />
+        <bool name="enableRotate" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="ForbidAbilityDuration" eventType="ForbidAbilityDuration" guid="187cec24-e521-4b10-ba30-803951b39d48" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="3f7318b6-375a-4f7b-b10c-132e02f40a79" status="true" />
+      <Event eventName="ForbidAbilityDuration" time="0.000" length="0.500" isDuration="true" guid="80bcd19f-2002-4dc7-acdc-751cff21e855">
+        <TemplateObject name="attackerId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="forbidMove" value="true" refParamName="" useRefParam="false" />
+        <bool name="forbidSkill" value="true" refParamName="" useRefParam="false" />
+        <bool name="forbidMoveRotate" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle4" eventType="TriggerParticle" guid="661f0c1c-623a-489e-bc83-86055d183995" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="TriggerParticle" time="0.000" length="1.000" isDuration="true" guid="210e7477-5732-4e4c-a20a-9721f8270dee">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/tongyong_effects/ui_fx/xuanyun_tongyong_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-0.800" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bindOnHUD" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

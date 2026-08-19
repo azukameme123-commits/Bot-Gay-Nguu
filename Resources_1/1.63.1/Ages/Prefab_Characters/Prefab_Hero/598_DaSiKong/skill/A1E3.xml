@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="攻击者" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet1" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet" id="3" isTemp="true" />
+    <TemplateObject objectName="self" id="4" isTemp="false" />
+    <TemplateObject objectName="bullet2" id="5" isTemp="true" />
+    <TemplateObject objectName="AActor" id="6" isTemp="false" />
+    <TemplateObject objectName="BActor" id="7" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="1.000" loop="false">
+    <Track trackName="检查自己是否变身" eventType="FilterTargetType" guid="a28df234-0082-49f5-b306-a2d8c473f66d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="94c48beb-7448-4b17-beee-7f5560a00d13">
+        <TemplateObject name="targetId" objectName="攻击者" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="598700" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身前远程受击音效" eventType="PlayHeroSoundTick" guid="f2509c8a-c182-4a3e-8641-2c0b91890ce9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="0" guid="a28df234-0082-49f5-b306-a2d8c473f66d" status="false" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="186e60d6-48a2-4506-ba9e-db3e77cbca68">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_Attack_Hit" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后远程受击音效" eventType="PlayHeroSoundTick" guid="4cf5421c-44df-446e-bd15-ffd541fd8450" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="0" guid="a28df234-0082-49f5-b306-a2d8c473f66d" status="true" />
+      <Event eventName="PlayHeroSoundTick" time="0.000" isDuration="false" guid="619aac6f-b684-471a-a497-0ea33a654564">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="eventName" value="Play_SiKongZhen_Attack_Hit_S" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="过滤花" eventType="FilterTargetType" guid="a1368677-5d34-4e71-a4d5-420b075da680" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="8af79add-fdf5-408b-a79f-f1171d305b86">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterOtherMonster" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="598700" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SkillFuncInstant0" eventType="SkillFuncInstant" guid="19018bf5-6d9c-44c3-b72c-5560cbea8f77" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="3" guid="a1368677-5d34-4e71-a4d5-420b075da680" status="true" />
+      <Event eventName="SkillFuncInstant" time="0.000" isDuration="false" guid="566512be-426e-4c26-a67c-1ccb4c56cbff">
+        <Enum name="SkillFuncType" value="1" EnumValue="法术伤害" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身前远程受击特效" eventType="TriggerParticleTick" guid="354b03c2-4d40-49c7-b5b9-e2fb32a40f22" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" nameSpace="">
+      <Condition id="0" guid="a28df234-0082-49f5-b306-a2d8c473f66d" status="false" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="7ace7983-35c0-49cc-935f-c6259e03421f">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_hurt01A" refParamName="" useRefParam="false" />
+        <float name="lifeTime" value="0.600" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="变身后远程受击特效" eventType="TriggerParticleTick" guid="a483173d-6d98-4528-9061-29440f3b320a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="11" nameSpace="">
+      <Condition id="0" guid="a28df234-0082-49f5-b306-a2d8c473f66d" status="true" />
+      <Event eventName="TriggerParticleTick" time="0.000" isDuration="false" guid="749271c0-8103-412f-a03f-eb81e97c4433">
+        <TemplateObject name="targetId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/598_DaSiKong/DaSiKong_hurt01B" refParamName="" useRefParam="false" />
+        <float name="lifeTime" value="0.600" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="59802" />
+    </Track>
+  </Action>
+</Project>

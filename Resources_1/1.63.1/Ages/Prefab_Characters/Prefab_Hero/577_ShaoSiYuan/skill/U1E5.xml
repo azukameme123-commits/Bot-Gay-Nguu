@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="zhiren1" id="3" isTemp="true" />
+    <TemplateObject objectName="bullet2" id="4" isTemp="true" />
+    <TemplateObject objectName="zhiren3" id="5" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.500" loop="false">
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="1ee0bfb4-060a-4fe6-a791-a2dc83085e37" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="5849f2ec-a9ff-4145-aeee-89c00975aafc">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="yuanzai_B" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckTargetIsNullTick0" eventType="CheckTargetIsNullTick" guid="d3b79d85-7038-4fd3-b660-6281b009c7ad" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckTargetIsNullTick" time="0.000" isDuration="false" guid="e12ec3c5-860a-4f65-b0f9-b06181ad504a">
+        <TemplateObject name="actorId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick0" eventType="SimpleSpawnBuffTick" guid="5e049c0c-4dd4-47fe-9f25-87ca35da8299" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="d3b79d85-7038-4fd3-b660-6281b009c7ad" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="dfe95a5e-66f2-484b-96c3-e183c11adb5e">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577225" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="e8d569d0-72a7-457b-9bc6-8657c626b49a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="e486fe35-22cf-4e98-a15f-26e0d78507fd">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="yuanzai_B" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="非英雄" eventType="FilterTargetType" guid="0ecf68d5-4bf3-4317-9fd0-d5ccbcdd05c0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="d766afbc-d9cf-49da-9b0c-a9f2d19ea217">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterHero" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterOrgan" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks1" eventType="StopTracks" guid="61eeb453-36fe-4129-8c09-3feef456bef0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="4" guid="0ecf68d5-4bf3-4317-9fd0-d5ccbcdd05c0" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="2f752b9d-c15f-4ee1-90be-2c3c3cc3bf40">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="7" guid="d85675f8-be8e-4c03-8284-4405a2e71d34" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckTargetIsNullTick0" eventType="CheckTargetIsNullTick" guid="2535690c-e1a3-4e28-bda4-92b2c7dc4a77" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckTargetIsNullTick" time="0.000" isDuration="false" guid="f16f377e-4e3d-4412-a8fd-ada90328122e">
+        <TemplateObject name="actorId" objectName="zhiren1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick0" eventType="SimpleSpawnBuffTick" guid="d85675f8-be8e-4c03-8284-4405a2e71d34" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="6" guid="2535690c-e1a3-4e28-bda4-92b2c7dc4a77" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="29b913a7-9095-4969-a34b-1ac346d42974">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577225" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="714e4d31-667f-4839-b1c3-7470ff6ce85a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="cfa092c8-d224-4aa7-b8ba-87fdfb36f589">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="577200" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="76b9df84-5433-4f2b-a051-1f1c79995cc6" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="8" guid="714e4d31-667f-4839-b1c3-7470ff6ce85a" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="bcdace3f-fd63-46b9-aa60-3ba8d1fc4759">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="存在577200" eventType="SimpleSpawnBuffTick" guid="03c3a66c-047e-4204-b3ed-32d895f918b6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="8" guid="714e4d31-667f-4839-b1c3-7470ff6ce85a" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="eb7eb394-71f5-43c1-8678-b6f6823a46ea">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577392" />
+          <int value="577220" />
+          <int value="0" />
+          <int value="0" />
+          <int value="0" />
+          <int value="0" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="存在577200" eventType="SimpleSpawnBuffTick" guid="40380243-2288-47f6-a7d1-5489503d0b3c" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="8" guid="714e4d31-667f-4839-b1c3-7470ff6ce85a" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.067" isDuration="false" guid="77eb45d9-aeb0-446f-9045-4bb7c14bf682">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577237" />
+          <int value="577200" />
+          <int value="0" />
+          <int value="0" />
+          <int value="0" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick0" eventType="SimpleSpawnBuffTick" guid="46459a0d-19e2-48d7-bd5c-f0e9e698f4f6" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="8" guid="714e4d31-667f-4839-b1c3-7470ff6ce85a" status="false" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="9595b7cc-e4ce-4872-8f57-124a4d1d0882">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577200" />
+          <int value="577206" />
+          <int value="577227" />
+          <int value="577237" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetStateDuration0" eventType="FilterTargetStateDuration" guid="207b9320-8109-4101-bcc7-6114e3581eb6" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" OrConditions="true">
+      <Event eventName="FilterTargetStateDuration" time="0.000" length="0.200" isDuration="true" guid="d9298e4b-f919-40e6-8ee1-8525457231ae">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="checkDeadState" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="577943" eventType="SimpleSpawnBuffTick" guid="51860c48-56c9-4f1a-8d50-00cd86d188b5" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="13" guid="207b9320-8109-4101-bcc7-6114e3581eb6" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.067" isDuration="false" guid="bf459539-dcb6-40c6-b30b-a1bb255450f0">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577943" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="143a0130-5f33-493b-aea9-c8964c08b7e9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="1dfb3431-d427-409e-bbcf-2e90645b161b">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="577198" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SimpleSpawnBuffTick0" eventType="SimpleSpawnBuffTick" guid="502e3a57-4d42-4d48-830a-6882d6daba2e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="15" guid="143a0130-5f33-493b-aea9-c8964c08b7e9" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.000" isDuration="false" guid="e1aa2235-30a0-488d-aaa3-38acc8901662">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="577200" />
+          <int value="577206" />
+          <int value="577227" />
+          <int value="577237" />
+        </Array>
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="pos" id="3" isTemp="false" />
+    <TemplateObject objectName="攻击者" id="4" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" />
+  </RefParamList>
+  <Action tag="" length="100.000" loop="false" isConditionRuntime="true">
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="742a4ebf-ac2e-461f-87f1-0074ef3e4e69" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="100.000" isDuration="true" guid="16f2c0f1-bc2d-4260-937c-f631b6a4716a">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" />
+      </Event>
+    </Track>
+    <Track trackName="循环特效" eventType="TriggerParticle" guid="cb186ea9-391b-43a7-a065-cb79b51546ab" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="TriggerParticle" time="0.000" length="100.000" isDuration="true" guid="450b7d09-d8f1-4296-a586-7bd0152e2bf8">
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" />
+        <String name="resourceName" value="Prefab_Skill_Effects/Hero_Skill_Effects/132_makeboluo/13209/13209_MaKe_chaofeng01" />
+      </Event>
+    </Track>
+    <Track trackName="NewSaveActorRootTick0" eventType="NewSaveActorRootTick" guid="01e27118-8116-4216-98fa-4ac3fee16161" enabled="false" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="NewSaveActorRootTick" time="0.000" isDuration="false" guid="81a1ccca-2056-432e-80e8-5816829e4318">
+        <Enum name="dataDest" value="1" EnumValue="SkillContext" />
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" />
+        <TemplateObject name="targetId" objectName="bullet" id="2" isTemp="true" />
+        <String name="variableName" value="chaofengweizhi" />
+      </Event>
+    </Track>
+    <Track trackName="这个是附近的按钮" eventType="CheckActorAroundDuration" guid="23ee4738-58ec-4b23-a8a9-ab9fbfffa0dd" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckActorAroundDuration" time="0.003" length="99.997" isDuration="true" guid="aab5adb0-765c-412e-9335-a32d10360795">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" />
+        <int name="distance" value="6000" />
+        <bool name="bFindHero" value="false" />
+        <bool name="bFindMonster" value="false" />
+        <bool name="bFindSoldier" value="false" />
+        <bool name="bFindOrgan" value="false" />
+        <bool name="bFindCallActor" value="false" />
+        <bool name="bFindSpecificTarget" value="true" />
+        <TemplateObject name="chooseTargetId" objectName="bullet" id="2" isTemp="true" />
+        <Array name="bulletActionNames" type="String">
+          <String value="Prefab_Characters/Prefab_Hero/132_MaKeBoLuo/skill/skinaction/chaofenganniu.xml" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="对方活了就播结束" eventType="CheckTargetDeadDuration" guid="20569965-7b84-46a5-91af-35e029addf6a" enabled="false" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckTargetDeadDuration" time="0.000" length="100.000" isDuration="true" guid="a5b32aa7-925a-409f-b26f-dc22ebfcd01e">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetAnimationParamsTick0" eventType="SetAnimationParamsTick" guid="1c831b1f-3a46-4a98-a71a-3db779217cda" enabled="false" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="20569965-7b84-46a5-91af-35e029addf6a" status="false" />
+      <Event eventName="SetAnimationParamsTick" time="0.000" isDuration="false" guid="726aa5d1-20a9-47d2-8b5b-09ce0d6331da">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" />
+        <Array name="boolNames" type="String">
+          <String value="chaofeng" />
+        </Array>
+        <Array name="boolValues" type="bool">
+          <bool value="false" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="2deb3885-3a5f-442c-92c3-a539673048eb" enabled="false" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="20569965-7b84-46a5-91af-35e029addf6a" status="false" />
+      <Event eventName="RemoveBuffTick" time="0.100" isDuration="false" guid="ef1def16-9119-47eb-903d-c444f59f84b1">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" />
+        <Array name="buffIds" type="int">
+          <int value="132897" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="StopAge0" eventType="StopAge" guid="678cac4f-8f7a-42ee-a375-d6d88504eb3f" enabled="false" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="20569965-7b84-46a5-91af-35e029addf6a" status="false" />
+      <Event eventName="StopAge" time="0.100" isDuration="false" guid="3ef34e87-d31d-477b-8bf5-f21efeef6149" />
+    </Track>
+  </Action>
+</Project>

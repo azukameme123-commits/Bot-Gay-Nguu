@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="6.000" loop="false">
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="135d26eb-3148-45d6-9861-f4ab1790940b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="9c0cedd8-6953-41e1-94d4-4e32ceef3f59">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bOnlyHostHero" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="MinimapEffect0" eventType="MinimapEffect" guid="1156d5a2-2fa6-4b68-8530-430e76f947d3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="135d26eb-3148-45d6-9861-f4ab1790940b" status="true" />
+      <Event eventName="MinimapEffect" time="0.000" length="6.000" isDuration="true" guid="47be43ec-5925-43a4-a6b5-82aab5097202">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="effect" value="prefab_skill_effects/hero_skill_effects/180_nezha/nezha_loop_07" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckSkillCombineConditionDuration0" eventType="CheckSkillCombineConditionDuration" guid="9ff4da8e-2854-4005-9460-9d37bddd8aff" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckSkillCombineConditionDuration" time="0.000" length="6.000" isDuration="true" guid="f7e59ea0-3b1e-45ea-9138-726bdcf92d32">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="180350" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="03e4e265-fdba-4958-a89f-c54d41b9da51" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="9ff4da8e-2854-4005-9460-9d37bddd8aff" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="cb016874-8b5b-41ae-a9c2-103c261dccea" />
+    </Track>
+    <Track trackName="StopTrack0" eventType="StopTrack" guid="5cd6bfe4-ca90-4245-9f34-9215ac7cab28" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="9ff4da8e-2854-4005-9460-9d37bddd8aff" status="true" />
+      <Event eventName="StopTrack" time="0.000" isDuration="false" guid="2017b35f-c0f4-4160-b37f-daaacbe11242">
+        <TrackObject name="trackId" id="1" guid="1156d5a2-2fa6-4b68-8530-430e76f947d3" refParamName="" useRefParam="false" />
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

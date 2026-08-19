@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <int name="WeaponCount" value="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="1.000" loop="false" isConditionRuntime="true">
+    <Track trackName="SendBluePrintCommonEventTick0" eventType="SendBluePrintCommonEventTick" guid="aa51aa62-15c8-467e-81da-fcd2566ce986" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SendBluePrintCommonEventTick" time="0.000" isDuration="false" guid="1aecfe11-dc80-4d14-bcd7-1cfae148d57c">
+        <String name="evtName" value="GetWeaponCount" refParamName="" useRefParam="false" />
+        <bool name="bparam1" value="false" refParamName="" useRefParam="false" />
+        <bool name="bparam2" value="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="eventActorParamId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="看还有没有剩下的枪" eventType="NewCheckNumberTick" guid="103d9bc7-7d3c-4586-aaa9-67d69666909d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewCheckNumberTick" time="0.000" isDuration="false" guid="b29fd7fb-28be-483f-83e3-b3dafe7a9c80">
+        <String name="inputNumber" value="WeaponCount" refParamName="" useRefParam="false" />
+        <bool name="bGetFromRefParam" value="true" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="5" EnumValue="大于等于" refParamName="" useRefParam="false" />
+        <int name="targetNumber" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="137dc20a-38d1-4389-8fa6-69b2c7584c92" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="103d9bc7-7d3c-4586-aaa9-67d69666909d" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="a4924b30-a069-49e9-a526-fe6c02818ecf" />
+    </Track>
+    <Track trackName="51804" eventType="FilterTargetType" guid="1891aa0b-8c4b-4ddf-a634-b0c6ef180962" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="9c49d934-7e91-4adb-93ad-5faf3072e3f8">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bSelectSkinID" value="true" refParamName="" useRefParam="false" />
+        <Array name="skinIDs" refParamName="" useRefParam="false" type="int">
+          <int value="59304" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="PlayAnimDuration0" eventType="PlayAnimDuration" guid="95bf29d9-5f9f-4c8c-ab5b-4f187e2f062c" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="1891aa0b-8c4b-4ddf-a634-b0c6ef180962" status="false" />
+      <Event eventName="PlayAnimDuration" time="0.000" length="1.000" isDuration="true" guid="174d3506-7d84-4c7a-9971-0eaa5f3cde62">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Atk7_2" refParamName="" useRefParam="false" />
+        <int name="layer" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayAnimDuration0" eventType="PlayAnimDuration" guid="2be085b6-4757-46cd-8cbd-f1f2ecdc9b22" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PlayAnimDuration" time="0.000" length="1.000" isDuration="true" guid="81df75de-f76c-4f0e-a65c-49e774acdbbd">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Atk7_2" refParamName="" useRefParam="false" />
+        <bool name="breakSameLayerAnims2" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <int name="damage" value="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="3.000" loop="false">
+    <Track trackName="过滤非英雄" eventType="FilterTargetType" guid="896b0152-3a38-4902-a25e-72013c5a2fbe" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="c7b88757-f589-4426-92a6-9a3c5ea68038">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterPet" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterMajorMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterMinorMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterSoldier" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterOtherMonster" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CollectDamageDuration0" eventType="CollectDamageDuration" guid="f26ea18e-6eec-4739-9a1b-4c5e05d95fb4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="896b0152-3a38-4902-a25e-72013c5a2fbe" status="true" />
+      <Event eventName="CollectDamageDuration" time="0.000" length="3.000" isDuration="true" guid="8458a188-43ff-48ab-a98a-e263f44fb267">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="sourceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="OutDamageValueName" value="damage" refParamName="" useRefParam="false" />
+        <int name="OutDamagePercent" value="3500" refParamName="" useRefParam="false" />
+        <bool name="bBeforeCalcDef" value="false" refParamName="" useRefParam="false" />
+        <bool name="bIncludeShieldAbsorbed" value="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="maxHpPctTargetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CollectDamageDuration0" eventType="CollectDamageDuration" guid="228efc8e-ff50-4538-9f5f-cf416630d52f" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="896b0152-3a38-4902-a25e-72013c5a2fbe" status="false" />
+      <Event eventName="CollectDamageDuration" time="0.000" length="3.000" isDuration="true" guid="3e13217b-acce-4c5f-a0d9-8d2e2b8a2458">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="sourceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="OutDamageValueName" value="damage" refParamName="" useRefParam="false" />
+        <int name="OutDamagePercent" value="1000" refParamName="" useRefParam="false" />
+        <bool name="bBeforeCalcDef" value="false" refParamName="" useRefParam="false" />
+        <bool name="bIncludeShieldAbsorbed" value="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="maxHpPctTargetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="044c3157-9adf-4cf6-9493-c0ee6b11d39c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="TriggerParticle" time="0.000" length="3.000" isDuration="true" guid="d2efdeea-381b-461b-b7fe-eb5fee87d335">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/116_jingke/jingke_buff" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="bindOnHUD" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckConditionDuration0" eventType="CheckConditionDuration" guid="fe950a3c-c953-4edb-934b-73c8f0c89e2f" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="0" guid="896b0152-3a38-4902-a25e-72013c5a2fbe" status="true" />
+      <Event eventName="CheckConditionDuration" time="0.000" length="3.000" isDuration="true" guid="f69fa21c-014c-42bf-83d5-ba10ad874a2e">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bActorDead" value="true" refParamName="" useRefParam="false" />
+        <Enum name="operatorMethod" value="0" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="生命恢复" eventType="HitTriggerTick" guid="7ecfeac3-5605-4e03-bd74-e8ad63099515" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="true">
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="1bc517ec-d089-46e4-b124-3b1ee79a81b6">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="116350" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bOverrideParam" value="true" refParamName="" useRefParam="false" />
+        <int name="buffOverrideParam2" value="0" refParamName="damage" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="目标死亡" eventType="CheckConditionDuration" guid="57153f40-ffe8-46d7-a85c-4a804baa808e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckConditionDuration" time="0.000" length="3.000" isDuration="true" guid="15e46230-00b4-4421-85b2-85f35b755d3d">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bActorDead" value="true" refParamName="" useRefParam="false" />
+        <Enum name="operatorMethod" value="0" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="过滤非英雄" eventType="FilterTargetType" guid="33b766af-080b-4236-97d5-3498ec269638" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="6" guid="57153f40-ffe8-46d7-a85c-4a804baa808e" status="true" />
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="4c6d2530-6ae2-4324-b38e-c07a9fb604e4">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterMonter" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterBoss" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterOrgan" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterChest" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterEye" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterPet" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterMajorMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterMinorMonster" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterSoldier" value="true" refParamName="" useRefParam="false" />
+        <bool name="bFilterOtherMonster" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="重置大招冷却" eventType="HitTriggerTick" guid="c8ea272d-0e20-4c78-8439-7690ddcaf38c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="6" guid="57153f40-ffe8-46d7-a85c-4a804baa808e" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="96eaa72a-fb93-4332-8f79-3dc03d75deb2">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="116361" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffOverrideParam2" value="0" refParamName="damage" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="Y=0" eventType="FilterTargetType" guid="745654fb-1d7a-472f-b6b3-3a8d32899e77" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="e64a560a-dc80-401b-b67e-8444330c7dfe">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bFilterBufferLayers" value="true" refParamName="" useRefParam="false" />
+        <int name="buffId" value="116897" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="11620" />
+    </Track>
+    <Track trackName="X=1" eventType="HitTriggerTick" guid="0c8fac51-d5ef-45ac-8211-11827b209966" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="6" guid="57153f40-ffe8-46d7-a85c-4a804baa808e" status="true" />
+      <Condition id="9" guid="745654fb-1d7a-472f-b6b3-3a8d32899e77" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="16c01c7e-b295-4233-b7e4-1d425c83c976">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="116898" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffOverrideParam2" value="0" refParamName="damage" useRefParam="true" />
+      </Event>
+      <SkinOrAvatarList id="11620" />
+    </Track>
+    <Track trackName="Y=0" eventType="RemoveBuffTick" guid="168dda16-fd0a-43c9-b034-7b11d8dec807" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">
+      <Condition id="6" guid="57153f40-ffe8-46d7-a85c-4a804baa808e" status="true" />
+      <Condition id="9" guid="745654fb-1d7a-472f-b6b3-3a8d32899e77" status="false" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="78b986c0-448c-46f9-a695-15d99d04979f">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="116897" refParamName="" useRefParam="false" />
+        <int name="BuffLayer" value="1" refParamName="" useRefParam="false" />
+        <bool name="bImmeStop" value="true" refParamName="" useRefParam="false" />
+      </Event>
+      <SkinOrAvatarList id="11620" />
+    </Track>
+    <Track trackName="StopAction0" eventType="StopAction" guid="d37fa6b6-8930-4393-9224-b649e90eee94" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="6" guid="57153f40-ffe8-46d7-a85c-4a804baa808e" status="true" />
+      <Event eventName="StopAction" time="0.000" isDuration="false" guid="e260ff97-246b-4ce9-a93d-b767c52feb47" />
+    </Track>
+  </Action>
+</Project>

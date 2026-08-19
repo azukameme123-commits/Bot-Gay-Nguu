@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="攻击者" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="dahuaidan" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList />
+  <Action tag="" length="7.000" loop="false">
+    <Track trackName="GetLinkedActorTick0" eventType="GetLinkedActorTick" guid="62c2d201-0aa8-4f26-ba20-bfbd94f6734c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="GetLinkedActorTick" time="0.000" isDuration="false" guid="afb7e697-5a9c-4ea1-86a2-6255c7027ebd">
+        <TemplateObject name="tempId" id="2" objectName="dahuaidan" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="srcId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bIsGetSpecialHurtTarget" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckConditionDuration0" eventType="CheckConditionDuration" guid="d07e9a99-1a53-452b-adab-e78a29a9e888" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="CheckConditionDuration" time="0.000" length="6.400" isDuration="true" guid="e5092eca-ba07-4bc0-b21d-8c0578a901e8">
+        <TemplateObject name="targetId" id="2" objectName="dahuaidan" isTemp="true" refParamName="" useRefParam="false" />
+        <bool name="bActorDead" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBulletTick0" eventType="RemoveBulletTick" guid="0c734b42-3630-4e32-854e-7fce126ab358" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="d07e9a99-1a53-452b-adab-e78a29a9e888" status="true" />
+      <Event eventName="RemoveBulletTick" time="0.000" isDuration="false" guid="9b22c761-f5a9-49dd-8c32-cf8ecc5d4986">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="bulletTypeId" value="195201" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckSkillCombineConditionTick0" eventType="CheckSkillCombineConditionTick" guid="016c3eb2-893a-4ea1-a8ce-7febfc72adad" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="d07e9a99-1a53-452b-adab-e78a29a9e888" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="d056ee04-b70a-4ec0-9098-e98a54af5571">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="195913" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="b03ac353-4739-453d-967d-db5234971e9c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="016c3eb2-893a-4ea1-a8ce-7febfc72adad" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="d4aa1b1c-7bc0-47f0-a2b3-40156b7617be">
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="195210" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

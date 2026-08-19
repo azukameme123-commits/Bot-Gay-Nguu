@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="攻击者" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="self" isTemp="false" />
+    <TemplateObject id="3" objectName="None" isTemp="false" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="0.250" loop="false">
+    <Track trackName="小于等于3000" eventType="FilterTargetDistance" guid="d010fd97-73ea-4a5b-988a-6a709d1c5016" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="FilterTargetDistance" time="0.000" isDuration="false" guid="84cbfa83-4edb-4a65-b4e2-6508d7c30085">
+        <TemplateObject name="sourceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="disCheckType" value="1" EnumValue="距离检测" refParamName="" useRefParam="false" />
+        <int name="distance" value="3000" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="2" EnumValue="小于等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="击退3750" eventType="BeatBackDuration" guid="f873c310-844b-47ee-b3b0-acd8af16a224" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="0" guid="d010fd97-73ea-4a5b-988a-6a709d1c5016" status="true" />
+      <Event eventName="BeatBackDuration" time="0.000" length="0.250" isDuration="true" guid="85e44a00-9253-4c85-bd46-50c9085362ba">
+        <TemplateObject name="attackerId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="initSpeed" value="18500" refParamName="" useRefParam="false" />
+        <int name="accelerateSpeed" value="-30" refParamName="" useRefParam="false" />
+        <Enum name="dirType" value="2" EnumValue="指定朝向" refParamName="" useRefParam="false" />
+        <Vector3i name="specifyDirection" x="0" y="0" z="0" refParamName="_TargetDir" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="ForbidAbilityDuration0" eventType="ForbidAbilityDuration" guid="e02d739b-f714-4d93-bd65-71dbd003cd90" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="d010fd97-73ea-4a5b-988a-6a709d1c5016" status="true" />
+      <Event eventName="ForbidAbilityDuration" time="0.000" length="0.250" isDuration="true" guid="1c26fd26-eace-435e-98f7-0bec122a4427">
+        <TemplateObject name="attackerId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="forbidMove" value="true" refParamName="" useRefParam="false" />
+        <bool name="forbidSkill" value="true" refParamName="" useRefParam="false" />
+        <bool name="forbidMoveRotate" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayAnimDuration2" eventType="PlayAnimDuration" guid="b288216f-e624-449e-9874-d79a83b1dd03" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="d010fd97-73ea-4a5b-988a-6a709d1c5016" status="true" />
+      <Event eventName="PlayAnimDuration" time="0.000" length="0.250" isDuration="true" guid="d250c118-869c-462f-ad95-3714f8fa5539">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Stun" refParamName="" useRefParam="false" />
+        <int name="layer" value="5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="c89cbb80-2dc8-4166-b8d0-6f33e6d218f4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="0" guid="d010fd97-73ea-4a5b-988a-6a709d1c5016" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.250" isDuration="true" guid="92548a9c-3f3a-4f62-a17d-810988d5d769">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/tongyong_effects/ui_fx/xuanyun_tongyong_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="2.000" z="0.000" refParamName="" useRefParam="false" />
+        <TemplateObject name="lookTargetId" id="3" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="specialEffectTarget" id="3" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="503affb0-fd0c-4e18-b2ae-2fb66172a4c2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="0" guid="d010fd97-73ea-4a5b-988a-6a709d1c5016" status="true" />
+      <Condition id="9" guid="b5710874-6a10-4af6-b872-b0b793674760" status="true" />
+      <Condition id="16" guid="0146afa4-4fea-4e73-9b51-c742d2f9c6d1" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="0ce0777d-b345-44fa-90c0-a06256176161">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="8" guid="d18f6f32-683b-4c5c-a723-070f40cad4b1" />
+          <TrackObject id="15" guid="efe26893-1d54-456e-91f4-3e96993b8e45" />
+          <TrackObject id="-1" guid="" />
+          <TrackObject id="-1" guid="" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="大于3000" eventType="FilterTargetDistance" guid="0bb48a9d-8e19-4676-a059-0162b280d3c0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="FilterTargetDistance" time="0.000" isDuration="false" guid="8f0e7f12-192a-4870-9a5d-8a93d7c2f45f">
+        <TemplateObject name="sourceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="disCheckType" value="1" EnumValue="距离检测" refParamName="" useRefParam="false" />
+        <int name="distance" value="3000" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="小于等于5000" eventType="FilterTargetDistance" guid="f0e24eec-1ead-4ad2-80a9-117bdaa3fbfc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="FilterTargetDistance" time="0.000" isDuration="false" guid="f42fad8e-a98c-4cc7-b261-887bb5587b98">
+        <TemplateObject name="sourceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="disCheckType" value="1" EnumValue="距离检测" refParamName="" useRefParam="false" />
+        <int name="distance" value="5000" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="2" EnumValue="小于等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="击退1950" eventType="BeatBackDuration" guid="d18f6f32-683b-4c5c-a723-070f40cad4b1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="7" guid="f0e24eec-1ead-4ad2-80a9-117bdaa3fbfc" status="true" />
+      <Condition id="6" guid="0bb48a9d-8e19-4676-a059-0162b280d3c0" status="true" />
+      <Event eventName="BeatBackDuration" time="0.000" length="0.130" isDuration="true" guid="682ca4ff-b8c8-4b02-bb64-cd85e1fee611">
+        <TemplateObject name="attackerId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="initSpeed" value="15000" refParamName="" useRefParam="false" />
+        <int name="accelerateSpeed" value="-30" refParamName="" useRefParam="false" />
+        <Enum name="dirType" value="2" EnumValue="指定朝向" refParamName="" useRefParam="false" />
+        <Vector3i name="specifyDirection" x="0" y="0" z="0" refParamName="_TargetDir" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="ForbidAbilityDuration1" eventType="ForbidAbilityDuration" guid="b5710874-6a10-4af6-b872-b0b793674760" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="0bb48a9d-8e19-4676-a059-0162b280d3c0" status="true" />
+      <Condition id="7" guid="f0e24eec-1ead-4ad2-80a9-117bdaa3fbfc" status="true" />
+      <Event eventName="ForbidAbilityDuration" time="0.000" length="0.130" isDuration="true" guid="5fc08f23-0b0c-4298-99ce-b7cb6dce867e">
+        <TemplateObject name="attackerId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="forbidMove" value="true" refParamName="" useRefParam="false" />
+        <bool name="forbidSkill" value="true" refParamName="" useRefParam="false" />
+        <bool name="forbidMoveRotate" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayAnimDuration2" eventType="PlayAnimDuration" guid="512aff58-72a3-4c7e-a8e0-c3b7b042c21f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="f0e24eec-1ead-4ad2-80a9-117bdaa3fbfc" status="true" />
+      <Condition id="6" guid="0bb48a9d-8e19-4676-a059-0162b280d3c0" status="true" />
+      <Event eventName="PlayAnimDuration" time="0.000" length="0.130" isDuration="true" guid="ab619676-65a8-41a9-a5cb-e3b0f94100f1">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Stun" refParamName="" useRefParam="false" />
+        <int name="layer" value="5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="230e5f54-d48f-427c-a13a-308de93a9fd1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="f0e24eec-1ead-4ad2-80a9-117bdaa3fbfc" status="true" />
+      <Condition id="6" guid="0bb48a9d-8e19-4676-a059-0162b280d3c0" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.130" isDuration="true" guid="e2c138ea-029f-4f94-b2d1-7bdaa9714d93">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/tongyong_effects/ui_fx/xuanyun_tongyong_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="2.000" z="0.000" refParamName="" useRefParam="false" />
+        <TemplateObject name="lookTargetId" id="3" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="specialEffectTarget" id="3" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="大于5000" eventType="FilterTargetDistance" guid="543bc48d-f254-4501-82a6-8bf24f18f5f2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="FilterTargetDistance" time="0.000" isDuration="false" guid="a1809f22-9e6e-4dda-9eb0-c9d79fccedb0">
+        <TemplateObject name="sourceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="disCheckType" value="1" EnumValue="距离检测" refParamName="" useRefParam="false" />
+        <int name="distance" value="5000" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="4" EnumValue="大于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="StopTracks0" eventType="StopTracks" guid="279293b2-9847-4967-a690-eaa82d3a0cd9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="6" guid="0bb48a9d-8e19-4676-a059-0162b280d3c0" status="true" />
+      <Condition id="7" guid="f0e24eec-1ead-4ad2-80a9-117bdaa3fbfc" status="true" />
+      <Condition id="16" guid="0146afa4-4fea-4e73-9b51-c742d2f9c6d1" status="true" />
+      <Event eventName="StopTracks" time="0.000" isDuration="false" guid="92c5084a-d5d7-4354-abf3-e62998e4d652">
+        <Array name="trackIds" refParamName="" useRefParam="false" type="TrackObject">
+          <TrackObject id="15" guid="efe26893-1d54-456e-91f4-3e96993b8e45" />
+          <TrackObject id="-1" guid="" />
+        </Array>
+        <bool name="alsoStopNotStartedTrack" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="小于等于6000" eventType="FilterTargetDistance" guid="50007a46-7dab-4b31-a9f2-13b1be855084" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Event eventName="FilterTargetDistance" time="0.000" isDuration="false" guid="15b83fcb-1f01-4e18-b4c2-21cf5ecac7a5">
+        <TemplateObject name="sourceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="disCheckType" value="1" EnumValue="距离检测" refParamName="" useRefParam="false" />
+        <int name="distance" value="6000" refParamName="" useRefParam="false" />
+        <Enum name="operatorType" value="2" EnumValue="小于等于" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="击退1000" eventType="BeatBackDuration" guid="efe26893-1d54-456e-91f4-3e96993b8e45" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true" nameSpace="">
+      <Condition id="14" guid="50007a46-7dab-4b31-a9f2-13b1be855084" status="true" />
+      <Condition id="12" guid="543bc48d-f254-4501-82a6-8bf24f18f5f2" status="true" />
+      <Event eventName="BeatBackDuration" time="0.000" length="0.100" isDuration="true" guid="b66cd287-d6cf-4276-ae75-09e76761728e">
+        <TemplateObject name="attackerId" id="0" objectName="攻击者" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="initSpeed" value="10000" refParamName="" useRefParam="false" />
+        <int name="accelerateSpeed" value="-30" refParamName="" useRefParam="false" />
+        <Enum name="dirType" value="2" EnumValue="指定朝向" refParamName="" useRefParam="false" />
+        <Vector3i name="specifyDirection" x="0" y="0" z="0" refParamName="_TargetDir" useRefParam="true" />
+      </Event>
+    </Track>
+    <Track trackName="ForbidAbilityDuration2" eventType="ForbidAbilityDuration" guid="0146afa4-4fea-4e73-9b51-c742d2f9c6d1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="12" guid="543bc48d-f254-4501-82a6-8bf24f18f5f2" status="true" />
+      <Condition id="14" guid="50007a46-7dab-4b31-a9f2-13b1be855084" status="true" />
+      <Event eventName="ForbidAbilityDuration" time="0.000" length="0.100" isDuration="true" guid="e52c9a32-20ab-4ab2-a783-c92321f91e9d">
+        <TemplateObject name="attackerId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="forbidMove" value="true" refParamName="" useRefParam="false" />
+        <bool name="forbidSkill" value="true" refParamName="" useRefParam="false" />
+        <bool name="forbidMoveRotate" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PlayAnimDuration2" eventType="PlayAnimDuration" guid="a24bb2d6-a272-453f-a653-6c545222ff6c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="12" guid="543bc48d-f254-4501-82a6-8bf24f18f5f2" status="true" />
+      <Condition id="14" guid="50007a46-7dab-4b31-a9f2-13b1be855084" status="true" />
+      <Event eventName="PlayAnimDuration" time="0.000" length="0.100" isDuration="true" guid="556d5c91-38e9-44f7-b3f4-d2aa1f562ef6">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="clipName" value="Stun" refParamName="" useRefParam="false" />
+        <int name="layer" value="5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle0" eventType="TriggerParticle" guid="54aa2171-4c4a-4f78-8a78-26ba72f1b749" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="12" guid="543bc48d-f254-4501-82a6-8bf24f18f5f2" status="true" />
+      <Condition id="14" guid="50007a46-7dab-4b31-a9f2-13b1be855084" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.100" isDuration="true" guid="2b57cea7-911f-4eaf-8c21-0bcac6741cdc">
+        <TemplateObject name="targetId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="1" objectName="target" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/tongyong_effects/ui_fx/xuanyun_tongyong_01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="2.000" z="0.000" refParamName="" useRefParam="false" />
+        <TemplateObject name="lookTargetId" id="3" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="specialEffectTarget" id="3" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

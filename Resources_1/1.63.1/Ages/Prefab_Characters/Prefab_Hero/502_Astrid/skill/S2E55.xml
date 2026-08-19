@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="target1" id="2" isTemp="false" />
+    <TemplateObject objectName="bullet" id="3" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="5.500" loop="false">
+    <Track trackName="NewGetActorRootTick0" eventType="NewGetActorRootTick" guid="f1810b8a-e17b-4748-92c8-b756a5bd8964" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="NewGetActorRootTick" time="0.000" isDuration="false" guid="abfebe5d-ec8f-4b40-b20b-777bbfe6784c">
+        <Enum name="dataSrc" value="2" EnumValue="SkillLogicUnit" refParamName="" useRefParam="false" />
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="variableName" value="target1" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target1" id="2" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="CheckDistanceDuration0" eventType="CheckDistanceDuration" guid="7e6196f3-132e-484e-91cc-cd60b6f59618" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="CheckDistanceDuration" time="0.000" length="5.000" isDuration="true" guid="7b821c11-ba56-4e26-a633-4a7146d02d36">
+        <TemplateObject name="srcId" objectName="target1" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="distance" value="6000" refParamName="" useRefParam="false" />
+        <bool name="bIngoreY" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="一层" eventType="CheckSkillCombineConditionTick" guid="827da5ad-0631-4ef1-b477-68f874826220" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="7e6196f3-132e-484e-91cc-cd60b6f59618" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="e5360432-75f1-4481-b4a5-c6b00c32760e">
+        <TemplateObject name="targetId" objectName="target1" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="502251" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="二层" eventType="CheckSkillCombineConditionTick" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="7e6196f3-132e-484e-91cc-cd60b6f59618" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="d6ee0c30-9a9d-4eae-80d2-c73358bed310">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="502251" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" EnumValue="等于" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="b69662b4-f0f4-400c-9c86-85b635f2d33d" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.100" isDuration="true" guid="2914e505-6119-4d4b-893f-1536a864df5d">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-0.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="1.150" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="74518686-c5bd-47fd-a2a5-568594820e46" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.100" length="0.100" isDuration="true" guid="a13f9caa-a44b-4700-9102-89dff6e03640">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.800" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="b098ba67-36ad-45af-91a0-816b3298cfd9" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.200" length="0.100" isDuration="true" guid="3a1ccff4-d95c-49c3-8808-c07b025d2501">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.800" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.400" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="bb16858d-a454-4a90-bb2f-ff3666162a96" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.300" length="0.100" isDuration="true" guid="71dc78ef-cb62-469f-94ef-9747792528f4">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.200" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="f4fb2dec-f60b-4700-bca8-e1e28c3045ba" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.100" isDuration="true" guid="1088344e-5ff0-4155-8fbe-b14d50d7612d">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-0.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="1.150" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="47a65144-de5d-43cd-ba6e-a65dabd116fa" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.100" length="0.100" isDuration="true" guid="382a75cb-3660-4dfc-8363-1a6b14096cf1">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.800" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="2061f1c6-10a1-43a5-b03e-22d9efbbeccb" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.200" length="0.100" isDuration="true" guid="6d50faf3-9a6d-4ad4-a591-24b3c6566d80">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.800" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.400" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="f3677285-4a8d-44af-9dcd-efb2a6b146ec" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.300" length="0.100" isDuration="true" guid="fa7ed394-5262-4316-96ba-54cbd5d72660">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.200" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="d31f8a93-ccc3-40d6-810d-98924e6d24dc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="0.100" isDuration="true" guid="9c8b5e6b-4d2e-47d4-89d5-fdad62ebee9d">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-0.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="1.150" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="151cf81d-1473-4f65-9253-7ec2aaa53d25" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.100" length="0.100" isDuration="true" guid="acfcde8f-40a0-4495-a5a3-823894c8f01c">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.800" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="e11b8468-aa96-40d6-bf2e-e082d28ad414" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.200" length="0.100" isDuration="true" guid="a54bfb1d-5fa6-4c4c-9390-9a08dc6097d0">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="0.800" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.400" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="55e42f93-c834-4bfc-b194-2b5ac42e5c71" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="183647fb-6eac-4d5f-a60f-6241d143bd5a" status="true" />
+      <Event eventName="TriggerParticle" time="0.300" length="0.100" isDuration="true" guid="99d9f7fd-3418-4495-b499-7782e56f99a2">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="1.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="0.200" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="目标身上移除一层" eventType="WZRemoveBuffTick" guid="e5d6e636-2d2c-4d9e-8dd0-fd2f22534891" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="7e6196f3-132e-484e-91cc-cd60b6f59618" status="true" />
+      <Event eventName="WZRemoveBuffTick" time="0.000" isDuration="false" guid="62da03fe-2dbc-4e3a-b68b-49c1ec2a8396">
+        <TemplateObject name="targetId" objectName="target1" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="buffInstigatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="502251" />
+        </Array>
+        <int name="removeLayerCnt" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="目标身上移除两层" eventType="WZRemoveBuffTick" guid="057b8e4b-b8fa-4af1-a691-3b4d4e5d2fdd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="15" guid="55e42f93-c834-4bfc-b194-2b5ac42e5c71" status="true" />
+      <Event eventName="WZRemoveBuffTick" time="0.000" isDuration="false" guid="d0ca9b2d-295a-4c48-8cbc-d389577572ef">
+        <TemplateObject name="targetId" objectName="target1" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="buffInstigatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="502251" />
+        </Array>
+        <int name="removeLayerCnt" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="一层子弹飞" eventType="SpawnBulletTick" guid="0e04af27-a34d-4284-86b6-8aa251a9933b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="1" guid="7e6196f3-132e-484e-91cc-cd60b6f59618" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="7f3bb827-d76d-4fe6-a591-db98cc0c9924">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/502_Astrid/skill/S2B1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="两层子弹飞" eventType="SpawnBulletTick" guid="98fcb138-cf9b-4655-b53b-814c22777e94" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="17" guid="057b8e4b-b8fa-4af1-a691-3b4d4e5d2fdd" status="true" />
+      <Event eventName="SpawnBulletTick" time="0.000" isDuration="false" guid="9886d157-45a4-47e9-9a47-5b4491ae20ca">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="ActionName" value="Prefab_Characters/Prefab_Hero/502_Astrid/skill/S2B2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="目标伤害" eventType="SimpleSpawnBuffTick" guid="8e42cee2-b402-4c5b-98cd-ec6544eb58bf" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="17" guid="057b8e4b-b8fa-4af1-a691-3b4d4e5d2fdd" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.350" isDuration="false" guid="d8ca4573-8935-4010-b6e1-7006fecb15c6">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="502200" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="目标眩晕" eventType="SimpleSpawnBuffTick" guid="368cdba8-5288-4781-99ad-29d30189059e" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="17" guid="057b8e4b-b8fa-4af1-a691-3b4d4e5d2fdd" status="true" />
+      <Event eventName="SimpleSpawnBuffTick" time="0.350" isDuration="false" guid="b98cc1cb-3402-4690-acd1-2ccbd5272cf3">
+        <TemplateObject name="originatorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Array name="buffIds" refParamName="" useRefParam="false" type="int">
+          <int value="502390" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="CameraShakeDuration0" eventType="CameraShakeDuration" guid="b54fe7bc-9e29-488b-8681-e74a1cae8ad6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="17" guid="057b8e4b-b8fa-4af1-a691-3b4d4e5d2fdd" status="true" />
+      <Event eventName="CameraShakeDuration" time="0.350" length="0.100" isDuration="true" guid="088eef61-8598-4157-9120-efe895223744">
+        <bool name="useMainCamera" value="true" refParamName="" useRefParam="false" />
+        <bool name="filter_self" value="true" refParamName="" useRefParam="false" />
+        <Vector3 name="shakeRange" x="0.200" y="0.200" z="0.100" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="PrintTick0" eventType="PrintTick" guid="92a092d7-1aa0-456b-8cb6-41ed3b2708c6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="PrintTick" time="0.000" isDuration="false" guid="d6853d3b-0d23-4010-b344-4f30d6b51033">
+        <TemplateObject name="actorId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bSkillContext" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="强化普攻范围圈" eventType="TriggerParticle" guid="c6d560b2-b801-44c7-a965-cc5555334e8e" enabled="false" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="TriggerParticle" time="0.000" length="0.500" isDuration="true" guid="45e2f1b0-883d-44f6-8ad6-1e4abae164ad">
+        <TemplateObject name="targetId" objectName="target1" id="2" isTemp="false" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/502_astrid/astrid_spell02_range01" refParamName="" useRefParam="false" />
+        <Vector3 name="bindPosOffset" x="0.000" y="-0.200" z="0.000" refParamName="" useRefParam="false" />
+        <Vector3 name="scaling" x="1.150" y="1.000" z="1.000" refParamName="" useRefParam="false" />
+        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />
+        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />
+        <String name="syncAnimationName" value="" refParamName="" useRefParam="false" />
+        <String name="customTagName" value="" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

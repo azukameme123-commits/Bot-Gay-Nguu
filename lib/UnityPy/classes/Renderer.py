@@ -1,0 +1,95 @@
+from .Component import Component
+from .PPtr import PPtr
+from ..export import MeshRendererExporter
+
+
+class StaticBatchInfo:
+    def __init__(self, reader):
+        self.firstSubMesh = reader.read_u_short()
+        self.subMeshCount = reader.read_u_short()
+
+
+class Renderer(Component):
+    def __init__(self, reader):
+        super().__init__(reader=reader)
+        version = self.version
+        if version < (5,):  
+            self.m_Enabled = reader.read_boolean()
+            self.m_CastShadows = reader.read_boolean()
+            self.m_ReceiveShadows = reader.read_boolean()
+            self.m_LightmapIndex = reader.read_byte()
+        else:  
+            if version >= (5, 4):  
+                self.m_Enabled = reader.read_boolean()
+                self.m_CastShadows = reader.read_byte()
+                self.m_ReceiveShadows = reader.read_byte()
+                if version[:2] > (2017, 2):  
+                    self.m_DynamicOccludee = reader.read_byte()
+                self.m_MotionVectors = reader.read_byte()
+                self.m_LightProbeUsage = reader.read_byte()
+                self.m_ReflectionProbeUsage = reader.read_byte()
+                if version >= (2019, 3):  
+                    self.m_RayTracingMode = reader.read_byte()
+                if version >= (2020,):  
+                    self.m_RayTraceProcedural = reader.read_byte()
+                reader.align_stream()
+            else:
+                self.m_Enabled = reader.read_boolean()
+                reader.align_stream()
+                self.m_CastShadows = reader.read_byte()
+                self.m_ReceiveShadows = reader.read_boolean()
+                reader.align_stream()
+
+            if version >= (2018,):  
+                self.m_RenderingLayerMask = reader.read_u_int()
+
+            if version >= (2018, 3):  
+                self.m_RendererPriority = reader.read_int()
+
+            self.m_LightmapIndex = reader.read_u_short()
+            self.m_LightmapIndexDynamic = reader.read_u_short()
+
+        if version >= (3,):  
+            self.m_LightmapTilingOffset = reader.read_vector4()
+
+        if version >= (5,):  
+            self.m_LightmapTilingOffsetDynamic = reader.read_vector4()
+
+        m_MaterialsSize = reader.read_int()
+        self.m_Materials = [PPtr(reader) for _ in range(m_MaterialsSize)]  
+
+        if version < (3,):  
+            self.m_LightmapTilingOffset = reader.read_vector4()
+        else:  
+            if version >= (5, 5):  
+                self.m_StaticBatchInfo = StaticBatchInfo(reader)
+            else:
+                self.m_SubsetIndices = reader.read_u_int_array()
+
+            self.m_StaticBatchRoot = PPtr(reader)  
+
+        if version >= (5, 4):  
+            self.m_ProbeAnchor = PPtr(reader)  
+            self.m_LightProbeVolumeOverride = PPtr(reader)  
+        elif version >= (3, 5):  
+            self.m_UseLightProbes = reader.read_boolean()
+            reader.align_stream()
+
+            if version >= (5,):  
+                self.m_ReflectionProbeUsage = reader.read_int()
+
+            
+            self.m_LightProbeAnchor = PPtr(reader)
+
+        if version >= (4, 3):  
+            if version[:2] == (4, 3):  
+                self.m_SortingLayer = reader.read_short()
+            else:
+                self.m_SortingLayerID = reader.read_u_int()
+
+            
+            self.m_SortingOrder = reader.read_short()
+            reader.align_stream()
+
+    def export(self, export_dir: str) -> None:
+        MeshRendererExporter.export_mesh_renderer(self, export_dir)

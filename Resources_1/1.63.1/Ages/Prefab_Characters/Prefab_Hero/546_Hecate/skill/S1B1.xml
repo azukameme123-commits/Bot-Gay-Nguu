@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject id="0" objectName="self" isTemp="false" />
+    <TemplateObject id="1" objectName="target" isTemp="false" />
+    <TemplateObject id="2" objectName="bullet" isTemp="true" />
+    <TemplateObject id="3" objectName="empty" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <String name="BulletPrefab" value="" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletUseDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="m1" x="0" y="0" z="1000" refParamName="" useRefParam="false" />
+    <Vector3i name="m2" x="-1000" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="m3" x="1000" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetDir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_TargetPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="2.000" loop="false">
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="18af0dde-9eab-41cb-87f4-9b67baff63a6" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="2.000" isDuration="true" guid="93ff8c55-3332-420e-9655-a870b14bc226">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bTargetPosition" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="targetPosition" x="0" y="0" z="0" refParamName="_TargetPos" useRefParam="true" />
+        <String name="prefabName" value="prefab_characters/commonempty" refParamName="" useRefParam="false" />
+        <bool name="modifyDirection" value="true" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+        <TemplateObject name="materialParentActorId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="visionActorId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="recordTargeID" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetCollisionTick0" eventType="SetCollisionTick" guid="4dbe3668-df2f-4d68-9715-057f8a0b2c58" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SetCollisionTick" time="0.000" isDuration="false" guid="5b9bbeba-aefb-4713-b1b0-24ad9da1d21c">
+        <TemplateObject name="targetId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="type" value="1" refParamName="" useRefParam="false" />
+        <Vector3i name="Size" x="3500" y="0" z="9000" refParamName="" useRefParam="false" />
+        <int name="Radius" value="9000" refParamName="" useRefParam="false" />
+        <int name="SectorRadius" value="8000" refParamName="" useRefParam="false" />
+        <int name="Height" value="7000" refParamName="" useRefParam="false" />
+        <int name="Degree" value="60" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查人数" eventType="HitTriggerDuration" guid="10aa04a1-7178-4c1d-a867-843113e6a8a2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="HitTriggerDuration" time="0.000" length="2.000" isDuration="true" guid="241328ab-6568-4612-b50a-2ce6a0044bd0">
+        <TemplateObject name="triggerId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="bulletID" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="546902" refParamName="" useRefParam="false" />
+        <String name="BulletActionName" value="" refParamName="" useRefParam="false" />
+        <bool name="bCheckSight" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="=1(20)" eventType="CheckSkillCombineConditionTick" guid="9283c9dd-6f3d-4283-be66-6c645a0df98b" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="10aa04a1-7178-4c1d-a867-843113e6a8a2" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="d1c12623-9b9a-42c2-b803-79f5b5d368cc">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="546902" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="1" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="=2(24)" eventType="CheckSkillCombineConditionTick" guid="9e67977e-4d4b-47bc-af68-3bab2403f9f5" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="10aa04a1-7178-4c1d-a867-843113e6a8a2" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="90fa42c6-63cd-4847-8c6e-0f97ac33c29d">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="546902" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="2" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="=3(28)" eventType="CheckSkillCombineConditionTick" guid="6d81e18e-2c03-43dd-b579-bfbcdfaaa4f3" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="10aa04a1-7178-4c1d-a867-843113e6a8a2" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="322c3220-1653-4345-9830-2fe9d3e40ff1">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="546902" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="=4(32)" eventType="CheckSkillCombineConditionTick" guid="6b6c1513-d3c8-44c8-8dc5-8f6a51c65503" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="10aa04a1-7178-4c1d-a867-843113e6a8a2" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="76a99e61-c8b6-48f0-b671-b37a79b83d77">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="546902" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="4" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="=5(36)" eventType="CheckSkillCombineConditionTick" guid="a5a695a0-3ff1-47e6-8ada-b04f17fe7cd1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="10aa04a1-7178-4c1d-a867-843113e6a8a2" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="8cb799e0-9337-47db-b502-cb0e39966ac7">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="546902" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+        <int name="skillCombineLevel" value="5" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="检查是否存在被动" eventType="CheckSkillCombineConditionTick" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="10aa04a1-7178-4c1d-a867-843113e6a8a2" status="true" />
+      <Event eventName="CheckSkillCombineConditionTick" time="0.000" isDuration="false" guid="8c935e48-4759-467b-8720-10bc4e6049e1">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="skillCombineId" value="546013" refParamName="" useRefParam="false" />
+        <Enum name="checkOPType" value="3" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="HitTriggerTick0" eventType="HitTriggerTick" guid="787f1f91-c642-4967-9ba5-cde39011552c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="2" guid="10aa04a1-7178-4c1d-a867-843113e6a8a2" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="true" />
+      <Event eventName="HitTriggerTick" time="0.000" isDuration="false" guid="595b7d6d-172b-484a-a9fc-8a75359796c3">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="SelfSkillCombineID_1" value="546013" refParamName="" useRefParam="false" />
+        <TemplateObject name="triggerId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="9199a366-aea9-4e7f-b757-8199e642fc9f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="9283c9dd-6f3d-4283-be66-6c645a0df98b" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="true" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="0f7db928-e97c-4a2d-baf6-fe17096fd99d">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="19" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="604b7539-abf4-4cbf-90eb-aa98d99c7706" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="3" guid="9283c9dd-6f3d-4283-be66-6c645a0df98b" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="false" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="427ef4f4-0f73-4062-a99b-08d519e71136">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="20" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="17fc9833-adf6-44f0-9b46-328bb866bbf8" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="9e67977e-4d4b-47bc-af68-3bab2403f9f5" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="true" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="3552d14b-ccfc-4fdb-afbf-f5f2a38fc4e0">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="23" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="b206fe65-fdaf-4413-a933-6f810d47f639" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="4" guid="9e67977e-4d4b-47bc-af68-3bab2403f9f5" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="false" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="08362d07-9dde-417b-a523-73988382cc82">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="24" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="1306cbe7-7c70-44f5-a321-56d08304736c" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="5" guid="6d81e18e-2c03-43dd-b579-bfbcdfaaa4f3" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="true" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="1c1dbb33-e51b-4890-bdca-07ad57d7728c">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="27" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="05279718-415e-4742-b7f6-289fa1b50dc4" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="5" guid="6d81e18e-2c03-43dd-b579-bfbcdfaaa4f3" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="false" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="3c9146da-f231-42d1-90b6-1978dc32f820">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="28" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="2c22af33-ac3e-452c-8179-5a88e27457cc" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="6b6c1513-d3c8-44c8-8dc5-8f6a51c65503" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="true" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="2e4244c9-526b-4e15-96ef-18950766500a">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="31" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="ff5f5636-0885-46d7-af2d-be96708144d0" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="6" guid="6b6c1513-d3c8-44c8-8dc5-8f6a51c65503" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="false" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="e6f7164f-278b-49a7-bd20-354303d46df2">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="32" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="0622d977-2622-41c4-9685-5ea08085b557" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="a5a695a0-3ff1-47e6-8ada-b04f17fe7cd1" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="true" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="6e251952-2d19-4d5c-9362-f93616a0de17">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="35" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SetBuffOverLayTick0" eventType="SetBuffOverLayTick" guid="bc8a3e08-f362-4636-809f-85a1058fd2b1" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="7" guid="a5a695a0-3ff1-47e6-8ada-b04f17fe7cd1" status="true" />
+      <Condition id="8" guid="835d8151-5f15-4bf8-a21e-99b7e22193cb" status="false" />
+      <Event eventName="SetBuffOverLayTick" time="0.000" isDuration="false" guid="0cf03474-e657-4262-9863-dee6215db166">
+        <TemplateObject name="targetId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="buffId" value="546013" refParamName="" useRefParam="false" />
+        <int name="buffOverLayNum" value="36" refParamName="" useRefParam="false" />
+        <bool name="addOnOrigin" value="true" refParamName="" useRefParam="false" />
+        <bool name="calZero" value="true" refParamName="" useRefParam="false" />
+        <bool name="resetAction" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="命中后均摊子弹" eventType="HitTriggerDuration" guid="69e3288a-57a5-45e8-b4fd-e1af6a8db70f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="HitTriggerDuration" time="0.000" length="0.066" isDuration="true" guid="67491889-5809-4354-a639-e000ff4a7f0c">
+        <TemplateObject name="triggerId" id="2" objectName="bullet" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="attackerId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="triggerInterval" value="100" refParamName="" useRefParam="false" />
+        <int name="TriggerActorInterval" value="300" refParamName="" useRefParam="false" />
+        <bool name="bFileterOrgan" value="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="bulletID" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />
+        <int name="TriggerActorCount" value="5" refParamName="" useRefParam="false" />
+        <bool name="TriggerByAverage" value="true" refParamName="" useRefParam="false" />
+        <int name="CollideMaxCount" value="1" refParamName="" useRefParam="false" />
+        <bool name="bTriggerBullet" value="true" refParamName="" useRefParam="false" />
+        <String name="BulletActionName" value="prefab_characters/prefab_hero/546_Hecate/skill/s1b2" refParamName="" useRefParam="false" />
+        <bool name="bAgeImmeExcute" value="true" refParamName="" useRefParam="false" />
+        <bool name="bCheckSight" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

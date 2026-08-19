@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+    <TemplateObject objectName="bullet1" id="3" isTemp="true" />
+    <TemplateObject objectName="bullet2" id="4" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+  </RefParamList>
+  <Action tag="" length="4.000" loop="false">
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="b84451e9-8679-4ec0-b51f-cf35c9cf9178" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="4.000" isDuration="true" guid="23f3e15f-61a2-4015-87a9-8c0f9d8a4d8e">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="parentId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="modifyDirUsage" value="1" EnumValue="作为本物体朝向" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+        <TemplateObject name="recordTargeID" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bOnlyFollowPos" value="true" refParamName="" useRefParam="false" />
+        <Enum name="heightMode" value="1" EnumValue="OnGround" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RotateActorDuration0" eventType="RotateActorDuration" guid="4422dda5-9c46-484f-9df1-9d856fcfe186" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="RotateActorDuration" time="0.000" length="0.066" isDuration="true" guid="b913abdf-31a4-43c2-8cde-07bda349472a">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="RotateType" value="2" EnumValue="指定目标转向" refParamName="" useRefParam="false" />
+        <TemplateObject name="RotateForwardTargetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="IsImmediatelyRotate" value="true" refParamName="" useRefParam="false" />
+        <int name="rotateSpeed" value="99999" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RotateActorDuration0" eventType="RotateActorDuration" guid="803e6941-b2e9-4b90-86a4-d7dc3f342d7f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="RotateActorDuration" time="0.066" length="3.934" isDuration="true" guid="1e33b6b6-e9bd-4a36-af71-b44075ebce77">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="RotateType" value="2" EnumValue="指定目标转向" refParamName="" useRefParam="false" />
+        <TemplateObject name="RotateForwardTargetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="IsImmediatelyRotate" value="true" refParamName="" useRefParam="false" />
+        <int name="rotateSpeed" value="250" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="77e1658c-923d-468b-8145-f22529f1e5ea" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="d675ed26-1754-47e0-82a6-ae4161eb5c94">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bOnlyHostHero" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="dbf46e96-d9e3-4704-bf98-4dd73a7eca6a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="3" guid="77e1658c-923d-468b-8145-f22529f1e5ea" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="4.000" isDuration="true" guid="4ff6bb4a-2544-4ba8-8572-535c35915a87">
+        <TemplateObject name="targetId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet1" id="3" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/568_mingshiyin/Mingshiyin_fanwei_huang" refParamName="" useRefParam="false" />
+        <EulerAngle name="bindRotOffset" x="0.000" y="180.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="SpawnObjectDuration0" eventType="SpawnObjectDuration" guid="a8239a15-6771-4e3f-a08c-76a56975a56f" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="SpawnObjectDuration" time="0.000" length="4.000" isDuration="true" guid="e0837db4-e9b2-453e-a19d-6cf42f00427a">
+        <TemplateObject name="targetId" objectName="bullet2" id="4" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="parentId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="self" id="0" isTemp="false" refParamName="" useRefParam="false" />
+        <Enum name="modifyDirUsage" value="1" EnumValue="作为本物体朝向" refParamName="" useRefParam="false" />
+        <Vector3i name="direction" x="0" y="0" z="0" refParamName="" useRefParam="false" />
+        <TemplateObject name="recordTargeID" objectName="None" id="-1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bOnlyFollowPos" value="true" refParamName="" useRefParam="false" />
+        <Enum name="heightMode" value="1" EnumValue="OnGround" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RotateActorDuration0" eventType="RotateActorDuration" guid="6e96348f-c5db-440f-9b8e-d09d4601f539" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="RotateActorDuration" time="0.000" length="0.066" isDuration="true" guid="53abf65f-896c-488e-88d6-c1cd3db2800b">
+        <TemplateObject name="targetId" objectName="bullet2" id="4" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="RotateType" value="2" EnumValue="指定目标转向" refParamName="" useRefParam="false" />
+        <TemplateObject name="RotateForwardTargetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="IsImmediatelyRotate" value="true" refParamName="" useRefParam="false" />
+        <int name="rotateSpeed" value="99999" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="RotateActorDuration0" eventType="RotateActorDuration" guid="e2815c06-bfc2-42d3-994c-412af7cd902a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="RotateActorDuration" time="0.066" length="3.934" isDuration="true" guid="f3ae4ff1-2601-4d0c-ad8c-d481b3f721ca">
+        <TemplateObject name="targetId" objectName="bullet2" id="4" isTemp="true" refParamName="" useRefParam="false" />
+        <Enum name="RotateType" value="2" EnumValue="指定目标转向" refParamName="" useRefParam="false" />
+        <TemplateObject name="RotateForwardTargetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="IsImmediatelyRotate" value="true" refParamName="" useRefParam="false" />
+        <int name="rotateSpeed" value="250" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetType0" eventType="FilterTargetType" guid="3f411ed9-6efb-4677-a778-607559340ebd" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Event eventName="FilterTargetType" time="0.000" isDuration="false" guid="dcd96d8a-1709-4b2d-9d1b-9ae66f609595">
+        <TemplateObject name="targetId" objectName="target" id="1" isTemp="false" refParamName="" useRefParam="false" />
+        <bool name="bOnlyHostHero" value="true" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+    <Track trackName="TriggerParticle1" eventType="TriggerParticle" guid="2a78b130-eeab-4a9f-bf95-ee07b2a529a2" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false">
+      <Condition id="8" guid="3f411ed9-6efb-4677-a778-607559340ebd" status="true" />
+      <Event eventName="TriggerParticle" time="0.000" length="4.000" isDuration="true" guid="23440d49-8799-44be-a4a9-a91466ab80c8">
+        <TemplateObject name="targetId" objectName="bullet2" id="4" isTemp="true" refParamName="" useRefParam="false" />
+        <TemplateObject name="objectSpaceId" objectName="bullet2" id="4" isTemp="true" refParamName="" useRefParam="false" />
+        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/568_mingshiyin/Mingshiyin_fanwei_huang" refParamName="" useRefParam="false" />
+        <EulerAngle name="bindRotOffset" x="0.000" y="180.000" z="0.000" refParamName="" useRefParam="false" />
+        <bool name="applyActionSpeedToParticle" value="false" refParamName="" useRefParam="false" />
+      </Event>
+    </Track>
+  </Action>
+</Project>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <TemplateObjectList>
+    <TemplateObject objectName="self" id="0" isTemp="false" />
+    <TemplateObject objectName="target" id="1" isTemp="false" />
+    <TemplateObject objectName="bullet" id="2" isTemp="true" />
+  </TemplateObjectList>
+  <RefParamList>
+    <Vector3i name="targetdir" x="0" y="0" z="0" />
+    <Vector3i name="_BulletPos" x="0" y="0" z="0" />
+  </RefParamList>
+  <Action tag="" length="7.000" loop="false" isConditionRuntime="true">
+    <Track trackName="SetAnimationParamsDuration0" eventType="SetAnimationParamsDuration" guid="b66c16da-68cc-4e0b-a23e-12fd6269fb18" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="SetAnimationParamsDuration" time="0.000" length="7.000" isDuration="true" guid="5c4d851f-c281-4f36-bf88-ce675bf42f73">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <Array name="boolNames" type="String">
+          <String value="InFight" />
+        </Array>
+        <Array name="boolValues" type="bool">
+          <bool value="true" />
+        </Array>
+        <bool name="bForceSetParamWhenLeave" value="true" />
+        <Array name="leaveBoolNames" type="String">
+          <String value="InFight" />
+        </Array>
+        <Array name="leaveBoolValues" type="bool">
+          <bool value="false" />
+        </Array>
+      </Event>
+    </Track>
+    <Track trackName="FilterTargetStateDuration0" eventType="FilterTargetStateDuration" guid="cb22571a-251a-432e-b965-0b21d7c20120" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Event eventName="FilterTargetStateDuration" time="5.000" length="2.000" isDuration="true" guid="2955d053-aba1-4fd7-87e1-5ef59443b850">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <bool name="checkBehaviorMode" value="true" />
+        <bool name="bInIdle" value="true" />
+      </Event>
+    </Track>
+    <Track trackName="RemoveBuffTick0" eventType="RemoveBuffTick" guid="ea5685f2-0cba-4a6b-832d-21e9337cc94b" enabled="true" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">
+      <Condition id="1" guid="cb22571a-251a-432e-b965-0b21d7c20120" status="true" />
+      <Event eventName="RemoveBuffTick" time="0.000" isDuration="false" guid="001efef7-3ead-426a-8607-ba8bf633134c">
+        <TemplateObject name="targetId" objectName="self" id="0" isTemp="false" value="" />
+        <Array name="buffIds" type="int">
+          <int value="582990" />
+        </Array>
+      </Event>
+    </Track>
+  </Action>
+</Project>

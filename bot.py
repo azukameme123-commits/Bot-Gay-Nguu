@@ -19,7 +19,8 @@ Yêu cầu (đã update):
   - VIP: mod skin KHÔNG giới hạn, được 3 lần buttonmod / tháng
   - Admin: cần nhập key AdminSv để được cấp quyền
   - Key VIP không giới hạn thời gian sử dụng trong ngày
-  - Nén 2 link: Link4m + TrafficHD
+  - Link tải nén theo chuỗi: GoFile -> Link4m -> TrafficHD (1 link cuối duy nhất)
+  - /sangdamefx: bật/tắt chế độ Sáng Đậm khi mod cho RIÊNG acc đó (mặc định tắt)
 """
 import os
 import sys
@@ -117,6 +118,7 @@ LINK_COUNT_FILE    = "Data/Json/link_count.json"
 MOD_DAILY_FILE     = "Data/Json/mod_daily.json"
 BUTTON_TICKET_FILE = "Data/Json/button_ticket.json"
 VIP_BTN_MONTH_FILE = "Data/Json/vip_btn_month.json"
+SANGDAM_FILE       = "Data/Json/sangdam.json"   # trạng thái bật/tắt Sáng Đậm theo từng user
 SKIN_TXT           = "Data/Json/skin.txt"     # dùng cho /choosehero
 NUTBAM_JSON        = "Data/Json/nutbam.json"  # danh sách button có thể mod
 
@@ -415,10 +417,8 @@ USER_MENU_COMMANDS = [
     ("choosehero", "Chọn tướng"),
     ("xemdanhsach", "Xem danh sách"),
     ("xoadanhsach", "Xóa danh sách"),
-    ("sangdamefx", "Sáng đậm hiệu ứng"),
+    ("sangdamefx", "Bật/Tắt chế độ Sáng Đậm (riêng acc này)"),
     ("layfile", "Lấy file"),
-    ("fixreset", "Lấy File Anti Reset Mod"),
-    ("resources", "Lấy File Resources Mới Nhất"),
     ("newkeyvip", "Liên Hệ Admin Mua Key Vip"),
     ("inputkeyvip", "Nhập key VIP"),
     ("buttonmod", "Mod button / notify"),
@@ -475,35 +475,33 @@ async def _send_latest_file(update, search_roots, keywords, title, missing_messa
     except Exception as exc:
         await update.message.reply_text(f"❌ Không thể gửi file: {exc}")
 
+def is_sangdam(user_id):
+    """Acc này đang bật chế độ Sáng Đậm hay không (mặc định: tắt)."""
+    return bool(load_json(SANGDAM_FILE).get(str(user_id), False))
+
+def toggle_sangdam(user_id):
+    data = load_json(SANGDAM_FILE)
+    uid = str(user_id)
+    data[uid] = not bool(data.get(uid, False))
+    save_json(SANGDAM_FILE, data)
+    return data[uid]
+
 async def sangdamefx(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Gửi file hiệu ứng nếu gói mod có sẵn file tương ứng."""
-    await _send_latest_file(
-        update,
-        [MODPACK_DIR, BUTTONNOTIFY_DIR, OUTPUT_DIR],
-        ("effect", "fx", "dame", "hiệu", "hieu"),
-        "file sáng đậm hiệu ứng",
-        "❌ Chưa tìm thấy file hiệu ứng. Hãy kiểm tra lại thư mục ModPack/Output."
-    )
-
-async def fixreset(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Gửi file anti-reset nếu có trong gói mod."""
-    await _send_latest_file(
-        update,
-        [MODPACK_DIR, OUTPUT_DIR],
-        ("anti", "fix", "reset", "resource"),
-        "File Anti Reset Mod",
-        "❌ Chưa tìm thấy File Anti Reset Mod trong thư mục ModPack/Output."
-    )
-
-async def resources(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Gửi resource pack mới nhất nếu có."""
-    await _send_latest_file(
-        update,
-        [MODPACK_DIR, BUTTONNOTIFY_DIR, OUTPUT_DIR],
-        ("resource", "res", "resources"),
-        "File Resources Mới Nhất",
-        "❌ Chưa tìm thấy Resources. Hãy đặt file resources vào ModPack hoặc Output."
-    )
+    """Bật/tắt chế độ Sáng Đậm cho CHÍNH acc đang dùng lệnh.
+    Khi bật: các lần /run sau của acc này sẽ mod ở chế độ Sáng Đậm.
+    Acc khác không bật thì vẫn mod Normal như bình thường."""
+    user_id = str(update.effective_user.id)
+    enabled = toggle_sangdam(user_id)
+    if enabled:
+        await update.message.reply_text(
+            "🌟 Đã BẬT chế độ Sáng Đậm cho tài khoản này.\n"
+            "Các lần /run sau của acc này sẽ mod ở chế độ Sáng Đậm.\n"
+            "Gõ /sangdamefx lần nữa để tắt."
+        )
+    else:
+        await update.message.reply_text(
+            "🌙 Đã TẮT chế độ Sáng Đậm.\nAcc này sẽ mod ở chế độ Normal như bình thường."
+        )
 
 # ==============================================================
 #                       BASIC COMMANDS
@@ -888,12 +886,14 @@ def _pick_latest_zip(folder):
     candidates.sort(reverse=True)
     return candidates[0][1]
 
-def _pick_latest_folder(folder, before_ts=0):
-    """Lấy folder con mới nhất tạo sau `before_ts`."""
+def _pick_latest_folder(folder, before_ts=0, prefix=None):
+    """Lấy folder con mới nhất tạo sau `before_ts` (lọc theo prefix tên nếu có)."""
     best = None; best_ts = before_ts
     if not os.path.isdir(folder):
         return None
     for name in os.listdir(folder):
+        if prefix and not name.startswith(prefix):
+            continue
         p = os.path.join(folder, name)
         if not os.path.isdir(p):
             continue
@@ -960,8 +960,9 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
     progress_task = asyncio.create_task(
         _run_progress_bar(msg, all_tuongs_str, all_skins_str, stop_progress)
     )
+    sang_dam = is_sangdam(user_id)
     try:
-        new_folder = await asyncio.to_thread(_inline_skin_mod, ids)
+        new_folder = await asyncio.to_thread(_inline_skin_mod, ids, sang_dam)
     except Exception as exc:
         stop_progress.set()
         progress_task.cancel()
@@ -980,7 +981,8 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"❌ Lỗi khi nén file mod: {exc}")
         return
     context.user_data["output_zip"] = out_zip
-    await msg.edit_text(f"🎉 Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất\n\n➡️ Dùng /layfile Để Nhận Link Tải File Mod 📁.")
+    mode_txt = "\n🌟 Chế Độ: Sáng Đậm" if sang_dam else ""
+    await msg.edit_text(f"🎉 Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất{mode_txt}\n\n➡️ Dùng /layfile Để Nhận Link Tải File Mod 📁.")
     try:
         history = load_json(MOD_HISTORY_FILE)
         history.setdefault(username, []).append({"Time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "Hero": tuongs, "Skin": skins, "ID": ids})
@@ -1166,21 +1168,19 @@ async def file_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="Markdown"
         )
     else:
-        link4m    = await create_link4m(gofile_link)
-        traffichd = await create_trafficHD(gofile_link)
+        # Nén link theo chuỗi: GoFile -> Link4m -> TrafficHD (user chỉ vượt 1 link cuối)
+        final_link, layers = await create_chained_link(gofile_link)
 
-        if not link4m and not traffichd:
-            await update.message.reply_text("❌ Tạo Link Rút Gọn Thất Bại.")
-            return
-
-        gained = (1 if link4m else 0) + (1 if traffichd else 0)
-        remain, tickets = add_link_count(user_id, gained)
+        remain, tickets = add_link_count(user_id, layers)
 
         lines_out = ["✅ **FILE MOD ĐÃ SẴN SÀNG ( User Normal )**\n",
-                     "➢ **Vượt Đủ 2 Link Bên Dưới Để Lấy File**"]
-        if link4m:    lines_out.append(f"🔗 **Link 1 (Link4m):**\n{link4m}")
-        if traffichd: lines_out.append(f"🔗 **Link 2 (TrafficHD):**\n{traffichd}")
-        lines_out.append("")
+                     "➢ **Vượt Link Bên Dưới Để Lấy File**",
+                     f"🔗 **Link Tải Mod:**\n{final_link}",
+                     ""]
+        if layers >= 2:
+            lines_out.append("↳ Chuỗi link: TrafficHD → Link4m → GoFile")
+        elif layers == 1:
+            lines_out.append("↳ Chuỗi link: Link4m → GoFile")
         lines_out.append(f"📊 Tiến Độ Đổi Mod Button: {remain}/{LINK_NEED_FOR_BUTTON}")
         lines_out.append(f"🎟️ Vé Mod Button Đang Có: {tickets}")
         if tickets > 0:
@@ -1318,7 +1318,7 @@ async def button_mod_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         await context.bot.send_message(chat_id=user.id, text=f"❌ Tạo Button Mod thất bại: {exc}")
         return
 
-    new_folder = _pick_latest_folder(output_root, before_ts=ts_before)
+    new_folder = _pick_latest_folder(output_root, before_ts=ts_before, prefix=f"[{sid}]")
     if not new_folder:
         # Hoàn vé lại nếu là user thường (mod fail)
         if not (admin_flag or vip_flag):
@@ -1366,13 +1366,10 @@ async def button_mod_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             parse_mode="Markdown"
         )
     else:
-        link4m    = await create_link4m(gofile_link)
-        traffichd = await create_trafficHD(gofile_link)
-        lines_out = [f"✅ **BUTTON MOD SẴN SÀNG (User)**\n➢ ID: {sid}\n"]
-        if link4m:    lines_out.append(f"🔗 **Link 1 (Link4m):**\n{link4m}")
-        if traffichd: lines_out.append(f"🔗 **Link 2 (TrafficHD):**\n{traffichd}")
-        if not link4m and not traffichd:
-            lines_out.append(f"🔗 {gofile_link}")
+        # Chuỗi link: GoFile -> Link4m -> TrafficHD (1 link cuối duy nhất)
+        final_link, _layers = await create_chained_link(gofile_link)
+        lines_out = [f"✅ **BUTTON MOD SẴN SÀNG (User)**\n➢ ID: {sid}\n",
+                     f"🔗 **Link Tải Mod:**\n{final_link}"]
         await context.bot.send_message(chat_id=user.id,
                                        text="\n".join(lines_out),
                                        parse_mode="Markdown")
@@ -2504,9 +2501,9 @@ def show_menu(rows):
 
 
 def parse_ids(text, rows):
-    by_id = {r['id']: r for r in rows}
+    by_id = {str(r['id']).upper(): r for r in rows}
     picked, bad = [], []
-    
+
     # Neu Nhan Enter (chuoi rong), tu dong chon tat ca cac skin trong menu
     if not text.strip():
         return list(rows), []
@@ -2515,9 +2512,10 @@ def parse_ids(text, rows):
         tok = tok.strip()
         if not tok:
             continue
-        if tok.isdigit() and tok in by_id:
-            if by_id[tok] not in picked:
-                picked.append(by_id[tok])
+        key = tok.upper()
+        if key in by_id:
+            if by_id[key] not in picked:
+                picked.append(by_id[key])
         elif tok.isdigit() and 1 <= int(tok) <= len(rows):
             r = rows[int(tok) - 1]
             if r not in picked:
@@ -2761,8 +2759,20 @@ def main():
 
 
 
-def _inline_skin_mod(ids):
-    """Gọi đúng run_one_mod của engine đã nhúng, không tạo process con."""
+async def create_chained_link(gofile_link):
+    """Nén link theo chuỗi: GoFile -> Link4m -> TrafficHD.
+    Trả về (link_cuoi_cung, so_lop_nen). Thiếu lớp nào thì dùng link của lớp trước."""
+    link4m = await create_link4m(gofile_link)
+    if not link4m:
+        return gofile_link, 0
+    traffichd = await create_trafficHD(link4m)
+    if traffichd:
+        return traffichd, 2
+    return link4m, 1
+
+def _inline_skin_mod(ids, sang_dam=False):
+    """Gọi đúng run_one_mod của engine đã nhúng, không tạo process con.
+    sang_dam=True -> chạy chế độ '1' (Sáng Đậm) cho riêng acc đã bật /sangdamefx."""
     if pyzstd is None:
         raise RuntimeError(f"Thiếu pyzstd: {_PYZSTD_IMPORT_ERROR}")
     version = "UNKNOWN"
@@ -2774,21 +2784,48 @@ def _inline_skin_mod(ids):
     with open(os.path.join(BASE_DIR, "Resources_1", "kb.txt"), "r", encoding="utf-8") as f:
         kb = f.readlines()
     dup = has_duplicate_hero_prefix(ids)
-    return run_one_mod(ids, version, Zstd_Aes, "3", "FILES_MOD/", {}, zdict, kb, is_pack=(len(ids) > 1 and not dup))
+    mode = "1" if sang_dam else "3"
+    # Engine hỏi phụ kiện bằng input() console khi gặp 11620 (Butterfly Bình Minh)
+    # và 52007 (Veres). Bot Telegram không trả lời được -> process bị TREO ở INPUT.
+    # Tự động trả lời "3" (No Mod) cho mọi câu hỏi console của engine.
+    original_input = builtins.input
+    builtins.input = lambda prompt="": "3"
+    try:
+        return run_one_mod(ids, version, Zstd_Aes, mode, "FILES_MOD/", {}, zdict, kb,
+                           is_pack=(len(ids) > 1 and not dup))
+    finally:
+        builtins.input = original_input
 
 def _inline_button_mod(sid):
     """Gọi đúng run_session của engine button nhúng, với input được cấp tự động."""
-    source_dir = os.path.join(BASE_DIR, "Source")
-    skin_file = os.path.join(BASE_DIR, "Skin", "skin.txt")
+    source_dir  = os.path.join(BASE_DIR, "Source")
+    skin_file   = os.path.join(BASE_DIR, "Skin", "skin.txt")
     notify_file = os.path.join(BASE_DIR, "Skin", "notify.txt")
-    rows = build_menu(source_dir, skin_file, notify_txt=notify_file, databin_dir=os.path.join(BASE_DIR, "Databin", "Client", "Huanhua"))
-    answers = iter([str(sid), "n", ""])
+    if not os.path.isdir(source_dir) or not os.path.isfile(skin_file):
+        raise RuntimeError("Thiếu thư mục Source/ hoặc Skin/skin.txt của engine button.")
+    rows = build_menu(source_dir, skin_file, notify_txt=notify_file,
+                      databin_dir=os.path.join(BASE_DIR, "Databin", "Client", "Huanhua"))
+    if not rows:
+        raise RuntimeError("Engine button không đọc được danh sách button nào.")
+    by_id = {str(r['id']).upper(): r for r in rows}
+    if str(sid).upper() not in by_id:
+        raise RuntimeError(f"ID {sid} không có trong engine button (kiểm tra Skin/skin.txt và Source/).")
+    # Trả lời tự động: câu đầu = ID button, sau đó 'n' cho bản quyền;
+    # hết answer thì mặc định 'n' cho prompt y/n, '' cho các prompt Enter.
+    answers = [str(sid), "n"]
     original_input = builtins.input
-    builtins.input = lambda prompt="": next(answers)
+    def _auto_input(prompt=""):
+        if answers:
+            return answers.pop(0)
+        return "n" if "y/n" in str(prompt).lower() else ""
+    builtins.input = _auto_input
     try:
-        return run_session(rows, BASE_DIR)
+        ok = run_session(rows, BASE_DIR)
     finally:
         builtins.input = original_input
+    if not ok:
+        raise RuntimeError("Engine button chạy xong nhưng không tạo được output.")
+    return ok
 
 # ==============================================================
 #                          MAIN
@@ -2835,8 +2872,6 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("deladmin",    deladmin_cmd))
     app.add_handler(CommandHandler("buttonmod",   buttonmod_cmd))
     app.add_handler(CommandHandler("sangdamefx", sangdamefx))
-    app.add_handler(CommandHandler("fixreset",    fixreset))
-    app.add_handler(CommandHandler("resources",   resources))
     app.add_handler(CommandHandler("danhsachlenh", danhsachlenh_cmd))
 
     # ----- Kích hoạt admin: /start/start/admin 34567 -----

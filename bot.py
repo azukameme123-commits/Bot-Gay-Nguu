@@ -1712,12 +1712,13 @@ def CopyConfigsPack(Version, FILES_MOD):
         if not os.path.isfile(s):
             continue
         low = name.lower()
-        if low.endswith(".pkg.bytes"):
+                if low.endswith('.pkg.bytes'):
             dst_dir = base
-        elif low.endswith(".assetbundle"):
-            dst_dir = base / "assetbundle" / "uisystem" / "atlas" / "primary"
+        elif low.endswith('.assetbundle'):
+            continue
         else:
             continue
+
         dst_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(s, dst_dir / name)
 

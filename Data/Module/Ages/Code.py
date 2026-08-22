@@ -367,7 +367,7 @@ TRACK_SKIP = {
         "u1b1.xml": [b"SpawnObject", b"SetCollision"],
         "U11.xml": [b"SpawnObject", b"SetCollision"],
     },
-    "59803": {
+    "59802": {
         "A1B2.xml": [b"SpawnObject"],
         "A1B5.xml": [b"Random"],
         "A1B6.xml": [b"Random"],
@@ -400,7 +400,7 @@ TRACK_SKIP = {
         "A1B1.xml": [b"DebugLog", b"StopTracks"],
         "A1B11.xml": [b"DebugLog", b"StopTracks"],
         "S2.xml": [b'<int name="buffId" value="132942"'],
-        "132_back.xml": _132_BACK_SKIP,
+        "132_Back.xml": _132_BACK_SKIP,
     },
     "13204": {"132_Back.xml": _132_BACK_SKIP},
     "132010": {"132_Back.xml": _132_BACK_SKIP},

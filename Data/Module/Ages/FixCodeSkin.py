@@ -25,9 +25,6 @@ FIX_BLOB_FILES: Dict[str, str] = {
     "S12MOD": "13210/S12MOD.xml",
     "S1B1MOD": "13210/S1B1MOD.xml",
     
-    "S215013": "15013/S2.xml",
-    "S2MOD15013": "15013/S2MOD.xml",
-    
     "WUKONGBACKMOD": "16707/16707_BackMod.xml",
     "WUKONGU1B0": "16707/U1B0.xml",
     "WUKONGU1B0MOD": "16707/U1B0Mod.xml",
@@ -69,8 +66,8 @@ def FixCodeSkin(ID_SKIN, THU_MUC_SKILL, NAME_HERO, phukienbutter, phukienveres):
     NAME_HERO = NAME_HERO.lower()
     ID_SKIN = ID_SKIN.encode()
     duongvaotimem = os.listdir(THU_MUC_SKILL)
-    '''if ID_SKIN[:3] == b"521":
-        kich_thuoc = input(" Nhập Kích Thước Hoa Mặc Định 1.0: ").strip() or "1.0"'''
+    if ID_SKIN[:3] == b"521":
+        kich_thuoc = input(" Nhập Kích Thước Hoa Mặc Định 1.0: ").strip() or "1.0"
     for file_skill in duongvaotimem:
         file_path = os.path.join(THU_MUC_SKILL, file_skill)
         if not os.path.isfile(file_path):
@@ -353,9 +350,9 @@ def FixCodeSkin(ID_SKIN, THU_MUC_SKILL, NAME_HERO, phukienbutter, phukienveres):
 
         if ID_SKIN == b"15013":          
             if file_skill in ["S2.xml"]:
-                with open(file_path, 'rb') as f: sec = f.read().replace(b'      <Condition id="17" guid="b73050c0-0afc-4e3b-98e2-6ffe12d3d489" status="true" />\r\n      <Condition id="18" guid="84b2cbba-51cc-4673-adab-a3624a854953" status="true" />', b'      <Condition id="18" guid="84b2cbba-51cc-4673-adab-a3624a854953" status="true" />').replace(b'      <Condition id="17" guid="b73050c0-0afc-4e3b-98e2-6ffe12d3d489" status="true" />\r\n      <Event eventName="CheckActorPositionDuration"', b'      <Event eventName="CheckActorPositionDuration"').replace(b'      <Condition id="17" guid="b73050c0-0afc-4e3b-98e2-6ffe12d3d489" status="true" />\r\n      <Event eventName="HitTriggerTick"', b'      <Event eventName="HitTriggerTick"').replace(b'      <Condition id="40" guid="173653f1-8aaf-47ee-84a3-92cf343f6711" status="false" />\r\n      <Condition id="17" guid="b73050c0-0afc-4e3b-98e2-6ffe12d3d489" status="true" />\r\n      <Event eventName="SetAnimationParamsTick"', b'      <Condition id="40" guid="173653f1-8aaf-47ee-84a3-92cf343f6711" status="false" />\r\n      <Event eventName="SetAnimationParamsTick"').replace(b'      <Condition id="16" guid="0ba75381-3d32-4aa6-9e9f-7fc5a2488448" status="true" />\r\n      <Event eventName="PlayAnimDuration"', b'      <Event eventName="PlayAnimDuration"').replace(_blob("S215013"), _blob("S2MOD15013"))
-                with open(file_path,'wb') as f: f.write(sec)                     
-
+                with open(file_path, 'rb') as f: sec = f.read().replace(b'      <Condition id="17" guid="b73050c0-0afc-4e3b-98e2-6ffe12d3d489" status="true" />\r\n      <Condition id="18" guid="84b2cbba-51cc-4673-adab-a3624a854953" status="true" />', b'      <Condition id="18" guid="84b2cbba-51cc-4673-adab-a3624a854953" status="true" />').replace(b'      <Condition id="17" guid="b73050c0-0afc-4e3b-98e2-6ffe12d3d489" status="true" />\r\n      <Event eventName="HitTriggerTick"', b'      <Event eventName="HitTriggerTick"')
+                with open(file_path,'wb') as f: f.write(sec)
+                    
         if ID_SKIN == b"19015":          
             if file_skill in ["S1.xml"]:
                 with open(file_path, 'rb') as f: sec = f.read().replace(b'aea0a916-e3f8-4524-b464-307e531ce3ae" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="9">', b'aea0a916-e3f8-4524-b464-307e531ce3ae" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" SkinAvatarFilterType="11">')
@@ -557,7 +554,7 @@ def FixCodeSkin(ID_SKIN, THU_MUC_SKILL, NAME_HERO, phukienbutter, phukienveres):
                 with open(file_path, 'rb') as f: sec = f.read().replace(b'  </Action>\r\n</Project>', b'    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="0dd50bba-7a9f-42e5-9e07-36682560346a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">\r\n      <Event eventName="TriggerParticleTick" time="0.133" isDuration="false" guid="739356cc-bba5-4e21-be19-1864beab3928">\r\n        <TemplateObject name="targetId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />\r\n        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />\r\n        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/150_hanxin/15009/hanxin_attack01_spell06" refParamName="" useRefParam="false" />\r\n        <float name="lifeTime" value="2.000" refParamName="" useRefParam="false" />\r\n        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />\r\n      </Event>\r\n      </Track>\r\n    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="0dd50bba-7a9f-42e5-9e07-36682560346a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">\r\n      <Event eventName="TriggerParticleTick" time="0.133" isDuration="false" guid="739356cc-bba5-4e21-be19-1864beab3928">\r\n        <TemplateObject name="targetId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />\r\n        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />\r\n        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/518_Quillen/51809/jingke_attack_04" refParamName="" useRefParam="false" />\r\n        <Vector3 name="scaling" x="1.000" y="1.000" z="1.000" refParamName="" useRefParam="false" />\r\n        <Vector3 name="bindPosOffset" x="-1.000" y="2.800" z="1.300" refParamName="" useRefParam="false"/>\r\n        <EulerAngle name="bindRotOffset" x="-100.000" y="0.000" z="-100.000" refParamName="" useRefParam="false" />\r\n        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />\r\n        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />\r\n        <bool name="applyActionSpeedToAnimation" value="true" refParamName="" useRefParam="false" />\r\n      </Event>\r\n      </Track>\r\n    <Track trackName="TriggerParticleTick0" eventType="TriggerParticleTick" guid="0dd50bba-7a9f-42e5-9e07-36682560346a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">\r\n      <Event eventName="TriggerParticleTick" time="0.133" isDuration="false" guid="739356cc-bba5-4e21-be19-1864beab3928">\r\n        <TemplateObject name="targetId" id="-1" objectName="None" isTemp="false" refParamName="" useRefParam="false" />\r\n        <TemplateObject name="objectSpaceId" id="0" objectName="self" isTemp="false" refParamName="" useRefParam="false" />\r\n        <String name="resourceName" value="prefab_skill_effects/hero_skill_effects/518_Quillen/51809/jingke_attack_04" refParamName="" useRefParam="false" />\r\n        <Vector3 name="scaling" x="1.000" y="1.000" z="1.000" refParamName="" useRefParam="false" />\r\n        <Vector3 name="bindPosOffset" x="-1.000" y="2.800" z="1.300" refParamName="" useRefParam="false"/>\r\n        <EulerAngle name="bindRotOffset" x="-280.000" y="0.000" z="-100.000" refParamName="" useRefParam="false" />\r\n        <Vector3i name="scalingInt" x="10000" y="10000" z="10000" refParamName="" useRefParam="false" />\r\n        <bool name="bUseRealScaling" value="true" refParamName="" useRefParam="false" />\r\n        <bool name="applyActionSpeedToAnimation" value="true" refParamName="" useRefParam="false" />\r\n      </Event>\r\n    </Track>\r\n  </Action>\r\n</Project>')
                 with open(file_path,'wb') as f: f.write(sec)'''
                 
-        '''if ID_SKIN[:3] == b"521":
+        if ID_SKIN[:3] == b"521":
             if file_skill in ["S1B2.xml", "S1B3.xml", "S1B4.xml"]:
                 with open(file_path, "rb") as f:
                     sec = f.read()
@@ -567,4 +564,4 @@ def FixCodeSkin(ID_SKIN, THU_MUC_SKILL, NAME_HERO, phukienbutter, phukienveres):
                     new = old + add_data
                     sec = sec.replace(old, new)
                 with open(file_path, "wb") as f:
-                    f.write(sec)'''
+                    f.write(sec)

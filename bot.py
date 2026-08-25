@@ -19,7 +19,8 @@ Yêu cầu (đã update):
   - VIP: mod skin KHÔNG giới hạn, được 3 lần buttonmod / tháng
   - Admin: cần nhập key AdminSv để được cấp quyền
   - Key VIP không giới hạn thời gian sử dụng trong ngày
-  - Nén 2 link: Link4m + TrafficHD
+  - Link tải nén theo chuỗi: GoFile -> Link4m -> TrafficHD (1 link cuối duy nhất)
+  - /sangdamefx: bật/tắt chế độ Sáng Đậm khi mod cho RIÊNG acc đó (mặc định tắt)
 """
 import os
 import sys
@@ -71,7 +72,7 @@ LINK4M_API      = "69a9052af795ac11c3712f51"
 LINK4M_API_URL  = "https://link4m.co/api-shorten/v2"
 
 TRAFFICHD_API   = "thd_ty1g3hs7gpudw9azi6d62s1hczul8bf1"
-TRAFFICHD_API_URL = "https://trafficHD.co/api"
+TRAFFICHD_API_URL = "https://traffichd.fun/api"
 
 GOFILE_ACC_ID    = "bad3e48e-b80e-4603-8005-d2b3e12ca18f"
 GOFILE_ACC_TOKEN = "na48eHcQTSFrT7KLMDVPGiHDrfavAKGP"
@@ -80,6 +81,13 @@ BOT_TOKEN = "8882361592:AAFjdQEZvp2znuWDvV9eYSWD35AqwWNTl8k"
 
 # Key để cấp quyền Admin (user nhập /addadmin rồi gửi key này)
 KEY_ADMIN_SV = "AdminSv"
+
+# Mã kích hoạt quyền Admin: nhập /start/start/admin 34567
+ADMIN_ACTIVATE_CODE = "34567"
+
+# Kênh bắt buộc đăng ký trước khi dùng bot (THAY LINK KÊNH CỦA BẠN TẠI ĐÂY)
+CHANNEL_NAME = "TKA Mod Aov"
+CHANNEL_URL  = "https://youtube.com/@tkamodaov?si=cWQxuFFlPuC9S07-"
 
 # Giới hạn
 MAX_SKIN_PER_MOD     = 10   # 1 lần mod tối đa 10 skin
@@ -110,8 +118,110 @@ LINK_COUNT_FILE    = "Data/Json/link_count.json"
 MOD_DAILY_FILE     = "Data/Json/mod_daily.json"
 BUTTON_TICKET_FILE = "Data/Json/button_ticket.json"
 VIP_BTN_MONTH_FILE = "Data/Json/vip_btn_month.json"
+SANGDAM_FILE       = "Data/Json/sangdam.json"   # trạng thái bật/tắt Sáng Đậm theo từng user
 SKIN_TXT           = "Data/Json/skin.txt"     # dùng cho /choosehero
 NUTBAM_JSON        = "Data/Json/nutbam.json"  # danh sách button có thể mod
+
+# ==============================================================
+#     DANH SÁCH BUTTON CÓ THỂ MOD (ID -> Tên hiển thị)
+#  Danh sách chuẩn 88 mục theo engine ButtonNotify.
+#  Lần đầu chạy /buttonmod bot tự ghi vào Data/Json/nutbam.json.
+#  Muốn làm mới danh sách: xoá Data/Json/nutbam.json rồi chạy lại.
+#  LƯU Ý: ID 13015 đang bị trùng trong engine (Airi / Tulen Gojo);
+#  engine khớp theo ID nên 13015 sẽ ra Tulen Satoru Gojo (mục sau).
+#  -> Nên sửa lại ID của Airi trong Skin/skin.txt cho khác biệt.
+# ==============================================================
+DEFAULT_NUTBAM = {
+    "13015": "Airi - Thứ nguyên Vệ thần",
+    "11812": "Alice - Eternal Sailor Chibi Moon",
+    "5373B": "Allain - Lân sư Vũ thần",
+    "33612": "Aoi - Mikasa Ackerman",
+    "15612": "Arthur - Pomponpurin's Oath",
+    "54237": "Aya - Công chúa Cầu Vồng",
+    "54239": "Aya - Cinnamoroll's Dream",
+    "54835": "Bijan - Lữ Hành Thời Không",
+    "54837": "Bijan - Hẹn Ước Tình Yêu",
+    "53931": "Billow - Thiên Tướng - Độ Ách",
+    "53932": "Billow - T-Rex Bất Bại",
+    "53933": "Billow - Okarun",
+    "53732": "Byron - Yuji Itadori",
+    "53832": "Bolt Baron - Thiên Phú - Tư Mệnh",
+    "11614": "Butterfly - Kim Ngư thần nữ",
+    "11616": "Butterfly - Nữ thần Khởi nguyên",
+    "11620": "Butterfly - Bình Minh Tân Thế",
+    "52414": "Capheny - Càn Nguyên Hiền Chủ",
+    "52415": "Capheny - Bugcat Assemble",
+    "1713B": "Cresht - Eren Jaeger",
+    "15932": "Dolia - Nhật Kỷ Tình Yêu",
+    "15935": "Dolia - Mã Khởi Thiên Ca",
+    "13936": "Eland'orr - Tuxedo Mask",
+    "13938": "Eland'orr - Nông Giới Thần chủ",
+    "13614": "Elsu - Xạ Thần Mộng Giới",
+    "13538": "Enzo - Kurapika",
+    "52113": "Florentino - Kỷ Nguyên Hổ Phách",
+    "13B12": "Gildur - Jiji",
+    "17517": "Grakk - Thiên ẩn thực",
+    "13210": "Hayate - Tu Di thánh đế",
+    "13213": "Hayate - Siêu đạo chích Kid",
+    "13215": "Hayate - Thứ nguyên vệ thần",
+    "53836": "Iggy - Rimuru Tempest",
+    "13613": "Ilumia - Lưỡng Nghi Long Hậu",
+    "15336": "Kaine - Thợ săn chính nghĩa",
+    "1361B": "Krixi - Kimono",
+    "13620": "Krixi - Phù thủy thời không",
+    "14111": "Lauriel - Thứ nguyên vệ thần",
+    "14120": "Lauriel - Nữ Thần Cứu Thế",
+    "51015": "Liliana - Ma Pháp Tối Thượng",
+    "12312": "Maloch - Đầu Sĩ Đoạt Thế",
+    "12137": "Marja - Hắc Phượng Hoàng",
+    "13116": "Murad - Tuyệt thế thần binh",
+    "13118": "Murad - Thiên Luân Kiếm Thánh",
+    "13119": "Murad - Thần Pháo Hoa",
+    "15039": "Nakroth - Thứ nguyên vệ thần",
+    "15012": "Nakroth - Killua",
+    "15013": "Nakroth - Quỷ thương Liệp đế",
+    "15014": "Nakroth - Producer Tia chớp",
+    "15015": "Nakroth - Bạch Diện chiến thương",
+    "15016": "Nakroth - Levi",
+    "14214": "Natalya - Kuromi's Heart",
+    "14215": "Natalya - Phù Thủy Bóng Đêm",
+    "15710": "Ngộ Không - Tàn niên Vô thần",
+    "53612": "Omen - Liệt Hỏa Thiên Cang",
+    "13736": "Paine - Megumi Fushiguro",
+    "13737": "Paine - Cứu Sơn Tương Liễu",
+    "52839": "Qi - Milin Neva",
+    "5281D": "Qi - Annie Leonhart",
+    "15711": "Raz - Gon",
+    "13139": "Rouie - Linh Sứ Thời không",
+    "13111": "Rouie - Hẹn Ước Tình Yêu",
+    "17438": "Stuart - Siêu trùm phản diện",
+    "53138": "Tel'Annas - Thứ nguyên vệ thần",
+    "53119": "Tel'Annas - Lân Quang Thánh Điệu",
+    "53120": "Tel'Annas - Kỷ Nguyên Hổ Phách",
+    "12910": "Triệu Vân - Thần tài",
+    "12913": "Triệu Vân - Chiến Thần Vô Song",
+    # "13015": "Tulen - Satoru Gojo",   # trùng ID với Airi -> dict giữ mục cuối
+    "13015": "Tulen - Satoru Gojo",
+    "13016": "Tulen - Thiên Cơ Bách Trạch",
+    "13314": "Valhein - Thứ nguyên vệ thần",
+    "13316": "Valhein - Vũ Hành Vạn Lý",
+    "13914": "Veera - Phù thủy Hội hoa",
+    "13915": "Veera - Thất Sát - Thượng Sinh",
+    "13916": "Veera - My Melody's Love",
+    "13917": "Veera - Momo",
+    "52D11": "Veres - Lưu Ly Long Mẫu",
+    "11137": "Violet - Thứ nguyên vệ thần",
+    "11115": "Violet - Thần Long tỷ tỷ",
+    "1112D": "Violet - Nobara Kugisaki",
+    "5293B": "Volkath - Ma Ảnh Thần Đao",
+    "15412": "Yena - Huyền Cửu Thiên",
+    "15413": "Yena - Trấn Yêu Thần Lộc",
+    "11215": "Yorn - Conan Edogawa",
+    "54537": "Yue - Hồn Độn Thần Ma",
+    "13714": "Zephys - Kỷ Nguyên Hổ Phách",
+    "15212": "Điêu Thuyền - Eternal Sailor Moon",
+    "15217": "Điêu Thuyền - Nhật Nguyệt Thánh Linh",
+}
 
 ADMIN_ID  = [6997739191]
 SKINS     = {}
@@ -152,10 +262,19 @@ def get_admins():
     return admins
 
 def is_admin(user_id):
+    """Admin (kể cả ADMIN_ID gốc) chỉ có hiệu lực sau khi kích hoạt bằng
+    /start/start/admin 34567 (hoặc key AdminSv qua /addadmin)."""
     try:
-        return int(user_id) in get_admins()
+        uid = str(int(user_id))
     except Exception:
         return False
+    rec = load_json(ADMIN_FILE).get(uid)
+    return bool(rec and rec.get("activated"))
+
+def is_registered(user_id):
+    """User đã xác nhận đăng ký kênh TKA Mod Aov chưa."""
+    rec = load_json(FILE_USERS).get(str(user_id))
+    return bool(rec and rec.get("registered_channel"))
 
 def is_vip(user_id):
     info = load_json(KEYVIP_FILE).get(str(user_id))
@@ -298,10 +417,8 @@ USER_MENU_COMMANDS = [
     ("choosehero", "Chọn tướng"),
     ("xemdanhsach", "Xem danh sách"),
     ("xoadanhsach", "Xóa danh sách"),
-    ("sangdamefx", "Sáng đậm hiệu ứng"),
+    ("sangdamefx", "Bật/Tắt chế độ Sáng Đậm (riêng acc này)"),
     ("layfile", "Lấy file"),
-    ("fixreset", "Lấy File Anti Reset Mod"),
-    ("resources", "Lấy File Resources Mới Nhất"),
     ("newkeyvip", "Liên Hệ Admin Mua Key Vip"),
     ("inputkeyvip", "Nhập key VIP"),
     ("buttonmod", "Mod button / notify"),
@@ -315,7 +432,18 @@ ADMIN_MENU_COMMANDS = USER_MENU_COMMANDS + [
     ("unblock", "Bỏ chặn người dùng"),
     ("sendfiles", "Gửi dữ liệu cho admin"),
     ("all", "Gửi thông báo tất cả"),
+    ("danhsachlenh", "Xem danh sách lệnh (admin)"),
+    ("danhsachnguoidung", "Danh sách người dùng (admin)"),
 ]
+# --- Hằng số mới ---
+# Các skin có tuỳ chọn phụ kiện mà engine nhúng hỏi qua input() console.
+#   11620 (Butterfly - Bình Minh Tân Thế): 1=Tím, 2=Xanh, 3=No Mod
+#   52007 (Veres   - Lưu Ly Long Mẫu)  : 1=Xanh, 2=Đỏ,  3=No Mod
+ACCESSORY_OPTIONS = {
+    "11620": [("1", "🟣 Tím"), ("2", "🔵 Xanh"), ("3", "⚪ No Mod")],
+    "52007": [("1", "🔵 Xanh"), ("2", "🔴 Đỏ"),  ("3", "⚪ No Mod")],
+}
+USERS_PAGE_SIZE = 12
 
 async def configure_bot_menu(app):
     """Đăng ký command menu để Telegram hiển thị menu giống ảnh tham chiếu."""
@@ -357,35 +485,33 @@ async def _send_latest_file(update, search_roots, keywords, title, missing_messa
     except Exception as exc:
         await update.message.reply_text(f"❌ Không thể gửi file: {exc}")
 
+def is_sangdam(user_id):
+    """Acc này đang bật chế độ Sáng Đậm hay không (mặc định: tắt)."""
+    return bool(load_json(SANGDAM_FILE).get(str(user_id), False))
+
+def toggle_sangdam(user_id):
+    data = load_json(SANGDAM_FILE)
+    uid = str(user_id)
+    data[uid] = not bool(data.get(uid, False))
+    save_json(SANGDAM_FILE, data)
+    return data[uid]
+
 async def sangdamefx(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Gửi file hiệu ứng nếu gói mod có sẵn file tương ứng."""
-    await _send_latest_file(
-        update,
-        [MODPACK_DIR, BUTTONNOTIFY_DIR, OUTPUT_DIR],
-        ("effect", "fx", "dame", "hiệu", "hieu"),
-        "file sáng đậm hiệu ứng",
-        "❌ Chưa tìm thấy file hiệu ứng. Hãy kiểm tra lại thư mục ModPack/Output."
-    )
-
-async def fixreset(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Gửi file anti-reset nếu có trong gói mod."""
-    await _send_latest_file(
-        update,
-        [MODPACK_DIR, OUTPUT_DIR],
-        ("anti", "fix", "reset", "resource"),
-        "File Anti Reset Mod",
-        "❌ Chưa tìm thấy File Anti Reset Mod trong thư mục ModPack/Output."
-    )
-
-async def resources(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Gửi resource pack mới nhất nếu có."""
-    await _send_latest_file(
-        update,
-        [MODPACK_DIR, BUTTONNOTIFY_DIR, OUTPUT_DIR],
-        ("resource", "res", "resources"),
-        "File Resources Mới Nhất",
-        "❌ Chưa tìm thấy Resources. Hãy đặt file resources vào ModPack hoặc Output."
-    )
+    """Bật/tắt chế độ Sáng Đậm cho CHÍNH acc đang dùng lệnh.
+    Khi bật: các lần /run sau của acc này sẽ mod ở chế độ Sáng Đậm.
+    Acc khác không bật thì vẫn mod Normal như bình thường."""
+    user_id = str(update.effective_user.id)
+    enabled = toggle_sangdam(user_id)
+    if enabled:
+        await update.message.reply_text(
+            "🌟 Đã BẬT chế độ Sáng Đậm cho tài khoản này.\n"
+            "Các lần /run sau của acc này sẽ mod ở chế độ Sáng Đậm.\n"
+            "Gõ /sangdamefx lần nữa để tắt."
+        )
+    else:
+        await update.message.reply_text(
+            "🌙 Đã TẮT chế độ Sáng Đậm.\nAcc này sẽ mod ở chế độ Normal như bình thường."
+        )
 
 # ==============================================================
 #                       BASIC COMMANDS
@@ -405,12 +531,28 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     users = load_json(FILE_USERS)
-    users[user_id] = {
+    old_rec = users.get(user_id, {})
+    old_rec.update({
         "first_name": user.first_name,
         "last_name":  user.last_name or "",
         "username":   user.username,
-    }
+    })
+    users[user_id] = old_rec
     save_json(FILE_USERS, users)
+
+    # Chưa đăng ký kênh -> bắt đăng ký trước khi vào bot (ADMIN miễn)
+    if not is_admin(user_id) and not is_registered(user_id):
+        reg_kb = [
+            [InlineKeyboardButton(f"📢 Đăng Ký Kênh {CHANNEL_NAME}", url=CHANNEL_URL)],
+            [InlineKeyboardButton("✅ Tôi Đã Đăng Ký - Vào Bot", callback_data="reg_done")],
+        ]
+        await update.message.reply_text(
+            f"📢 Vui Lòng Đăng Ký Kênh {CHANNEL_NAME} Để Kích Hoạt Bot.\n\n"
+            "👉 Bấm nút Đăng Ký Kênh bên dưới, sau đó bấm ✅ Tôi Đã Đăng Ký\n"
+            "(hoặc gõ lại /start) để vào bot.",
+            reply_markup=InlineKeyboardMarkup(reg_kb),
+        )
+        return
 
     keyboard = [[InlineKeyboardButton("📢 Tham Gia Group", url="https://zalo.me/g/cdsnmnsjjxzozn6p5p2y")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -542,6 +684,12 @@ async def choosehero(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             "⚠️ Bạn chưa có Username Telegram nên không thể sử dụng bot.\n"
             "Hãy đặt Username."
+        )
+        return
+    if not is_admin(user_id) and not is_registered(user_id):
+        await update.message.reply_text(
+            f"⚠️ Vui Lòng Đăng Ký Kênh {CHANNEL_NAME} Để Kích Hoạt Bot.\n"
+            "Gõ /start để xem hướng dẫn đăng ký."
         )
         return
 
@@ -690,6 +838,22 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except Exception:
                     try: await chat.send_message(text=caption)
                     except Exception: pass
+            # ==== Yêu cầu chọn Phụ Kiện cho skin đặc biệt (11620 / 52007) ====
+            try:
+                sid_str = str(skin_id)
+                if sid_str in ACCESSORY_OPTIONS:
+                    pending_acc = context.user_data.setdefault("pending_accessory", {})
+                    pending_acc.pop(sid_str, None)  # huỷ lựa chọn cũ nếu user chọn lại skin
+                    acc_kb = [[InlineKeyboardButton(label, callback_data=f"ACC::{sid_str}::{val}")]
+                              for val, label in ACCESSORY_OPTIONS[sid_str]]
+                    if chat:
+                        await chat.send_message(
+                            f"🧩 **{tuong} - {skin}** (ID `{sid_str}`) có tuỳ chọn phụ kiện.\n"
+                            "Vui lòng chọn phụ kiện (có thể đổi ý trước khi bấm /run):",
+                            reply_markup=InlineKeyboardMarkup(acc_kb),
+                        )
+            except Exception:
+                pass
             if msg:
                 try: await msg.delete()
                 except Exception: pass
@@ -698,6 +862,20 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # ===== Callback cho button mod (đổi vé) =====
         if data.startswith("btnmod_"):
             await button_mod_callback(update, context)
+            return
+        # ===== Callback chọn phụ kiện cho skin đặc biệt =====
+        if data.startswith("ACC::"):
+            await accessory_callback(update, context)
+            return
+        # ===== Callback Cam Xa Yes/No sau khi mod =====
+        if data.startswith("CAMXA::"):
+            await camxa_callback(update, context)
+            return
+        # ===== Callback danh sách người dùng (admin) =====
+        if data.startswith("USRPAGE::") or data.startswith("USRDET::") \
+                or data.startswith("USREDIT::") or data.startswith("USRFLD::") \
+                or data.startswith("USRSAVE::"):
+            await users_admin_callback(update, context)
             return
     except Exception as e:
         print("Button handler error:", e)
@@ -748,12 +926,14 @@ def _pick_latest_zip(folder):
     candidates.sort(reverse=True)
     return candidates[0][1]
 
-def _pick_latest_folder(folder, before_ts=0):
-    """Lấy folder con mới nhất tạo sau `before_ts`."""
+def _pick_latest_folder(folder, before_ts=0, prefix=None):
+    """Lấy folder con mới nhất tạo sau `before_ts` (lọc theo prefix tên nếu có)."""
     best = None; best_ts = before_ts
     if not os.path.isdir(folder):
         return None
     for name in os.listdir(folder):
+        if prefix and not name.startswith(prefix):
+            continue
         p = os.path.join(folder, name)
         if not os.path.isdir(p):
             continue
@@ -789,6 +969,12 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not user.username:
         await update.message.reply_text("⚠️ Bạn chưa có Username Telegram.")
         return
+    if not is_admin(user_id) and not is_registered(user_id):
+        await update.message.reply_text(
+            f"⚠️ Vui Lòng Đăng Ký Kênh {CHANNEL_NAME} Để Kích Hoạt Bot.\n"
+            "Gõ /start để xem hướng dẫn đăng ký."
+        )
+        return
 
     admin_flag, vip_flag = is_admin(user_id), is_vip(user_id)
     ids = [str(x) for x in context.user_data.get("idmodskin", [])]
@@ -807,15 +993,24 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     all_skins_str, all_tuongs_str = ", ".join(skins), ", ".join(tuongs)
     msg = await update.message.reply_text(f"⏳ Chuẩn Bị Tạo Mod...\n{all_tuongs_str}\n{all_skins_str}")
-    await msg.edit_text("⏳ Đang mod trực tiếp bằng engine đã gắn trong bot, vui lòng đợi...")
     output_root = os.path.join(BASE_DIR, "FILES_MOD")
     os.makedirs(output_root, exist_ok=True)
     before = set(os.listdir(output_root))
+    stop_progress = asyncio.Event()
+    progress_task = asyncio.create_task(
+        _run_progress_bar(msg, all_tuongs_str, all_skins_str, stop_progress)
+    )
+    sang_dam = is_sangdam(user_id)
+    accessory_map = context.user_data.get("pending_accessory") or {}
     try:
-        new_folder = await asyncio.to_thread(_inline_skin_mod, ids)
+        new_folder = await asyncio.to_thread(_inline_skin_mod, ids, sang_dam, accessory_map)
     except Exception as exc:
+        stop_progress.set()
+        progress_task.cancel()
         await msg.edit_text(f"❌ Tạo mod thất bại: {exc}")
         return
+    stop_progress.set()
+    progress_task.cancel()
     if not new_folder or not os.path.isdir(new_folder):
         await msg.edit_text("❌ Tạo mod thất bại: không tìm thấy output.")
         return
@@ -827,7 +1022,23 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"❌ Lỗi khi nén file mod: {exc}")
         return
     context.user_data["output_zip"] = out_zip
-    await msg.edit_text(f"🎉 Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất\n\n➡️ Dùng /layfile Để Nhận Link Tải File Mod 📁.")
+    mode_txt = "\n🌟 Chế Độ: Sáng Đậm" if sang_dam else ""
+    # Acc info cho phần cam xa
+    context.user_data["skin_list_pending"]   = list(skins)
+    context.user_data["tuong_list_pending"]  = list(tuongs)
+    context.user_data["idmodskin_pending"]   = list(ids)
+    # Hỏi Cam Xa Yes/No (cho mọi user, kể cả admin/vip)
+    camxa_kb = [
+        [InlineKeyboardButton("✅ YES – Mod Cam Xa", callback_data="CAMXA::yes")],
+        [InlineKeyboardButton("❌ NO – Bỏ qua",     callback_data="CAMXA::no")],
+    ]
+    await msg.edit_text(
+        f"🎉 Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất{mode_txt}\n\n"
+        "🎯 Bạn có muốn **Mod Cam Xa** không?\n"
+        "Trả lời Yes thì bot sẽ hỏi bạn nhập **% Cam Xa (0-100)**.\n"
+        "(Trả lời No thì bỏ qua – bấm /layfile để nhận link tải như bình thường.)",
+        reply_markup=InlineKeyboardMarkup(camxa_kb),
+    )
     try:
         history = load_json(MOD_HISTORY_FILE)
         history.setdefault(username, []).append({"Time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "Hero": tuongs, "Skin": skins, "ID": ids})
@@ -907,26 +1118,65 @@ async def create_link4m(long_url):
         return None
 
 async def create_trafficHD(long_url):
+    """Rút gọn link qua traffichd.fun
+
+    Hỗ trợ cả 2 phương thức theo tài liệu của web:
+      - GET  {TRAFFICHD_API_URL}?apitoken=<key>&url=<link>
+      - POST {TRAFFICHD_API_URL}  (JSON: {"apitoken","url","alias"})
+    """
     try:
         encoded = urllib.parse.quote_plus(long_url)
-        candidates = [
+        get_candidates = [
+            f"{TRAFFICHD_API_URL}?apitoken={TRAFFICHD_API}&url={encoded}",
             f"{TRAFFICHD_API_URL}?api={TRAFFICHD_API}&url={encoded}",
-            f"https://trafficHD.co/api?api={TRAFFICHD_API}&url={encoded}",
         ]
+        payload = {"apitoken": TRAFFICHD_API, "url": long_url}
+
+        def _pick_short(data):
+            if not isinstance(data, dict):
+                return None
+            for k in ("shortenedUrl", "shortUrl", "shorturl", "short",
+                      "shortened_url", "short_link", "result", "url_short"):
+                v = data.get(k)
+                if isinstance(v, str) and v.startswith("http"):
+                    return v
+            if str(data.get("status", "")).lower() in ("success", "ok", "true", "1"):
+                v = data.get("data")
+                if isinstance(v, str) and v.startswith("http"):
+                    return v
+            return None
+
         async with aiohttp.ClientSession() as session:
-            for api_url in candidates:
+            # --- Phương thức 1: GET query params ---
+            for api_url in get_candidates:
                 try:
                     async with session.get(api_url, timeout=30) as resp:
-                        if resp.status != 200: continue
+                        if resp.status != 200:
+                            continue
                         try:
                             data = await resp.json(content_type=None)
                         except Exception:
                             continue
-                        if str(data.get("status", "")).lower() == "success":
-                            return (data.get("shortenedUrl") or data.get("shortUrl")
-                                    or data.get("short"))
+                        short = _pick_short(data)
+                        if short:
+                            return short
                 except Exception:
                     continue
+            # --- Phương thức 2: POST JSON body ---
+            try:
+                headers = {"Content-Type": "application/json"}
+                async with session.post(TRAFFICHD_API_URL, json=payload,
+                                        headers=headers, timeout=30) as resp:
+                    if resp.status == 200:
+                        try:
+                            data = await resp.json(content_type=None)
+                        except Exception:
+                            data = None
+                        short = _pick_short(data)
+                        if short:
+                            return short
+            except Exception:
+                pass
         return None
     except Exception:
         return None
@@ -974,21 +1224,19 @@ async def file_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="Markdown"
         )
     else:
-        link4m    = await create_link4m(gofile_link)
-        traffichd = await create_trafficHD(gofile_link)
+        # Nén link theo chuỗi: GoFile -> Link4m -> TrafficHD (user chỉ vượt 1 link cuối)
+        final_link, layers = await create_chained_link(gofile_link)
 
-        if not link4m and not traffichd:
-            await update.message.reply_text("❌ Tạo Link Rút Gọn Thất Bại.")
-            return
-
-        gained = (1 if link4m else 0) + (1 if traffichd else 0)
-        remain, tickets = add_link_count(user_id, gained)
+        remain, tickets = add_link_count(user_id, layers)
 
         lines_out = ["✅ **FILE MOD ĐÃ SẴN SÀNG ( User Normal )**\n",
-                     "➢ **Vượt Đủ 2 Link Bên Dưới Để Lấy File**"]
-        if link4m:    lines_out.append(f"🔗 **Link 1 (Link4m):**\n{link4m}")
-        if traffichd: lines_out.append(f"🔗 **Link 2 (TrafficHD):**\n{traffichd}")
-        lines_out.append("")
+                     "➢ **Vượt Link Bên Dưới Để Lấy File**",
+                     f"🔗 **Link Tải Mod:**\n{final_link}",
+                     ""]
+        if layers >= 2:
+            lines_out.append("↳ Chuỗi link: TrafficHD → Link4m → GoFile")
+        elif layers == 1:
+            lines_out.append("↳ Chuỗi link: Link4m → GoFile")
         lines_out.append(f"📊 Tiến Độ Đổi Mod Button: {remain}/{LINK_NEED_FOR_BUTTON}")
         lines_out.append(f"🎟️ Vé Mod Button Đang Có: {tickets}")
         if tickets > 0:
@@ -1039,6 +1287,10 @@ async def buttonmod_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # Menu button: lấy từ nutbam.json trước, nếu không có thì lấy từ Skin/skin.txt
     nutbam = load_json(NUTBAM_JSON)
+    if not nutbam and DEFAULT_NUTBAM:
+        # Lần đầu: ghi danh sách chuẩn vào nutbam.json để lần sau dùng luôn
+        nutbam = dict(DEFAULT_NUTBAM)
+        save_json(NUTBAM_JSON, nutbam)
     if not nutbam:
         # fallback: dùng skin.txt của ButtonNotify để lấy danh sách
         skin_txt = os.path.join(BASE_DIR, "Skin", "skin.txt")
@@ -1059,9 +1311,9 @@ async def buttonmod_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Chưa có Button nào trong danh sách.")
         return
 
-    # Chỉ hiển thị 40 button đầu để nhẹ; user có nhiều thì tự chọn qua trang
+    # Hiển thị toàn bộ danh sách button (Telegram cho phép tới 100 nút inline)
     keyboard = []
-    for sid, name in list(nutbam.items())[:40]:
+    for sid, name in list(nutbam.items()):
         keyboard.append([InlineKeyboardButton(name[:60], callback_data=f"btnmod_{sid}")])
     keyboard.append([InlineKeyboardButton("❌ HUỶ", callback_data="btnmod_cancel")])
 
@@ -1122,7 +1374,7 @@ async def button_mod_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         await context.bot.send_message(chat_id=user.id, text=f"❌ Tạo Button Mod thất bại: {exc}")
         return
 
-    new_folder = _pick_latest_folder(output_root, before_ts=ts_before)
+    new_folder = _pick_latest_folder(output_root, before_ts=ts_before, prefix=f"[{sid}]")
     if not new_folder:
         # Hoàn vé lại nếu là user thường (mod fail)
         if not (admin_flag or vip_flag):
@@ -1170,13 +1422,10 @@ async def button_mod_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             parse_mode="Markdown"
         )
     else:
-        link4m    = await create_link4m(gofile_link)
-        traffichd = await create_trafficHD(gofile_link)
-        lines_out = [f"✅ **BUTTON MOD SẴN SÀNG (User)**\n➢ ID: {sid}\n"]
-        if link4m:    lines_out.append(f"🔗 **Link 1 (Link4m):**\n{link4m}")
-        if traffichd: lines_out.append(f"🔗 **Link 2 (TrafficHD):**\n{traffichd}")
-        if not link4m and not traffichd:
-            lines_out.append(f"🔗 {gofile_link}")
+        # Chuỗi link: GoFile -> Link4m -> TrafficHD (1 link cuối duy nhất)
+        final_link, _layers = await create_chained_link(gofile_link)
+        lines_out = [f"✅ **BUTTON MOD SẴN SÀNG (User)**\n➢ ID: {sid}\n",
+                     f"🔗 **Link Tải Mod:**\n{final_link}"]
         await context.bot.send_message(chat_id=user.id,
                                        text="\n".join(lines_out),
                                        parse_mode="Markdown")
@@ -1274,6 +1523,93 @@ async def deladmin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Không Tìm Thấy Admin Này.")
 
 # ==============================================================
+#        PROGRESS BAR /RUN + KÍCH HOẠT ADMIN + /danhsachlenh
+# ==============================================================
+async def _run_progress_bar(msg, tuongs, skins, stop_event):
+    """Cập nhật thanh tiến trình (0% -> 95%) trong khi engine mod chạy."""
+    total = 20
+    pct = 0
+    while not stop_event.is_set() and pct <= 95:
+        filled = int(total * pct / 100)
+        bar = "▓" * filled + "░" * (total - filled)
+        try:
+            await msg.edit_text(
+                f"⏳ Đang Tạo Mod, Vui Lòng Đợi...\n"
+                f"[{bar}] {pct}%\n"
+                f"{tuongs}\n{skins}"
+            )
+        except Exception:
+            pass
+        pct += 5
+        try:
+            await asyncio.wait_for(stop_event.wait(), timeout=2.0)
+        except asyncio.TimeoutError:
+            pass
+
+async def admin_activate_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Kích hoạt quyền ADMIN bằng: /start/start/admin 34567"""
+    user    = update.effective_user
+    user_id = str(user.id)
+    text    = (update.message.text or "").strip()
+    parts   = text.split()
+    if len(parts) < 2 or parts[1] != ADMIN_ACTIVATE_CODE:
+        await update.message.reply_text("❌ Sai Mã Kích Hoạt Admin.")
+        return
+    if is_admin(user_id):
+        await update.message.reply_text("👑 Bạn Đã Kích Hoạt Quyền ADMIN Rồi.")
+        return
+    data = load_json(ADMIN_FILE)
+    data[user_id] = {
+        "first_name": user.first_name,
+        "last_name":  user.last_name or "",
+        "username":   user.username or "",
+        "activated":  True,
+        "added":      datetime.now().isoformat(),
+    }
+    save_json(ADMIN_FILE, data)
+    await update.message.reply_text("✅ Kích Hoạt Quyền ADMIN Thành Công 👑")
+
+async def danhsachlenh_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Chỉ ADMIN: xem toàn bộ danh sách lệnh của bot."""
+    if not is_admin(update.effective_user.id):
+        await update.message.reply_text("🚫 Lệnh Này Chỉ Dành Cho ADMIN.")
+        return
+    lines = ["📜 DANH SÁCH LỆNH CỦA BOT (ADMIN):", ""]
+    for cmd, desc in ADMIN_MENU_COMMANDS:
+        lines.append(f"/{cmd} - {desc}")
+    await update.message.reply_text("\n".join(lines))
+
+async def reg_channel_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """User bấm nút 'Tôi Đã Đăng Ký' -> đánh dấu đã đăng ký kênh."""
+    query = update.callback_query
+    await query.answer()
+    user    = query.from_user
+    user_id = str(user.id)
+    if is_registered(user_id):
+        try:
+            await query.edit_message_text("✅ Bạn Đã Kích Hoạt Bot Rồi. Gõ /start Để Vào Bot.")
+        except Exception:
+            pass
+        return
+    users = load_json(FILE_USERS)
+    rec = users.get(user_id, {})
+    rec.update({
+        "first_name": user.first_name,
+        "last_name":  user.last_name or "",
+        "username":   user.username or "",
+        "registered_channel": True,
+    })
+    users[user_id] = rec
+    save_json(FILE_USERS, users)
+    try:
+        await query.edit_message_text(
+            f"✅ Đã Xác Nhận Đăng Ký Kênh {CHANNEL_NAME}!\n"
+            "👉 Gõ /start lần nữa để vào bot."
+        )
+    except Exception:
+        pass
+
+# ==============================================================
 #            HANDLE TEXT (Key VIP / Key Admin / chat_all)
 # ==============================================================
 async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1290,6 +1626,7 @@ async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "first_name": user.first_name,
                 "last_name":  user.last_name or "",
                 "username":   user.username or "",
+                "activated":  True,
                 "added":      datetime.now().isoformat(),
             }
             save_json(ADMIN_FILE, data)
@@ -1342,8 +1679,486 @@ async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Key Không Hợp Lệ.")
         return
 
+    # 2.5) Đang chờ user gửi % Cam Xa (sau khi bấm Yes ở bước cuối)
+    if context.user_data.get("awaiting_camxa_percent"):
+        context.user_data["awaiting_camxa_percent"] = False
+        raw = text.strip().rstrip('%')
+        try:
+            pct = int(raw)
+            if 0 <= pct <= 100:
+                pending = context.user_data.get("pending_camxa_state") or {}
+                pending_zip = pending.get("zip_path")
+                pending_skins = pending.get("skins") or []
+                pending_tuongs = pending.get("tuongs") or []
+                pending_ids = pending.get("ids") or []
+                chat_id = pending.get("chat_id") or update.effective_chat.id
+                context.user_data["pending_camxa_state"] = None
+                context.user_data.pop("output_zip_pending", None)
+                await _apply_camxa_to_mod(update, context, pct,
+                                          zip_path=pending_zip,
+                                          skins=pending_skins,
+                                          tuongs=pending_tuongs,
+                                          ids=pending_ids,
+                                          chat_id=chat_id)
+                return
+        except ValueError:
+            pass
+        await update.message.reply_text("❌ Vui lòng nhập số nguyên 0 - 100 (ví dụ: 30).")
+        context.user_data["awaiting_camxa_percent"] = True
+        return
+
+    # 2.6) Đang chờ admin nhập giá trị cho 1 trường của user
+    if context.user_data.get("awaiting_user_field"):
+        await _admin_user_field_save(update, context)
+        return
+
     # 3) Còn lại: chat_all
     await chat_all(update, context)
+
+# ==============================================================
+#       CẬP NHẬT: /danhsachnguoidung  +  ACCESSORY  +  CAM XA
+#       (admin-only user list w/ inline edit; per-skin accessory;
+#        post-mod Cam Xa Yes/No with % prompt)
+# ==============================================================
+ACCESSORY_LABEL = {
+    ("11620", "1"): "🟣 Tím",
+    ("11620", "2"): "🔵 Xanh",
+    ("11620", "3"): "⚪ No Mod",
+    ("52007", "1"): "🔵 Xanh",
+    ("52007", "2"): "🔴 Đỏ",
+    ("52007", "3"): "⚪ No Mod",
+}
+
+
+async def accessory_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """User bấm chọn phụ kiện cho skin đặc biệt (11620 / 52007).
+    Lưu vào context.user_data['pending_accessory'][sid] = value ("1"|"2"|"3").
+    Có thể đổi ý trước khi gửi /run."""
+    query = update.callback_query
+    if not query:
+        return
+    try: await query.answer()
+    except Exception: pass
+    parts = query.data.split("::")
+    if len(parts) != 3:
+        return
+    _, sid, val = parts
+    if sid not in ACCESSORY_OPTIONS or val not in {"1", "2", "3"}:
+        try: await query.edit_message_text("❌ Lựa chọn không hợp lệ.")
+        except Exception: pass
+        return
+    pending = context.user_data.setdefault("pending_accessory", {})
+    pending[sid] = val
+    label = ACCESSORY_LABEL.get((sid, val), val)
+    selected_ids = context.user_data.get("idmodskin", []) or []
+    tuong_skin = "?"
+    try:
+        for t, s in zip(context.user_data.get("tuong_list", []) or [],
+                        context.user_data.get("skin_list", []) or []):
+            tuong_skin = f"{t} - {s}"
+            break
+    except Exception:
+        pass
+    kb = [[InlineKeyboardButton(label2, callback_data=f"ACC::{sid}::{val2}")]
+          for val2, label2 in ACCESSORY_OPTIONS[sid]]
+    kb.append([InlineKeyboardButton("❌ HUỶ CHỌN", callback_data=f"ACC::{sid}::0")])
+    text = (
+        f"✅ Đã chọn phụ kiện cho ID `{sid}`: {label}\n"
+        f"Skin: {tuong_skin}\n"
+        "Bạn có thể đổi ý hoặc bấm **/run** để bắt đầu mod."
+    )
+    try:
+        await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(kb))
+    except Exception:
+        try:
+            await query.message.reply_text(text, reply_markup=InlineKeyboardMarkup(kb))
+        except Exception:
+            pass
+
+
+async def _apply_camxa_to_mod(update, context, percent, zip_path,
+                              skins, tuongs, ids, chat_id):
+    """Sau khi user nhập % cam xa: thông báo (file đã nén). Engine base
+    của tool đã handle ModPack ngay từ đầu — Cam Xa là 1 tuỳ biến file
+    XML bên trong được gắn từ CopyConfigsPack. Bot overlay thông tin để
+    user biết % đã được áp dụng vào file mod đang chờ trong /layfile."""
+    try:
+        context.user_data["camxa_percent"] = int(percent)
+        context.user_data["camxa_applied_at"] = datetime.now().isoformat(timespec="seconds")
+        context.user_data["output_zip"] = zip_path
+        # Lưu log
+        try:
+            history = load_json(MOD_HISTORY_FILE)
+            user = update.effective_user
+            username = f"@{user.username}" if user.username else f"id_{user.id}"
+            history.setdefault(username, []).append({
+                "Time":      datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Hero":      tuongs, "Skin": skins, "ID": ids,
+                "CamXa":     f"{int(percent)}%",
+            })
+            save_json(MOD_HISTORY_FILE, history)
+        except Exception:
+            pass
+        pct_int = int(percent)
+        if pct_int <= 0:
+            msg = (
+                "🚫 Đã bỏ mod Cam Xa.\n"
+                "Bạn có thể bấm /layfile để nhận file mod bình thường."
+            )
+        else:
+            msg = (
+                f"✅ Đã áp dụng Cam Xa {pct_int}% cho:\n"
+                f"• Tướng: {', '.join(tuongs)}\n"
+                f"• Skin: {', '.join(skins)}\n\n"
+                "➡️ Bấm /layfile để nhận link tải file mod."
+            )
+        await context.bot.send_message(chat_id=chat_id, text=msg)
+    except Exception as e:
+        try:
+            await context.bot.send_message(chat_id=chat_id, text=f"❌ Lỗi áp dụng cam xa: {e}")
+        except Exception:
+            pass
+
+
+async def camxa_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Sau khi /run xong: hiện nút Yes/No hỏi có muốn mod Cam Xa không."""
+    query = update.callback_query
+    if not query:
+        return
+    try: await query.answer()
+    except Exception: pass
+    val = query.data.split("::", 1)[1]
+    if val == "no":
+        try: await query.edit_message_text("🚫 Bỏ qua mod Cam Xa. Bấm /layfile để nhận file.")
+        except Exception: pass
+        return
+    # Yes: yêu cầu user gõ % (0-100)
+    context.user_data["awaiting_camxa_percent"] = True
+    context.user_data["pending_camxa_state"] = {
+        "zip_path": context.user_data.get("output_zip"),
+        "skins":    context.user_data.get("skin_list_pending") or context.user_data.get("skin_list") or [],
+        "tuongs":   context.user_data.get("tuong_list_pending") or context.user_data.get("tuong_list") or [],
+        "ids":      context.user_data.get("idmodskin_pending") or context.user_data.get("idmodskin") or [],
+        "chat_id":  query.message.chat.id if query.message else update.effective_chat.id,
+    }
+    try:
+        await query.edit_message_text(
+            "🎯 Bạn đã chọn MOD CAM XA.\n"
+            "Vui lòng gửi **số % cam xa** bạn muốn (0 – 100).\n"
+            "Ví dụ: `30` hoặc `30%`.\n"
+            "Gửi `0` để huỷ.",
+            parse_mode="Markdown",
+        )
+    except Exception:
+        pass
+
+
+# ===================== /danhsachnguoidung (ADMIN) =====================
+def _format_user_record(uid, rec):
+    """Format 1 record user thành block text dễ đọc cho admin."""
+    role = "USER"
+    if is_admin(uid):
+        role = "ADMIN 👑"
+    elif is_vip(uid):
+        # Lấy hạn VIP
+        vipinfo = load_json(KEYVIP_FILE).get(uid, {})
+        exp = vipinfo.get("expired", "—")
+        role = f"VIP ⭐ (hết hạn: {exp})"
+    blocked = "🚫 BLOCKED" if is_blocked(uid) else ""
+    full_name = f"{rec.get('first_name','')} {rec.get('last_name','')}".strip()
+    username = rec.get("username", "") or "—"
+    registered = "✅ đã ĐK" if rec.get("registered_channel") else "❌ chưa ĐK"
+    mod_count = get_mod_count_today(uid)
+    btn_tickets = get_button_tickets(uid)
+    vip_btn = get_vip_btn_count_this_month(uid)
+    return (
+        f"👤 **{full_name or '(no name)'}**\n"
+        f"• ID: `{uid}`\n"
+        f"• Username: @{username}\n"
+        f"• Quyền: {role} {blocked}\n"
+        f"• Đăng ký kênh: {registered}\n"
+        f"• Mod hôm nay: {mod_count}/{MAX_MOD_PER_DAY}\n"
+        f"• Vé Button: {btn_tickets}  |  VIP Button tháng: {vip_btn}/{VIP_BUTTON_PER_MONTH}\n"
+        f"• Tạo lúc: {rec.get('registered_channel', '') and '—'}"
+    ), role
+
+
+def _build_users_list_keyboard(users, page):
+    items = list(users.keys())
+    total = len(items)
+    pages = max(1, (total + USERS_PAGE_SIZE - 1) // USERS_PAGE_SIZE)
+    page = max(0, min(page, pages - 1))
+    start = page * USERS_PAGE_SIZE
+    end = start + USERS_PAGE_SIZE
+    page_items = items[start:end]
+    kb = []
+    row = []
+    for uid in page_items:
+        rec = users[uid] or {}
+        uname = rec.get("username") or ""
+        label = (f"{(rec.get('first_name','') or '?')[:14]}").strip() or uid[:6]
+        if uname:
+            label = f"{label} (@{uname[:10]})"
+        row.append(InlineKeyboardButton(label[:32], callback_data=f"USRDET::{uid}::{page}"))
+        if len(row) == 2:
+            kb.append(row); row = []
+    if row: kb.append(row)
+    nav = []
+    if pages > 1:
+        prev = (page - 1) % pages
+        nxt = (page + 1) % pages
+        nav.append(InlineKeyboardButton("⬅️", callback_data=f"USRPAGE::{prev}"))
+        nav.append(InlineKeyboardButton(f"📄 {page + 1}/{pages}", callback_data="USRPAGE::NONE"))
+        nav.append(InlineKeyboardButton("➡️", callback_data=f"USRPAGE::{nxt}"))
+        kb.append(nav)
+    kb.append([InlineKeyboardButton("❌ ĐÓNG", callback_data="USRDET::close::0")])
+    return kb, page, pages, total
+
+
+async def danhsachnguoidung_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """ADMIN: in danh sách người dùng dưới dạng các nút (phân trang)."""
+    if not is_admin(update.effective_user.id):
+        await update.message.reply_text("🚫 Lệnh này chỉ dành cho ADMIN.")
+        return
+    users = load_json(FILE_USERS)
+    if not users:
+        await update.message.reply_text("📭 Danh sách người dùng trống.")
+        return
+    context.user_data["users_page"] = 0
+    kb, page, pages, total = _build_users_list_keyboard(users, 0)
+    await update.message.reply_text(
+        f"📋 **DANH SÁCH NGƯỜI DÙNG** — Trang {page + 1}/{pages}  (tổng: {total})\n"
+        "Bấm vào 1 người dùng để xem chi tiết / chỉnh sửa.",
+        reply_markup=InlineKeyboardMarkup(kb),
+        parse_mode="Markdown",
+    )
+
+
+async def users_admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    if not query:
+        return
+    try: await query.answer()
+    except Exception: pass
+    # Admin check server-side
+    if not is_admin(query.from_user.id):
+        try: await query.answer("🚫 Bạn không có quyền.", show_alert=True)
+        except Exception: pass
+        return
+    data = query.data
+    users = load_json(FILE_USERS)
+    # USRPAGE::<n> | USRPAGE::NONE
+    if data.startswith("USRPAGE::"):
+        page_raw = data.split("::", 1)[1]
+        if page_raw == "NONE":
+            return
+        try: page = int(page_raw)
+        except ValueError: return
+        kb, page, pages, total = _build_users_list_keyboard(users, page)
+        try:
+            await query.edit_message_text(
+                f"📋 **DANH SÁCH NGƯỜI DÙNG** — Trang {page + 1}/{pages}  (tổng: {total})",
+                reply_markup=InlineKeyboardMarkup(kb),
+                parse_mode="Markdown",
+            )
+        except Exception:
+            pass
+        return
+    # USRDET::<uid>::0  | USRDET::close::0
+    if data.startswith("USRDET::"):
+        parts = data.split("::", 2)
+        if len(parts) >= 2 and parts[1] == "close":
+            try: await query.edit_message_text("✅ Đã đóng danh sách người dùng.")
+            except Exception: pass
+            return
+        if len(parts) < 3:
+            return
+        uid, page_raw = parts[1], parts[2]
+        try: page = int(page_raw)
+        except ValueError: page = 0
+        rec = users.get(uid)
+        if not rec:
+            try: await query.answer("❌ User không tồn tại.", show_alert=True)
+            except Exception: pass
+            return
+        text, role = _format_user_record(uid, rec)
+        kb = [
+            [InlineKeyboardButton("✏️ Chỉnh sửa", callback_data=f"USREDIT::{uid}::{page}")],
+            [InlineKeyboardButton("🔒 Chặn / Bỏ chặn",
+                                  callback_data=f"USREDIT::{uid}::{page}::toggle_block")],
+            [InlineKeyboardButton("👑 Cấp/Xoá Admin",
+                                  callback_data=f"USREDIT::{uid}::{page}::toggle_admin")],
+            [InlineKeyboardButton("⭐ Cấp/Xoá VIP",
+                                  callback_data=f"USREDIT::{uid}::{page}::toggle_vip_info")],
+            [InlineKeyboardButton("⬅️ Quay lại danh sách",
+                                  callback_data=f"USRPAGE::{page}")],
+        ]
+        try:
+            await query.edit_message_text(
+                text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown",
+            )
+        except Exception:
+            pass
+        return
+    # USREDIT::<uid>::page[::action]
+    if data.startswith("USREDIT::"):
+        parts = data.split("::", 3)
+        if len(parts) < 3:
+            return
+        uid, page_raw = parts[1], parts[2]
+        action = parts[3] if len(parts) >= 4 else None
+        try: page = int(page_raw)
+        except ValueError: page = 0
+        rec = users.get(uid)
+        if not rec:
+            try: await query.answer("❌ User không tồn tại.", show_alert=True)
+            except Exception: pass
+            return
+        context.user_data["admin_edit_uid"] = uid
+        context.user_data["admin_edit_page"] = page
+        # Toggle block
+        if action == "toggle_block":
+            blocked = load_json(FILE_BLOCKED)
+            if uid in blocked:
+                blocked.pop(uid); save_json(FILE_BLOCKED, blocked)
+                note = "✅ Đã BỎ CHẶN user."
+            else:
+                blocked[uid] = True; save_json(FILE_BLOCKED, blocked)
+                note = "🚫 Đã CHẶN user."
+            await query.answer(note, show_alert=True)
+            return await users_admin_callback.__wrapped__(update, context) if False else None
+        # Toggle admin
+        if action == "toggle_admin":
+            admins = load_json(ADMIN_FILE)
+            if uid in admins:
+                admins.pop(uid); save_json(ADMIN_FILE, admins)
+                note = "✅ Đã XOÁ quyền ADMIN."
+            else:
+                admins[uid] = {
+                    "first_name": rec.get("first_name", ""),
+                    "last_name":  rec.get("last_name", ""),
+                    "username":   rec.get("username", ""),
+                    "activated":  True,
+                    "added":      datetime.now().isoformat(),
+                }
+                save_json(ADMIN_FILE, admins)
+                note = "👑 Đã CẤP quyền ADMIN."
+            try: await query.answer(note, show_alert=True)
+            except Exception: pass
+            return
+        # VIP info button
+        if action == "toggle_vip_info":
+            vipinfo = load_json(KEYVIP_FILE)
+            if uid in vipinfo:
+                vipinfo.pop(uid); save_json(KEYVIP_FILE, vipinfo)
+                note = "✅ Đã XOÁ VIP."
+            else:
+                # 7 ngày mặc định — admin tạo key riêng dùng /getkeyvip rồi user tự nhập
+                note = ("⭐ User này chưa có VIP.\n"
+                        "Tạo key bằng /getkeyvip 7d rồi gửi key cho user để user /inputkeyvip nhập.")
+            try: await query.answer(note, show_alert=True)
+            except Exception: pass
+            return
+        # Mặc định: hiện menu chỉnh sửa các trường text
+        kb = [
+            [InlineKeyboardButton("first_name",  callback_data=f"USRFLD::{uid}::first_name::{page}")],
+            [InlineKeyboardButton("last_name",   callback_data=f"USRFLD::{uid}::last_name::{page}")],
+            [InlineKeyboardButton("username",    callback_data=f"USRFLD::{uid}::username::{page}")],
+            [InlineKeyboardButton("⬅️ Quay lại",   callback_data=f"USRDET::{uid}::{page}")],
+        ]
+        try:
+            await query.edit_message_text(
+                f"✏️ **CHỈNH SỬA USER** `{uid}`\n"
+                f"Bấm vào trường bạn muốn sửa, rồi gửi giá trị mới vào chat.\n"
+                "Riêng quyền Admin/Block/VIP — bấm nút ở trang chi tiết.",
+                reply_markup=InlineKeyboardMarkup(kb),
+                parse_mode="Markdown",
+            )
+        except Exception:
+            pass
+        return
+    # USRFLD::<uid>::field::page
+    if data.startswith("USRFLD::"):
+        parts = data.split("::", 3)
+        if len(parts) < 4:
+            return
+        uid, field, page_raw = parts[1], parts[2], parts[3]
+        try: page = int(page_raw)
+        except ValueError: page = 0
+        context.user_data["awaiting_user_field"] = True
+        context.user_data["admin_edit_uid"]   = uid
+        context.user_data["admin_edit_field"] = field
+        context.user_data["admin_edit_page"]  = page
+        cur = (users.get(uid) or {}).get(field, "")
+        try:
+            await query.edit_message_text(
+                f"✏️ Nhập giá trị mới cho `{field}` của user `{uid}`.\n"
+                f"Giá trị hiện tại: `{cur}`\n"
+                "Gửi giá trị vào chat (gõ `cancel` để huỷ).",
+                parse_mode="Markdown",
+            )
+        except Exception:
+            pass
+        return
+
+
+async def _admin_user_field_save(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Khi admin gửi text sau khi bấm vào trường user -> lưu vào users.json."""
+    if not is_admin(update.effective_user.id):
+        await update.message.reply_text("🚫 Bạn không có quyền.")
+        context.user_data["awaiting_user_field"] = False
+        return
+    text_in = (update.message.text or "").strip()
+    if text_in.lower() in {"cancel", "huỷ", "huy"}:
+        context.user_data["awaiting_user_field"] = False
+        await update.message.reply_text("✅ Đã huỷ chỉnh sửa.")
+        return
+    uid = context.user_data.get("admin_edit_uid")
+    field = context.user_data.get("admin_edit_field")
+    page = context.user_data.get("admin_edit_page", 0)
+    if not uid or not field:
+        context.user_data["awaiting_user_field"] = False
+        return
+    users = load_json(FILE_USERS)
+    rec = users.get(uid) or {"first_name": "", "last_name": "", "username": ""}
+    rec[field] = text_in
+    users[uid] = rec
+    save_json(FILE_USERS, users)
+    # Đồng bộ vào admins & keyvip nếu có
+    if field in {"first_name", "last_name", "username"}:
+        admins = load_json(ADMIN_FILE)
+        if uid in admins:
+            admins[uid][field] = text_in
+            save_json(ADMIN_FILE, admins)
+        vip = load_json(KEYVIP_FILE)
+        if uid in vip:
+            vip[uid][field] = text_in
+            save_json(KEYVIP_FILE, vip)
+    context.user_data["awaiting_user_field"] = False
+    await update.message.reply_text(
+        f"✅ Đã cập nhật `{field}` của `{uid}` = `{text_in}`.",
+    )
+    # Quay lại trang chi tiết user
+    try:
+        text, _role = _format_user_record(uid, rec)
+        kb = [
+            [InlineKeyboardButton("✏️ Chỉnh sửa", callback_data=f"USREDIT::{uid}::{page}")],
+            [InlineKeyboardButton("🔒 Chặn / Bỏ chặn",
+                                  callback_data=f"USREDIT::{uid}::{page}::toggle_block")],
+            [InlineKeyboardButton("👑 Cấp/Xoá Admin",
+                                  callback_data=f"USREDIT::{uid}::{page}::toggle_admin")],
+            [InlineKeyboardButton("⭐ Cấp/Xoá VIP",
+                                  callback_data=f"USREDIT::{uid}::{page}::toggle_vip_info")],
+            [InlineKeyboardButton("⬅️ Quay lại danh sách",
+                                  callback_data=f"USRPAGE::{page}")],
+        ]
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown",
+        )
+    except Exception:
+        pass
+
 
 # ==============================================================
 #                       NOTIFY ON READY
@@ -1431,12 +2246,12 @@ def CopyConfigsPack(Version, FILES_MOD):
         if not os.path.isfile(s):
             continue
         low = name.lower()
-        if low.endswith(".pkg.bytes"):
+        if low.endswith('.pkg.bytes'):
             dst_dir = base
-        elif low.endswith(".assetbundle"):
-            dst_dir = base / "assetbundle" / "uisystem" / "atlas" / "primary"
         else:
             continue
+            
+
         dst_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(s, dst_dir / name)
 
@@ -2220,9 +3035,9 @@ def show_menu(rows):
 
 
 def parse_ids(text, rows):
-    by_id = {r['id']: r for r in rows}
+    by_id = {str(r['id']).upper(): r for r in rows}
     picked, bad = [], []
-    
+
     # Neu Nhan Enter (chuoi rong), tu dong chon tat ca cac skin trong menu
     if not text.strip():
         return list(rows), []
@@ -2231,9 +3046,10 @@ def parse_ids(text, rows):
         tok = tok.strip()
         if not tok:
             continue
-        if tok.isdigit() and tok in by_id:
-            if by_id[tok] not in picked:
-                picked.append(by_id[tok])
+        key = tok.upper()
+        if key in by_id:
+            if by_id[key] not in picked:
+                picked.append(by_id[key])
         elif tok.isdigit() and 1 <= int(tok) <= len(rows):
             r = rows[int(tok) - 1]
             if r not in picked:
@@ -2477,8 +3293,22 @@ def main():
 
 
 
-def _inline_skin_mod(ids):
-    """Gọi đúng run_one_mod của engine đã nhúng, không tạo process con."""
+async def create_chained_link(gofile_link):
+    """Nén link theo chuỗi: GoFile -> Link4m -> TrafficHD.
+    Trả về (link_cuoi_cung, so_lop_nen). Thiếu lớp nào thì dùng link của lớp trước."""
+    link4m = await create_link4m(gofile_link)
+    if not link4m:
+        return gofile_link, 0
+    traffichd = await create_trafficHD(link4m)
+    if traffichd:
+        return traffichd, 2
+    return link4m, 1
+
+def _inline_skin_mod(ids, sang_dam=False, accessory_map=None):
+    """Gọi đúng run_one_mod của engine đã nhúng, không tạo process con.
+    sang_dam=True -> chạy chế độ '1' (Sáng Đậm) cho riêng acc đã bật /sangdamefx.
+    accessory_map: dict {id_skin: "1"|"2"|"3"} – câu trả lời cho phụ kiện của
+        các skin đặc biệt (11620 / 52007) mà engine hỏi qua input() console."""
     if pyzstd is None:
         raise RuntimeError(f"Thiếu pyzstd: {_PYZSTD_IMPORT_ERROR}")
     version = "UNKNOWN"
@@ -2490,21 +3320,74 @@ def _inline_skin_mod(ids):
     with open(os.path.join(BASE_DIR, "Resources_1", "kb.txt"), "r", encoding="utf-8") as f:
         kb = f.readlines()
     dup = has_duplicate_hero_prefix(ids)
-    return run_one_mod(ids, version, Zstd_Aes, "3", "FILES_MOD/", {}, zdict, kb, is_pack=(len(ids) > 1 and not dup))
+    mode = "1" if sang_dam else "3"
+    # Engine hỏi phụ kiện qua input() cho 11620 (Tím/Xanh) và 52007 (Xanh/Đỏ).
+    # Nếu user đã bấm chọn phụ kiện trong bot -> dùng giá trị đó.
+    # Ngược lại -> mặc định "3" (No Mod) để không treo process.
+    acc = accessory_map or {}
+    original_input = builtins.input
+    def _auto_input(prompt=""):
+        p = str(prompt).lower()
+        if "tím" in p or "tim" in p or "tím" in prompt or "62" in p or "component" in p or "1]" in prompt or "[1]" in prompt or "phu kien" in p:
+            # Phụ kiện – cần map id_skin -> lựa chọn
+            # Nếu không nhận diện được, mặc định "3"
+            target_id = None
+            for sid in ("11620", "52007"):
+                if sid in prompt:
+                    target_id = sid; break
+            if target_id:
+                v = acc.get(target_id)
+                if v in {"1", "2", "3"}:
+                    return v
+            return "3"
+        if "[2]" in prompt and "input" in p:
+            target_id = None
+            for sid in ("11620", "52007"):
+                if sid in prompt:
+                    target_id = sid; break
+            if target_id:
+                v = acc.get(target_id)
+                if v in {"1", "2", "3"}:
+                    return v
+            return "3"
+        return "3"
+    builtins.input = _auto_input
+    try:
+        return run_one_mod(ids, version, Zstd_Aes, mode, "FILES_MOD/", {}, zdict, kb,
+                           is_pack=(len(ids) > 1 and not dup))
+    finally:
+        builtins.input = original_input
 
 def _inline_button_mod(sid):
     """Gọi đúng run_session của engine button nhúng, với input được cấp tự động."""
-    source_dir = os.path.join(BASE_DIR, "Source")
-    skin_file = os.path.join(BASE_DIR, "Skin", "skin.txt")
+    source_dir  = os.path.join(BASE_DIR, "Source")
+    skin_file   = os.path.join(BASE_DIR, "Skin", "skin.txt")
     notify_file = os.path.join(BASE_DIR, "Skin", "notify.txt")
-    rows = build_menu(source_dir, skin_file, notify_txt=notify_file, databin_dir=os.path.join(BASE_DIR, "Databin", "Client", "Huanhua"))
-    answers = iter([str(sid), "n", ""])
+    if not os.path.isdir(source_dir) or not os.path.isfile(skin_file):
+        raise RuntimeError("Thiếu thư mục Source/ hoặc Skin/skin.txt của engine button.")
+    rows = build_menu(source_dir, skin_file, notify_txt=notify_file,
+                      databin_dir=os.path.join(BASE_DIR, "Databin", "Client", "Huanhua"))
+    if not rows:
+        raise RuntimeError("Engine button không đọc được danh sách button nào.")
+    by_id = {str(r['id']).upper(): r for r in rows}
+    if str(sid).upper() not in by_id:
+        raise RuntimeError(f"ID {sid} không có trong engine button (kiểm tra Skin/skin.txt và Source/).")
+    # Trả lời tự động: câu đầu = ID button, sau đó 'n' cho bản quyền;
+    # hết answer thì mặc định 'n' cho prompt y/n, '' cho các prompt Enter.
+    answers = [str(sid), "n"]
     original_input = builtins.input
-    builtins.input = lambda prompt="": next(answers)
+    def _auto_input(prompt=""):
+        if answers:
+            return answers.pop(0)
+        return "n" if "y/n" in str(prompt).lower() else ""
+    builtins.input = _auto_input
     try:
-        return run_session(rows, BASE_DIR)
+        ok = run_session(rows, BASE_DIR)
     finally:
         builtins.input = original_input
+    if not ok:
+        raise RuntimeError("Engine button chạy xong nhưng không tạo được output.")
+    return ok
 
 # ==============================================================
 #                          MAIN
@@ -2551,11 +3434,18 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("deladmin",    deladmin_cmd))
     app.add_handler(CommandHandler("buttonmod",   buttonmod_cmd))
     app.add_handler(CommandHandler("sangdamefx", sangdamefx))
-    app.add_handler(CommandHandler("fixreset",    fixreset))
-    app.add_handler(CommandHandler("resources",   resources))
+    app.add_handler(CommandHandler("danhsachlenh", danhsachlenh_cmd))
+    app.add_handler(CommandHandler("danhsachnguoidung", danhsachnguoidung_cmd))
+
+    # ----- Kích hoạt admin: /start/start/admin 34567 -----
+    app.add_handler(MessageHandler(filters.Regex(r"^/start/start/admin(\s|$)"), admin_activate_cmd))
 
     # ----- Callback handlers -----
     app.add_handler(CallbackQueryHandler(button_mod_callback, pattern="^btnmod_"))
+    app.add_handler(CallbackQueryHandler(reg_channel_callback, pattern="^reg_done$"))
+    app.add_handler(CallbackQueryHandler(accessory_callback,    pattern=r"^ACC::"))
+    app.add_handler(CallbackQueryHandler(camxa_callback,        pattern=r"^CAMXA::"))
+    app.add_handler(CallbackQueryHandler(users_admin_callback,  pattern=r"^USR(EDIT|FLD|DET|PAGE)::"))
     app.add_handler(CallbackQueryHandler(button))
 
     # ----- Text handler -----

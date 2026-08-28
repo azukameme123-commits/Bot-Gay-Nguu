@@ -1,4 +1,4 @@
-# BUILD: LINKMODE-V2-2026-08-28
+# BUILD: YUAN-AOV-KEY-V3-2026-08-28
 # ADMIN LINK MODES: /link4m | /traffichd | /2combine
 # /link4m    = File Mod -> GoFile -> Link4M
 # /traffichd = File Mod -> GoFile -> TrafficHD
@@ -456,13 +456,12 @@ USER_MENU_COMMANDS = [
     ("xoadanhsach", "Xóa danh sách"),
     ("sangdamefx", "Bật/Tắt chế độ Sáng Đậm (riêng acc này)"),
     ("layfile", "Lấy file"),
-    ("newkeyvip", "Liên Hệ Admin Mua Key Vip"),
-    ("inputkeyvip", "Nhập key VIP"),
+    ("key", "Nhập Key VIP"),
     ("buttonmod", "Mod button / notify"),
 ]
 
 ADMIN_MENU_COMMANDS = USER_MENU_COMMANDS + [
-    ("getkeyvip", "Tạo key VIP"),
+    ("makekey", "Tạo Key VIP"),
     ("addadmin", "Cấp quyền admin"),
     ("deladmin", "Xóa quyền admin"),
     ("block", "Chặn người dùng"),
@@ -1793,63 +1792,51 @@ async def button_mod_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
 # ==============================================================
 #                       KEY VIP
 # ==============================================================
-async def newkey(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def makekey(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """ADMIN: /makekey 1h | 1d | 1m | 1y."""
     if not is_admin(update.effective_user.id):
-        await update.message.reply_text("🚫 Bạn không có quyền tạo Key.")
+        await update.message.reply_text("🚫 Chỉ ADMIN mới được tạo Key VIP.")
         return
-    args = context.args
-    if len(args) != 1:
+    if len(context.args) != 1:
         await update.message.reply_text(
-            "📌 Hướng Dẫn:\n/newkeyvip 7d  (7 ngày)\n/newkeyvip 12h (12 giờ)\n/newkeyvip 30d"
+            "📌 Tạo Key VIP:\n"
+            "• /makekey 1h — 1 tiếng\n"
+            "• /makekey 1d — 1 ngày\n"
+            "• /makekey 1m — 1 tháng\n"
+            "• /makekey 1y — 1 năm"
         )
         return
-    time_arg = args[0].lower()
-    try:
-        if time_arg.endswith("d"):
-            value = int(time_arg[:-1]); delta = timedelta(days=value)
-        elif time_arg.endswith("h"):
-            value = int(time_arg[:-1]); delta = timedelta(hours=value)
-        else:
-            raise ValueError
-        if value <= 0: raise ValueError
-    except ValueError:
-        await update.message.reply_text("❗ Định dạng không hợp lệ. Ví dụ: 7d hoặc 12h")
+    time_arg = context.args[0].strip().lower()
+    match = re.fullmatch(r"([1-9]\d*)([hdmy])", time_arg)
+    if not match:
+        await update.message.reply_text("❌ Sai định dạng. Dùng: 1h, 1d, 1m hoặc 1y.")
         return
+    value = int(match.group(1)); unit = match.group(2)
+    if unit == "h": delta, unit_name = timedelta(hours=value), "tiếng"
+    elif unit == "d": delta, unit_name = timedelta(days=value), "ngày"
+    elif unit == "m": delta, unit_name = timedelta(days=30 * value), "tháng"
+    else: delta, unit_name = timedelta(days=365 * value), "năm"
     keydb = load_json(KEY_FILE)
-    new_key = "KM-MOD_" + uuid4().hex[:8].upper()
-    expired_date = (datetime.now() + delta).replace(minute=0, second=0, microsecond=0).isoformat()
-    keydb[new_key] = {"expired": expired_date}
+    while True:
+        new_key = "YUAN-AOV_" + uuid4().hex[:10].upper()
+        if new_key not in keydb: break
+    expired_date = (datetime.now() + delta).replace(microsecond=0).isoformat()
+    keydb[new_key] = {"expired": expired_date, "duration": time_arg, "brand": "YUAN AOV", "created_by": str(update.effective_user.id)}
     save_json(KEY_FILE, keydb)
     await update.message.reply_text(
-        f"✅ Key Mới Được Tạo:\n🔑 `{new_key}`\n🕒 Hết hạn: {expired_date}",
+        f"✅ ĐÃ TẠO KEY VIP YUAN AOV\n🔑 `{new_key}`\n⏳ Thời hạn: {value} {unit_name}\n🕒 Hết hạn: {expired_date}",
         parse_mode="Markdown"
     )
 
-async def getkey(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not update.effective_user.username:
-        await update.message.reply_text("⚠️ Bạn chưa có Username Telegram nên không thể Get Key.")
-        return
-    buttons = [
-        [InlineKeyboardButton("💰 MUA KEY - Telegram ADMIN", url="https://t.me/kmmodaov")],
-        [InlineKeyboardButton("💰 MUA KEY - FACEBOOK ADMIN",
-                              url="https://www.facebook.com/share/16upSNcxbQ/")],
-    ]
-    await update.message.reply_text(
-        "🔑 Bạn Có Thể Lấy Key Miễn Phí Hoặc Mua Key:",
-        reply_markup=InlineKeyboardMarkup(buttons),
-    )
-
-async def inputkey(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.effective_user
-    user_id = str(user.id)
+async def key_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """User: /key để bắt đầu nhập Key VIP."""
+    user = update.effective_user; user_id = str(user.id)
     if is_admin(user_id):
-        await update.message.reply_text("👑 Bạn là ADMIN, không cần nhập key.")
-        return
-    if not user.username:
-        await update.message.reply_text("⚠️ Bạn chưa có Username Telegram.")
+        await update.message.reply_text("👑 Bạn là ADMIN, không cần nhập Key VIP.")
         return
     context.user_data["awaiting_keyvip"] = True
-    await update.message.reply_text("🔑 Vui Lòng Gửi Key Vip Của Bạn:")
+    await update.message.reply_text("🔑 Gửi Key VIP YUAN AOV của bạn vào đây.\n\n💰 Mua Key chỉ qua Telegram Admin: @zilongaz1122")
+
 
 # ==============================================================
 #                   ADD ADMIN (cần Key AdminSv)
@@ -2051,7 +2038,7 @@ async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if context.user_data.get("awaiting_keyvip"):
         context.user_data["awaiting_keyvip"] = False
-        await update.message.reply_text("❌ Key Không Hợp Lệ.")
+        await update.message.reply_text("❌ Key YUAN AOV không hợp lệ. Mua Key: @zilongaz1122")
         return
 
     # 2.5) Đang chờ user gửi % Cam Xa (sau khi bấm Yes ở bước cuối)
@@ -2428,9 +2415,9 @@ async def users_admin_callback(update: Update, context: ContextTypes.DEFAULT_TYP
                 vipinfo.pop(uid); save_json(KEYVIP_FILE, vipinfo)
                 note = "✅ Đã XOÁ VIP."
             else:
-                # 7 ngày mặc định — admin tạo key riêng dùng /getkeyvip rồi user tự nhập
+                # 7 ngày mặc định — admin tạo key riêng dùng /makekey rồi user tự nhập
                 note = ("⭐ User này chưa có VIP.\n"
-                        "Tạo key bằng /getkeyvip 7d rồi gửi key cho user để user /inputkeyvip nhập.")
+                        "Tạo key bằng /makekey 1d rồi gửi key cho user để user dùng /key nhập.")
             try: await query.answer(note, show_alert=True)
             except Exception: pass
             return
@@ -3815,7 +3802,6 @@ if __name__ == "__main__":
     # ----- Commands -----
     app.add_handler(CommandHandler("start",       start))
     app.add_handler(CommandHandler("run",         run))
-    app.add_handler(CommandHandler("getkeyvip",   getkey))
     app.add_handler(CommandHandler("xemdanhsach", xemdanhsach))
     app.add_handler(CommandHandler("xoadanhsach", xoadanhsach))
     app.add_handler(CommandHandler("choosehero",  choosehero))
@@ -3827,10 +3813,8 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("link4m",      link4m_cmd))
     app.add_handler(CommandHandler("traffichd",   traffichd_cmd))
     app.add_handler(CommandHandler("2combine",    combine2_cmd))
-    # /newkeyvip trong menu người dùng mở thông tin liên hệ mua key;
-    # admin vẫn dùng /getkeyvip để tạo key VIP theo thời hạn.
-    app.add_handler(CommandHandler("newkeyvip",   getkey))
-    app.add_handler(CommandHandler("inputkeyvip", inputkey))
+    app.add_handler(CommandHandler("makekey",     makekey))
+    app.add_handler(CommandHandler("key",         key_cmd))
     app.add_handler(CommandHandler("addadmin",    addadmin_cmd))
     app.add_handler(CommandHandler("deladmin",    deladmin_cmd))
     app.add_handler(CommandHandler("buttonmod",   buttonmod_cmd))

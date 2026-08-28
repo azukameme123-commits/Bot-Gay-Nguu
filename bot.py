@@ -1,3 +1,9 @@
+# BUILD: LINKMODE-V2-2026-08-28
+# ADMIN LINK MODES: /link4m | /traffichd | /2combine
+# /link4m    = File Mod -> GoFile -> Link4M
+# /traffichd = File Mod -> GoFile -> TrafficHD
+# /2combine  = File Mod -> GoFile -> Link4M -> TrafficHD
+
 # -*- coding: utf-8 -*-
 """
 Telegram Bot - Mod AOV (Skin Pack + Button/Notify)
@@ -53,6 +59,7 @@ from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     BotCommand,
+    BotCommandScopeChat,
 )
 from telegram.ext import (
     ApplicationBuilder,
@@ -118,6 +125,7 @@ LINK_COUNT_FILE    = "Data/Json/link_count.json"
 MOD_DAILY_FILE     = "Data/Json/mod_daily.json"
 BUTTON_TICKET_FILE = "Data/Json/button_ticket.json"
 VIP_BTN_MONTH_FILE = "Data/Json/vip_btn_month.json"
+LINK_MODE_FILE      = "Data/Json/link_mode.json"  # chế độ link toàn bot do admin chọn
 SANGDAM_FILE       = "Data/Json/sangdam.json"   # trạng thái bật/tắt Sáng Đậm theo từng user
 SKIN_TXT           = "Data/Json/skin.txt"     # dùng cho /choosehero
 NUTBAM_JSON        = "Data/Json/nutbam.json"  # danh sách button có thể mod
@@ -243,6 +251,36 @@ def save_json(file, data):
         os.makedirs(os.path.dirname(file), exist_ok=True)
     with open(file, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
+
+# =============================================================
+#           GLOBAL DOWNLOAD LINK MODE — ADMIN SWITCH V2
+#   /link4m | /traffichd | /2combine (persist + admin menu)
+# =============================================================
+LINK_MODE_INFO = {
+    "link4m": {"label": "LINK4M", "route": "File Mod → GoFile → Link4M"},
+    "traffichd": {"label": "TRAFFICHD", "route": "File Mod → GoFile → TrafficHD"},
+    "2combine": {"label": "2COMBINE", "route": "File Mod → GoFile → Link4M → TrafficHD"},
+}
+DEFAULT_LINK_MODE = "2combine"
+
+def get_link_mode():
+    data = load_json(LINK_MODE_FILE)
+    mode = str(data.get("mode", DEFAULT_LINK_MODE)).strip().lower()
+    return mode if mode in LINK_MODE_INFO else DEFAULT_LINK_MODE
+
+def set_link_mode(mode, changed_by=None):
+    mode = str(mode).strip().lower()
+    if mode not in LINK_MODE_INFO:
+        raise ValueError(f"Unsupported link mode: {mode}")
+    payload = {"mode": mode, "updated_at": datetime.now().isoformat(timespec="seconds")}
+    if changed_by is not None:
+        payload["updated_by"] = str(changed_by)
+    save_json(LINK_MODE_FILE, payload)
+    return mode
+
+def link_mode_label(mode=None):
+    mode = mode or get_link_mode()
+    return LINK_MODE_INFO.get(mode, LINK_MODE_INFO[DEFAULT_LINK_MODE])
 
 def is_blocked(user_id):
     return str(user_id) in load_json(FILE_BLOCKED)
@@ -431,6 +469,9 @@ ADMIN_MENU_COMMANDS = USER_MENU_COMMANDS + [
     ("unblock", "Bỏ chặn người dùng"),
     ("sendfiles", "Gửi dữ liệu cho admin"),
     ("all", "Gửi thông báo tất cả"),
+    ("link4m", "Dùng GoFile → Link4M cho mọi file mod"),
+    ("traffichd", "Dùng GoFile → TrafficHD cho mọi file mod"),
+    ("2combine", "Dùng GoFile → Link4M → TrafficHD"),
     ("danhsachlenh", "Xem danh sách lệnh (admin)"),
     ("danhsachnguoidung", "Danh sách người dùng (admin)"),
 ]
@@ -444,12 +485,46 @@ ACCESSORY_OPTIONS = {
 }
 USERS_PAGE_SIZE = 12
 
+def _build_bot_commands(items):
+    return [BotCommand(command=command, description=description) for command, description in items]
+
+async def set_admin_command_menu(bot, chat_id):
+    """Hiện menu ADMIN riêng cho đúng chat admin (không làm lộ lệnh admin cho user thường)."""
+    try:
+        await bot.set_my_commands(
+            _build_bot_commands(ADMIN_MENU_COMMANDS),
+            scope=BotCommandScopeChat(chat_id=int(chat_id)),
+        )
+        return True
+    except Exception as exc:
+        print(f"[WARN] Không set được menu ADMIN cho {chat_id}: {exc}")
+        return False
+
+async def set_user_command_menu(bot, chat_id):
+    """Đưa một chat cụ thể về menu USER mặc định."""
+    try:
+        await bot.set_my_commands(
+            _build_bot_commands(USER_MENU_COMMANDS),
+            scope=BotCommandScopeChat(chat_id=int(chat_id)),
+        )
+        return True
+    except Exception as exc:
+        print(f"[WARN] Không set được menu USER cho {chat_id}: {exc}")
+        return False
+
 async def configure_bot_menu(app):
-    """Đăng ký command menu để Telegram hiển thị menu giống ảnh tham chiếu."""
-    await app.bot.set_my_commands([
-        BotCommand(command=command, description=description)
-        for command, description in USER_MENU_COMMANDS
-    ])
+    """Đăng ký menu USER mặc định + menu riêng cho các ADMIN đã kích hoạt."""
+    await app.bot.set_my_commands(_build_bot_commands(USER_MENU_COMMANDS))
+
+    # Telegram chỉ hiển thị menu mặc định nếu không set scope riêng.
+    # Vì vậy phải set BotCommandScopeChat cho từng admin thì /link4m,
+    # /traffichd và /2combine mới hiện khi admin bấm nút '/'.
+    for admin_id in sorted(get_admins()):
+        if is_admin(admin_id):
+            await set_admin_command_menu(app.bot, admin_id)
+
+    info = link_mode_label()
+    print(f"[LINK MODE] {info['label']} | {info['route']}")
 
 # ==============================================================
 #                    FILE DOWNLOAD HELPERS
@@ -1172,8 +1247,37 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data["tuong_list"] = []
 
 # ==============================================================
+#              ADMIN: GLOBAL DOWNLOAD LINK MODE
+# ==============================================================
+async def _set_global_link_mode(update: Update, mode: str):
+    user = update.effective_user
+    if not user or not is_admin(user.id):
+        await update.message.reply_text("🚫 Lệnh này chỉ dành cho ADMIN.")
+        return
+
+    mode = set_link_mode(mode, changed_by=user.id)
+    info = link_mode_label(mode)
+    await update.message.reply_text(
+        f"✅ **ĐÃ ĐỔI LINK MODE TOÀN BOT: {info['label']}**\n\n"
+        f"🔗 Chuỗi đang chạy: **{info['route']}**\n"
+        f"💾 Đã lưu: `{LINK_MODE_FILE}`\n"
+        "📦 Từ file mod tiếp theo, cả Mod Skin và Mod Button đều dùng mode này.",
+        parse_mode="Markdown",
+    )
+
+async def link4m_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await _set_global_link_mode(update, "link4m")
+
+async def traffichd_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await _set_global_link_mode(update, "traffichd")
+
+async def combine2_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await _set_global_link_mode(update, "2combine")
+
+
+# ==============================================================
 #                       /layfile  (Upload)
-#           (Nén 2 link: Link4m + TrafficHD cho user thường)
+#          Route do ADMIN chọn: Link4M / TrafficHD / 2Combine
 # ==============================================================
 async def get_gofile_servers():
     try:
@@ -1327,36 +1431,33 @@ async def file_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Upload GoFile thất bại.")
         return
 
+    final_link, active_mode = await create_download_link(gofile_link)
+    if not final_link:
+        info = link_mode_label(active_mode)
+        await update.message.reply_text(
+            f"❌ Tạo link {info['label']} thất bại. File mod vẫn được giữ để bạn /layfile lại."
+        )
+        return
+
     if admin_flag:
-        await update.message.reply_text(
-            f"✅ **FILE MOD ĐÃ SẴN SÀNG ( ADMIN )**\n\n"
-            f"➢ **Link Tải Mod:**\n{gofile_link}\n"
-            f"❗ **Sử Dụng Trình Duyệt Để Tải Tránh Lỗi**",
-            parse_mode="Markdown"
-        )
+        role = "ADMIN"
     elif vip_flag:
-        await update.message.reply_text(
-            f"✅ **FILE MOD ĐÃ SẴN SÀNG ( User Key VIP )**\n\n"
-            f"➢ **Link Tải Mod:**\n{gofile_link}\n"
-            f"❗ **Sử Dụng Trình Duyệt Để Tải Tránh Lỗi**",
-            parse_mode="Markdown"
-        )
+        role = "User Key VIP"
     else:
-        # User thường vẫn dùng chuỗi link tải; Mod Button không còn liên quan vé/link count.
-        final_link, layers = await create_chained_link(gofile_link)
-        lines_out = [
-            "✅ **FILE MOD ĐÃ SẴN SÀNG ( User Normal )**\n",
-            "➢ **Vượt Link Bên Dưới Để Lấy File**",
-            f"🔗 **Link Tải Mod:**\n{final_link}",
-            "",
-        ]
-        if layers >= 2:
-            lines_out.append("↳ Chuỗi link: TrafficHD → Link4m → GoFile")
-        elif layers == 1:
-            lines_out.append("↳ Chuỗi link: Link4m → GoFile")
-        lines_out.append("🎮 Mod Button: **FREE – không cần vé** (/buttonmod)")
-        lines_out.append("❗ **Sử Dụng Trình Duyệt Để Tránh Lỗi**")
-        await update.message.reply_text("\n".join(lines_out), parse_mode="Markdown")
+        role = "User Normal"
+
+    info = link_mode_label(active_mode)
+    lines_out = [
+        f"✅ **FILE MOD ĐÃ SẴN SÀNG ( {role} )**\n",
+        "➢ **Link Tải Mod:**",
+        f"🔗 {final_link}",
+        "",
+        f"↳ Chế độ: **{info['label']}**",
+        f"↳ Chuỗi: {info['route']}",
+        "🎮 Mod Button: **FREE – không cần vé** (/buttonmod)",
+        "❗ **Sử Dụng Trình Duyệt Để Tránh Lỗi**",
+    ]
+    await update.message.reply_text("\n".join(lines_out), parse_mode="Markdown")
 
     try:
         os.remove(output_zip)
@@ -1657,26 +1758,27 @@ async def button_mod_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             await _offer_camxa(context, user.id)
         return
 
-    admin_flag = is_admin(user_id)
-    vip_flag = is_vip(user_id)
-    if admin_flag or vip_flag:
-        who = "ADMIN" if admin_flag else "VIP"
+    final_link, active_mode = await create_download_link(gofile_link)
+    if not final_link:
+        info = link_mode_label(active_mode)
         await context.bot.send_message(
             chat_id=user.id,
-            text=(f"✅ **BUTTON MOD SẴN SÀNG ({who} · FREE)**\n"
-                  f"➢ ID: {sid}\n"
-                  f"🔗 {gofile_link}"),
-            parse_mode="Markdown"
+            text=f"❌ Tạo link {info['label']} cho Button Mod thất bại. Hãy thử lại /buttonmod.",
         )
-    else:
-        final_link, _layers = await create_chained_link(gofile_link)
-        await context.bot.send_message(
-            chat_id=user.id,
-            text=(f"✅ **BUTTON MOD SẴN SÀNG (FREE)**\n"
-                  f"➢ ID: {sid}\n\n"
-                  f"🔗 **Link Tải Mod:**\n{final_link}"),
-            parse_mode="Markdown"
-        )
+        context.user_data["post_button_flow"] = False
+        if post_flow:
+            await _offer_camxa(context, user.id)
+        return
+
+    info = link_mode_label(active_mode)
+    await context.bot.send_message(
+        chat_id=user.id,
+        text=(f"✅ **BUTTON MOD SẴN SÀNG (FREE)**\n"
+              f"➢ ID: {sid}\n"
+              f"↳ Chế độ: **{info['label']}**\n\n"
+              f"🔗 **Link Tải Mod:**\n{final_link}"),
+        parse_mode="Markdown"
+    )
 
     try:
         os.remove(out_zip)
@@ -1773,7 +1875,8 @@ async def deladmin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if target in data:
         data.pop(target)
         save_json(ADMIN_FILE, data)
-        await update.message.reply_text(f"✅ Đã Xoá Admin {target}.")
+        await set_user_command_menu(context.bot, target)
+        await update.message.reply_text(f"✅ Đã Xoá Admin {target} và trả menu về USER.")
     else:
         await update.message.reply_text("❌ Không Tìm Thấy Admin Này.")
 
@@ -1822,14 +1925,25 @@ async def admin_activate_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE)
         "added":      datetime.now().isoformat(),
     }
     save_json(ADMIN_FILE, data)
-    await update.message.reply_text("✅ Kích Hoạt Quyền ADMIN Thành Công 👑")
+    await set_admin_command_menu(context.bot, user.id)
+    info = link_mode_label()
+    await update.message.reply_text(
+        "✅ Kích Hoạt Quyền ADMIN Thành Công 👑\n"
+        f"🔗 Link mode hiện tại: {info['label']}\n"
+        "👉 Bấm '/' để thấy /link4m, /traffichd, /2combine."
+    )
 
 async def danhsachlenh_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Chỉ ADMIN: xem toàn bộ danh sách lệnh của bot."""
     if not is_admin(update.effective_user.id):
         await update.message.reply_text("🚫 Lệnh Này Chỉ Dành Cho ADMIN.")
         return
-    lines = ["📜 DANH SÁCH LỆNH CỦA BOT (ADMIN):", ""]
+    info = link_mode_label()
+    lines = [
+        "📜 DANH SÁCH LỆNH CỦA BOT (ADMIN):",
+        f"🔗 LINK MODE: {info['label']} — {info['route']}",
+        "",
+    ]
     for cmd, desc in ADMIN_MENU_COMMANDS:
         lines.append(f"/{cmd} - {desc}")
     await update.message.reply_text("\n".join(lines))
@@ -1885,7 +1999,13 @@ async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "added":      datetime.now().isoformat(),
             }
             save_json(ADMIN_FILE, data)
-            await update.message.reply_text("✅ Cấp Quyền ADMIN Thành Công 👑")
+            await set_admin_command_menu(context.bot, user.id)
+            info = link_mode_label()
+            await update.message.reply_text(
+                "✅ Cấp Quyền ADMIN Thành Công 👑\n"
+                f"🔗 Link mode hiện tại: {info['label']}\n"
+                "👉 Bấm '/' để thấy /link4m, /traffichd, /2combine."
+            )
         else:
             await update.message.reply_text("❌ Sai Key AdminSv.")
         return
@@ -3547,16 +3667,40 @@ def main():
 
 
 
-async def create_chained_link(gofile_link):
-    """Nén link theo chuỗi: GoFile -> Link4m -> TrafficHD.
-    Trả về (link_cuoi_cung, so_lop_nen). Thiếu lớp nào thì dùng link của lớp trước."""
+async def create_download_link(gofile_link, mode=None):
+    """Tạo link cuối theo chế độ toàn bot do ADMIN chọn.
+
+    link4m:    File -> GoFile -> Link4M
+    traffichd: File -> GoFile -> TrafficHD
+    2combine:  File -> GoFile -> Link4M -> TrafficHD
+
+    Nếu lớp rút gọn đang chọn lỗi thì trả None; không tự lộ link GoFile trực tiếp.
+    """
+    active_mode = (mode or get_link_mode()).strip().lower()
+    if active_mode not in LINK_MODE_INFO:
+        active_mode = DEFAULT_LINK_MODE
+
+    if active_mode == "link4m":
+        return await create_link4m(gofile_link), active_mode
+
+    if active_mode == "traffichd":
+        return await create_trafficHD(gofile_link), active_mode
+
+    # 2combine: GoFile -> Link4M -> TrafficHD
     link4m = await create_link4m(gofile_link)
     if not link4m:
-        return gofile_link, 0
+        return None, active_mode
     traffichd = await create_trafficHD(link4m)
-    if traffichd:
-        return traffichd, 2
-    return link4m, 1
+    if not traffichd:
+        return None, active_mode
+    return traffichd, active_mode
+
+
+async def create_chained_link(gofile_link):
+    """Compatibility helper: luôn tạo GoFile -> Link4M -> TrafficHD."""
+    final_link, _ = await create_download_link(gofile_link, mode="2combine")
+    return final_link, (2 if final_link else 0)
+
 
 def _inline_skin_mod(ids, sang_dam=False, accessory_map=None):
     """Gọi đúng run_one_mod của engine đã nhúng, không tạo process con.
@@ -3680,6 +3824,9 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("unblock",     unblock_user))
     app.add_handler(CommandHandler("sendfiles",   send_files))
     app.add_handler(CommandHandler("all",         broadcast))
+    app.add_handler(CommandHandler("link4m",      link4m_cmd))
+    app.add_handler(CommandHandler("traffichd",   traffichd_cmd))
+    app.add_handler(CommandHandler("2combine",    combine2_cmd))
     # /newkeyvip trong menu người dùng mở thông tin liên hệ mua key;
     # admin vẫn dùng /getkeyvip để tạo key VIP theo thời hạn.
     app.add_handler(CommandHandler("newkeyvip",   getkey))

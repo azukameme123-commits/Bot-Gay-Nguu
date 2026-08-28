@@ -1,4 +1,4 @@
-# BUILD: YUAN-AOV-VIP-2LINK-V4-2026-08-28
+# BUILD: YUAN-AOV-RSFILE-V5-2026-08-28
 # ADMIN LINK MODES: /link4m | /traffichd | /2combine
 # /link4m    = File Mod -> GoFile -> Link4M
 # /traffichd = File Mod -> GoFile -> TrafficHD
@@ -471,6 +471,7 @@ ADMIN_MENU_COMMANDS = USER_MENU_COMMANDS + [
     ("link4m", "Dùng GoFile → Link4M cho mọi file mod"),
     ("traffichd", "Dùng GoFile → TrafficHD cho mọi file mod"),
     ("2combine", "Dùng GoFile → Link4M → TrafficHD"),
+    ("rsfile", "Xóa sạch file trên GoFile"),
     ("danhsachlenh", "Xem danh sách lệnh (admin)"),
     ("danhsachnguoidung", "Danh sách người dùng (admin)"),
 ]
@@ -1225,7 +1226,7 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("❌ NO – Bỏ qua",     callback_data="POSTBTN::no")],
     ]
     await msg.edit_text(
-        f"?? Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất{mode_txt}\n\n"
+        f"🎉 Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất{mode_txt}\n\n"
         "🎮 Bạn có muốn **Mod Button** không?\n"
         "Mod Button hiện **FREE**, không cần vé. Bot sẽ tự quét source và chỉ hiện các Button nhận dạng được.",
         reply_markup=InlineKeyboardMarkup(button_kb),
@@ -1272,6 +1273,262 @@ async def traffichd_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def combine2_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await _set_global_link_mode(update, "2combine")
+
+
+
+# ==============================================================
+#                  /rsfile — XÓA SẠCH GOFILE
+# ==============================================================
+def _extract_gofile_child_ids(data):
+    """Lấy ID các mục con trong root, tương thích nhiều dạng response GoFile."""
+    ids = []
+
+    def add(value):
+        if isinstance(value, str) and value and value not in ids:
+            ids.append(value)
+        elif isinstance(value, dict):
+            cid = value.get("id") or value.get("contentId")
+            if isinstance(cid, str) and cid and cid not in ids:
+                ids.append(cid)
+
+    for key in ("children", "childs"):
+        value = data.get(key)
+        if isinstance(value, list):
+            for item in value:
+                add(item)
+        elif isinstance(value, dict):
+            for k, item in value.items():
+                add(item)
+                if isinstance(k, str):
+                    add(k)
+
+    contents = data.get("contents")
+    if isinstance(contents, dict):
+        for k, item in contents.items():
+            add(item)
+            if isinstance(k, str):
+                add(k)
+    elif isinstance(contents, list):
+        for item in contents:
+            add(item)
+
+    return ids
+
+
+async def _get_gofile_root_folder(session, headers):
+    """Lấy root folder của đúng account/token bot đang dùng."""
+    account_id = (GOFILE_ACC_ID or "").strip()
+
+    if not account_id:
+        async with session.get(
+            "https://api.gofile.io/accounts/getid",
+            headers=headers,
+        ) as resp:
+            js = await resp.json(content_type=None)
+            if resp.status != 200 or js.get("status") != "ok":
+                raise RuntimeError(f"Không lấy được Account ID GoFile (HTTP {resp.status}).")
+            account_id = str((js.get("data") or {}).get("id") or "").strip()
+
+    if not account_id:
+        raise RuntimeError("GOFILE_ACC_ID trống hoặc không hợp lệ.")
+
+    async with session.get(
+        f"https://api.gofile.io/accounts/{account_id}",
+        headers=headers,
+    ) as resp:
+        js = await resp.json(content_type=None)
+        if resp.status != 200 or js.get("status") != "ok":
+            raise RuntimeError(f"Không đọc được tài khoản GoFile (HTTP {resp.status}).")
+
+    root = (js.get("data") or {}).get("rootFolder")
+    if isinstance(root, dict):
+        root = root.get("id") or root.get("contentId")
+    root = str(root or "").strip()
+    if not root:
+        raise RuntimeError("Không tìm thấy Root Folder GoFile.")
+    return root
+
+
+async def _list_gofile_root_children(session, headers, root_id):
+    """
+    Liệt kê toàn bộ mục trực tiếp trong root.
+    Xóa các mục root là đủ để xóa sạch vì xóa folder sẽ xóa đệ quy nội dung bên trong.
+    """
+    result = []
+    seen = set()
+
+    # API hỗ trợ page/pageSize. Nếu backend bỏ qua page, seen sẽ khiến vòng lặp dừng.
+    for page in range(1, 1001):
+        params = {"page": page, "pageSize": 1000}
+        async with session.get(
+            f"https://api.gofile.io/contents/{root_id}",
+            headers=headers,
+            params=params,
+        ) as resp:
+            js = await resp.json(content_type=None)
+            if resp.status != 200 or js.get("status") != "ok":
+                raise RuntimeError(f"Không đọc được nội dung GoFile (HTTP {resp.status}).")
+
+        data = js.get("data") or {}
+        page_ids = _extract_gofile_child_ids(data)
+        new_ids = [cid for cid in page_ids if cid not in seen]
+
+        for cid in new_ids:
+            seen.add(cid)
+            result.append(cid)
+
+        if not page_ids or not new_ids:
+            break
+
+        # Các dạng pagination thường gặp.
+        total_pages = (
+            data.get("totalPages")
+            or (data.get("pagination") or {}).get("totalPages")
+            or (data.get("metadata") or {}).get("totalPages")
+        )
+        if total_pages:
+            try:
+                if page >= int(total_pages):
+                    break
+            except Exception:
+                pass
+
+        # Nếu trang có ít hơn pageSize thì không còn trang sau.
+        if len(page_ids) < 1000:
+            break
+
+    return result
+
+
+async def delete_all_gofile_contents():
+    """
+    Xóa tất cả file/folder bên trong root GoFile.
+    KHÔNG xóa root folder và KHÔNG xóa account.
+    Trả về (deleted_count, failed_count, remaining_count).
+    """
+    if not GOFILE_ACC_TOKEN:
+        raise RuntimeError("Chưa cấu hình GOFILE_ACC_TOKEN.")
+
+    headers = {
+        "Authorization": f"Bearer {GOFILE_ACC_TOKEN}",
+        "Content-Type": "application/json",
+    }
+    timeout = aiohttp.ClientTimeout(total=120)
+
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        root_id = await _get_gofile_root_folder(session, headers)
+        content_ids = await _list_gofile_root_children(session, headers, root_id)
+
+        if not content_ids:
+            return 0, 0, 0
+
+        deleted = 0
+        failed = 0
+
+        # Chia batch để URL/body không quá lớn và tránh rate limit.
+        batch_size = 100
+        for pos in range(0, len(content_ids), batch_size):
+            batch = content_ids[pos:pos + batch_size]
+            payload = {"contentsId": ",".join(batch)}
+
+            try:
+                async with session.delete(
+                    "https://api.gofile.io/contents",
+                    headers=headers,
+                    json=payload,
+                ) as resp:
+                    js = await resp.json(content_type=None)
+                    if resp.status == 200 and js.get("status") == "ok":
+                        deleted += len(batch)
+                    else:
+                        failed += len(batch)
+            except Exception:
+                failed += len(batch)
+
+            # Nhẹ API một chút giữa các batch.
+            if pos + batch_size < len(content_ids):
+                await asyncio.sleep(0.25)
+
+        # Kiểm tra lại root sau khi xóa.
+        try:
+            remaining = await _list_gofile_root_children(session, headers, root_id)
+            remaining_count = len(remaining)
+        except Exception:
+            remaining_count = -1
+
+        return deleted, failed, remaining_count
+
+
+async def rsfile_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Admin-only: hỏi xác nhận trước khi xóa sạch storage GoFile."""
+    if not is_admin(update.effective_user.id):
+        await update.message.reply_text("🚫 Chỉ ADMIN mới được dùng /rsfile.")
+        return
+
+    keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("🗑 XOÁ HẾT GOFILE", callback_data="RSFILE::confirm")],
+        [InlineKeyboardButton("❌ HUỶ", callback_data="RSFILE::cancel")],
+    ])
+    await update.message.reply_text(
+        "⚠️ **XÁC NHẬN XOÁ SẠCH GOFILE**\n\n"
+        "Lệnh này sẽ xoá **toàn bộ file và folder upload** trong tài khoản GoFile của bot.\n"
+        "Dữ liệu đã xoá **không thể khôi phục**.\n\n"
+        "Root folder và tài khoản GoFile sẽ được giữ nguyên.",
+        reply_markup=keyboard,
+        parse_mode="Markdown",
+    )
+
+
+async def rsfile_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    user_id = update.effective_user.id
+
+    if not is_admin(user_id):
+        await query.answer("🚫 Chỉ ADMIN mới được dùng chức năng này.", show_alert=True)
+        return
+
+    action = (query.data or "").split("::", 1)[-1]
+    if action == "cancel":
+        await query.answer("Đã huỷ.")
+        try:
+            await query.edit_message_text("❌ Đã huỷ xoá GoFile.")
+        except Exception:
+            pass
+        return
+
+    if action != "confirm":
+        await query.answer()
+        return
+
+    await query.answer("Đang xoá toàn bộ GoFile...")
+    try:
+        await query.edit_message_text("⏳ Đang xoá toàn bộ file trên GoFile, vui lòng đợi...")
+    except Exception:
+        pass
+
+    try:
+        deleted, failed, remaining = await delete_all_gofile_contents()
+        if deleted == 0 and failed == 0 and remaining == 0:
+            text = "✅ GoFile hiện đã trống, không có file/folder nào để xoá."
+        else:
+            remain_text = "không xác định" if remaining < 0 else str(remaining)
+            text = (
+                "✅ **RSFILE HOÀN TẤT**\n\n"
+                f"🗑 Đã xoá: **{deleted}** mục gốc\n"
+                f"❌ Lỗi: **{failed}** mục\n"
+                f"📦 Còn lại trên root: **{remain_text}** mục\n\n"
+                "Folder bị xoá sẽ kéo theo toàn bộ file/subfolder bên trong."
+            )
+        try:
+            await query.edit_message_text(text, parse_mode="Markdown")
+        except Exception:
+            await context.bot.send_message(chat_id=user_id, text=text, parse_mode="Markdown")
+    except Exception as exc:
+        err = str(exc)
+        try:
+            await query.edit_message_text(f"❌ Xoá GoFile thất bại:\n`{err}`", parse_mode="Markdown")
+        except Exception:
+            await context.bot.send_message(chat_id=user_id, text=f"❌ Xoá GoFile thất bại: {err}")
 
 
 # ==============================================================
@@ -3869,6 +4126,7 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("link4m",      link4m_cmd))
     app.add_handler(CommandHandler("traffichd",   traffichd_cmd))
     app.add_handler(CommandHandler("2combine",    combine2_cmd))
+    app.add_handler(CommandHandler("rsfile",      rsfile_cmd))
     app.add_handler(CommandHandler("makekey",     makekey))
     app.add_handler(CommandHandler("key",         key_cmd))
     app.add_handler(CommandHandler("addadmin",    addadmin_cmd))
@@ -3882,6 +4140,7 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Regex(r"^/start/start/admin(\s|$)"), admin_activate_cmd))
 
     # ----- Callback handlers -----
+    app.add_handler(CallbackQueryHandler(rsfile_callback,            pattern=r"^RSFILE::"))
     app.add_handler(CallbackQueryHandler(post_button_prompt_callback, pattern=r"^POSTBTN::"))
     app.add_handler(CallbackQueryHandler(button_page_callback,        pattern=r"^BTNPG::"))
     app.add_handler(CallbackQueryHandler(button_mod_callback,         pattern=r"^btnmod_"))

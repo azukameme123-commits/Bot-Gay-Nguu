@@ -484,6 +484,47 @@ def Add_SkillCombineId(ID_SKIN, skillcombine):
         "UnknownI4": 10000
     }])
     
+    elif ID_SKIN in ["16707"]:
+        data.extend([{
+        "CfgID": 167235,
+        "bMapSkillCombineUseRuleID": 100,
+        "OverlayRule": 1,
+        "OverlayMax": 1,
+        "SkillCombineDesc": "94BB57718F6CA746_##",
+        "Prefab": "Prefab_Characters/Prefab_Hero/141_DiaoChan/skill/Change",
+        "Duration": -1,
+        "bAgeImmeExcute": True,
+        "ExtraEffectSlotType": -1,
+        "TargetMarkerSlotType": -1,
+        "UnknownI4": 10000
+    },
+    {
+        "CfgID": 167736,
+        "bMapSkillCombineUseRuleID": 100,
+        "OverlayRule": 1,
+        "OverlayMax": 1,
+        "SkillCombineDesc": "94BB57718F6CA746_##",
+        "Prefab": "Prefab_Characters/Prefab_Hero/141_DiaoChan/skill/Change",
+        "Duration": -1,
+        "bAgeImmeExcute": True,
+        "ExtraEffectSlotType": -1,
+        "TargetMarkerSlotType": -1,
+        "UnknownI4": 10000
+    },
+    {
+        "CfgID": 167767,
+        "bMapSkillCombineUseRuleID": 100,
+        "OverlayRule": 1,
+        "OverlayMax": 1,
+        "SkillCombineDesc": "94BB57718F6CA746_##",
+        "Prefab": "Prefab_Characters/Prefab_Hero/141_DiaoChan/skill/Change",
+        "Duration": -1,
+        "bAgeImmeExcute": True,
+        "ExtraEffectSlotType": -1,
+        "TargetMarkerSlotType": -1,
+        "UnknownI4": 10000
+    }])
+    
     with open(skillcombine, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
         

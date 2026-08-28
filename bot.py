@@ -15,8 +15,8 @@ Cấu trúc thư mục ĐẶT bot.py cạnh 2 thư mục sau (giống ảnh ch�
 Yêu cầu (đã update):
   - 1 lần mod tối đa 10 skin
   - 1 ngày user thường mod tối đa 5 lần
-  - Đủ 30 link (Link4m + TrafficHD) -> +1 vé đổi mod Button
-  - VIP: mod skin KHÔNG giới hạn, được 3 lần buttonmod / tháng
+  - Mod Button FREE, không cần vé, bot tự nhận dạng source button
+  - VIP: mod skin KHÔNG giới hạn; Mod Button FREE như mọi user
   - Admin: cần nhập key AdminSv để được cấp quyền
   - Key VIP không giới hạn thời gian sử dụng trong ngày
   - Link tải nén theo chuỗi: GoFile -> Link4m -> TrafficHD (1 link cuối duy nhất)
@@ -92,8 +92,8 @@ CHANNEL_URL  = "https://youtube.com/@tkamodaov?si=cWQxuFFlPuC9S07-"
 # Giới hạn
 MAX_SKIN_PER_MOD     = 10   # 1 lần mod tối đa 10 skin
 MAX_MOD_PER_DAY      = 5    # user thường: 5 lần/ngày
-LINK_NEED_FOR_BUTTON = 30   # đủ 30 link -> +1 vé Mod Button
-VIP_BUTTON_PER_MONTH = 3    # VIP: 3 lần button/tháng
+LINK_NEED_FOR_BUTTON = 30   # legacy data only; Mod Button hiện FREE, không dùng vé
+VIP_BUTTON_PER_MONTH = 3    # legacy data only; Mod Button hiện FREE, không giới hạn
 
 # Path 2 thư mục ngoại vi (bot.py cạnh 2 thư mục này)
 BASE_DIR         = os.path.dirname(os.path.abspath(__file__))
@@ -123,10 +123,9 @@ SKIN_TXT           = "Data/Json/skin.txt"     # dùng cho /choosehero
 NUTBAM_JSON        = "Data/Json/nutbam.json"  # danh sách button có thể mod
 
 # ==============================================================
-#     DANH SÁCH BUTTON CÓ THỂ MOD (ID -> Tên hiển thị)
-#  Danh sách chuẩn 88 mục theo engine ButtonNotify.
-#  Lần đầu chạy /buttonmod bot tự ghi vào Data/Json/nutbam.json.
-#  Muốn làm mới danh sách: xoá Data/Json/nutbam.json rồi chạy lại.
+#     DANH SÁCH BUTTON LEGACY (KHÔNG CÒN DÙNG ĐỂ QUYẾT ĐỊNH MENU)
+#  /buttonmod hiện tự quét source thật bằng _detected_button_rows().
+#  DEFAULT_NUTBAM chỉ giữ lại để tương thích dữ liệu/config cũ.
 #  LƯU Ý: ID 13015 đang bị trùng trong engine (Airi / Tulen Gojo);
 #  engine khớp theo ID nên 13015 sẽ ra Tulen Satoru Gojo (mục sau).
 #  -> Nên sửa lại ID của Airi trong Skin/skin.txt cho khác biệt.
@@ -567,8 +566,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"• /choosehero → Chọn Tướng - Skin Cần Mod.\n"
             f"• 1 Lần Mod Tối Đa {MAX_SKIN_PER_MOD} Skin.\n"
             f"• 1 Ngày Được Mod Tối Đa {MAX_MOD_PER_DAY} Lần.\n"
-            f"• Vượt Đủ {LINK_NEED_FOR_BUTTON} Link → Đổi 1 Lần Mod Button.\n"
-            f"• Key VIP: Mod Skin Không Giới Hạn, Mod Button {VIP_BUTTON_PER_MONTH} Lần/Tháng.\n"
+            "• Mod Button: FREE – Không Cần Vé.\n"
+            "• Key VIP: Mod Skin Không Giới Hạn, Mod Button FREE.\n"
             f"🚫 Nghiêm Cấm Hành Vi Lấy Mod Đăng Video Khi Chưa Được Cho Phép."
         )
 
@@ -672,9 +671,78 @@ async def send_files(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # ==============================================================
 #              CHOOSE HERO / SKIN (Inline Menu)
 # ==============================================================
+def _find_skin_by_id(skin_id):
+    """Tìm (tướng, skin, id) từ SKINS theo ID skin."""
+    sid = str(skin_id).strip()
+    for tuong, skin_dict in SKINS.items():
+        for skin, value in skin_dict.items():
+            if str(value).strip() == sid:
+                return tuong, skin, sid
+    return None
+
+
+def _store_selected_skin(context, tuong, skin, skin_id):
+    """Lưu lựa chọn giống hệt callback SKIN::, mỗi tướng giữ 1 skin."""
+    selected_ids    = list(context.user_data.get("idmodskin", []))
+    selected_skins  = list(context.user_data.get("skin_list", []))
+    selected_tuongs = list(context.user_data.get("tuong_list", []))
+
+    if tuong in selected_tuongs:
+        i = selected_tuongs.index(tuong)
+        selected_tuongs.pop(i)
+        selected_skins.pop(i)
+        selected_ids.pop(i)
+
+    selected_tuongs.append(tuong)
+    selected_skins.append(skin)
+    selected_ids.append(str(skin_id))
+    context.user_data.update({
+        "idmodskin": selected_ids,
+        "skin_list": selected_skins,
+        "tuong_list": selected_tuongs,
+    })
+
+
+async def _send_selected_skin_info(update, context, tuong, skin, skin_id):
+    """Gửi ảnh/thông báo và menu phụ kiện cho skin vừa chọn."""
+    chat = update.effective_chat
+    sid_str = str(skin_id)
+    suffix = "_2" if sid_str in {"16707", "13311", "11620"} else ""
+    image_url = f"https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/{sid_str}{suffix}.jpg"
+    caption = f"Bạn Đã Chọn: {tuong} - {skin} [{sid_str}]\nDùng Lệnh /run Để Bắt Đầu Tạo Mod"
+
+    try:
+        await chat.send_action("upload_photo")
+        async with aiohttp.ClientSession() as session:
+            async with session.get(image_url) as resp:
+                if resp.status == 200:
+                    file = BytesIO(await resp.read())
+                    file.name = f"{sid_str}.jpg"
+                    file.seek(0)
+                    await chat.send_photo(photo=InputFile(file), caption=caption)
+                else:
+                    await chat.send_message(text=caption)
+    except Exception:
+        await chat.send_message(text=caption)
+
+    if sid_str in ACCESSORY_OPTIONS:
+        pending_acc = context.user_data.setdefault("pending_accessory", {})
+        pending_acc.pop(sid_str, None)
+        acc_kb = [
+            [InlineKeyboardButton(label, callback_data=f"ACC::{sid_str}::{val}")]
+            for val, label in ACCESSORY_OPTIONS[sid_str]
+        ]
+        await chat.send_message(
+            f"🧩 **{tuong} - {skin}** (ID `{sid_str}`) có tuỳ chọn phụ kiện.\n"
+            "Vui lòng chọn phụ kiện (có thể đổi ý trước khi bấm /run):",
+            reply_markup=InlineKeyboardMarkup(acc_kb),
+            parse_mode="Markdown",
+        )
+
+
 async def choosehero(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user    = update.effective_user
-    user_id = str(user.id)
+    user     = update.effective_user
+    user_id  = str(user.id)
     username = f"@{user.username}" if user.username else None
 
     if is_blocked(user_id) or (username and is_blocked(username)):
@@ -693,7 +761,54 @@ async def choosehero(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    # Admin / VIP: không giới hạn số skin/lần
+    # Có ID sau lệnh: /choosehero 15009 (hỗ trợ luôn nhiều ID cách nhau bằng khoảng trắng).
+    if context.args:
+        raw_ids = []
+        for arg in context.args:
+            raw_ids.extend(x for x in re.split(r"[,;\s]+", arg.strip()) if x)
+
+        found = []
+        invalid = []
+        for sid in raw_ids:
+            item = _find_skin_by_id(sid)
+            if item:
+                found.append(item)
+            else:
+                invalid.append(sid)
+
+        if invalid:
+            await update.message.reply_text(
+                "❌ Không tìm thấy ID skin: " + ", ".join(invalid)
+            )
+        if not found:
+            return
+
+        unlimited = is_admin(user_id) or is_vip(user_id)
+        context.user_data.setdefault("choose_count", 0)
+        selected_now = 0
+
+        for tuong, skin, sid in found:
+            # User thường vẫn giữ giới hạn chọn skin/lần như menu cũ.
+            if not unlimited and context.user_data["choose_count"] >= MAX_SKIN_PER_MOD:
+                await update.message.reply_text(
+                    f"⚠️ Bạn Đã Chọn Đủ {MAX_SKIN_PER_MOD} Skin.\n"
+                    "Hãy Dùng /run Để Tạo Mod Hoặc /xoadanhsach Để Chọn Lại."
+                )
+                break
+
+            _store_selected_skin(context, tuong, skin, sid)
+            if not unlimited:
+                context.user_data["choose_count"] += 1
+            selected_now += 1
+            await _send_selected_skin_info(update, context, tuong, skin, sid)
+
+        if selected_now and not unlimited:
+            await update.message.reply_text(
+                f"🎯 Đã Chọn: {context.user_data['choose_count']}/{MAX_SKIN_PER_MOD} Skin"
+            )
+        return
+
+    # Không truyền ID -> giữ menu chọn tướng/skin cũ.
     if is_admin(user_id) or is_vip(user_id):
         await mod(update, context)
         return
@@ -859,7 +974,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except Exception: pass
             return
 
-        # ===== Callback cho button mod (đổi vé) =====
+        # ===== Callback cho button mod (FREE) =====
         if data.startswith("btnmod_"):
             await button_mod_callback(update, context)
             return
@@ -1027,17 +1142,20 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data["skin_list_pending"]   = list(skins)
     context.user_data["tuong_list_pending"]  = list(tuongs)
     context.user_data["idmodskin_pending"]   = list(ids)
-    # Hỏi Cam Xa Yes/No (cho mọi user, kể cả admin/vip)
-    camxa_kb = [
-        [InlineKeyboardButton("✅ YES – Mod Cam Xa", callback_data="CAMXA::yes")],
-        [InlineKeyboardButton("❌ NO – Bỏ qua",     callback_data="CAMXA::no")],
+    # Sau khi mod skin xong: hỏi Mod Button trước (FREE), đúng flow bot UI.
+    # Sau khi chọn/huỷ Button, bot mới chuyển sang bước hỏi Cam Xa để giữ đủ chức năng cũ.
+    context.user_data["button_preferred_ids"] = list(ids)
+    context.user_data["post_button_flow"] = False
+    button_kb = [
+        [InlineKeyboardButton("✅ YES – Mod Button", callback_data="POSTBTN::yes")],
+        [InlineKeyboardButton("❌ NO – Bỏ qua",     callback_data="POSTBTN::no")],
     ]
     await msg.edit_text(
         f"🎉 Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất{mode_txt}\n\n"
-        "🎯 Bạn có muốn **Mod Cam Xa** không?\n"
-        "Trả lời Yes thì bot sẽ hỏi bạn nhập **% Cam Xa (0-100)**.\n"
-        "(Trả lời No thì bỏ qua – bấm /layfile để nhận link tải như bình thường.)",
-        reply_markup=InlineKeyboardMarkup(camxa_kb),
+        "🎮 Bạn có muốn **Mod Button** không?\n"
+        "Mod Button hiện **FREE**, không cần vé. Bot sẽ tự quét source và chỉ hiện các Button nhận dạng được.",
+        reply_markup=InlineKeyboardMarkup(button_kb),
+        parse_mode="Markdown",
     )
     try:
         history = load_json(MOD_HISTORY_FILE)
@@ -1182,7 +1300,7 @@ async def create_trafficHD(long_url):
         return None
 
 async def file_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user    = update.effective_user
+    user = update.effective_user
     user_id = str(user.id)
     username = f"@{user.username}" if user.username else None
 
@@ -1202,7 +1320,7 @@ async def file_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("⏳ Đang Upload File, Vui Lòng Đợi...")
 
     admin_flag = is_admin(user_id)
-    vip_flag   = is_vip(user_id)
+    vip_flag = is_vip(user_id)
 
     gofile_link = await upload_gofile(output_zip)
     if not gofile_link:
@@ -1224,214 +1342,351 @@ async def file_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="Markdown"
         )
     else:
-        # Nén link theo chuỗi: GoFile -> Link4m -> TrafficHD (user chỉ vượt 1 link cuối)
+        # User thường vẫn dùng chuỗi link tải; Mod Button không còn liên quan vé/link count.
         final_link, layers = await create_chained_link(gofile_link)
-
-        remain, tickets = add_link_count(user_id, layers)
-
-        lines_out = ["✅ **FILE MOD ĐÃ SẴN SÀNG ( User Normal )**\n",
-                     "➢ **Vượt Link Bên Dưới Để Lấy File**",
-                     f"🔗 **Link Tải Mod:**\n{final_link}",
-                     ""]
+        lines_out = [
+            "✅ **FILE MOD ĐÃ SẴN SÀNG ( User Normal )**\n",
+            "➢ **Vượt Link Bên Dưới Để Lấy File**",
+            f"🔗 **Link Tải Mod:**\n{final_link}",
+            "",
+        ]
         if layers >= 2:
             lines_out.append("↳ Chuỗi link: TrafficHD → Link4m → GoFile")
         elif layers == 1:
             lines_out.append("↳ Chuỗi link: Link4m → GoFile")
-        lines_out.append(f"📊 Tiến Độ Đổi Mod Button: {remain}/{LINK_NEED_FOR_BUTTON}")
-        lines_out.append(f"🎟️ Vé Mod Button Đang Có: {tickets}")
-        if tickets > 0:
-            lines_out.append("➡️ Dùng /buttonmod Để Đổi Mod Button.")
+        lines_out.append("🎮 Mod Button: **FREE – không cần vé** (/buttonmod)")
         lines_out.append("❗ **Sử Dụng Trình Duyệt Để Tránh Lỗi**")
-
         await update.message.reply_text("\n".join(lines_out), parse_mode="Markdown")
 
-    try: os.remove(output_zip)
-    except Exception: pass
+    try:
+        os.remove(output_zip)
+    except Exception:
+        pass
     context.user_data["output_zip"] = None
+
+
+
+# ==============================================================
+#          BUTTON FREE + AUTO-DETECT + POST-MOD FLOW
+# ==============================================================
+BUTTON_PAGE_SIZE = 20
+
+
+def _detected_button_rows():
+    """Tự quét toàn source bot để nhận dạng Button thực sự mod được.
+
+    Không dùng DEFAULT_NUTBAM/nutbam.json làm nguồn chân lý nữa. Engine
+    skinlist.scan_source() tự nhận file theo pattern:
+      personalbuttoneffect_<ID>.assetbundle
+      personalbuttoneffect_<ID>_raw.assetbundle
+      personalbuttonsprite_<ID>_raw.assetbundle
+
+    Quét từ BASE_DIR giúp bot không phụ thuộc bắt buộc vào đúng tên thư mục
+    Source/. Nếu source nằm trong thư mục con khác, engine vẫn tự tìm thấy.
+    """
+    skin_file = os.path.join(BASE_DIR, "Skin", "skin.txt")
+    notify_file = os.path.join(BASE_DIR, "Skin", "notify.txt")
+    if not os.path.isfile(skin_file):
+        return []
+    try:
+        rows = build_menu(
+            BASE_DIR,
+            skin_file,
+            notify_txt=notify_file,
+            databin_dir=os.path.join(BASE_DIR, "Databin", "Client", "Huanhua"),
+        )
+    except Exception:
+        return []
+
+    # Mod Button chỉ lấy row có source button thật; bỏ row NTF-only.
+    out = []
+    seen = set()
+    for r in rows:
+        files = r.get("files") or {}
+        if not (files.get("effect") or files.get("sprite_raw")):
+            continue
+        sid = str(r.get("id", "")).upper()
+        if not sid or sid in seen:
+            continue
+        seen.add(sid)
+        out.append(r)
+    return out
+
+
+def _sort_button_rows(rows, preferred_ids=None):
+    preferred = {str(x).upper() for x in (preferred_ids or [])}
+    return sorted(
+        rows,
+        key=lambda r: (
+            str(r.get("id", "")).upper() not in preferred,
+            (r.get("hero") or "").lower(),
+            (r.get("name") or "").lower(),
+            str(r.get("id", "")).upper(),
+        ),
+    )
+
+
+async def _show_button_picker(target, context, page=0, edit=False):
+    rows = _sort_button_rows(
+        _detected_button_rows(),
+        context.user_data.get("button_preferred_ids") or [],
+    )
+    if not rows:
+        text = (
+            "❌ Bot chưa nhận dạng được Button nào từ source.\n"
+            "Engine chỉ hiện Button khi tìm thấy file `personalbuttoneffect_*` hoặc "
+            "`personalbuttonsprite_*_raw.assetbundle`.\n"
+            "Không dùng danh sách hard-code để tránh hiện skin không mod được."
+        )
+        try:
+            if edit and hasattr(target, "edit_message_text"):
+                await target.edit_message_text(text, parse_mode="Markdown")
+            elif hasattr(target, "reply_text"):
+                await target.reply_text(text, parse_mode="Markdown")
+            elif hasattr(target, "message") and target.message:
+                await target.message.reply_text(text, parse_mode="Markdown")
+        except Exception:
+            pass
+        return False
+
+    total = len(rows)
+    pages = max(1, (total + BUTTON_PAGE_SIZE - 1) // BUTTON_PAGE_SIZE)
+    page = max(0, min(int(page), pages - 1))
+    start = page * BUTTON_PAGE_SIZE
+    chunk = rows[start:start + BUTTON_PAGE_SIZE]
+    preferred = {str(x).upper() for x in (context.user_data.get("button_preferred_ids") or [])}
+
+    keyboard = []
+    for r in chunk:
+        sid = str(r.get("id", "")).upper()
+        hero = (r.get("hero") or "").strip()
+        name = (r.get("name") or "").strip()
+        display = (f"{hero} - {name}" if hero else name) or sid
+        mark = "⭐ " if sid in preferred else ""
+        keyboard.append([
+            InlineKeyboardButton(
+                f"{mark}{display}"[:60],
+                callback_data=f"btnmod_{sid}",
+            )
+        ])
+
+    nav = []
+    if pages > 1:
+        nav.append(InlineKeyboardButton("⬅️", callback_data=f"BTNPG::{max(0, page - 1)}"))
+        nav.append(InlineKeyboardButton(f"{page + 1}/{pages}", callback_data="BTNPG::NONE"))
+        nav.append(InlineKeyboardButton("➡️", callback_data=f"BTNPG::{min(pages - 1, page + 1)}"))
+        keyboard.append(nav)
+    keyboard.append([InlineKeyboardButton("❌ HUỶ", callback_data="btnmod_cancel")])
+
+    text = (
+        f"🎛️ **CHỌN SKIN BUTTON CẦN MOD — FREE**\n"
+        f"🔎 Tự nhận dạng: **{total}** Button từ source.\n"
+        "⭐ = skin vừa mod (nếu có Button tương ứng)."
+    )
+    markup = InlineKeyboardMarkup(keyboard)
+    try:
+        if edit and hasattr(target, "edit_message_text"):
+            await target.edit_message_text(text, reply_markup=markup, parse_mode="Markdown")
+        elif hasattr(target, "reply_text"):
+            await target.reply_text(text, reply_markup=markup, parse_mode="Markdown")
+        elif hasattr(target, "message") and target.message:
+            await target.message.reply_text(text, reply_markup=markup, parse_mode="Markdown")
+        else:
+            return False
+    except Exception:
+        return False
+    return True
+
+
+async def _offer_camxa(context, chat_id):
+    """Bước kế tiếp sau flow Mod Button: giữ nguyên chức năng Cam Xa cũ."""
+    camxa_kb = [
+        [InlineKeyboardButton("✅ YES – Mod Cam Xa", callback_data="CAMXA::yes")],
+        [InlineKeyboardButton("❌ NO – Bỏ qua", callback_data="CAMXA::no")],
+    ]
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text=(
+            "🎯 Bạn có muốn **Mod Cam Xa** không?\n"
+            "Nếu Yes, bot sẽ hỏi **% Cam Xa (0-100)**.\n"
+            "Nếu No, bấm /layfile để lấy file skin mod."
+        ),
+        reply_markup=InlineKeyboardMarkup(camxa_kb),
+        parse_mode="Markdown",
+    )
+
+
+async def post_button_prompt_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    if not query:
+        return
+    try:
+        await query.answer()
+    except Exception:
+        pass
+    val = query.data.split("::", 1)[1]
+    chat_id = query.message.chat.id if query.message else update.effective_chat.id
+
+    if val == "no":
+        context.user_data["post_button_flow"] = False
+        try:
+            await query.edit_message_text("🚫 Bỏ qua Mod Button.")
+        except Exception:
+            pass
+        await _offer_camxa(context, chat_id)
+        return
+
+    context.user_data["post_button_flow"] = True
+    ok = await _show_button_picker(query, context, page=0, edit=True)
+    if not ok:
+        context.user_data["post_button_flow"] = False
+        await _offer_camxa(context, chat_id)
+
+
+async def button_page_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    if not query:
+        return
+    try:
+        await query.answer()
+    except Exception:
+        pass
+    page_s = query.data.split("::", 1)[1]
+    if page_s == "NONE":
+        return
+    try:
+        page = int(page_s)
+    except ValueError:
+        page = 0
+    await _show_button_picker(query, context, page=page, edit=True)
 
 # ==============================================================
 #                        /buttonmod
 #         (Điều phối, gọi ButtonNotify/engine button nhúng)
 # ==============================================================
 async def buttonmod_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user    = update.effective_user
+    """Mod Button FREE — không dùng vé, không giới hạn lượt.
+
+    Danh sách không hard-code: bot tự quét các file personalbutton*.assetbundle
+    đang có trong source và chỉ hiện những button engine thực sự nhận dạng được.
+    """
+    user = update.effective_user
     user_id = str(user.id)
     if not user.username:
         await update.message.reply_text("⚠️ Bạn chưa có Username Telegram.")
         return
-
-    admin_flag = is_admin(user_id)
-    vip_flag   = is_vip(user_id)
-    tickets    = get_button_tickets(user_id)
-
-    # Kiểm tra hạn mức
-    if admin_flag:
-        pass  # unlimited
-    elif vip_flag:
-        used = get_vip_btn_count_this_month(user_id)
-        if used >= VIP_BUTTON_PER_MONTH:
-            await update.message.reply_text(
-                f"⚠️ VIP Đã Dùng Đủ {VIP_BUTTON_PER_MONTH}/{VIP_BUTTON_PER_MONTH} "
-                f"Lượt Mod Button Trong Tháng.\nHãy quay lại vào tháng sau."
-            )
-            return
-    else:
-        if tickets <= 0:
-            link_cnt = get_link_count(user_id)
-            await update.message.reply_text(
-                f"🚫 Bạn Chưa Có Vé Đổi Mod Button.\n"
-                f"📊 Tiến Độ: {link_cnt}/{LINK_NEED_FOR_BUTTON} link.\n"
-                f"Hãy Vượt Đủ {LINK_NEED_FOR_BUTTON} Link Tại /layfile Để Nhận 1 Vé."
-            )
-            return
-
-    # Menu button: lấy từ nutbam.json trước, nếu không có thì lấy từ Skin/skin.txt
-    nutbam = load_json(NUTBAM_JSON)
-    if not nutbam and DEFAULT_NUTBAM:
-        # Lần đầu: ghi danh sách chuẩn vào nutbam.json để lần sau dùng luôn
-        nutbam = dict(DEFAULT_NUTBAM)
-        save_json(NUTBAM_JSON, nutbam)
-    if not nutbam:
-        # fallback: dùng skin.txt của ButtonNotify để lấy danh sách
-        skin_txt = os.path.join(BASE_DIR, "Skin", "skin.txt")
-        if os.path.isfile(skin_txt):
-            with open(skin_txt, encoding="utf-8") as f:
-                cur_hero = ""
-                for line in f:
-                    line = line.strip()
-                    if not line: continue
-                    if line.endswith(":"):
-                        cur_hero = line[:-1]; continue
-                    m = re.match(r'^(\d{4,6})\s*[-–—:]\s*(.+)$', line)
-                    if m:
-                        sid = m.group(1); name = m.group(2).strip()
-                        display = f"{cur_hero} - {name}" if cur_hero else name
-                        nutbam[sid] = display
-    if not nutbam:
-        await update.message.reply_text("❌ Chưa có Button nào trong danh sách.")
+    if is_blocked(user_id) or is_blocked(f"@{user.username}"):
+        await update.message.reply_text("🚫 Bạn đã bị chặn khỏi việc sử dụng bot.")
         return
 
-    # Hiển thị toàn bộ danh sách button (Telegram cho phép tới 100 nút inline)
-    keyboard = []
-    for sid, name in list(nutbam.items()):
-        keyboard.append([InlineKeyboardButton(name[:60], callback_data=f"btnmod_{sid}")])
-    keyboard.append([InlineKeyboardButton("❌ HUỶ", callback_data="btnmod_cancel")])
+    context.user_data["post_button_flow"] = False
+    context.user_data["button_preferred_ids"] = []
+    await _show_button_picker(update.message, context, page=0, edit=False)
 
-    who = ("ADMIN" if admin_flag
-           else (f"VIP ({get_vip_btn_count_this_month(user_id)}/{VIP_BUTTON_PER_MONTH})"
-                 if vip_flag else f"User (Vé: {tickets})"))
-    await update.message.reply_text(
-        f"🎛️ **CHỌN BUTTON CẦN MOD** — {who}",
-        reply_markup=InlineKeyboardMarkup(keyboard),
-        parse_mode="Markdown",
-    )
 
 async def button_mod_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Callback chọn Button. Mod Button luôn FREE, không trừ vé/VIP quota."""
     query = update.callback_query
-    user  = update.effective_user
+    user = update.effective_user
     user_id = str(user.id)
-    data  = query.data
+    data = query.data
+    post_flow = bool(context.user_data.get("post_button_flow"))
 
     if data == "btnmod_cancel":
-        try: await query.edit_message_text("❌ Đã Huỷ.")
-        except Exception: pass
+        context.user_data["post_button_flow"] = False
+        try:
+            await query.edit_message_text("❌ Đã huỷ Mod Button.")
+        except Exception:
+            pass
+        if post_flow:
+            await _offer_camxa(context, query.message.chat.id if query.message else update.effective_chat.id)
         return
 
     sid = data.split("_", 1)[1]
-
-    admin_flag = is_admin(user_id)
-    vip_flag   = is_vip(user_id)
-
-    # ==== Trừ hạn mức ====
-    if admin_flag:
-        pass
-    elif vip_flag:
-        used = get_vip_btn_count_this_month(user_id)
-        if used >= VIP_BUTTON_PER_MONTH:
-            try: await query.edit_message_text("🚫 VIP Đã Hết Lượt Trong Tháng.")
-            except Exception: pass
-            return
-    else:
-        if not use_button_ticket(user_id):
-            try: await query.edit_message_text("🚫 Bạn Không Còn Vé Để Đổi.")
-            except Exception: pass
-            return
-
     try:
-        await query.edit_message_text(f"⏳ Đang Tạo Mod Button ID: {sid}...")
+        await query.edit_message_text(f"⏳ Đang Tạo Mod Button FREE ID: {sid}...")
     except Exception:
         pass
 
-    # ==== Chạy engine button đã được gắn trực tiếp trong bot ====
     output_root = os.path.join(BASE_DIR, "Output")
     os.makedirs(output_root, exist_ok=True)
     ts_before = max([os.path.getmtime(os.path.join(output_root, x)) for x in os.listdir(output_root)] + [0]) if os.listdir(output_root) else 0
     try:
         await asyncio.to_thread(_inline_button_mod, sid)
     except Exception as exc:
-        if not (admin_flag or vip_flag):
-            tk = load_json(BUTTON_TICKET_FILE); tk[user_id] = int(tk.get(user_id, 0)) + 1; save_json(BUTTON_TICKET_FILE, tk)
         await context.bot.send_message(chat_id=user.id, text=f"❌ Tạo Button Mod thất bại: {exc}")
+        context.user_data["post_button_flow"] = False
+        if post_flow:
+            await _offer_camxa(context, user.id)
         return
 
     new_folder = _pick_latest_folder(output_root, before_ts=ts_before, prefix=f"[{sid}]")
     if not new_folder:
-        # Hoàn vé lại nếu là user thường (mod fail)
-        if not (admin_flag or vip_flag):
-            tk = load_json(BUTTON_TICKET_FILE)
-            tk[user_id] = int(tk.get(user_id, 0)) + 1
-            save_json(BUTTON_TICKET_FILE, tk)
         await context.bot.send_message(
             chat_id=user.id,
             text="❌ Tạo Button Mod thất bại (không thấy output)."
         )
+        context.user_data["post_button_flow"] = False
+        if post_flow:
+            await _offer_camxa(context, user.id)
         return
 
     base_name = os.path.basename(new_folder)
-    out_zip   = os.path.join(OUTPUT_DIR, f"[@{user.username}] Button {base_name}.zip")
+    out_zip = os.path.join(OUTPUT_DIR, f"[@{user.username}] Button {base_name}.zip")
     try:
         _zip_folder(new_folder, out_zip)
     except Exception as e:
         await context.bot.send_message(chat_id=user.id, text=f"❌ Lỗi khi nén: {e}")
+        context.user_data["post_button_flow"] = False
+        if post_flow:
+            await _offer_camxa(context, user.id)
         return
     out_zip = sanitize_filename(out_zip)
 
-    try: shutil.rmtree(new_folder)
-    except Exception: pass
+    try:
+        shutil.rmtree(new_folder)
+    except Exception:
+        pass
 
     await context.bot.send_message(chat_id=user.id, text="⏳ Đang Upload File Button...")
     gofile_link = await upload_gofile(out_zip)
     if not gofile_link:
         await context.bot.send_message(chat_id=user.id, text="❌ Upload GoFile thất bại.")
+        context.user_data["post_button_flow"] = False
+        if post_flow:
+            await _offer_camxa(context, user.id)
         return
 
+    admin_flag = is_admin(user_id)
+    vip_flag = is_vip(user_id)
     if admin_flag or vip_flag:
-        # VIP tăng đếm sau khi mod thành công
-        if vip_flag:
-            inc_vip_btn_count(user_id)
         who = "ADMIN" if admin_flag else "VIP"
-        remain_txt = ""
-        if vip_flag:
-            u = get_vip_btn_count_this_month(user_id)
-            remain_txt = f"\n📊 VIP Button Tháng: {u}/{VIP_BUTTON_PER_MONTH}"
         await context.bot.send_message(
             chat_id=user.id,
-            text=(f"✅ **BUTTON MOD SẴN SÀNG ({who})**\n"
+            text=(f"✅ **BUTTON MOD SẴN SÀNG ({who} · FREE)**\n"
                   f"➢ ID: {sid}\n"
-                  f"🔗 {gofile_link}{remain_txt}"),
+                  f"🔗 {gofile_link}"),
             parse_mode="Markdown"
         )
     else:
-        # Chuỗi link: GoFile -> Link4m -> TrafficHD (1 link cuối duy nhất)
         final_link, _layers = await create_chained_link(gofile_link)
-        lines_out = [f"✅ **BUTTON MOD SẴN SÀNG (User)**\n➢ ID: {sid}\n",
-                     f"🔗 **Link Tải Mod:**\n{final_link}"]
-        await context.bot.send_message(chat_id=user.id,
-                                       text="\n".join(lines_out),
-                                       parse_mode="Markdown")
+        await context.bot.send_message(
+            chat_id=user.id,
+            text=(f"✅ **BUTTON MOD SẴN SÀNG (FREE)**\n"
+                  f"➢ ID: {sid}\n\n"
+                  f"🔗 **Link Tải Mod:**\n{final_link}"),
+            parse_mode="Markdown"
+        )
 
-    try: os.remove(out_zip)
-    except Exception: pass
+    try:
+        os.remove(out_zip)
+    except Exception:
+        pass
+
+    context.user_data["post_button_flow"] = False
+    if post_flow:
+        await _offer_camxa(context, user.id)
+
 
 # ==============================================================
 #                       KEY VIP
@@ -1670,7 +1925,7 @@ async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"• Key VIP: {text}\n"
             f"• Hết hạn: {key_info['expired']}\n"
             f"• Mod Skin: Không giới hạn\n"
-            f"• Mod Button: {VIP_BUTTON_PER_MONTH} lần/tháng"
+            "• Mod Button: FREE – Không Giới Hạn"
         )
         return
 
@@ -1878,7 +2133,7 @@ def _format_user_record(uid, rec):
         f"• Quyền: {role} {blocked}\n"
         f"• Đăng ký kênh: {registered}\n"
         f"• Mod hôm nay: {mod_count}/{MAX_MOD_PER_DAY}\n"
-        f"• Vé Button: {btn_tickets}  |  VIP Button tháng: {vip_btn}/{VIP_BUTTON_PER_MONTH}\n"
+        "• Mod Button: FREE – Không Cần Vé\n"
         f"• Tạo lúc: {rec.get('registered_channel', '') and '—'}"
     ), role
 
@@ -2233,27 +2488,20 @@ def Setup(Version, FILES_MOD):
 
 def CopyConfigsPack(Version, FILES_MOD):
     """
-    Dán các file trong ./Configs vào đúng vị trí trong FILES_MOD:
-      - *.pkg.bytes  -> FILES_MOD/com.garena.game.kgvn/files/Resources/{Version}/
-      - *.assetbundle -> FILES_MOD/com.garena.game.kgvn/files/Resources/{Version}/assetbundle/uisystem/atlas/primary/
+    Chỉ dán *.pkg.bytes trong ./Configs vào:
+      FILES_MOD/com.garena.game.kgvn/files/Resources/{Version}/
+
+    Không copy bất kỳ file *.assetbundle nào từ Configs.
     """
     src = "Configs"
     if not os.path.isdir(src):
         return
     base = Path(FILES_MOD) / "com.garena.game.kgvn" / "files" / "Resources" / Version
+    base.mkdir(parents=True, exist_ok=True)
     for name in os.listdir(src):
         s = os.path.join(src, name)
-        if not os.path.isfile(s):
-            continue
-        low = name.lower()
-        if low.endswith('.pkg.bytes'):
-            dst_dir = base
-        else:
-            continue
-            
-
-        dst_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(s, dst_dir / name)
+        if os.path.isfile(s) and name.lower().endswith(".pkg.bytes"):
+            shutil.copy2(s, base / name)
 
 
 def TimNameHero(source_path, ID_SKIN):
@@ -2477,7 +2725,7 @@ def process_single_skin(ID_SKIN, ctx):
         code_bv_skill = ham_code_bv_skill(ID_SKIN, Files_MOD)
         Change_Actor = HDSkill(ID_SKIN, ID_HD, Files_MOD)
         FixStopTrack(Files_MOD)
-        AddGetHolidayResourcePath(Files_MOD)
+        # AddGetHolidayResourcePath(Files_MOD)
         Function_Track_Guid_AddGetHoliday(Files_MOD)
         MaHoa(ZSTD_DICT, Files_MOD)
 
@@ -2569,7 +2817,7 @@ def build_pack_folder_name(processed_skins, DECACMOD, chedomod_raw):
         base = f"{DECACMOD}[{today}] {safe_filename(processed_skins[0])}"
     else:
         base = f"{DECACMOD}[{today}] Pack {len(processed_skins)} Skin"
-    return suffix_by_mode(base, chedomod_raw)
+    return base
 
 
 def build_ctx(Version, FILES_MOD, MaHoa, chedomod_raw):
@@ -2687,10 +2935,14 @@ def finalize_pack(ctx, Version, FILES_MOD, camxa_ids=None, camxa_pack_percent=0)
         CamXaFile(ctx['junglemark'], camxa_pack_percent)
 
     with ThreadPoolExecutor(max_workers=16) as ex:
-        xmls = [ctx['junglemark'], ctx['Back'], ctx['hasteE1'], ctx['HasteE1_leave'], ctx['DaofengSprint'],
+        # junglemark giữ nguyên form/thụt lề Cam Xa; các XML cũ vẫn đi qua Xml() như main.py ban đầu.
+        if os.path.exists(ctx['junglemark']):
+            ex.submit(MaHoa, ctx['ZSTD_DICT'], ctx['junglemark'])
+        xmls = [ctx['Back'], ctx['hasteE1'], ctx['HasteE1_leave'], ctx['DaofengSprint'],
                 ctx['Born'], ctx['Dead_Born'], ctx['Dance'], ctx['DanceBullet']]
         for x in xmls:
-            ex.submit(lambda f=x: (MaHoa(ctx['ZSTD_DICT'], f)))
+            if os.path.exists(x):
+                ex.submit(lambda f=x: (Xml(f), MaHoa(ctx['ZSTD_DICT'], f)))
 
         conver = [(HeroSkinJson, ctx['heroSkin']), (HeroSkinShopJson, ctx['HeroSkinShop']),
                   (SeniorLabelJson, ctx['ResSkinSeniorLabelCfg']), (LitebulletJson, ctx['liteBulletCfg']),
@@ -2711,7 +2963,7 @@ def finalize_pack(ctx, Version, FILES_MOD, camxa_ids=None, camxa_pack_percent=0)
         ]
     )
 
-    # Gắn Configs pack (2 file pkg.bytes + assetbundle uisystem)
+    # Gắn Configs pack (chỉ các file pkg.bytes; không copy assetbundle từ Configs)
     CopyConfigsPack(Version, FILES_MOD)
 
     File1 = f"{FILES_MOD}/com.garena.game.kgvn/files/"
@@ -2770,7 +3022,7 @@ def run_one_mod(id_list, Version, MaHoa, chedomod_raw, DECACMOD, camxa_ids, ZSTD
         target = build_pack_folder_name(processed_skins, DECACMOD, chedomod_raw)
     else:
         # mod lẻ (1 skin) — tên là [DD-MM] Tên Skin
-        target = suffix_by_mode(build_mod_folder_name(processed_skins[0], DECACMOD), chedomod_raw)
+        target = build_mod_folder_name(processed_skins[0], DECACMOD)
 
     FILES_MOD_NEW = generate_unique_filename(target)
     _safe_move(FILES_MOD, FILES_MOD_NEW)
@@ -2887,12 +3139,14 @@ def run_camxa_only(percent, Version, MaHoa, DECACMOD, ZSTD_DICT):
 
     # Mã hoá các XML rồi đóng gói vào CommonActions.pkg.bytes
     with ThreadPoolExecutor(max_workers=16) as ex:
-        xmls = [ctx['junglemark'], ctx['Back'], ctx['hasteE1'], ctx['HasteE1_leave'], ctx['DaofengSprint'],
+        if os.path.exists(ctx['junglemark']):
+            ex.submit(MaHoa, ZSTD_DICT, ctx['junglemark'])
+        xmls = [ctx['Back'], ctx['hasteE1'], ctx['HasteE1_leave'], ctx['DaofengSprint'],
                 ctx['Born'], ctx['Dead_Born'], ctx['Dance'], ctx['DanceBullet'],
                 ctx['BlueBuff'], ctx['RedBuff_Slow'], ctx['BlueBuff_CD']]
         for x in xmls:
             if os.path.exists(x):
-                ex.submit(lambda f=x: MaHoa(ZSTD_DICT, f))
+                ex.submit(lambda f=x: (Xml(f), MaHoa(ZSTD_DICT, f)))
 
     AddFoldersToZip(
         f"{FILES_MOD}/com.garena.game.kgvn/files/Resources/{Version}/Ages/Prefab_Characters/Prefab_Hero/CommonActions.pkg.bytes",
@@ -2902,7 +3156,7 @@ def run_camxa_only(percent, Version, MaHoa, DECACMOD, ZSTD_DICT):
         ]
     )
 
-    # Gắn Configs pack (pkg.bytes + assetbundle uisystem) cho gói hoàn chỉnh
+    # Gắn Configs pack (chỉ pkg.bytes; không copy assetbundle từ Configs) cho gói hoàn chỉnh
     CopyConfigsPack(Version, FILES_MOD)
 
     # Đóng gói iOS
@@ -3359,22 +3613,19 @@ def _inline_skin_mod(ids, sang_dam=False, accessory_map=None):
         builtins.input = original_input
 
 def _inline_button_mod(sid):
-    """Gọi đúng run_session của engine button nhúng, với input được cấp tự động."""
-    source_dir  = os.path.join(BASE_DIR, "Source")
-    skin_file   = os.path.join(BASE_DIR, "Skin", "skin.txt")
-    notify_file = os.path.join(BASE_DIR, "Skin", "notify.txt")
-    if not os.path.isdir(source_dir) or not os.path.isfile(skin_file):
-        raise RuntimeError("Thiếu thư mục Source/ hoặc Skin/skin.txt của engine button.")
-    rows = build_menu(source_dir, skin_file, notify_txt=notify_file,
-                      databin_dir=os.path.join(BASE_DIR, "Databin", "Client", "Huanhua"))
+    """Chạy engine Button theo ID đã được auto-detect từ source thật."""
+    rows = _detected_button_rows()
     if not rows:
-        raise RuntimeError("Engine button không đọc được danh sách button nào.")
+        raise RuntimeError(
+            "Không tìm thấy source Button (personalbuttoneffect_*/personalbuttonsprite_*_raw.assetbundle)."
+        )
     by_id = {str(r['id']).upper(): r for r in rows}
-    if str(sid).upper() not in by_id:
-        raise RuntimeError(f"ID {sid} không có trong engine button (kiểm tra Skin/skin.txt và Source/).")
-    # Trả lời tự động: câu đầu = ID button, sau đó 'n' cho bản quyền;
-    # hết answer thì mặc định 'n' cho prompt y/n, '' cho các prompt Enter.
-    answers = [str(sid), "n"]
+    sid_u = str(sid).upper()
+    if sid_u not in by_id:
+        raise RuntimeError(f"ID {sid} không còn nằm trong danh sách Button tự nhận dạng.")
+
+    # run_session vẫn là engine gốc; cấp ID tự động + tắt copyright mặc định.
+    answers = [sid_u, "n"]
     original_input = builtins.input
     def _auto_input(prompt=""):
         if answers:
@@ -3382,12 +3633,15 @@ def _inline_button_mod(sid):
         return "n" if "y/n" in str(prompt).lower() else ""
     builtins.input = _auto_input
     try:
-        ok = run_session(rows, BASE_DIR)
+        # Quan trọng: graft.build_one cần đúng thư mục Button/{Android,IOS},
+        # không phải BASE_DIR.
+        ok = run_session(rows, BTN_DIR)
     finally:
         builtins.input = original_input
     if not ok:
         raise RuntimeError("Engine button chạy xong nhưng không tạo được output.")
     return ok
+
 
 # ==============================================================
 #                          MAIN
@@ -3441,8 +3695,10 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Regex(r"^/start/start/admin(\s|$)"), admin_activate_cmd))
 
     # ----- Callback handlers -----
-    app.add_handler(CallbackQueryHandler(button_mod_callback, pattern="^btnmod_"))
-    app.add_handler(CallbackQueryHandler(reg_channel_callback, pattern="^reg_done$"))
+    app.add_handler(CallbackQueryHandler(post_button_prompt_callback, pattern=r"^POSTBTN::"))
+    app.add_handler(CallbackQueryHandler(button_page_callback,        pattern=r"^BTNPG::"))
+    app.add_handler(CallbackQueryHandler(button_mod_callback,         pattern=r"^btnmod_"))
+    app.add_handler(CallbackQueryHandler(reg_channel_callback,        pattern="^reg_done$"))
     app.add_handler(CallbackQueryHandler(accessory_callback,    pattern=r"^ACC::"))
     app.add_handler(CallbackQueryHandler(camxa_callback,        pattern=r"^CAMXA::"))
     app.add_handler(CallbackQueryHandler(users_admin_callback,  pattern=r"^USR(EDIT|FLD|DET|PAGE)::"))

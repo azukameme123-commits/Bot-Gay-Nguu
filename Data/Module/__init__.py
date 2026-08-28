@@ -1,5 +1,6 @@
 
 from .Converter.Actor.heroskin import *
+from .Converter.Actor.dict_heroSkin import *
 from .Converter.Actor.seniorlabel import *
 from .Converter.Character.charactercomponent import *
 from .Converter.Global.headimage import *
@@ -40,7 +41,6 @@ from .Databin.Huanhua.KillBillboard import *
 from .Databin.Character.CharacterComponent import *
 from .Databin.Global.HeadImage import *
 
-# Thư Viện Cần Thiết 
 import os
 import sys
 import re

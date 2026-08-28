@@ -33,9 +33,9 @@ def AddGetHolidayResourcePath(path):
                 try:
                     guid = str(uuid.uuid4())
                     resource_name = full_path.decode()
-                    short_name = "KMㅤModㅤAov - " + guid
+                    short_name = "Juzu Mod Aov - " + guid
                     
-                    getholiday = (f'<Track trackName="KM MOD AOV" eventType="GetHolidayResourcePathTick" guid="{guid}" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">').encode()
+                    getholiday = (f'<Track trackName="JUZU MOD AOV" eventType="GetHolidayResourcePathTick" guid="{guid}" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">').encode()
 
                     if condition_xml:
                         getholiday += condition_xml + b"\r\n"

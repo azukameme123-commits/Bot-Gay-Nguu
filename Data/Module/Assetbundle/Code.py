@@ -40,7 +40,7 @@ def ResourcePackerInfoSetAll(path, ID_SKIN):
     id3 = ID_SKIN[:3]
     id_full = ID_SKIN.encode()
 
-    MARK = b"MMN AOVX" # 8 bytes phải nhớ ko đc trên hoặc dưới
+    MARK = b"Juzu Mod" # 8 bytes phải nhớ ko đc trên hoặc dưới
 
     with open(path, "rb") as f:
         data = bytearray(f.read())

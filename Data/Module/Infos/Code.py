@@ -140,7 +140,7 @@ def FixCodeInfos(file_path, ID_SKIN, ID_INFO):
     if ID_SKIN == "19908":
         data = data.replace(b'Assets/Art_Resources/Characters/Hero/199_Li/Ani/1999/',b'prefab_skill_effects/hero_skill_effects/199_Li/19908/')
         
-    data = re.sub(rb'<ActorName var="String" type="System.String" value=".*?"/>', b'<ActorName var="String" type="System.String" value="MOD BY: KM MOD AOV \x54\x68\xE1\xBA\xB1\x6E\x67\x20\x4E\xC3\xA0\x6F\x20\xC4\x82\x6E\x20\x43\xE1\xBA\xAF\x70\x20\x4C\xC3\xA0\x6D\x20\x43\x68\xC3\xB3"/>', data)
+    data = re.sub(rb'<ActorName var="String" type="System.String" value=".*?"/>', b'<ActorName var="String" type="System.String" value="MOD BY: Juzu Mod Aov \x54\x68\xE1\xBA\xB1\x6E\x67\x20\x4E\xC3\xA0\x6F\x20\xC4\x82\x6E\x20\x43\xE1\xBA\xAF\x70\x20\x4C\xC3\xA0\x6D\x20\x43\x68\xC3\xB3"/>', data)
     data = data.replace(b'<SkinPrefab', b'<MSAA var="Enum" type="Assets.Scripts.GameLogic.EAntiAliasing" value="4"/>\r\n  <SkinPrefab').replace(b'    </Element>\r\n    <Element var="Com"', b'      <MSAA var="Enum" type="Assets.Scripts.GameLogic.EAntiAliasing" value="4"/>\r\n    </Element>\r\n    <Element var="Com"').replace(b'<MSAA var="Enum" type="Assets.Scripts.GameLogic.EAntiAliasing" value="0"/>', b'<MSAA var="Enum" type="Assets.Scripts.GameLogic.EAntiAliasing" value="4"/>').replace(b'<MSAA var="Enum" type="Assets.Scripts.GameLogic.EAntiAliasing" value="2"/>', b'<MSAA var="Enum" type="Assets.Scripts.GameLogic.EAntiAliasing" value="4"/>')
     
     if ID_INFO in ['5373', '5458', '5485', '1843', '1845', '1846', '1847', '1848', '1849', '5343', '5346', '5482', '5483', '5484', '5372', '11611', '11612', '5393', '5394', '5395', '5353', '5355', '5359', '5363', '5366', '5367', '5369', '53610']:

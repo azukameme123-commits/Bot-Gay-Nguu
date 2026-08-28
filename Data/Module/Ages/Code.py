@@ -5,19 +5,19 @@ import re
 SKIP_MARKER       = b'"Jg\x00'
 
 TRACK_RE          = br'(<Track.*?</Track>)'
-TRACK_SPLIT       = b'    <Track trackName="'                       # NOTE-1
+TRACK_SPLIT       = b'    <Track trackName="'
 EVENT_VALUE_RE    = rb'<String name="eventName" value="(.*?)"'
 PRE_PATH_RE       = br'(?i)(<String\s+name="[^"]+"\s+value=")(prefab_skill_effects[^"]+)(" refParamName="" useRefParam="false" />)'
 
-PATH_STRIP_BACK   = b'Project\\Assets\\Prefabs\\'                   # dạng Windows
-PATH_STRIP_FWD    = b'Project/Assets/Prefabs/'                     # dạng POSIX
+PATH_STRIP_BACK   = b'Project\\Assets\\Prefabs\\'
+PATH_STRIP_FWD    = b'Project/Assets/Prefabs/'
 
 EMPTY_EFFECT_FROM = b'<bool name="bAllowEmptyEffect" value="true"'
 EMPTY_EFFECT_TO   = b'<bool name="bAllowEmptyEffect" value="false"'
 
 EXTRA_SKIN_RE     = br'\r\n\s*<Array name="extraSkinId".*?</Array>'
 COMPONENT_LOWER   = b'component_effects/'
-HERO_DIR_B        = b'prefab_skill_effects/hero_skill_effects/'
+Effectf_Code        = b'prefab_skill_effects/hero_skill_effects/'
 COMPONENT_DIR_B   = b'prefab_skill_effects/component_effects/'
 
 SOUND_EVO = {
@@ -56,10 +56,11 @@ SKIP_CODES = {
 
 FILE_SKIN_SKIP = {
     b'14111': {'A1B2.xml', 'S1.xml'},
+    b'12008': {'P1E2.xml', 'P1E8.xml', 'S11.xml'},
     b'14117': {'A1B2.xml'},
     b'17408': {'17408_Back.xml'},
     b'19613': {'P01.xml'},
-    b'53806': {'Skin2E1.xml'},
+    b'53806': {'U1.xml', 'Skin2E1.xml'},
     b'11215': {'S1.xml'},
     b'56703': {'A1.xml', 'A2.xml', 'A3.xml'},
     b'56704': {'A1.xml', 'A2.xml', 'A3.xml'},
@@ -72,7 +73,6 @@ FILE_SKIN_SKIP = {
     b'13210': {'t2b1.xml', 't2b2.xml', 't2b3.xml'},
     b'13609': {'U1.xml', 'U1B2.xml'},
     b'16707': {'U1B0.xml'},
-    b'15611': {'S3.xml'},
     b'15015': {'U1.xml'},
     b'16307': {'P2.xml'},
     b'59702': {'Skin2E1.xml'},
@@ -116,7 +116,7 @@ def _make_path_rewriter(skin_id, hero_b):
         if skin_id in SOUND_EVO:
             tail = COMPONENT_DIR_B + skin_id + b'/' + skin_id + b'_5/' + leaf
         else:
-            tail = HERO_DIR_B + hero_b + b'/' + skin_id + b'/' + leaf
+            tail = Effectf_Code + hero_b + b'/' + skin_id + b'/' + leaf
         return m.group(1) + tail + m.group(3)
     return repl
 
@@ -207,7 +207,7 @@ def _process_skin(x_id, thu_muc):
             continue
         if filename in skip_files:
             continue
-        if x_id.startswith(b'111') and filename == 'A2b2.xml':       # NOTE-7
+        if x_id.startswith(b'111') and filename == 'A2b2.xml':
             continue
 
         with open(file_path, 'rb') as f:
@@ -243,12 +243,12 @@ def _patch_tracks(x_id, filename, code_check, data):
 
 def _make_snippets(x_id):
     return (
-        b'\r\n        <int name="skinId" value="235' + x_id[-2:] + b'" refParamName="" useRefParam="false" />',  # SKM
-        b'\r\n        <int name="skinId" value="' + x_id + b'" refParamName="" useRefParam="false" />',        # IDS
-        b'\r\n        <bool name="bEqual" value="false" refParamName="" useRefParam="false" />',               # EQF
-        b'\r\n        <bool name="bEqual" value="true" refParamName="" useRefParam="false" />',                # EQT
-        b'\r\n        <bool name="useNegateValue" value="true" refParamName="" useRefParam="false" />',         # UNV
-        b'\r\n        <bool name="useNegateValue" value="false" refParamName="" useRefParam="false" />',        # UNF
+        b'\r\n        <int name="skinId" value="235' + x_id[-2:] + b'" refParamName="" useRefParam="false" />',
+        b'\r\n        <int name="skinId" value="' + x_id + b'" refParamName="" useRefParam="false" />',
+        b'\r\n        <bool name="bEqual" value="false" refParamName="" useRefParam="false" />',
+        b'\r\n        <bool name="bEqual" value="true" refParamName="" useRefParam="false" />',
+        b'\r\n        <bool name="useNegateValue" value="true" refParamName="" useRefParam="false" />',
+        b'\r\n        <bool name="useNegateValue" value="false" refParamName="" useRefParam="false" />',
     )
 
 
@@ -312,7 +312,6 @@ def _sound_pass(content, skin_id, sound_b):
 FILE_SKILL_SKIP = {
     "59901": {"S1B1.xml"},
     "59903": {"S1B1.xml"},
-    "14120": {"S214112.xml"},
     "13213": {"S1B0.xml", "S1B1.xml"},
     "52414": {"S3.xml", "S3_1.xml"},
     "17408": {"17408_back.xml"},
@@ -321,7 +320,7 @@ FILE_SKILL_SKIP = {
     "10620": {"S2B1.xml"},
 }
 
-_132_BACK_SKIP = [b"CheckAnimationSystemVirtualTick", b"SetObjectDirectionTick", b"MoveCityDuration"]
+_132_BACK_SKIP = [b"CheckAnimationSystemVirtual", b"SetObjectDirection", b"MoveCityDuration"]
 
 TRACK_SKIP = {
     "14120": {
@@ -345,6 +344,14 @@ TRACK_SKIP = {
     },
     "51015": {
         "Death.xml": [b"SetObjectDirection"],
+    },
+    "59703": {
+        "S1.xml": [b"CheckSkinIdVirtual"],
+        "S11.xml": [b"CheckSkinIdVirtual"],
+    },
+    "12313": {
+        "S1E71.xml": [b'CreateRandomNum', b'CheckRandomRange'],
+        "U1.xml": [b'CheckRandomRange', b'CreateRandomNum', b'FilterTargetTypeClient'],
     },
     "10915": {
         "A2.xml": [b"ChangeSkillTrigger"],
@@ -398,7 +405,6 @@ TRACK_SKIP = {
     },
     "13215": {
         "A1B1.xml": [b"DebugLog", b"StopTracks"],
-        "A1B11.xml": [b"DebugLog", b"StopTracks"],
         "S2.xml": [b'<int name="buffId" value="132942"'],
         "132_Back.xml": _132_BACK_SKIP,
     },

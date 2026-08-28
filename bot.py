@@ -1,4 +1,4 @@
-# BUILD: YUAN-AOV-KEY-V3-2026-08-28
+# BUILD: YUAN-AOV-VIP-2LINK-V4-2026-08-28
 # ADMIN LINK MODES: /link4m | /traffichd | /2combine
 # /link4m    = File Mod -> GoFile -> Link4M
 # /traffichd = File Mod -> GoFile -> TrafficHD
@@ -1225,7 +1225,7 @@ async def run(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("❌ NO – Bỏ qua",     callback_data="POSTBTN::no")],
     ]
     await msg.edit_text(
-        f"🎉 Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất{mode_txt}\n\n"
+        f"?? Mod Skin:\n{all_tuongs_str}\n{all_skins_str}\nHoàn Tất{mode_txt}\n\n"
         "🎮 Bạn có muốn **Mod Button** không?\n"
         "Mod Button hiện **FREE**, không cần vé. Bot sẽ tự quét source và chỉ hiện các Button nhận dạng được.",
         reply_markup=InlineKeyboardMarkup(button_kb),
@@ -1431,12 +1431,6 @@ async def file_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     final_link, active_mode = await create_download_link(gofile_link)
-    if not final_link:
-        info = link_mode_label(active_mode)
-        await update.message.reply_text(
-            f"❌ Tạo link {info['label']} thất bại. File mod vẫn được giữ để bạn /layfile lại."
-        )
-        return
 
     if admin_flag:
         role = "ADMIN"
@@ -1446,11 +1440,42 @@ async def file_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         role = "User Normal"
 
     info = link_mode_label(active_mode)
-    lines_out = [
-        f"✅ **FILE MOD ĐÃ SẴN SÀNG ( {role} )**\n",
-        "➢ **Link Tải Mod:**",
-        f"🔗 {final_link}",
-        "",
+
+    # ADMIN + VIP: luôn được thấy GoFile gốc và link rút gọn theo mode hiện tại.
+    # User thường: chỉ được thấy link rút gọn, tuyệt đối không lộ GoFile.
+    if admin_flag or vip_flag:
+        lines_out = [
+            f"✅ **FILE MOD ĐÃ SẴN SÀNG ( {role} )**\n",
+            "➢ **Link Gốc (GoFile):**",
+            f"🔗 {gofile_link}",
+            "",
+        ]
+        if final_link:
+            lines_out += [
+                f"➢ **Link Rút Gọn ({info['label']}):**",
+                f"🔗 {final_link}",
+                "",
+            ]
+        else:
+            lines_out += [
+                f"⚠️ Không tạo được link rút gọn **{info['label']}**.",
+                "Bạn vẫn có thể dùng Link Gốc GoFile ở trên.",
+                "",
+            ]
+    else:
+        if not final_link:
+            await update.message.reply_text(
+                f"❌ Tạo link {info['label']} thất bại. File mod vẫn được giữ để bạn /layfile lại."
+            )
+            return
+        lines_out = [
+            f"✅ **FILE MOD ĐÃ SẴN SÀNG ( {role} )**\n",
+            f"➢ **Link Tải Mod ({info['label']}):**",
+            f"🔗 {final_link}",
+            "",
+        ]
+
+    lines_out += [
         f"↳ Chế độ: **{info['label']}**",
         f"↳ Chuỗi: {info['route']}",
         "🎮 Mod Button: **FREE – không cần vé** (/buttonmod)",
@@ -1758,24 +1783,55 @@ async def button_mod_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         return
 
     final_link, active_mode = await create_download_link(gofile_link)
-    if not final_link:
-        info = link_mode_label(active_mode)
-        await context.bot.send_message(
-            chat_id=user.id,
-            text=f"❌ Tạo link {info['label']} cho Button Mod thất bại. Hãy thử lại /buttonmod.",
-        )
-        context.user_data["post_button_flow"] = False
-        if post_flow:
-            await _offer_camxa(context, user.id)
-        return
-
     info = link_mode_label(active_mode)
+    admin_flag = is_admin(user.id)
+    vip_flag = is_vip(user.id)
+
+    # Button dùng cùng chính sách link với Skin:
+    # ADMIN/VIP = GoFile gốc + link rút gọn; User thường = chỉ link rút gọn.
+    if admin_flag or vip_flag:
+        role = "ADMIN" if admin_flag else "User Key VIP"
+        button_lines = [
+            f"✅ **BUTTON MOD SẴN SÀNG (FREE) — {role}**",
+            f"➢ ID: {sid}",
+            f"↳ Chế độ: **{info['label']}**",
+            "",
+            "➢ **Link Gốc (GoFile):**",
+            f"🔗 {gofile_link}",
+            "",
+        ]
+        if final_link:
+            button_lines += [
+                f"➢ **Link Rút Gọn ({info['label']}):**",
+                f"🔗 {final_link}",
+            ]
+        else:
+            button_lines += [
+                f"⚠️ Không tạo được link rút gọn **{info['label']}**.",
+                "Bạn vẫn có thể dùng Link Gốc GoFile ở trên.",
+            ]
+    else:
+        if not final_link:
+            await context.bot.send_message(
+                chat_id=user.id,
+                text=f"❌ Tạo link {info['label']} cho Button Mod thất bại. Hãy thử lại /buttonmod.",
+            )
+            context.user_data["post_button_flow"] = False
+            if post_flow:
+                await _offer_camxa(context, user.id)
+            return
+        button_lines = [
+            "✅ **BUTTON MOD SẴN SÀNG (FREE)**",
+            f"➢ ID: {sid}",
+            f"↳ Chế độ: **{info['label']}**",
+            "",
+            f"🔗 **Link Tải Mod ({info['label']}):**",
+            final_link,
+        ]
+
     await context.bot.send_message(
         chat_id=user.id,
-        text=(f"✅ **BUTTON MOD SẴN SÀNG (FREE)**\n"
-              f"➢ ID: {sid}\n"
-              f"↳ Chế độ: **{info['label']}**\n\n"
-              f"🔗 **Link Tải Mod:**\n{final_link}"),
+        text="\n".join(button_lines),
         parse_mode="Markdown"
     )
 

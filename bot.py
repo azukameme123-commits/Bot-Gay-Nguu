@@ -2453,46 +2453,114 @@ async def accessory_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
 async def _apply_camxa_to_mod(update, context, percent, zip_path,
                               skins, tuongs, ids, chat_id):
-    """Sau khi user nhập % cam xa: thông báo (file đã nén). Engine base
-    của tool đã handle ModPack ngay từ đầu — Cam Xa là 1 tuỳ biến file
-    XML bên trong được gắn từ CopyConfigsPack. Bot overlay thông tin để
-    user biết % đã được áp dụng vào file mod đang chờ trong /layfile."""
-    try:
-        context.user_data["camxa_percent"] = int(percent)
-        context.user_data["camxa_applied_at"] = datetime.now().isoformat(timespec="seconds")
+    """Áp dụng Cam Xa THẬT vào file mod đang chờ /layfile.
+
+    Bản cũ chỉ lưu percent/history rồi báo thành công, nhưng ZIP đã được tạo trước
+    đó nên junglemark.xml không đổi. Bản này chạy lại đúng engine skin với % Cam Xa,
+    patch junglemark.xml trước mã hoá và trước khi đóng CommonActions.pkg.bytes,
+    sau đó thay ZIP cũ bằng ZIP mới.
+    """
+    pct_int = int(percent)
+    if pct_int < 0 or pct_int > 100:
+        raise ValueError("Cam Xa phải nằm trong khoảng 0..100%.")
+
+    context.user_data["camxa_percent"] = pct_int
+    context.user_data["camxa_applied_at"] = datetime.now().isoformat(timespec="seconds")
+
+    if pct_int == 0:
         context.user_data["output_zip"] = zip_path
-        # Lưu log
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text="🚫 Đã bỏ mod Cam Xa.\nBạn có thể bấm /layfile để nhận file mod bình thường.",
+        )
+        return
+
+    ids = [str(x) for x in (ids or [])]
+    if not ids:
+        raise RuntimeError("Không còn danh sách ID skin để áp dụng Cam Xa.")
+    if not zip_path:
+        raise RuntimeError("Không tìm thấy ZIP skin đang chờ để cập nhật Cam Xa.")
+
+    status_msg = await context.bot.send_message(
+        chat_id=chat_id,
+        text=(
+            f"⏳ Đang áp dụng Cam Xa {pct_int}% vào file mod thật...\n"
+            "Bot đang tạo lại junglemark.xml và CommonActions.pkg.bytes, vui lòng đợi."
+        ),
+    )
+
+    new_folder = None
+    tmp_zip = None
+    try:
+        user_id = update.effective_user.id
+        sang_dam = is_sangdam(user_id)
+        accessory_map = context.user_data.get("pending_accessory") or {}
+
+        new_folder = await asyncio.to_thread(
+            _inline_skin_mod,
+            ids,
+            sang_dam,
+            accessory_map,
+            pct_int,
+        )
+        if not new_folder or not os.path.isdir(new_folder):
+            raise RuntimeError("Engine Cam Xa không tạo được output folder.")
+
+        zip_dir = os.path.dirname(zip_path) or OUTPUT_DIR
+        os.makedirs(zip_dir, exist_ok=True)
+        tmp_zip = os.path.join(
+            zip_dir,
+            f".camxa_{update.effective_user.id}_{int(time.time() * 1000)}.zip",
+        )
+        _zip_folder(new_folder, tmp_zip)
+        if not os.path.isfile(tmp_zip) or os.path.getsize(tmp_zip) <= 0:
+            raise RuntimeError("ZIP Cam Xa tạo ra không hợp lệ.")
+
+        os.replace(tmp_zip, zip_path)
+        tmp_zip = None
+        context.user_data["output_zip"] = zip_path
+
         try:
             history = load_json(MOD_HISTORY_FILE)
             user = update.effective_user
             username = f"@{user.username}" if user.username else f"id_{user.id}"
             history.setdefault(username, []).append({
-                "Time":      datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "Hero":      tuongs, "Skin": skins, "ID": ids,
-                "CamXa":     f"{int(percent)}%",
+                "Time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Hero": tuongs,
+                "Skin": skins,
+                "ID": ids,
+                "CamXa": f"{pct_int}%",
             })
             save_json(MOD_HISTORY_FILE, history)
         except Exception:
             pass
-        pct_int = int(percent)
-        if pct_int <= 0:
-            msg = (
-                "🚫 Đã bỏ mod Cam Xa.\n"
-                "Bạn có thể bấm /layfile để nhận file mod bình thường."
-            )
-        else:
-            msg = (
-                f"✅ Đã áp dụng Cam Xa {pct_int}% cho:\n"
-                f"• Tướng: {', '.join(tuongs)}\n"
-                f"• Skin: {', '.join(skins)}\n\n"
-                "➡️ Bấm /layfile để nhận link tải file mod."
-            )
-        await context.bot.send_message(chat_id=chat_id, text=msg)
-    except Exception as e:
+
+        msg = (
+            f"✅ Đã mod Cam Xa {pct_int}% THẬT vào file:\n"
+            f"• Tướng: {', '.join(tuongs) if tuongs else '-'}\n"
+            f"• Skin: {', '.join(skins) if skins else '-'}\n"
+            f"• heightRate: {1.0 + pct_int * 0.05:g}\n\n"
+            "➡️ Bấm /layfile để nhận link tải file mod mới."
+        )
         try:
-            await context.bot.send_message(chat_id=chat_id, text=f"❌ Lỗi áp dụng cam xa: {e}")
+            await status_msg.edit_text(msg)
         except Exception:
-            pass
+            await context.bot.send_message(chat_id=chat_id, text=msg)
+
+    except Exception as e:
+        err = f"❌ Lỗi áp dụng Cam Xa: {e}\nZIP skin cũ vẫn được giữ nguyên."
+        try:
+            await status_msg.edit_text(err)
+        except Exception:
+            await context.bot.send_message(chat_id=chat_id, text=err)
+    finally:
+        if new_folder and os.path.isdir(new_folder):
+            shutil.rmtree(new_folder, ignore_errors=True)
+        if tmp_zip and os.path.exists(tmp_zip):
+            try:
+                os.remove(tmp_zip)
+            except Exception:
+                pass
 
 
 async def camxa_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -3336,6 +3404,86 @@ def copy_resource_pack(ctx, Version, FILES_MOD):
         ex.submit(HeadImageJson, ctx['HeadImage'], 1)
 
 
+# ==============================================================
+#              CAM XA ENGINE — FIX THẬT TRONG BOT.PY
+# ==============================================================
+def _camxa_height_rate_from_percent(percent):
+    """1% = +0.05 từ base 1.0. Ví dụ 35% = 2.75."""
+    try:
+        percent = int(percent)
+    except (TypeError, ValueError):
+        raise ValueError("Cam Xa percent phải là số nguyên từ 1 đến 100.")
+    if not 1 <= percent <= 100:
+        raise ValueError("Cam Xa percent phải nằm trong khoảng 1..100.")
+    value = 1.0 + (percent * 0.05)
+    text = f"{value:.2f}".rstrip("0").rstrip(".")
+    if "." not in text:
+        text += ".0"
+    return text
+
+
+def _camxa_build_track(height_rate, newline):
+    lines = [
+        '    <Track trackName="SetCameraHeightDuration0" eventType="SetCameraHeightDuration" guid="9489c796-894b-4c2e-9a95-acf27873964a" enabled="true" useRefParam="false" refParamName="" r="0.000" g="0.000" b="0.000" execOnForceStopped="false" execOnActionCompleted="false" stopAfterLastEvent="true">',
+        '      <Event eventName="SetCameraHeightDuration" time="0.000" length="1.000" isDuration="true" guid="422a1ed9-a12c-44b3-a9c5-3fe899d689dd">',
+        '        <int name="slerpTick" value="0" refParamName="" useRefParam="false" />',
+        f'        <float name="heightRate" value="{height_rate}" refParamName="" useRefParam="false" />',
+        '        <bool name="bOverride" value="true" refParamName="" useRefParam="false" />',
+        '        <bool name="leftTimeSlerpBack" value="true" refParamName="" useRefParam="false" />',
+        '        <bool name="cutBackOnExit" value="true" refParamName="" useRefParam="false" />',
+        '        <bool name="exitKeepCurrentValue" value="true" refParamName="" useRefParam="false" />',
+        '        <bool name="isSlerpBackWhenInterrupted" value="true" refParamName="" useRefParam="false" />',
+        '        <int name="slerpBackTick" value="1500" refParamName="" useRefParam="false" />',
+        '        <String name="refParamName" value="" refParamName="" useRefParam="false" />',
+        '      </Event>',
+        '    </Track>',
+    ]
+    return newline.join(lines) + newline
+
+
+def CamXaFile(CamXa_MOD, percent):
+    """Patch junglemark.xml thật, đúng form, không chèn Track trùng."""
+    if not os.path.isfile(CamXa_MOD):
+        raise FileNotFoundError(f"Không tìm thấy junglemark.xml: {CamXa_MOD}")
+
+    height_rate = _camxa_height_rate_from_percent(percent)
+    with open(CamXa_MOD, "rb") as f:
+        raw = f.read()
+
+    newline = "\r\n" if b"\r\n" in raw else "\n"
+    bom = b"\xef\xbb\xbf" if raw.startswith(b"\xef\xbb\xbf") else b""
+    body = raw[len(bom):]
+    try:
+        text = body.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValueError("junglemark.xml không phải UTF-8 hợp lệ.") from exc
+
+    track_pattern = re.compile(
+        r'(<Track\b[^>]*\btrackName="SetCameraHeightDuration0"[^>]*>)(.*?)(</Track>)',
+        re.DOTALL,
+    )
+    match = track_pattern.search(text)
+    if match:
+        middle = match.group(2)
+        rate_pattern = re.compile(
+            r'(<float\b[^>]*\bname="heightRate"\s+value=")[^"]*("[^>]*/>)'
+        )
+        if not rate_pattern.search(middle):
+            raise ValueError("Đã có Track Cam Xa nhưng không tìm thấy heightRate.")
+        middle = rate_pattern.sub(rf'\g<1>{height_rate}\g<2>', middle, count=1)
+        text = text[:match.start(2)] + middle + text[match.end(2):]
+    else:
+        closing = "  </Action>"
+        pos = text.rfind(closing)
+        if pos < 0:
+            raise ValueError("Không tìm thấy thẻ đóng </Action> đúng form trong junglemark.xml.")
+        text = text[:pos] + _camxa_build_track(height_rate, newline) + text[pos:]
+
+    with open(CamXa_MOD, "wb") as f:
+        f.write(bom + text.encode("utf-8"))
+    return float(height_rate)
+
+
 def finalize_pack(ctx, Version, FILES_MOD, camxa_ids=None, camxa_pack_percent=0):
     """
     Kết thúc mod pack: apply CamXa (theo từng ID nếu có), MaHoa, iOS zip, gắn Configs.
@@ -4002,11 +4150,13 @@ async def create_chained_link(gofile_link):
     return final_link, (2 if final_link else 0)
 
 
-def _inline_skin_mod(ids, sang_dam=False, accessory_map=None):
+def _inline_skin_mod(ids, sang_dam=False, accessory_map=None, camxa_percent=0):
     """Gọi đúng run_one_mod của engine đã nhúng, không tạo process con.
     sang_dam=True -> chạy chế độ '1' (Sáng Đậm) cho riêng acc đã bật /sangdamefx.
     accessory_map: dict {id_skin: "1"|"2"|"3"} – câu trả lời cho phụ kiện của
-        các skin đặc biệt (11620 / 52007) mà engine hỏi qua input() console."""
+        các skin đặc biệt (11620 / 52007) mà engine hỏi qua input() console.
+    camxa_percent: 0 = không mod Cam Xa; 1..100 = patch junglemark.xml THẬT
+        trước khi mã hoá và đóng lại CommonActions.pkg.bytes."""
     if pyzstd is None:
         raise RuntimeError(f"Thiếu pyzstd: {_PYZSTD_IMPORT_ERROR}")
     version = "UNKNOWN"
@@ -4051,8 +4201,25 @@ def _inline_skin_mod(ids, sang_dam=False, accessory_map=None):
         return "3"
     builtins.input = _auto_input
     try:
-        return run_one_mod(ids, version, Zstd_Aes, mode, "FILES_MOD/", {}, zdict, kb,
-                           is_pack=(len(ids) > 1 and not dup))
+        is_pack = (len(ids) > 1 and not dup)
+        pct = int(camxa_percent or 0)
+        if pct < 0 or pct > 100:
+            raise ValueError("Cam Xa phải nằm trong khoảng 0..100%.")
+
+        camxa_ids = {}
+        camxa_pack_percent = 0
+        if pct > 0:
+            if is_pack:
+                camxa_pack_percent = pct
+            else:
+                camxa_ids = {str(sid): pct for sid in ids}
+
+        return run_one_mod(
+            ids, version, Zstd_Aes, mode, "FILES_MOD/",
+            camxa_ids, zdict, kb,
+            is_pack=is_pack,
+            camxa_pack_percent=camxa_pack_percent,
+        )
     finally:
         builtins.input = original_input
 
